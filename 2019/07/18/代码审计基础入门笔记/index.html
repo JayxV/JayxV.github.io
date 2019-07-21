@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/1563373599421.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/1563416371109.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/1563417336599.png">
-<meta property="og:updated_time" content="2019-07-18T06:47:04.236Z">
+<meta property="og:updated_time" content="2019-07-18T07:11:03.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="代码审计基入门笔记">
 <meta name="twitter:description" content="代码审计基础入门笔记审计大致方向、思路注入 文件上传 跨站 程序异常处理 MVC架构： Model：数据逻辑部分 View：处理数据显示的部分，显示数据 Controller：应用程序中处理用户交互的部分 常见php框架 先看手册、架构，安全过滤机制， ThinkPHP Yaf Laravel Kohana Codelgniter Yii Smyfony doitphp 处理流程 获取请求、全局过">
@@ -432,6 +432,8 @@
 <p>使用安全函数</p>
 <h3 id="宽字节注入、二次注入（扫描不出来）"><a href="#宽字节注入、二次注入（扫描不出来）" class="headerlink" title="宽字节注入、二次注入（扫描不出来）"></a>宽字节注入、二次注入（扫描不出来）</h3><p>addslashes()给‘加上\转义</p>
 <p>逃逸单引号-&gt;加一个%df</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%df&apos;===&gt;%df%27 ==&gt;(addslashes)===&gt;%df%5c%27===&gt;(GBK)===&gt;運&apos;</span><br></pre></td></tr></table></figure>
+
 <p>修复方案，</p>
 <p>使用mysql_set_charset(GBK)指定字符集</p>
 <p>使用mysql_real_escape_string进行转义</p>
@@ -923,6 +925,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/07/21/python 正则/" rel="prev" title="python 正则">
+                python 正则 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -998,7 +1004,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
