@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/1563373599421.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/1563416371109.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/1563417336599.png">
-<meta property="og:updated_time" content="2019-07-18T07:11:03.767Z">
+<meta property="og:updated_time" content="2019-07-30T13:16:11.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="代码审计基入门笔记">
 <meta name="twitter:description" content="代码审计基础入门笔记审计大致方向、思路注入 文件上传 跨站 程序异常处理 MVC架构： Model：数据逻辑部分 View：处理数据显示的部分，显示数据 Controller：应用程序中处理用户交互的部分 常见php框架 先看手册、架构，安全过滤机制， ThinkPHP Yaf Laravel Kohana Codelgniter Yii Smyfony doitphp 处理流程 获取请求、全局过">
@@ -748,7 +748,7 @@
 <p>反序列化对象中存在魔术方法，而且魔术方法中的代码可以被控制，</p>
 <p>漏洞根据不同的代码可以导致各种攻击，如代码注入，SQL注入、目录遍历等等</p>
 <p>序列化的不同结果：1. public 2. private 3. protect</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $test1 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">    <span class="keyword">public</span> $test2 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">    <span class="keyword">protected</span> $test3 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$test = <span class="keyword">new</span> test();</span><br><span class="line"><span class="keyword">echo</span> serialize($test());</span><br><span class="line">&gt;</span><br><span class="line">    </span><br><span class="line">&gt;O:<span class="number">4</span>:<span class="string">"test"</span>:<span class="number">3</span>:&#123;s:<span class="number">11</span>:<span class="string">"testtest1"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;s:<span class="number">5</span>:<span class="string">"test2"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;s:<span class="number">8</span>:<span class="string">"*test3"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $test1 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">    <span class="keyword">public</span> $test2 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">    <span class="keyword">protected</span> $test3 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$test = <span class="keyword">new</span> test();</span><br><span class="line"><span class="keyword">echo</span> serialize($test);</span><br><span class="line">&gt;</span><br><span class="line">    </span><br><span class="line">&gt;O:<span class="number">4</span>:<span class="string">"test"</span>:<span class="number">3</span>:&#123;s:<span class="number">11</span>:<span class="string">"testtest1"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;s:<span class="number">5</span>:<span class="string">"test2"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;s:<span class="number">8</span>:<span class="string">"*test3"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>漏洞本质</p>
 <p>unserialize函数的变量可控</p>
@@ -1004,7 +1004,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

