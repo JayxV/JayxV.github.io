@@ -334,7 +334,8 @@
         
           
           The Fifth Day for Web前言别问第四天去哪了，昨晚想做题的时候，buuoj.cn好像被d了，啊凑~。（今天的buuoj也仍然崩着23333，所以今天去做了西电招新赛的题）
-Objec
+Object代码审计题
+1234567891011121314151617181920212223242526272829&lt;?php error_reporting(0); //flag在flag.php
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -462,7 +463,8 @@ Objec
           
           The Third Day for Web前言别问Second去哪了，拿去完成第一天的任务了，我凑~
 今天继续来到buuoj看题，先看看高明的黑客
-高明的黑客先下载源码，然后看看发现里面会有一堆垃圾代
+高明的黑客先下载源码，然后看看发现里面会有一堆垃圾代码，但是也存在$_GET, $_POST，只不过几乎都被“封印”了，所以（面向wp做题）就知道要写脚本，给get，post传参构造能制造回显的参数，然后看是否有回显，有回显则证明那个地方可以被利用。
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -589,7 +591,9 @@ Objec
         
           
           The First Day for Web前言：看是正式当一名web狗的第一天：先直接上https://buuoj.cn/challenges，面向题目学习。
-WarmUp基操后拿到源码和hint：f
+WarmUp基操后拿到源码和hint：flag not here, and flag in ffffllllaaaagggg
+所以是简单的代码审计题目了：
+123456789101112131415161718192021222324252
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -717,7 +721,10 @@ WarmUp基操后拿到源码和hint：f
           
           nmap前言：后天要参加人生第一次awd线下攻防了，今天赶紧突击一下，先学习一下nmap的一些常规操作
 引入：1) 获取远程主机的系统类型及开放端口
-1nmap -sS -P0 -sV -O &lt;
+1nmap -sS -P0 -sV -O &lt;target&gt;
+
+这里的 &lt; target &gt; 可以是单一 IP, 或主机名，或域名，或子网
+-sS TCP SYN 扫描 (又称半开放,或隐身扫描)-P0 允许你关闭 ICMP p
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -844,7 +851,9 @@ WarmUp基操后拿到源码和hint：f
         
           
           python 正则前言：之前打CTF经常性的因为不会写脚本而去手撸，这大大降低了效率，而且有的题由于时间限制，显然手撸行不通。
-而不会写脚本经常是因为自己不会处理得到的数据，如何过滤、拼接。所以今天学
+而不会写脚本经常是因为自己不会处理得到的数据，如何过滤、拼接。所以今天学习一下python的re模块，正则替换，以及刚刚从Li4n0学长脚本中发现的字符表替换。
+正则^元字符字符串开始位置与匹配规则符合就匹配，否则不匹配
+1234567&gt;&gt;&gt; impor
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -977,7 +986,19 @@ WarmUp基操后拿到源码和hint：f
 MVC架构：
 Model：数据逻辑部分
 View：处理数据显示的部分，显示数据
-Controller：应用程序中处理用户交互的
+Controller：应用程序中处理用户交互的部分
+常见php框架
+先看手册、架构，安全过滤机制，
+ThinkPHP
+Yaf
+Laravel
+Kohana
+Codelgniter
+Yii
+Smyfony
+doitphp
+处理流程
+获取请求、全局过
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1106,7 +1127,10 @@ Controller：应用程序中处理用户交互的
           赛博杯2019 Write Up前言杭电赛博协会出得题，感觉质量还是不错的，难易兼备。以下是比赛题目部分Write Up。
 MISCSign in
 扫条形码得到flag。
-No Wordsnow加密，
+No Wordsnow加密，将文件放入010editor看他的十六进制形式，
+
+0D0A是换行，剩下的将20转0，将09转1，得到的二进制数据，转字符串即可得到flag。
+基础社工题目介绍：大家都用着我们的数字杭电（i.hdu.
           ...
           <!--noindex-->
           <div class="post-button text-center">
