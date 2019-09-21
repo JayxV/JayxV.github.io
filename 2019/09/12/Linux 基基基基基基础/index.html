@@ -542,7 +542,7 @@
 
 <p>就像我们的系统环境变量一样，必须导出用户定义的变量才能将其持久化到新的会话中。 </p>
 <p>如果要删除这个新变量或任何变量，请使用 unset 命令。不过，在删除系统变量之前一定要三思，因 为之后系统的操作可能会大不相同。 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kali &gt;<span class="built_in">unset</span> MYNEWVARIABLE </span><br><span class="line">kali &gt;<span class="built_in">echo</span> <span class="variable">$MYNEWVARIABLE</span> </span><br><span class="line">kali &gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kali &gt;<span class="keyword">unset</span> MYNEWVARIABLE </span><br><span class="line">kali &gt;<span class="keyword">echo</span> $MYNEWVARIABLE </span><br><span class="line">kali &gt;</span><br></pre></td></tr></table></figure>
 
 <p>如您所见，当您输入 unset  MYNEWVARIABLE 时，您将删除该变量及其值。如果在同一个变量上使用 echo，Linux 现在将返回空行。</p>
 <h2 id="简单BASH-脚本编程"><a href="#简单BASH-脚本编程" class="headerlink" title="简单BASH 脚本编程"></a>简单BASH 脚本编程</h2><p>#!        告诉您的操作系统您想为脚本使用哪个解释器。</p>
