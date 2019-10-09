@@ -397,16 +397,16 @@
 <p>然后命令$a=${eval(implode(getallheaders()))}    </p>
 <h4 id><a href="#" class="headerlink" title="${}"></a>${}</h4><p>参考：<a href="https://www.php.net/manual/zh/language.variables.variable.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/language.variables.variable.php</a></p>
 <p>有时候使用可变变量名是很方便的。就是说，一个变量的变量名可以动态的设置和使用。一个普通的变量通过声明来设置，例如：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $a = <span class="string">'hello'</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span> $a = <span class="string">'hello'</span>;<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>一个可变变量获取了一个普通变量的值作为这个可变变量的变量名。在上面的例子中 <em>hello</em> 使用了两个美元符号（$）以后，就可以作为一个可变变量的变量了。例如：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $$a = <span class="string">'world'</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span> $$a = <span class="string">'world'</span>;<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>这时，两个变量都被定义了：$a 的内容是“hello”并且 $hello 的内容是“world”。因此，以下语句：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">"$a $&#123;$a&#125;"</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">"$a $&#123;$a&#125;"</span>;<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>与以下语句输出完全相同的结果：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">"$a $hello"</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">"$a $hello"</span>;<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>它们都会输出：hello world。</p>
 <p>所以${}里面的东西好像会当作PHP代码执行，</p>
