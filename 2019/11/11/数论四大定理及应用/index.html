@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="note,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="密码学学习笔记（零）数论四大定理的证明及其应用前言可以发现RSA中的很多攻击方法都是从数论四大定理推导出的，所以找时间好好学习了一下数论四大定理的证明及其应用场景——Rabin算法。 欧拉定理若n,a为正整数，且n,a互素，即gcd(a,n) = 1，则 a^φ(n) ≡ 1 (mod n) 证明首先，我们需要知道欧拉定理是什么：  数论上的欧拉定理，指的是  a^φ(n)^≡1(mod n) 这">
+<meta name="keywords" content="note">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学学习笔记（零）数论四大定理的证明及其应用">
+<meta property="og:url" content="http://yoursite.com/2019/11/11/数论四大定理及应用/index.html">
+<meta property="og:site_name" content="V&#39;s blog">
+<meta property="og:description" content="密码学学习笔记（零）数论四大定理的证明及其应用前言可以发现RSA中的很多攻击方法都是从数论四大定理推导出的，所以找时间好好学习了一下数论四大定理的证明及其应用场景——Rabin算法。 欧拉定理若n,a为正整数，且n,a互素，即gcd(a,n) = 1，则 a^φ(n) ≡ 1 (mod n) 证明首先，我们需要知道欧拉定理是什么：  数论上的欧拉定理，指的是  a^φ(n)^≡1(mod n) 这">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20191106003424-20c73eb8-ffea-1.png">
+<meta property="og:image" content="http://upload.wikimedia.org/math/8/3/8/83878c91171338902e0fe0fb97a8c47a.png">
+<meta property="og:image" content="http://upload.wikimedia.org/math/8/3/8/83878c91171338902e0fe0fb97a8c47a.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/11/%E6%95%B0%E8%AE%BA%E5%9B%9B%E5%A4%A7%E5%AE%9A%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8/image-20191118000044109.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/11/数论四大定理及应用/image-20191118090130690.png">
+<meta property="og:updated_time" content="2019-11-23T06:45:06.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="密码学学习笔记（零）数论四大定理的证明及其应用">
+<meta name="twitter:description" content="密码学学习笔记（零）数论四大定理的证明及其应用前言可以发现RSA中的很多攻击方法都是从数论四大定理推导出的，所以找时间好好学习了一下数论四大定理的证明及其应用场景——Rabin算法。 欧拉定理若n,a为正整数，且n,a互素，即gcd(a,n) = 1，则 a^φ(n) ≡ 1 (mod n) 证明首先，我们需要知道欧拉定理是什么：  数论上的欧拉定理，指的是  a^φ(n)^≡1(mod n) 这">
+<meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20191106003424-20c73eb8-ffea-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/11/数论四大定理及应用/">
+
+
+
+
+
+  <title>密码学学习笔记（零）数论四大定理的证明及其应用 | V's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Daily life of a rookie</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/11/数论四大定理及应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="V">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">密码学学习笔记（零）数论四大定理的证明及其应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-11T15:30:00+08:00">
+                2019-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="密码学学习笔记（零）数论四大定理的证明及其应用"><a href="#密码学学习笔记（零）数论四大定理的证明及其应用" class="headerlink" title="密码学学习笔记（零）数论四大定理的证明及其应用"></a>密码学学习笔记（零）数论四大定理的证明及其应用</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>可以发现RSA中的很多攻击方法都是从数论四大定理推导出的，所以找时间好好学习了一下数论四大定理的证明及其应用场景——Rabin算法。</p>
+<h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2><p>若n,a为正整数，且n,a互素，即gcd(a,n) = 1，则</p>
+<p>a^φ(n) ≡ 1 (mod n)</p>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>首先，我们需要知道欧拉定理是什么：</p>
+<p> 数论上的欧拉定理，指的是</p>
+<p> a^φ(n)^≡1(mod n)</p>
+<p>这个式子实在a和n互质的前提下成立的。</p>
+<p>证明</p>
+<p>首先，我们知道在1到n的数中，与n互质的一共有φ(n)个，所以我们把这φ(n)个数拿出来，放到设出的集合X中，即为x<del>1</del>,x<del>2</del>……x<del>φ(n)</del></p>
+<p>那么接下来，我们可以再设出一个集合为M，设M中的数为：</p>
+<p>m<del>1</del>=a∗x<del>1</del>m<del>2</del>=a∗x<del>2</del>……m<del>φ(n)</del>=a∗x<del>φ(n)</del></p>
+<p>下面我们证明两个推理：</p>
+<h4 id="一、M中任意两个数都不模n同余。"><a href="#一、M中任意两个数都不模n同余。" class="headerlink" title="一、M中任意两个数都不模n同余。"></a>一、M中任意两个数都不模n同余。</h4><p>反证法。</p>
+<p>证明：假设M中存在两个数设为m<del>a</del>,m<del>b</del>模n同余。</p>
+<p> 即m<del>a</del>≡m<del>b</del></p>
+<p> 移项得到：m<del>a</del>−m<del>b</del>=n∗k</p>
+<p> 再将m用x来表示得到:a∗x<del>a</del>−a∗x<del>b</del>=n∗k<del>a</del>∗x<del>a</del>−a∗x<del>b</del>=n∗k</p>
+<p> 提取公因式得到a∗(x<del>a</del>−x<del>b</del>)=n∗k<del>a</del>∗(x<del>a</del>−x<del>b</del>)=n∗k</p>
+<p> 我们现在已知a与n互质，那么式子就可以转化为：</p>
+<p>x<del>a</del>−x<del>b</del>≡0（mod n)</p>
+<p>因为a中没有与n的公因子（1除外）所以a mod n != 0 所有只能是 x<del>a</del>−x<del>b</del>≡0（mod n)。</p>
+<p> 又因为x<del>a</del>,x<del>b</del>都是小于n的并且不会相同，那么上述的式子自然全都不成立。</p>
+<p> 假设不成立。</p>
+<p>证得：M中任意两个数都不模n同余。</p>
+<h4 id="二、M中的数除以n的余数全部与n互质。"><a href="#二、M中的数除以n的余数全部与n互质。" class="headerlink" title="二、M中的数除以n的余数全部与n互质。"></a>二、M中的数除以n的余数全部与n互质。</h4><p>证明：我们已知m<del>i</del>=a∗x<del>i</del></p>
+<p> 又因为a与n互质，x<del>i</del>与n互质，所以可得m<del>i</del>与n互质。</p>
+<p> 带入到欧几里得算法中推一步就好了。</p>
+<p> 即：</p>
+<p>gcd(a∗x<del>i</del>,n)=gcd(m<del>i</del>,n)=gcd(n,m<del>i</del> mod n)=1</p>
+<p>证毕。</p>
+<h4 id="三、根据我们证得的两个性质，就可以开始推式子了。"><a href="#三、根据我们证得的两个性质，就可以开始推式子了。" class="headerlink" title="三、根据我们证得的两个性质，就可以开始推式子了。"></a>三、根据我们证得的两个性质，就可以开始推式子了。</h4><p>首先，根据前两个推论可以知道，M中的数分别对应X中的每个数模n同余。</p>
+<p>（即是双射关系：首先M中的数在模n下不同余，即不相同，然后有φ(n)个m；其次有φ(n)个不相同的x与n互质，所以m与x是双射关系）</p>
+<p>所以可以得到：</p>
+<p>m<del>1</del>∗m<del>2</del>∗……∗m<del>φ(n)</del>≡x<del>1</del>∗x<del>2</del>∗……∗x<del>φ(n)</del>(mod n)</p>
+<p>现在我们把替换成x的形式，就可以得到：</p>
+<p>a∗x<del>1</del>∗a∗x<del>2</del>∗……∗a∗x<del>φ(n)</del>≡x<del>1</del>∗x<del>2</del>∗……∗x<del>φ(n)</del>(mod n)</p>
+<p>a^φ(n)^∗(x<del>1</del>∗x<del>2</del>……∗x<del>φ(n)</del>)≡x<del>1</del>∗x<del>2</del>……∗x<del>φ(n)</del>(mod n)</p>
+<p>(a^φ(n)^−1)∗(x<del>1</del>∗x<del>2</del>……∗x<del>φ(n)</del>)≡0(mod n)</p>
+<p>然后，由于(x<del>1</del>∗x<del>2</del>……∗x<del>φ(n)</del>)!≡0(mod n)</p>
+<p>所以    (a^φ(n)^−1)≡0(mod n)</p>
+<p>所以    a^φ(n)^≡1(mod n)</p>
+<h3 id="应用：RSA的解密"><a href="#应用：RSA的解密" class="headerlink" title="应用：RSA的解密"></a>应用：RSA的解密</h3><p>欧拉定理在RSA中可用于证明 M=C^d^ mod N ：</p>
+<p> <img src="https://xzfile.aliyuncs.com/media/upload/picture/20191106003424-20c73eb8-ffea-1.png" alt="img"> </p>
+<h2 id="费马小定理（欧拉定理特殊型情况）"><a href="#费马小定理（欧拉定理特殊型情况）" class="headerlink" title="费马小定理（欧拉定理特殊型情况）"></a>费马小定理（欧拉定理特殊型情况）</h2><p> 对于质数p，任意整数a，均满足：a^p-1^≡1（mod p）</p>
+<p>那么，a^p-2^就是a在模p下的逆元了~</p>
+<h2 id="孙子定理（中国剩余定理-CRT）"><a href="#孙子定理（中国剩余定理-CRT）" class="headerlink" title="孙子定理（中国剩余定理 CRT）"></a>孙子定理（中国剩余定理 CRT）</h2><p>设正整数$m_1,m_2…m_k$两两互素，则同余方程组<br>$x \equiv a_1 \pmod{m_1}$<br>$x \equiv a_2 \pmod{m_2}$<br>$x \equiv a_3 \pmod{m_3}$<br>…<br>$x \equiv a_k \pmod{m_k}$</p>
+<p>有整数解。并且在模$M = m_1 \cdot m_2 \cdot … \cdot m_k$下的解是唯一的，解为<br>$x \equiv (a_1M_1M_1^{-1} + a_2M_2M_2^{-1} + … + a_kM_kM_k^{-1}) \mod M$</p>
+<p>其中$M_i = M / m_i$，而$M_i^{-1}$为$M_i$模$m_i$的逆元。</p>
+<h3 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h3><p>具体证明如下：</p>
+<p>例：找出所有整数x,使其被3，5和7除时，余数分别为2，3和2</p>
+<p>x≡2(mod 3)</p>
+<p>x≡3(mod 5)      </p>
+<p>x≡2(mod 7)</p>
+<p>=&gt;      x = △ + 3<em>5</em>7*t  (△为期中的一个解，t为整数）</p>
+<p>在同余中最重要的观念就是求出第一个解，那么x = △ + 3<em>5</em>7*t就是通解。那怎么求一个解呢？</p>
+<p>利用同余的加性：</p>
+<p>把x拆成a+b+c,即x = a + b + c            </p>
+<p>令</p>
+<p>a≡2(mod 3)</p>
+<p>a≡0(mod 5)</p>
+<p>a≡0(mod 7)</p>
+<p>=&gt;a=35p(可以看到p取1的时候满足a≡2(mod3),即a=35)</p>
+<p><strong>为何这样取？从接下来的取法可知：b 和 c 都会取 3 的倍数，这样子就能保证，x  mod 3 = 2，我们标记这样的取法为FLAG</strong> </p>
+<p>接下来要求b：</p>
+<p>b≡0(mod 3)</p>
+<p>b≡3(mod 5)</p>
+<p>b≡0(mod 7)</p>
+<p>=&gt;b=21q(可以看到q取3的时候满足b≡3(mod5),即b=63)</p>
+<p>求c</p>
+<p>c≡0(mod 3)</p>
+<p>c≡0(mod 5)</p>
+<p>c≡2(mod 7)</p>
+<p>=&gt;c=15m(可以看到m取2的时候满足c≡2(mod7),即c=30)</p>
+<p>得</p>
+<p>x≡2(mod 3)  ≡ a + b + c</p>
+<p>x≡3(mod 5)  ≡ a + b + c</p>
+<p>x≡2(mod 7)  ≡ a + b + c</p>
+<p>a  b  c 都求出来之后，可以利用同余的加性</p>
+<p>x = a + b + c = 128是一个解，x = 128 + 105t 在适当调整t之后就可以求出x在任何范围内的解，比如说求最小正整数解，这时候t取-1，得x=23</p>
+<p>利用同余的乘性：</p>
+<p>之前令x = a + b + c,用同余的乘性之后x = 2a’ + 3b’ + 2c’    (此时令a’=b’=c’=1，就相当于同余的加性了)</p>
+<p>a’≡1(mod 3) </p>
+<p>a’≡0(mod 5)</p>
+<p>a’≡0(mod 7)</p>
+<p> =&gt;a’=35p(可以看到p取2的时候满足a’≡1(mod3),即a’=70)</p>
+<p>接下来要求b’：</p>
+<p>b’≡0(mod 3)</p>
+<p>b’≡1(mod 5)</p>
+<p>b’≡0(mod 7)</p>
+<p>=&gt;b’=21q(可以看到q取1的时候满足b’≡1(mod5),即b’=21)</p>
+<p>现在来看c’</p>
+<p>c’≡0(mod 3)</p>
+<p>c’≡0(mod 5) </p>
+<p>c’≡1(mod 7)</p>
+<p>=&gt;c’=15m(可以看到m取1的时候满足c’≡1(mod7),即c’=15)</p>
+<p>有了a’ b’ c’之后就可以得到 x = 2a’ + 3b’ + 2*c’<br>代入a’ b’ c’之后就可以得到x的一个解及其通解</p>
+<p>x = 2*70 + 3*21 +2*15 </p>
+<p>x = 233 + 105t</p>
+<p>在知道同余的加性和乘性之后再看下面这个公式就没有什么问题了</p>
+<p>$x \equiv (a_1M_1M_1^{-1} + a_2M_2M_2^{-1} + … + a_kM_kM_k^{-1}) \mod M$</p>
+<p>其中，a<del>i</del>就是题目所要求的剩余，M<del>1</del>就是前文提到的标记取法<strong>FLAG</strong>，而M<del>1</del>^-1^就是在同余的乘法性中为了满足a<del>1</del>‘≡1 mod （m<del>i</del>）</p>
+<h2 id="威尔逊定理"><a href="#威尔逊定理" class="headerlink" title="威尔逊定理"></a>威尔逊定理</h2><p>当且仅当p为素数时有，</p>
+<p> <strong>(p−1) ! ≡ −1(mod  p)</strong></p>
+<h3 id="证明："><a href="#证明：" class="headerlink" title="证明："></a>证明：</h3><p>首先：</p>
+<p>p−1 ≡ −1(mod p)</p>
+<p>那么我们只需要证明 (p−2)!≡1(mod p) </p>
+<p>也就是说，除去 1 后，如果 2,3,…,p−2 能够两两配对，且每对数乘积模 p 后为 1 的话，威尔逊定理就成立了，然后我们考虑这其实就是对于 2,3,…,p−2去找 模 p 意义下的逆元。</p>
+<p>然后考虑一下二次剩余里面的衍生知识，我们可以知道对于 x^2^≡1（mod q）只有两个解（1，p-1），而这两个数已经被我们安排掉了，也就是说 2,3,…,p−2中不存在某个数的逆元是自己本身。</p>
+<p>然后 集合 A={1,2,3,…p -1};  构成模p乘法的缩系，即任意i∈A ,存在j∈A,使得:     ( i，j ) ≡ 1 ( mod p )</p>
+<p>也就是说，除去1和p-1外，其余的两两配对互为逆元</p>
+<p>证毕</p>
+<h2 id="应用：Rabin算法"><a href="#应用：Rabin算法" class="headerlink" title="应用：Rabin算法"></a>应用：Rabin算法</h2><p>在解Rabin算法前，我们需要一些定理、推论</p>
+<h3 id="定理1"><a href="#定理1" class="headerlink" title="定理1"></a>定理1</h3><p>欧拉判别定理， c是模p的平方剩余的充要条件是 ，(c^1/2^)^φ(n)^  ≡ 1（mod P)</p>
+<h4 id="证明：-1"><a href="#证明：-1" class="headerlink" title="证明："></a>证明：</h4><p>首先，由于<img src="http://upload.wikimedia.org/math/8/3/8/83878c91171338902e0fe0fb97a8c47a.png" alt="p"> 是一个奇素数，由费马小定理，$d^{p-1} \equiv 1 \pmod{p}$。但是$P-1$是一个偶数，所以有</p>
+<p>$(d^{ \frac{p-1}{2} } -1) \cdot (d^{ \frac{p-1}{2} }+1) \equiv 0 \pmod{p}$</p>
+<p>$p$ 是一个素数，所以$d^{ \frac{p-1}{2} } -1$ 和 $d^{ \frac{p-1}{2} }+1$中必有一个是$P$ 的倍数。因此$d^{ \frac{p-1}{2} }$模$P$的余数必然是1或-1。</p>
+<ul>
+<li>证明若$d$是模$p$二次剩余，则$d^{ \frac{p-1}{2}} \equiv 1 \pmod{p}$</li>
+</ul>
+<p>若$d$是模<img src="http://upload.wikimedia.org/math/8/3/8/83878c91171338902e0fe0fb97a8c47a.png" alt="p">的二次剩余，则存在 $x^2 \equiv d \pmod{p}$，$p$跟$d$和$x$ 互质。根据费马小定理得：</p>
+<p>$d^{ \frac{p-1}{2}} \equiv x^{p-1} \equiv 1 \pmod{p}$</p>
+<ul>
+<li>证明若$d^{ \frac{p-1}{2} } \equiv 1 \pmod{p}$，则$d$是模$p$的二次剩余</li>
+</ul>
+<p>$p$ 是一个奇素数，所以关于$p$的原根存在。设$a$是$p$的一个原根，则存在$1 \le j \le p-1$使得$d=a^j$。于是</p>
+<p> $d^{ \frac{p-1}{2}} \equiv x^{p-1} \equiv 1 \pmod{p}$ </p>
+<p>$a$是$p$的一个原根，因此$a$模$p$的指数是$p-1$，于是$p-1$整除 $\frac{ j(p-1) }{2}$ 。这说明$j$是一个偶数。令 $i = \frac{j}{2}$ ，就有 $(a^i)^2 =a^{2i} = d$ 。$d$是模$p$ 的二次剩余 </p>
+<h3 id="定理2"><a href="#定理2" class="headerlink" title="定理2"></a>定理2</h3><p>二次同余式x^2^ ≡ c (mod p)的解为：</p>
+<p>​                                                    x ≡ ±c^(p+1)/4^  (mod p)    </p>
+<h4 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h4><p>由于p是素数，显然a与p互素，再由欧拉判别定理， a是模p的平方剩余的充要条件是 ，</p>
+<p>(c^1/2^)^φ(n)^  ≡ 1（mod P)</p>
+<p>即(c^1/2^)^p-1^  ≡ 1（mod p）</p>
+<p>带入原式，得x^2^ ≡ c·(c^1/2^)^p-1^ ≡ c^(p+1)/2^ ≡ (c^(p+1)/4^)^2^</p>
+<p>则</p>
+<p>x ≡ ±c^(p+1)/4^  (mod p)</p>
+<h3 id="定理3"><a href="#定理3" class="headerlink" title="定理3"></a>定理3</h3><p>如果整数c满足：</p>
+<p>1） c为p的平方剩余</p>
+<p>2） c为q的平方剩余</p>
+<p>则： c为p*q的平方剩余，解x为：x ≡ ±（c^(p+1)/4^(mod p))·(q^-1^(mod p))*q ± （c^(q+1)/4^(mod q))*(p^-1^(mod q))·p (mod p*q)</p>
+<h4 id="证明-3"><a href="#证明-3" class="headerlink" title="证明"></a>证明</h4><p>二次同余式：    x^2^ ≡ c (mod pq)</p>
+<p>等价于同余式组 ：    x^2^ ≡ c (mod p)        ①    </p>
+<p>​                                    x^2^ ≡ c (mod q)        ②</p>
+<p>由定理2</p>
+<p>①式解为    x ≡ ±c^(p+1)/4^  (mod p)    </p>
+<p>②式解为    x ≡ ±c^(q+1)/4^  (mod q)    </p>
+<p>由CRT，解为 x ≡ ±（c^(p+1)/4^(mod p))·(q^-1^(mod p))*q ± （c^(q+1)/4^(mod q))*(p^-1^(mod q))·p  (mod p*q)</p>
+<h3 id="Rabin加密"><a href="#Rabin加密" class="headerlink" title="Rabin加密"></a>Rabin加密</h3><p>选择两个大素数p和q做为私钥</p>
+<p>计算n = p * q做为公钥</p>
+<p>若明文为m，则密文为c ≡ m^2 (mod n)</p>
+<h3 id="Rabin解密"><a href="#Rabin解密" class="headerlink" title="Rabin解密"></a>Rabin解密</h3><p>我们首先计算出x<del>1</del>和x<del>2</del>，使得</p>
+<p>x<del>1</del>^2^ ≡ c (mod p)，①</p>
+<p>x<del>2</del>^2^ ≡ c (mod q)，②</p>
+<h4 id="i-p和q都是模4余3的数"><a href="#i-p和q都是模4余3的数" class="headerlink" title="i)p和q都是模4余3的数"></a>i)p和q都是模4余3的数</h4><p>由于p是素数，显然c与p互素，再由定理2</p>
+<p>得   </p>
+<p>x<del>1</del> ≡ ±c^(p+1)/4^  (mod p)</p>
+<p>x<del>2</del> ≡ ±c^(q+1)/4^  (mod q)</p>
+<p>（一正一负，负的计算可简化为 模-正，如：-x<del>1</del> ≡ p - x<del>1</del>  (mod p)）</p>
+<p>从这里可以看出来如果p和q不是模4余3的话，c的指数就不是一个整数，也就不能用这个方法计算了</p>
+<p>接着我们求出p在模q下的逆，设为a，即ap ≡ 1 (mod q)</p>
+<p>然后我们求出q在模p下的逆，设为b，即bq ≡ 1 (mod p)</p>
+<p>求出来a，b用于中国剩余定理</p>
+<p>带入x ≡ ±（c^(p+1)/4^(mod p))·(q^-1^(mod p))*q ±（c^(q+1)/4^(mod q))*(p^-1^(mod q))·p  (mod p*q)</p>
+<p>得    x ≡ ±（c^(p+1)/4^(mod p))·b*q ±（c^(q+1)/4^(mod q))*a·p   (mod n)</p>
+<p>设c^(p+1)/4^(mod p) 为c<del>p</del>，c^(q+1)/4^ (mod q)为c<del>q</del></p>
+<p>$x_1 = (b \cdot q \cdot c_p+a \cdot p \cdot c_q )  \mod n$<br>$-x_1 = n - x_1$<br>$x_2= (b \cdot q \cdot c_p- a \cdot p \cdot c_q)  \mod n$<br>$-x_2 = n - x_2$</p>
+<p>其中有一个为我们想要的明文m。</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">n2s</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> hex(x)[<span class="number">2</span>:].decode(<span class="string">"hex"</span>)</span><br><span class="line"></span><br><span class="line">c = </span><br><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">n = p*q</span><br><span class="line">c_p = pow(c,(p+<span class="number">1</span>)/<span class="number">4</span>,p)</span><br><span class="line">c_q = pow(c,(q+<span class="number">1</span>)/<span class="number">4</span>,q)</span><br><span class="line">a = gmpy2.invert(p,q)</span><br><span class="line">b = gmpy2.invert(q,p)</span><br><span class="line">x = (b*q*c_p+a*p*c_q)%n</span><br><span class="line">y = (b*q*c_p-a*p*c_q)%n</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> n2s(x)</span><br><span class="line"><span class="keyword">print</span> n2s(n-x)</span><br><span class="line"><span class="keyword">print</span> n2s(y)</span><br><span class="line"><span class="keyword">print</span> n2s(n-y)</span><br></pre></td></tr></table></figure>
+
+<h4 id="ii-p和q不是模4余3的数"><a href="#ii-p和q不是模4余3的数" class="headerlink" title="ii)p和q不是模4余3的数"></a>ii)p和q不是模4余3的数</h4><p>这里涉及 <a href="https://en.wikipedia.org/wiki/Cipolla's_algorithm" target="_blank" rel="noopener">Cipolla’s algorithm</a> ，先知已经有一篇讲的不错的文章了 <a href="https://xz.aliyun.com/t/5113#toc-4" target="_blank" rel="noopener">https://xz.aliyun.com/t/5113#toc-4</a> </p>
+<h2 id="题目实例"><a href="#题目实例" class="headerlink" title="题目实例"></a>题目实例</h2><h3 id="UNCTF-一句话加密"><a href="#UNCTF-一句话加密" class="headerlink" title="UNCTF - 一句话加密"></a>UNCTF - 一句话加密</h3><p>题目是给了一张图，隐写了一个模n</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">n</span> = <span class="number">0</span>xc2636ae5c3d8e43ffb97ab09028f1aac6c0bf6cd3d70ebca281bffe97fbe30dd</span><br></pre></td></tr></table></figure>
+
+<p>可以发现n不大，直接用yafu分解可得</p>
+<p><img src="/2019/11/11/%E6%95%B0%E8%AE%BA%E5%9B%9B%E5%A4%A7%E5%AE%9A%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8/image-20191118000044109.png" alt="image-20191118000044109"></p>
+<p>但是找不到e，最后试了试rabin，成功破解</p>
+<p>exp用上面的那个就可~</p>
+<h3 id="roarctf-babyrsa"><a href="#roarctf-babyrsa" class="headerlink" title="roarctf - babyrsa"></a>roarctf - babyrsa</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import sympy</span><br><span class="line">import random</span><br><span class="line">def myGetPrime():</span><br><span class="line">    A= getPrime(513)</span><br><span class="line">    <span class="builtin-name">print</span>(A)</span><br><span class="line">    <span class="attribute">B</span>=A-random.randint(1e3,1e5)</span><br><span class="line">    <span class="builtin-name">print</span>(B)</span><br><span class="line">    return sympy.nextPrime((B!)%A)</span><br><span class="line"><span class="attribute">p</span>=myGetPrime()</span><br><span class="line"><span class="comment">#A1=</span></span><br><span class="line"><span class="comment">#B1=</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">q</span>=myGetPrime()</span><br><span class="line"><span class="comment">#A2=</span></span><br><span class="line"><span class="comment">#B2=</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">r</span>=myGetPrime()</span><br><span class="line"><span class="attribute">n</span>=p*q*r</span><br><span class="line"><span class="comment">#n=</span></span><br><span class="line"><span class="attribute">c</span>=pow(flag,e,n)</span><br><span class="line"><span class="comment">#e=0x1001</span></span><br><span class="line"><span class="comment">#c=</span></span><br><span class="line"><span class="comment">#so,what is the flag?</span></span><br></pre></td></tr></table></figure>
+
+<p>加密中的<strong>(B!)%A</strong>的 <strong>!</strong> 在这里是阶乘的意思，所以显然这里要用到威尔逊定理，不然这么大的一个数的阶乘，根本吃不消好吧</p>
+<p>根据加密逻辑，这里是一个三素数系统，所以φ(n) = (p-1)(q-1)(r-1)，然后r肯定是要通过先求出p，q来得出</p>
+<p>然后关于p和q，题目给的信息都一样，所以求p和求q的解法肯定是一样的，</p>
+<p>所以题目简化为，<strong>根据A1,B1解p</strong></p>
+<p>而p = (B!)%A （B是一个比A小的数）</p>
+<p>虽然A，B均已给出且互素，但显然大数B的阶乘是不可能直接求得的，</p>
+<p>所以要用威尔逊定理简化计算</p>
+<p>简化过程如下：</p>
+<p>已知 B! ≡ P(MOD A)</p>
+<p>由于A是素数，所以有：        (A-1)! ≡ -1 (MOD A)</p>
+<p>​                   即(A-1)(A-2)……(B+1)B! ≡ -1 (MOD A)</p>
+<p>​         根据已知(A-1)(A-2)……(B+1)P ≡ -1 (MOD A)</p>
+<p>​                     变形为(A-2)……(B+1)P ≡ 1 (MOD A)</p>
+<p>所以p即为(A-2)(A-3)……(B+1) 在模A 下的逆</p>
+<p>exp</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">from gmpy2 import *</span><br><span class="line">import sympy</span><br><span class="line"></span><br><span class="line">A1=</span><br><span class="line">B1=</span><br><span class="line">A2=</span><br><span class="line">B2=</span><br><span class="line">n=</span><br><span class="line">e=0x1001</span><br><span class="line">c=</span><br><span class="line"></span><br><span class="line">a = 1</span><br><span class="line">for i in range(A1-2,B1,-1):</span><br><span class="line">    a = a*i % A1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b = 1</span><br><span class="line">for i in range(A2-2,B2,-1):</span><br><span class="line">    b = b*i % A2</span><br><span class="line">    </span><br><span class="line">p = sympy.nextprime(invert(a,A1))</span><br><span class="line">q = sympy.nextprime(invert(b,A2))</span><br><span class="line">r=n/p/q</span><br><span class="line">phi = (p-1)*(q-1)*(r-1)</span><br><span class="line">d = invert(e,phi)</span><br><span class="line">m=pow(c,d,n)</span><br><span class="line">print hex(m)[2:].decode('hex')</span><br></pre></td></tr></table></figure>
+
+<h3 id="HECTF-easy-rsa"><a href="#HECTF-easy-rsa" class="headerlink" title="HECTF - easy_rsa"></a>HECTF - easy_rsa</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from gmpy2 import *</span><br><span class="line"></span><br><span class="line">from Crypto.Util import number</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">#e = have a try~</span></span><br><span class="line">p = number.getPrime(1024)</span><br><span class="line"></span><br><span class="line">q = number.getPrime(1024)</span><br><span class="line"></span><br><span class="line">nothing = 251560377963038761190200797029988859033 <span class="comment"># getPrime(128)</span></span><br><span class="line"></span><br><span class="line">n = p*q</span><br><span class="line">fn = (p-1)*(q-1)</span><br><span class="line">d =inverse(e, fn)</span><br><span class="line">something=(p-1)d+nothing</span><br><span class="line">enc = pow(flag, e, p*q)</span><br><span class="line"></span><br><span class="line"><span class="comment">#n=</span></span><br><span class="line"><span class="comment">#something=</span></span><br><span class="line"><span class="comment">#enc=</span></span><br></pre></td></tr></table></figure>
+
+<p>题目给了，nothing（下面记为r），something（下面记为s），其中 (p-1)d= s - r</p>
+<p>目的很明确，就是分解大数n</p>
+<p>这一题的思路就是利用GCD来约出n的因子</p>
+<p>所以首先要获得一个p的倍数</p>
+<p>根据费马小定理</p>
+<p>2^p-1^ ≡ 1 (mod p ) 显然成立    (主要是为了利用题目中给出的<strong>(p-1)d</strong>）</p>
+<p>所以设A = 2^p-1^ - 1 = kp</p>
+<p>然后利用欧拉定理，我们直接利用上文中提到的RSA的解密证明中的结论</p>
+<img src="/2019/11/11/数论四大定理及应用/image-20191118090130690.png" alt="image-20191118090130690" style="zoom:67%;">
+
+<p>(2^p-1^)^ed^  ≡ (2^p-1^)   (mod n)</p>
+<p>由题，(p-1)d = s - r</p>
+<p>所以A  ≡ 2^p-1^ - 1  ≡  (2^p-1^)^ed^ - 1 ≡  2^es-er^ - 1    (mod n)</p>
+<p>所以  gcd( 2^es-er^ - 1 , n) </p>
+<p>即      gcd(kp , pq) </p>
+<p>即可得到     p</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"></span><br><span class="line">enc=</span><br><span class="line">n=</span><br><span class="line">something=</span><br><span class="line">nothing=</span><br><span class="line">e=<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        e=sympy.nextprime(e)</span><br><span class="line">        a=pow(<span class="number">2</span>,e*something-e*nothing,n)<span class="number">-1</span></span><br><span class="line">        p=libnum.gcd(a,n)</span><br><span class="line">        q=n/p</span><br><span class="line">        fn=(p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">        d=invert(e,fn)</span><br><span class="line">        flag=libnum.n2s(pow(enc,d,n))</span><br><span class="line">        <span class="keyword">if</span> <span class="string">"hebtu"</span> <span class="keyword">in</span> flag:</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">	<span class="keyword">except</span>:</span><br><span class="line">    	<span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="构造GCD"><a href="#构造GCD" class="headerlink" title="构造GCD"></a>构造GCD</h3><p>可以看出，构造gcd来求大数n的因子以此来分解n是一种很好又很巧妙的方式,来看这一题</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import getPrime, isPrime, getRandomNBitInteger</span><br><span class="line">p = getPrime(512)</span><br><span class="line">q = getPrime(512)</span><br><span class="line">n=p*q</span><br><span class="line"></span><br><span class="line">a=int(pow((q+p),2019,n))</span><br><span class="line">b=int(pow(p+2019,q,n))</span><br><span class="line">n=</span><br><span class="line">a=</span><br><span class="line">b=</span><br></pre></td></tr></table></figure>
+
+<p>这里，我们要通过已给出的a和b，来分解n</p>
+<p>通过a，b和p，q的关系，我们要想办法用a,b凑出一个GCD来求出n的一个因子</p>
+<p>解题过程如下：</p>
+<p>由 a ≡ (p+q)^2019^ (mod n)</p>
+<p>可得    a ≡ (p+q)^2019^ ≡ p^2019^  (mod q)        【二项式展开定理】</p>
+<p>由 b ≡ (p+2019)^q^ (mod n)</p>
+<p>可得 b ≡ (p+2019)^q^ ≡ p+2019  (mod q)            【费马小定理：(p+2019)^q-1^ ≡ 1 (mod q)】</p>
+<p>所以 a ≡ (b - 2019)^2019^ (mod q)</p>
+<p>​    即 a =  (b - 2019)^2019^ + kq</p>
+<p>这样我们就可以凑出一个GCD</p>
+<p>GCD（ (b - 2019)^2019^-a，n）=  GCD（ Kq，n）= q</p>
+<p>解题完毕</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这一次学习了数论四大定理的证明、应用，以及rabin密码的解法。发现其实很多解法、攻击方法都是多种定理的结合运用，有时候还要引出各种推论，很灵活~</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>欧拉定理证明： <a href="https://www.cnblogs.com/wangxiaodai/p/9758242.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangxiaodai/p/9758242.html</a> </p>
+<p>中国剩余定理证明： <a href="https://blog.csdn.net/Rain722/article/details/53230707" target="_blank" rel="noopener">https://blog.csdn.net/Rain722/article/details/53230707</a> </p>
+<p>威尔逊定理证明： <a href="https://www.cnblogs.com/Judge/p/10755703.html" target="_blank" rel="noopener">https://www.cnblogs.com/Judge/p/10755703.html</a> </p>
+<p>Rabin算法： <a href="https://veritas501.space/2017/03/01/密码学笔记/" target="_blank" rel="noopener">https://veritas501.space/2017/03/01/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AC%94%E8%AE%B0/</a> </p>
+<p> <a href="https://xz.aliyun.com/t/5113" target="_blank" rel="noopener">https://xz.aliyun.com/t/5113</a> </p>
+<p> <a href="https://en.wikipedia.org/wiki/Rabin_cryptosystem" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Rabin_cryptosystem</a> </p>
+<p> <a href="https://blog.csdn.net/qq_24451605/article/details/45093911" target="_blank" rel="noopener">https://blog.csdn.net/qq_24451605/article/details/45093911</a> </p>
+<p>最后感谢Lur大佬的一手指点~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/note/" rel="tag"># note</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/11/UNCTF-Write Up/" rel="next" title="UNCTF Write Up">
+                <i class="fa fa-chevron-left"></i> UNCTF Write Up
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/11/密码学学习笔记（一）/" rel="prev" title="密码学学习笔记（一）浅析Pollard's rho algorithm及其应用">
+                密码学学习笔记（一）浅析Pollard's rho algorithm及其应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="V">
+            
+              <p class="site-author-name" itemprop="name">V</p>
+              <p class="site-description motion-element" itemprop="description">It is not ignorance and weakness but arrogance that destroys mankind</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                blogroll
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fzwjscj.top/" title="fzwjscj" target="_blank">fzwjscj</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dldxz.cn/" title="DLDXZ" target="_blank">DLDXZ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanda.cloud/" title="fanda" target="_blank">fanda</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://passingfoam.com/" title="PassingFoam's blog" target="_blank">PassingFoam's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eqqie.cn/" title="eqqie's blog" target="_blank">eqqie's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.ragdoll.work/" title="nan-meng" target="_blank">nan-meng</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="glzjin" target="_blank">glzjin</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#密码学学习笔记（零）数论四大定理的证明及其应用"><span class="nav-number">1.</span> <span class="nav-text">密码学学习笔记（零）数论四大定理的证明及其应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉定理"><span class="nav-number">1.2.</span> <span class="nav-text">欧拉定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#证明"><span class="nav-number">1.2.1.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、M中任意两个数都不模n同余。"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">一、M中任意两个数都不模n同余。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、M中的数除以n的余数全部与n互质。"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">二、M中的数除以n的余数全部与n互质。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、根据我们证得的两个性质，就可以开始推式子了。"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">三、根据我们证得的两个性质，就可以开始推式子了。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用：RSA的解密"><span class="nav-number">1.2.2.</span> <span class="nav-text">应用：RSA的解密</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#费马小定理（欧拉定理特殊型情况）"><span class="nav-number">1.3.</span> <span class="nav-text">费马小定理（欧拉定理特殊型情况）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#孙子定理（中国剩余定理-CRT）"><span class="nav-number">1.4.</span> <span class="nav-text">孙子定理（中国剩余定理 CRT）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#证明-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#威尔逊定理"><span class="nav-number">1.5.</span> <span class="nav-text">威尔逊定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#证明："><span class="nav-number">1.5.1.</span> <span class="nav-text">证明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用：Rabin算法"><span class="nav-number">1.6.</span> <span class="nav-text">应用：Rabin算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定理1"><span class="nav-number">1.6.1.</span> <span class="nav-text">定理1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#证明：-1"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">证明：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定理2"><span class="nav-number">1.6.2.</span> <span class="nav-text">定理2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#证明-2"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定理3"><span class="nav-number">1.6.3.</span> <span class="nav-text">定理3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#证明-3"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rabin加密"><span class="nav-number">1.6.4.</span> <span class="nav-text">Rabin加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rabin解密"><span class="nav-number">1.6.5.</span> <span class="nav-text">Rabin解密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i-p和q都是模4余3的数"><span class="nav-number">1.6.5.1.</span> <span class="nav-text">i)p和q都是模4余3的数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii-p和q不是模4余3的数"><span class="nav-number">1.6.5.2.</span> <span class="nav-text">ii)p和q不是模4余3的数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目实例"><span class="nav-number">1.7.</span> <span class="nav-text">题目实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UNCTF-一句话加密"><span class="nav-number">1.7.1.</span> <span class="nav-text">UNCTF - 一句话加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#roarctf-babyrsa"><span class="nav-number">1.7.2.</span> <span class="nav-text">roarctf - babyrsa</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HECTF-easy-rsa"><span class="nav-number">1.7.3.</span> <span class="nav-text">HECTF - easy_rsa</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造GCD"><span class="nav-number">1.7.4.</span> <span class="nav-text">构造GCD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.9.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">V</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

