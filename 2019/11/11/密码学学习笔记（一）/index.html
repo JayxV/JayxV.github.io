@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="note,">
+  <meta name="keywords" content="Crypto,">
 
 
 
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="原文： https://xz.aliyun.com/t/6703  密码学学习笔记（一）浅析Pollard’s rho algorithm及其应用前言这几天在学密码学，其中有关RSA的内容。由于各种攻击算法的出现，RSA现在其实已经不太安全了，但不得不承认的是，当今RSA加密技术还是被普遍应用的~ 然后在做题的时候，遇到了这样一题 123456789101112131415161718192021">
-<meta name="keywords" content="note">
+<meta name="description" content="原文： https://xz.aliyun.com/t/6703  (建议配合typora食用) 密码学学习笔记（一）浅析Pollard’s rho algorithm及其应用前言这几天在学密码学，其中有关RSA的内容。由于各种攻击算法的出现，RSA现在其实已经不太安全了，但不得不承认的是，当今RSA加密技术还是被普遍应用的~ 然后在做题的时候，遇到了这样一题 123456789101112131">
+<meta name="keywords" content="Crypto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="密码学学习笔记（一）浅析Pollard&#39;s rho algorithm及其应用">
 <meta property="og:url" content="http://yoursite.com/2019/11/11/密码学学习笔记（一）/index.html">
 <meta property="og:site_name" content="V&#39;s blog">
-<meta property="og:description" content="原文： https://xz.aliyun.com/t/6703  密码学学习笔记（一）浅析Pollard’s rho algorithm及其应用前言这几天在学密码学，其中有关RSA的内容。由于各种攻击算法的出现，RSA现在其实已经不太安全了，但不得不承认的是，当今RSA加密技术还是被普遍应用的~ 然后在做题的时候，遇到了这样一题 123456789101112131415161718192021">
+<meta property="og:description" content="原文： https://xz.aliyun.com/t/6703  (建议配合typora食用) 密码学学习笔记（一）浅析Pollard’s rho algorithm及其应用前言这几天在学密码学，其中有关RSA的内容。由于各种攻击算法的出现，RSA现在其实已经不太安全了，但不得不承认的是，当今RSA加密技术还是被普遍应用的~ 然后在做题的时候，遇到了这样一题 123456789101112131">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20191106003318-f96f5044-ffe9-1.png">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20191106003326-fdee1394-ffe9-1.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20191106003405-1505b938-ffea-1.png">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20191106003417-1ca71876-ffea-1.png">
 <meta property="og:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20191106003424-20c73eb8-ffea-1.png">
-<meta property="og:updated_time" content="2019-11-11T07:34:09.501Z">
+<meta property="og:updated_time" content="2019-12-04T07:50:06.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="密码学学习笔记（一）浅析Pollard&#39;s rho algorithm及其应用">
-<meta name="twitter:description" content="原文： https://xz.aliyun.com/t/6703  密码学学习笔记（一）浅析Pollard’s rho algorithm及其应用前言这几天在学密码学，其中有关RSA的内容。由于各种攻击算法的出现，RSA现在其实已经不太安全了，但不得不承认的是，当今RSA加密技术还是被普遍应用的~ 然后在做题的时候，遇到了这样一题 123456789101112131415161718192021">
+<meta name="twitter:description" content="原文： https://xz.aliyun.com/t/6703  (建议配合typora食用) 密码学学习笔记（一）浅析Pollard’s rho algorithm及其应用前言这几天在学密码学，其中有关RSA的内容。由于各种攻击算法的出现，RSA现在其实已经不太安全了，但不得不承认的是，当今RSA加密技术还是被普遍应用的~ 然后在做题的时候，遇到了这样一题 123456789101112131">
 <meta name="twitter:image" content="https://xzfile.aliyuncs.com/media/upload/picture/20191106003318-f96f5044-ffe9-1.png">
 
 
@@ -340,6 +340,7 @@
 
       
         <p>原文： <a href="https://xz.aliyun.com/t/6703" target="_blank" rel="noopener">https://xz.aliyun.com/t/6703</a> </p>
+<p>(建议配合typora食用)</p>
 <h1 id="密码学学习笔记（一）浅析Pollard’s-rho-algorithm及其应用"><a href="#密码学学习笔记（一）浅析Pollard’s-rho-algorithm及其应用" class="headerlink" title="密码学学习笔记（一）浅析Pollard’s rho algorithm及其应用"></a>密码学学习笔记（一）浅析Pollard’s rho algorithm及其应用</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这几天在学密码学，其中有关RSA的内容。由于各种攻击算法的出现，RSA现在其实已经不太安全了，但不得不承认的是，当今RSA加密技术还是被普遍应用的~</p>
 <p>然后在做题的时候，遇到了这样一题</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.<span class="keyword">number</span> import getPrime, isPrime</span><br><span class="line">flag = <span class="string">'BCNS&#123;***************&#125;'</span></span><br><span class="line">nbits = <span class="number">2048</span></span><br><span class="line">gbits = <span class="number">1000</span></span><br><span class="line">g = getPrime(<span class="keyword">int</span>(gbits))</span><br><span class="line"><span class="keyword">while</span> True:</span><br><span class="line">    <span class="keyword">a</span> = getPrime(<span class="keyword">int</span>(nbits * <span class="number">0.5</span>) - gbits)</span><br><span class="line">    <span class="keyword">p</span> = <span class="number">2</span> * g * <span class="keyword">a</span> + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> isPrime(<span class="keyword">p</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> True:</span><br><span class="line">    <span class="keyword">b</span> = getPrime(<span class="keyword">int</span>(nbits * <span class="number">0.5</span>) - gbits)</span><br><span class="line">    q = <span class="number">2</span> * g * <span class="keyword">b</span> + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">p</span> != q <span class="built_in">and</span> isPrime(q):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">N</span> = <span class="keyword">p</span> * q</span><br><span class="line"><span class="keyword">e</span> = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">def str2int(s):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">int</span>(s.encode(<span class="string">'hex'</span>), <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">with <span class="keyword">open</span>(<span class="string">'pubkey.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> <span class="keyword">f</span>:</span><br><span class="line">    <span class="keyword">f</span>.<span class="keyword">write</span>(str(<span class="keyword">e</span>) + <span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">f</span>.<span class="keyword">write</span>(str(<span class="keyword">N</span>) + <span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">plain = str2int(flag)</span><br><span class="line"></span><br><span class="line"><span class="keyword">c</span> = <span class="built_in">pow</span>(plain, <span class="keyword">e</span>, <span class="keyword">N</span>)</span><br><span class="line">with <span class="keyword">open</span>(<span class="string">'cipher.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> <span class="keyword">f</span>:</span><br><span class="line">    <span class="keyword">f</span>.<span class="keyword">write</span>(hex(<span class="keyword">c</span>))</span><br></pre></td></tr></table></figure>
@@ -427,7 +428,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/note/" rel="tag"># note</a>
+            <a href="/tags/Crypto/" rel="tag"># Crypto</a>
           
         </div>
       
@@ -440,7 +441,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/11/数论四大定理及应用/" rel="next" title="密码学学习笔记（零）数论四大定理的证明及其应用">
+              <a href="/2019/11/11/密码学学习笔记（零）数论四大定理及应用/" rel="next" title="密码学学习笔记（零）数论四大定理的证明及其应用">
                 <i class="fa fa-chevron-left"></i> 密码学学习笔记（零）数论四大定理的证明及其应用
               </a>
             
@@ -450,8 +451,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2099/12/31/题目导航(手动置顶)/" rel="prev" title="题目导航(手动置顶)">
-                题目导航(手动置顶) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/12/04/密码学学习笔记（二）浅析On r-th Root Extraction Algorithm in Fq/" rel="prev" title="密码学学习笔记（二）：浅析On r-th Root Extraction Algorithm in Fq">
+                密码学学习笔记（二）：浅析On r-th Root Extraction Algorithm in Fq <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -531,7 +532,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -544,7 +545,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
