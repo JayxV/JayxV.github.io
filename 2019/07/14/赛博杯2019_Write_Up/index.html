@@ -1,362 +1,282 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html>
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Write UP,">
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="赛博杯2019 Write Up前言杭电赛博协会出得题，感觉质量还是不错的，难易兼备。以下是比赛题目部分Write Up。 MISCSign in 扫条形码得到flag。 No Wordsnow加密，将文件放入010editor看他的十六进制形式，  0D0A是换行，剩下的将20转0，将09转1，得到的二进制数据，转字符串即可得到flag。 基础社工题目介绍：大家都用着我们的数字杭电（i.hdu.">
-<meta name="keywords" content="Write UP">
-<meta property="og:type" content="article">
-<meta property="og:title" content="赛博杯2019_Write_Up">
-<meta property="og:url" content="http://yoursite.com/2019/07/14/赛博杯2019_Write_Up/index.html">
-<meta property="og:site_name" content="V&#39;s blog">
-<meta property="og:description" content="赛博杯2019 Write Up前言杭电赛博协会出得题，感觉质量还是不错的，难易兼备。以下是比赛题目部分Write Up。 MISCSign in 扫条形码得到flag。 No Wordsnow加密，将文件放入010editor看他的十六进制形式，  0D0A是换行，剩下的将20转0，将09转1，得到的二进制数据，转字符串即可得到flag。 基础社工题目介绍：大家都用着我们的数字杭电（i.hdu.">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/1.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/2.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/3.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/4.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/5.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/6.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/7.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/8.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/9.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/10.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/11.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/12.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/13.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/15.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/16.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/70.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/36.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/28.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/89.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/59.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/35.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/71.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/90.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/87.png">
-<meta property="og:updated_time" content="2019-11-11T07:17:03.393Z">
+  <meta charset="utf-8">
+  <title>赛博杯2019_Write_Up | Van1sh的小屋</title>
+  <meta name="keywords" content=" Write UP ">
+  <meta name="description" content="赛博杯2019_Write_Up | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T07:59:52.318Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="赛博杯2019_Write_Up">
-<meta name="twitter:description" content="赛博杯2019 Write Up前言杭电赛博协会出得题，感觉质量还是不错的，难易兼备。以下是比赛题目部分Write Up。 MISCSign in 扫条形码得到flag。 No Wordsnow加密，将文件放入010editor看他的十六进制形式，  0D0A是换行，剩下的将20转0，将09转1，得到的二进制数据，转字符串即可得到flag。 基础社工题目介绍：大家都用着我们的数字杭电（i.hdu.">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/1.png">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
 
 
+<link rel="icon" href="/img/avatar.jpg">
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
 </script>
 
-
-
-  <link rel="canonical" href="http://yoursite.com/2019/07/14/赛博杯2019_Write_Up/">
-
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 
 
 
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
-  <title>赛博杯2019_Write_Up | V's blog</title>
-  
-
-
-
-
-
-
-
+<script src="/js/iconfont.js?v=1.0.1"></script>
 
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">V's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">Daily life of a rookie</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
 </div>
 
-<nav class="site-nav">
-  
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
 
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+<div class="icon">
     
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
 
-  
 
-  
-  
-  
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/赛博杯2019_Write_Up/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="V">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
+<ul>
+    <li><div class="all active">全部文章<small>(1)</small></div></li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="1">
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="V's blog">
-    </span>
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write UP</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
 
     
-      <header class="post-header">
-
+    <nav id="title-list-nav">
         
+        <a  class=""
+           href="/2019/07/14/赛博杯2019_Write_Up/"
+           data-tag="Write UP"
+           data-author="" >
+            <span class="post-title" title="赛博杯2019_Write_Up">赛博杯2019_Write_Up</span>
+            <span class="post-date" title="2019-07-14 16:22:35">2019/07/14</span>
+        </a>
         
-          <h1 class="post-title" itemprop="name headline">赛博杯2019_Write_Up</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T16:22:35+08:00">
-                2019-07-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
         </div>
-      </header>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-赛博杯2019_Write_Up" class="article article-type-post" itemscope itemprop="blogPost">
     
-
+        <h1 class="article-title">赛博杯2019_Write_Up</h1>
     
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            
+            <a class="color4">Write UP</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-04-29 23:16:56'>2019-07-14 16:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
     
+    <div class="toc-ref">
     
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#赛博杯2019-Write-Up"><span class="toc-text">赛博杯2019 Write Up</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISC"><span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sign-in"><span class="toc-text">Sign in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#No-Word"><span class="toc-text">No Word</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基础社工"><span class="toc-text">基础社工</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-world"><span class="toc-text">The world</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Different-P"><span class="toc-text">Different_P</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto"><span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#easy-RSA"><span class="toc-text">easy_RSA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#川流不息"><span class="toc-text">川流不息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB"><span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#base-1"><span class="toc-text">base_1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#truncation"><span class="toc-text">truncation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simple-XXE"><span class="toc-text">Simple XXE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inclusion"><span class="toc-text">inclusion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN"><span class="toc-text">PWN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hardpwn"><span class="toc-text">hardpwn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stackpwn"><span class="toc-text">stackpwn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#floatpwn"><span class="toc-text">floatpwn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Babytcache"><span class="toc-text">Babytcache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#codepwn"><span class="toc-text">codepwn</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RE"><span class="toc-text">RE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Secret"><span class="toc-text">Secret</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
       
         <h1 id="赛博杯2019-Write-Up"><a href="#赛博杯2019-Write-Up" class="headerlink" title="赛博杯2019 Write Up"></a>赛博杯2019 Write Up</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>杭电赛博协会出得题，感觉质量还是不错的，难易兼备。以下是比赛题目部分Write Up。</p>
-<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="Sign-in"><a href="#Sign-in" class="headerlink" title="Sign in"></a>Sign in</h3><p><img src="/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/1.png" alt="1"></p>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="Sign-in"><a href="#Sign-in" class="headerlink" title="Sign in"></a>Sign in</h3><p><img src="%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/1.png" alt="1"></p>
 <p>扫条形码得到flag。</p>
 <h3 id="No-Word"><a href="#No-Word" class="headerlink" title="No Word"></a>No Word</h3><p>snow加密，将文件放入010editor看他的十六进制形式，</p>
 <p><img src="/2019/07/14/%E8%B5%9B%E5%8D%9A%E6%9D%AF2019_Write_Up/2.png" alt="2"></p>
@@ -523,409 +443,258 @@
 <p>后来发现，拿这程序去运行，只要flag的后面一半，也能过，所以一开始其实是忽略了这个check time（）函数。。。</p>
 
       
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 643713081@qq.com </span>
     </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>赛博杯2019_Write_Up</p>
     
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Write-UP/" rel="tag"># Write UP</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/18/代码审计基础入门笔记/" rel="prev" title="代码审计基入门笔记">
-                代码审计基入门笔记 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="V">
-            
-              <p class="site-author-name" itemprop="name">V</p>
-              <p class="site-description motion-element" itemprop="description">It is not ignorance and weakness but arrogance that destroys mankind</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">29</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-link"></i>
-                blogroll
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://fzwjscj.top/" title="fzwjscj" target="_blank">fzwjscj</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://dldxz.cn/" title="DLDXZ" target="_blank">DLDXZ</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://fanda.cloud/" title="fanda" target="_blank">fanda</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://passingfoam.com/" title="PassingFoam's blog" target="_blank">PassingFoam's blog</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://eqqie.cn/" title="eqqie's blog" target="_blank">eqqie's blog</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://blog.ragdoll.work/" title="nan-meng" target="_blank">nan-meng</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://www.zhaoj.in/" title="glzjin" target="_blank">glzjin</a>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#赛博杯2019-Write-Up"><span class="nav-number">1.</span> <span class="nav-text">赛博杯2019 Write Up</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISC"><span class="nav-number">1.2.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sign-in"><span class="nav-number">1.2.1.</span> <span class="nav-text">Sign in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#No-Word"><span class="nav-number">1.2.2.</span> <span class="nav-text">No Word</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础社工"><span class="nav-number">1.2.3.</span> <span class="nav-text">基础社工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-world"><span class="nav-number">1.2.4.</span> <span class="nav-text">The world</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Different-P"><span class="nav-number">1.2.5.</span> <span class="nav-text">Different_P</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto"><span class="nav-number">1.3.</span> <span class="nav-text">Crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#easy-RSA"><span class="nav-number">1.3.1.</span> <span class="nav-text">easy_RSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#川流不息"><span class="nav-number">1.3.2.</span> <span class="nav-text">川流不息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB"><span class="nav-number">1.4.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#base-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">base_1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#truncation"><span class="nav-number">1.4.2.</span> <span class="nav-text">truncation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-XXE"><span class="nav-number">1.4.3.</span> <span class="nav-text">Simple XXE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inclusion"><span class="nav-number">1.4.4.</span> <span class="nav-text">inclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PWN"><span class="nav-number">1.5.</span> <span class="nav-text">PWN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hardpwn"><span class="nav-number">1.5.1.</span> <span class="nav-text">hardpwn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stackpwn"><span class="nav-number">1.5.2.</span> <span class="nav-text">stackpwn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#floatpwn"><span class="nav-number">1.5.3.</span> <span class="nav-text">floatpwn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Babytcache"><span class="nav-number">1.5.4.</span> <span class="nav-text">Babytcache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#codepwn"><span class="nav-number">1.5.5.</span> <span class="nav-text">codepwn</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RE"><span class="nav-number">1.6.</span> <span class="nav-text">RE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Secret"><span class="nav-number">1.6.1.</span> <span class="nav-text">Secret</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">V</span>
-
-  
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-07-14, 16:22:35</p>
+    <p><span class="copy-title">最后更新:</span>2020-04-29, 23:16:56</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/07/14/赛博杯2019_Write_Up/" title="赛博杯2019_Write_Up">http://yoursite.com/2019/07/14/赛博杯2019_Write_Up/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
 
     
 
-  </div>
 
-  
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
 
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#Write UP',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
 </html>
