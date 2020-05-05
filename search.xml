@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>2020 De1CTF</title>
+      <link href="/2020/05/05/2020De1CTF/"/>
+      <url>/2020/05/05/2020De1CTF/</url>
+      
+        <content type="html"><![CDATA[<h3 id="NLFSR"><a href="#NLFSR" class="headerlink" title="NLFSR"></a>NLFSR</h3><p>改编自<a href="https://wiki.x10sec.org/crypto/streamcipher/fsr/nfsr/" target="_blank" rel="noopener">2018年的强网杯streamgame3</a>，式子可以化简</p><p>(ao * bo) ^ (bo * co) ^ (bo * do) ^ co ^ do = (ao * bo) ^ (bo * (co ^ do)) ^ (co ^ do)</p><p>[把co ^ do 设为=&gt;eo ]   =&gt;   (ao * bo) ^ (bo *eo )) ^  eo   这样子又只有三个寄存器了。</p><p>然后我们看一下关系</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ao <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">for</span> bo <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">        <span class="keyword">for</span> eo <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">print</span> ao,bo,eo,(ao*bo)^(bo*eo)^eo</span><br><span class="line">            </span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span></span><br><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span></span><br></pre></td></tr></table></figure><p>这样子，ao、eo 和输出有75%相同，这里可以用相关攻击。bo的话，爆破就好了。</p><p>这里说说自己对相关攻击的理解。线性反馈位移寄存器是用来生成密钥流的嘛，然后良好生成方式应该是输出的每一位为0和1的概率都应该是0.5，<del>这里的lfsr应该也是比较良好的吧，俺猜的，有现题了，就懒狗了，没有做测试，</del> 所以我们才有上面的表。</p><p>然后我们先爆破a，当ao和输出（不用全部输出啦，题目给的量有点大，随便来个1000位大概就好了）的%75相同时，大概就确定a了。</p><p>然后我们同时爆破c,d。当co^do 和输出的%75相同时，大概就确定c,d了。（出题人有良心，c 和 d 给的都比较短）</p><p>最后我们爆破b，把之前得到的a,c,d带入到加密程序，如果输出和题目给的输出完全相同就可了。（这次也不用测全部，来个50位，100位也就足够了。）</p><h3 id="easyRSA"><a href="#easyRSA" class="headerlink" title="easyRSA"></a>easyRSA</h3><p>是<a href="https://gist.github.com/LurkNoi/dfe86ed4d16776242251318b380336e7" target="_blank" rel="noopener">2019年D3CTF common</a>一题的一个part</p><p>直接用当时出题人给的题解exp， 换一换alpha的值，用解出来的phi求解私钥，解密密文，观察解密后的明文是否为flag就好</p><p><del>题做出来了，但其实原理并没有懂，是一个大坑，等俺哪天学会了再说哈哈哈哈哈</del></p><h3 id="ECDH"><a href="#ECDH" class="headerlink" title="ECDH"></a>ECDH</h3><p>NCCIP问题，直接构造出低阶点P（记录P的阶为N），然后发送给服务端，让他算出key，之后加密自己的输入，我们拿来异或自己的输入从而得到key，然后根据key的值（和P的关系）可以得到secret模N的一个剩余，即secret%N，多发送几个，最后来一波CRT就好。</p><p>具体步骤、细节俺会专门再写一篇。  <del>在做了，在做了</del></p><h3 id="Homomorphic"><a href="#Homomorphic" class="headerlink" title="Homomorphic"></a>Homomorphic</h3><p><del>这道题俺其实连解密原理都没搞懂，自己对多项式还是不够了解熟悉，所以这题就本地搭好，然后测！就硬测！</del></p><p>经过测试，发现该算法如其名，具有加法同态。并且发送(1,1,1,1,,,,,,1)和(1,1,1,,,,,1)过去解密得到的明文的ascii值是0。</p><p>所以直接把服务端给的flag的所有密文(FLAG)（44对，88组多项式），每一对中每一组的每一个系数都减1，发送回去给服务端解密就好。然后index输入0（多项式的表达，列表里头好像第一个是常数，也就是我们要的m），得到一位flag的ascii码，44次交互得到flag。</p><p><del>没懂原理，测试出来的而已哈哈哈哈哈哈哈哈</del></p><p>感觉这是非预期，毕竟让我们交互2^10次，出题人应该是看了这篇<a href="https://arxiv.org/pdf/1906.07127.pdf" target="_blank" rel="noopener">paper</a>，想让我们恢复私钥的吧哈哈哈哈哈哈哈哈。<del>俺以后有空一定看，一定看</del>    、</p><p>PS：badmonkey师傅好像是根据这个来的，恢复了私钥，TQL!!!</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 比赛小屋 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Write Up </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>密码学学习笔记 之 NCCIP</title>
       <link href="/2020/05/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8BNCCIP/"/>
       <url>/2020/05/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8BNCCIP/</url>
