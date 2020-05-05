@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>密码学学习笔记 之 NCCIP</title>
+      <link href="/2020/05/05/NCCIP/"/>
+      <url>/2020/05/05/NCCIP/</url>
+      
+        <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="Hey, password is required here." />    <label for="hbePass">Hey, password is required here.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="7a863c6b2e48af6ab13cc4d077b9959918d69dfdbbd51b3914ec74b759040e29">8d2864a07b7e6704050358d9fc712725e84e81cf187a0edf63adad4d49927575</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+      
+      
+      <categories>
+          
+          <category> 密码小屋 </category>
+          
+          <category> ECC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ECC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Van1sh 的 待办事项</title>
       <link href="/2020/05/03/%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9/"/>
       <url>/2020/05/03/%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9/</url>
