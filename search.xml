@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Van1sh 的 待办事项</title>
+      <link href="/2020/05/03/%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9/"/>
+      <url>/2020/05/03/%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9/</url>
+      
+        <content type="html"><![CDATA[<ol><li>De1CTF 的 wp</li><li>格密码的hnp理解+淘宝师傅出的LCG</li><li>浅尝ECC 之 详解De1CTF-ECDH-NCCIP</li><li>复习线代。。</li><li>从淘宝师傅那嫖来的两本书。。。</li><li>大坑：De1CTF - D3CTF ==&gt; common，共模分解大数N+coin的共模</li></ol><p><del>其实俺有点想玩web和逆向了。。。</del></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>密码学学习笔记 之 分组密码操作模式</title>
       <link href="/2020/03/03/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%BC%8F/"/>
       <url>/2020/03/03/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%BC%8F/</url>
@@ -15,7 +28,7 @@
           
           <category> 密码小屋 </category>
           
-          <category> Block Cipher </category>
+          <category> Block </category>
           
       </categories>
       
@@ -67,7 +80,7 @@
           
           <category> 密码小屋 </category>
           
-          <category> Stream Cipher </category>
+          <category> Stream </category>
           
       </categories>
       
