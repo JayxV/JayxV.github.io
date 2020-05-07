@@ -224,7 +224,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="20">
-<input type="hidden" id="yelog_site_word_count" value="87.9k">
+<input type="hidden" id="yelog_site_word_count" value="89.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -537,7 +537,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-05 16:05:00'>2020-05-05 15:57</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-06 12:24:32'>2020-05-05 15:57</time>
         
     </div>
     <div class="article-meta">
@@ -586,7 +586,7 @@
 
 <p>这样子，ao、eo 和输出有75%相同，这里可以用相关攻击。bo的话，爆破就好了。</p>
 <p>这里说说自己对相关攻击的理解。线性反馈位移寄存器是用来生成密钥流的嘛，然后良好生成方式应该是输出的每一位为0和1的概率都应该是0.5，<del>这里的lfsr应该也是比较良好的吧，俺猜的，有现题了，就懒狗了，没有做测试，</del> 所以我们才有上面的表。</p>
-<p>然后我们先爆破a，当ao和输出（不用全部输出啦，题目给的量有点大，随便来个1000位大概就好了）的%75相同时，大概就确定a了。</p>
+<p>然后我们先爆破a，当ao和输出（不用全部输出啦，题目给的量有点大，随便来个1000位大概就好了）的75%相同时，大概就确定a了。</p>
 <p>然后我们同时爆破c,d。当co^do 和输出的%75相同时，大概就确定c,d了。（出题人有良心，c 和 d 给的都比较短）</p>
 <p>最后我们爆破b，把之前得到的a,c,d带入到加密程序，如果输出和题目给的输出完全相同就可了。（这次也不用测全部，来个50位，100位也就足够了。）</p>
 <h3 id="easyRSA"><a href="#easyRSA" class="headerlink" title="easyRSA"></a>easyRSA</h3><p>是<a href="https://gist.github.com/LurkNoi/dfe86ed4d16776242251318b380336e7" target="_blank" rel="noopener">2019年D3CTF common</a>一题的一个part</p>
@@ -617,7 +617,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">893</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-05, 15:57:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-05, 16:05:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-06, 12:24:32</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/05/2020De1CTF/" title="2020 De1CTF">http://jayxv.github.io/2020/05/05/2020De1CTF/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
