@@ -599,7 +599,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-12 17:52:24'>2020-05-09 15:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-12 17:57:45'>2020-05-09 15:05</time>
         
     </div>
     <div class="article-meta">
@@ -650,10 +650,8 @@
 <p>其中，我们知道的信息全局公钥p, q, g，服务端公钥y , 每轮签名使用的r, s, 以及我们可控的H(x)，x即为用户名，Hash函数这里用的是sha256</p>
 <h4 id="step1-公式转化"><a href="#step1-公式转化" class="headerlink" title="step1-公式转化"></a>step1-公式转化</h4><p>由DSA签名中各参数的关系</p>
 <p>$r \equiv g^k \pmod{q}$<br>$s \equiv k^{-1}(H(m) + xr) \pmod{q}$</p>
-<p><img src="https://i.loli.net/2020/05/09/yomndMflri8wUZt.png" alt></p>
 <p>可得每轮临时密钥与签名、明文的关系</p>
 <p>$k_i \equiv  s_i^{-1}r_i \cdot x + s_i^{-1}H(m) \pmod{q} $<br>$k_i \equiv A_i x + B_i \pmod{q} $<br>$k_i = A_i x + B_i + l_i q$</p>
-<p><img src="https://i.loli.net/2020/05/09/H2LJSVgjyd9waON.png" alt></p>
 <p>其中$k_i$就是每次使用的临时密钥</p>
 <p>化简后的式子中的$A_i,B_i$均可由已知信息计算</p>
 <h4 id="step2-构造Lattice"><a href="#step2-构造Lattice" class="headerlink" title="step2-构造Lattice"></a>step2-构造Lattice</h4><p>对于上式中的$k_i$，我们仅仅知道它的bit_ength，bit_ength泄露了什么信息呢？</p>
@@ -663,11 +661,9 @@
 <p>这等价于，我们知道了临时密钥的一个大概的值，我们设其为$K$</p>
 <p>然后我们构造Lattice</p>
 <p>$M =<br>\begin{bmatrix}<br>q  &amp;   &amp;      &amp;    &amp;   &amp;   &amp; \newline<br>&amp; q &amp;      &amp;    &amp;   &amp;   &amp; \newline<br>&amp;   &amp;\ddots&amp;    &amp;   &amp;   &amp; \newline<br>&amp;   &amp;      &amp; q  &amp;   &amp;   &amp; \newline<br>A_1&amp;A_2&amp;\dots &amp; A_t&amp;K/q&amp;   &amp; \newline<br>B_1&amp;B_2&amp;\dots &amp; B_t&amp;   &amp; K &amp; \newline<br>\end{bmatrix}$</p>
-<p><img src="https://i.loli.net/2020/05/09/dkr61AXCW7EPzcR.png" alt></p>
-<p>然后这里就会存在一个向量        $v =<br>\begin{bmatrix}<br>l_1 &amp; l_2 &amp; \cdots &amp; l_t &amp; x &amp; 1<br>\end{bmatrix}$<img src="https://i.loli.net/2020/05/09/XFETnacORf3gwSm.png" alt></p>
+<p>然后这里就会存在一个向量        $v =<br>\begin{bmatrix}<br>l_1 &amp; l_2 &amp; \cdots &amp; l_t &amp; x &amp; 1<br>\end{bmatrix}$</p>
 <p>使得</p>
 <p>$vM =<br>\begin{bmatrix}<br>l_1 &amp; l_2 &amp; \cdots &amp; l_t &amp; x &amp; 1<br>\end{bmatrix}<br>\begin{bmatrix}<br>q  &amp;   &amp;      &amp;    &amp;   &amp;   &amp; \newline<br>&amp; q &amp;      &amp;    &amp;   &amp;   &amp; \newline<br>&amp;   &amp;\ddots&amp;    &amp;   &amp;   &amp; \newline<br>&amp;   &amp;      &amp; q  &amp;   &amp;   &amp; \newline<br>A_1&amp;A_2&amp;\dots &amp; A_t&amp;K/q&amp;   &amp; \newline<br>B_1&amp;B_2&amp;\dots &amp; B_t&amp;   &amp; K &amp; \newline<br>\end{bmatrix} = \begin{bmatrix}<br>k_1 &amp;<br>k_2 &amp;<br>\cdots &amp;<br>k_t  &amp;<br>Kx/q &amp;<br>K<br>\end{bmatrix}<br>= v_k$</p>
-<p><img src="https://i.loli.net/2020/05/09/ykhUuYQRz6Lq8GZ.png" alt></p>
 <p>其中向量$v$中的x即为我们的私钥，</p>
 <h4 id="step3-LLL"><a href="#step3-LLL" class="headerlink" title="step3-LLL"></a>step3-LLL</h4><p>解决格密码的问题LLL算法的运用总是必不可少的，可是这里我们该如何利用LLL算法去找到向量$v_k$呢？</p>
 <p>如果我们的$v_k$的长度在格中很小，我们利用LLL就很可能将其找出。所以，我们需要与服务端交互，然后收集当$k_i$的bit_length比较小的情况时的相关数据。比如：我们知道q的bit_length为128，那我们可以找bit_legnth为122的$k_i$，然后我们还需要一定的数据量，这样能提高利用LLL算法找到这个短向量的概率，并且，上述格中$K/q, K$的构造也是为了让$v_k$中的每一项的长度都差不多，这样也有利于找到$v_k$，参考这一篇<a href="https://holocircuit.github.io/2019/01/08/unofficial.html" target="_blank" rel="noopener">文章</a>中的<img src="https://i.loli.net/2020/05/09/7NJvL2DSsXwHEnr.png" alt></p>
@@ -688,7 +684,6 @@
 <p>$l_{3} \equiv a<em>A_1</em>l_{1}+a<em>B_1+a</em>h_{2}+b-h_{3}\pmod{m}$</p>
 <p>$l_{3} \equiv A_{2}<em>l_{1}+B_{2}\pmod{m}$【$设A_{2} = a</em>A_1; B_{2} = a<em>B_1+a</em>h_{2}+b-h_{3}$】</p>
 <p>…</p>
-<p><img src="https://i.loli.net/2020/05/09/2jVZ7n8dbECkimQ.png" alt></p>
 <p>这里，我们通过公式的变形，可以将原来式子<img src="https://i.loli.net/2020/05/09/9YZKClW4tPdzmbS.png" alt></p>
 <p>中$s_{i+1}和s_{i}$的关系转变为$l_{i+1}和l_{i}$的关系。当然，原系数a、b的意义也发生了对应转变。</p>
 <p>这里给出生成新A 和B 的脚本</p>
@@ -697,11 +692,8 @@
 <h4 id="step2-构造Lattice-1"><a href="#step2-构造Lattice-1" class="headerlink" title="step2-构造Lattice"></a>step2-构造Lattice</h4><p>现在我们二十条与 $l$ 相关的方程组了。即</p>
 <p>$l_{i+1} \equiv A_i*l_i+B_i\pmod{m}$</p>
 <p>$l_{i+1} = A_i*l_i+B_i+k_im$</p>
-<p><img src="https://i.loli.net/2020/05/09/3fDiQKOonJuUzrA.png" alt></p>
 <p>且对于 $l$ 我们真的一无所知么？我们其实知道 $l$ 是小于2^64的，即 $l$ 最大为64bit。这样与前面一道题就很类似了。</p>
-<p><img src="https://i.loli.net/2020/05/09/bRTmoz5J8pvPK2x.png" alt></p>
 <p>于是我们构造Lattice</p>
-<p><img src="https://i.loli.net/2020/05/09/eRnW9B2SHiAUO4f.png" alt></p>
 <p>$M =<br>\begin{bmatrix}<br>m  &amp;   &amp;      &amp;    &amp;   &amp;   \newline<br>&amp; m &amp;      &amp;    &amp;   &amp;   \newline<br>&amp;   &amp;\ddots&amp;    &amp;   &amp;   \newline<br>&amp;   &amp;      &amp; m  &amp;   &amp;   \newline<br>A_1&amp;A_2&amp;\dots &amp; A_{19}&amp;1&amp;   \newline<br>B_1&amp;B_2&amp;\dots &amp; B_{19}&amp;0&amp; 2^{64}\newline<br>\end{bmatrix}$</p>
 <p>然后这里就会存在一个向量        $v =<br>\begin{bmatrix}<br>k_1 &amp; k_2 &amp; \cdots &amp; k_{19} &amp; l_1 &amp; 1<br>\end{bmatrix}$ 使得</p>
 <p>$vM =<br>\begin{bmatrix}<br>k_1 &amp; k_2 &amp; \cdots &amp; k_{19} &amp; l_1 &amp; 1<br>\end{bmatrix}<br>\begin{bmatrix}<br>m  &amp;   &amp;      &amp;    &amp;   &amp;   \newline<br>&amp; m &amp;      &amp;    &amp;   &amp;   \newline<br>&amp;   &amp;\ddots&amp;    &amp;   &amp;   \newline<br>&amp;   &amp;      &amp; m  &amp;   &amp;   \newline<br>A_1&amp;A_2&amp;\dots &amp; A_{19}&amp;1&amp;   \newline<br>B_1&amp;B_2&amp;\dots &amp; B_{19}&amp;0&amp; 2^{64} \newline<br>\end{bmatrix} = \begin{bmatrix}<br>l_2 &amp;<br>l_3 &amp;<br>\cdots &amp;<br>l_{20}  &amp;<br>l_1 &amp;<br>2^{64}<br>\end{bmatrix}<br>= v_l$</p>
@@ -729,7 +721,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">2.6k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-09, 15:05:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-12, 17:52:24</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-12, 17:57:45</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/09/密码学学习笔记之HNP/" title="密码学学习笔记 之 HNP">http://jayxv.github.io/2020/05/09/密码学学习笔记之HNP/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
