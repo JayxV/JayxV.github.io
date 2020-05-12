@@ -595,7 +595,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-12 17:58:17'>2020-05-08 12:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-12 18:05:07'>2020-05-08 12:05</time>
         
     </div>
     <div class="article-meta">
@@ -661,10 +661,10 @@
 <li>m = ( L( c^λ mod n^2 ) * μ ) mod n</li>
 </ol>
 <h3 id="Proof"><a href="#Proof" class="headerlink" title="Proof"></a>Proof</h3><p>以下推理过程就用数学公式记录了，如果平台显示不出来的话，建议复制进typora等此类编辑器中食用，下面也会给出截图</p>
-<h4 id="The-first-pattern"><a href="#The-first-pattern" class="headerlink" title="The first pattern"></a>The first pattern</h4><p>由 $L(c^λ \pmod{n^2}*μ) \pmod{n}$</p>
-<p>有 $L(g^{mλ}<em>r^{nλ} \pmod{n^2})</em>μ \pmod{n}$  ①</p>
-<p>其中$λ = \frac{(p-1)<em>(q-1)}{gcd((p-1)</em>(q-1))}, μ = L(g^λ \pmod{n^2})^{-1} \pmod{n}$</p>
-<p>所以①式=&gt;  $L(g^{mλ}<em>r^{nλ} \pmod{n^2})</em>L(g^λ \pmod{n^2})^{-1} \pmod{n}$ ②</p>
+<h4 id="The-first-pattern"><a href="#The-first-pattern" class="headerlink" title="The first pattern"></a>The first pattern</h4><p>由 $L(c^λ \pmod{n^2}\cdot μ) \pmod{n}$</p>
+<p>有 $L(g^{mλ}\cdot r^{nλ}\pmod{n^2})\cdot μ \pmod{n}$  ①</p>
+<p>其中$λ = \frac{(p-1) \cdot (q-1)}{gcd((p-1)\cdot (q-1))}, μ = L(g^λ \pmod{n^2})^{-1} \pmod{n}$</p>
+<p>所以①式=&gt;  $L(g^{mλ}\cdot r^{nλ} \pmod{n^2})\cdot L(g^λ \pmod{n^2})^{-1} \pmod{n}$ ②</p>
 <p>∵$(p-1)|λ, (q-1)|λ$</p>
 <p>∴$λ = k_1(p-1) = k_2(q-1)$</p>
 <p>∴$g^λ = g^{k_1(p-1)}\equiv 1 \pmod{p}，即 (g^λ -1) | p$</p>
@@ -688,21 +688,21 @@
 <p>∴$r^{nλ} = (1+k_nn)^{n} \equiv k_nn^2+1 \equiv 1\pmod{n^2}$</p>
 <p>∴$L(g^{mλ}*r^{nλ}\pmod{n^2}) = L(k_gnm+1)=mk_g$</p>
 <p>又∴$L(g^λ\pmod{n^2}) = k_g$</p>
-<p>∴②式： $L(g^{mλ}<em>r^{nλ} \pmod{n^2})</em>L(g^λ \pmod{n^2})^{-1} \pmod{n}$ =&gt; $mk_g*k_g^{-1} \equiv m \pmod n$</p>
+<p>∴②式： $L(g^{mλ} \cdot r^{nλ} \pmod{n^2})\cdot L(g^λ \pmod{n^2})^{-1} \pmod{n}$ =&gt; $mk_g\cdot k_g^{-1} \equiv m \pmod n$</p>
 <p>证毕</p>
-<h4 id="The-second-pattern"><a href="#The-second-pattern" class="headerlink" title="The second pattern"></a>The second pattern</h4><p>由 $L(c^λ \pmod{n^2}*μ) \pmod{n}$</p>
-<p>有 $L(g^{mλ}<em>r^{nλ} \pmod{n^2}</em>μ) \pmod{n}$  ①</p>
+<h4 id="The-second-pattern"><a href="#The-second-pattern" class="headerlink" title="The second pattern"></a>The second pattern</h4><p>由 $L(c^λ \pmod{n^2} \cdot μ) \pmod{n}$</p>
+<p>有 $L(g^{mλ}*r^{nλ} \pmod{n^2} \cdot μ) \pmod{n}$  ①</p>
 <p>其中$λ = (p-1)*(q-1)， μ = φ(n)^{-1} \pmod{n}$</p>
-<p>∵$r^{nλ} = r^{n(p-1)*(q-1)} = r^{φ(n^2)}$</p>
+<p>∵$r^{nλ} = r^{n(p-1) \cdot (q-1)} = r^{φ(n^2)}$</p>
 <p>由欧拉定理：$r^{φ(n^2)} \equiv 1 \pmod{n^2}$</p>
-<p>①式 =&gt; $L(g^{mλ} \pmod{n^2}*μ) \pmod{n}$  ②</p>
+<p>①式 =&gt; $L(g^{mλ} \pmod{n^2} \cdot μ) \pmod{n}$  ②</p>
 <p>∵$g = n+1$</p>
 <p>∴$g^{mλ} = (1+n)^{mλ} \equiv nmλ+1 \pmod{n^2}$</p>
-<p>②式=&gt; $L((nmλ+1)*μ) \pmod{n}$ </p>
-<p>=&gt; $ \frac{(nmλ+1)-1}{n}*μ \pmod{n}$ </p>
-<p>=&gt;$(mλ*μ) \pmod{n}$ ③</p>
+<p>②式=&gt; $L((nmλ+1) \cdot μ) \pmod{n}$ </p>
+<p>=&gt; $ \frac{(nmλ+1)-1}{n} \cdot μ \pmod{n}$ </p>
+<p>=&gt;$(mλ \cdot μ) \pmod{n}$ ③</p>
 <p>∵$λ = φ(n)，μ = φ(n)^{-1} \pmod{n}$ </p>
-<p>∴③式： $(mλ*μ) \equiv m\pmod{n}$</p>
+<p>∴③式： $(mλ \cdot μ) \equiv m\pmod{n}$</p>
 <p>证毕</p>
 <h2 id="DASCTF四月月赛-not-RSA"><a href="#DASCTF四月月赛-not-RSA" class="headerlink" title="DASCTF四月月赛 not RSA"></a>DASCTF四月月赛 not RSA</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number import getPrime as bytes_to_long</span><br><span class="line"><span class="keyword">from</span><span class="built_in"> secret </span>import flag,p,q</span><br><span class="line"><span class="keyword">from</span> sympy import isprime,nextprime</span><br><span class="line">import random</span><br><span class="line"></span><br><span class="line"><span class="attribute">m</span>=bytes_to_long(flag)</span><br><span class="line"><span class="attribute">n</span>=p*q</span><br><span class="line"><span class="attribute">g</span>=n+1</span><br><span class="line"><span class="attribute">r</span>=random.randint(1,n)</span><br><span class="line"></span><br><span class="line">c=(pow(g,m,n*n)*pow(r,n,n*n))%(n*n)</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">print</span> <span class="string">"c=%d"</span>%(c)</span><br><span class="line"><span class="builtin-name">print</span> <span class="string">"n=%d"</span>%(n)</span><br></pre></td></tr></table></figure>
 
@@ -746,7 +746,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-08, 12:05:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-12, 17:58:17</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-12, 18:05:07</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/08/密码学学习笔记之 paillier cryptosystem/" title="密码学学习笔记 之 paillier cryptosystem">http://jayxv.github.io/2020/05/08/密码学学习笔记之 paillier cryptosystem/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
