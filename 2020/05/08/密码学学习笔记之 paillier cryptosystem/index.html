@@ -139,23 +139,15 @@
     
         
             
-            <li><div data-rel="工具小屋">工具小屋<small>(4)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
             <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(8)</small></div>
                 
                     <ul class="sub hide">
                         
-                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
                             
                         </li>
                             
@@ -171,15 +163,23 @@
                             
                         </li>
                             
-                        <li><div data-rel="Block">Block<small>(1)</small></div>
-                            
-                        </li>
-                            
                         <li><div data-rel="Basic">Basic<small>(1)</small></div>
                             
                         </li>
                             
+                        <li><div data-rel="Block">Block<small>(1)</small></div>
+                            
+                        </li>
+                            
                     </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(4)</small></div>
                 
             </li>
             
@@ -240,7 +240,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="23">
-<input type="hidden" id="yelog_site_word_count" value="93.3k">
+<input type="hidden" id="yelog_site_word_count" value="94.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -300,15 +300,15 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a class="color2">docker</a>
     </li>
     
     <li class="article-tag-list-item">
         <a class="color4">ECC</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color4">Paillier</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -340,11 +340,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color5">操作模式</a>
+        <a class="color2">Abstract algebra</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color2">Abstract algebra</a>
+        <a class="color5">操作模式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -595,7 +595,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-12 18:05:07'>2020-05-08 12:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-12 18:24:26'>2020-05-08 12:05</time>
         
     </div>
     <div class="article-meta">
@@ -638,27 +638,27 @@
         <h1 id="密码学学习笔记-之-paillier-cryptosystem"><a href="#密码学学习笔记-之-paillier-cryptosystem" class="headerlink" title="密码学学习笔记 之 paillier cryptosystem"></a>密码学学习笔记 之 paillier cryptosystem</h1><h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>&emsp;&emsp;现代公钥密码系统中，其实远远不止RSA、DSA、ECC等众所周知的公钥密码系统，最近还学习到了一种比较年轻的公钥密码系统 —— <strong>paillier cryptosystem</strong> 但是wiki上并没有给出该方案的解密的proof。</p>
 <h2 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h2><p>&emsp;&emsp;Paillier密码，于1999年由Pascal Paillier发明，是一种用于公钥加密的概率非对称算法。该算法具有加法同态的性质 ; 这意味着，仅给出公钥和m1、m2加密，可以计算出m1 + m2</p>
 <h2 id="Key-generation"><a href="#Key-generation" class="headerlink" title="Key generation"></a>Key generation</h2><h3 id="The-frist-pattern："><a href="#The-frist-pattern：" class="headerlink" title="The frist pattern："></a>The frist pattern：</h3><ol>
-<li>随机选择两个大质数p、q满足gcd(pq, (p-1)*(q-1))。</li>
-<li>计算n=p*q，λ = lcm(p-1, q-1) = (p-1)*(q-1) / gcd(p-1,q-1)</li>
-<li>选择随机整数g，0&lt;g&lt;n^2</li>
-<li>定义L(x) = (x-1) / n</li>
-<li>计算μ = (L(g^λ mod n^2 ))^(-1) mod n</li>
-<li>公钥为(n，g)</li>
-<li>私钥为(λ，μ)</li>
+<li>随机选择两个大质数p、q满足$gcd(pq, (p-1)\cdot (q-1))$。</li>
+<li>计算$n=p\cdot q，λ = lcm(p-1, q-1) = \frac{(p-1)\cdot (q-1) }{ gcd(p-1,q-1)}$</li>
+<li>选择随机整数g，$0&lt;g&lt;n^2$</li>
+<li>定义$L(x) = \frac{(x-1)} { n}$</li>
+<li>计算$μ = (L(g^λ \pmod {n^2} ))^{-1} \pmod n$</li>
+<li>公钥为$(n，g)$</li>
+<li>私钥为$(λ，μ)$</li>
 </ol>
 <h3 id="The-second-pattern（a-simpler-variant）："><a href="#The-second-pattern（a-simpler-variant）：" class="headerlink" title="The second pattern（a simpler variant）："></a>The second pattern（a simpler variant）：</h3><p>其余参数不变，主要改变了g，λ，μ的定义</p>
 <ol>
-<li>g = n+1</li>
-<li>λ = φ(n) = (p-1)*(q-1) </li>
-<li>μ = φ(n)^(-1) (mod n)</li>
+<li>$g = n+1$</li>
+<li>$λ = φ(n) = (p-1)\cdot (q-1) $</li>
+<li>$μ = φ(n)^{-1} \pmod n$</li>
 </ol>
 <h2 id="Encryption"><a href="#Encryption" class="headerlink" title="Encryption"></a>Encryption</h2><ol>
-<li>设m为要加密的消息，显然需要满足，0 ≤ m ＜ n</li>
-<li>选择随机 r，保证gcd(r, n) = 1</li>
-<li>密文c：c = (g^m) *(r^n) mod n^2</li>
+<li>设$m$为要加密的消息，显然需要满足，$0 ≤ m ＜ n$</li>
+<li>选择随机 $r$，保证$gcd(r, n) = 1$</li>
+<li>密文$c$：$c = g^m\cdot r^n \pmod {n^2}$</li>
 </ol>
 <h2 id="Decryption"><a href="#Decryption" class="headerlink" title="Decryption"></a>Decryption</h2><ol>
-<li>m = ( L( c^λ mod n^2 ) * μ ) mod n</li>
+<li>$m = ( L( c^λ \pmod {n^2} ) \cdot μ ) \pmod n$</li>
 </ol>
 <h3 id="Proof"><a href="#Proof" class="headerlink" title="Proof"></a>Proof</h3><p>以下推理过程就用数学公式记录了，如果平台显示不出来的话，建议复制进typora等此类编辑器中食用，下面也会给出截图</p>
 <h4 id="The-first-pattern"><a href="#The-first-pattern" class="headerlink" title="The first pattern"></a>The first pattern</h4><p>由 $L(c^λ \pmod{n^2}\cdot μ) \pmod{n}$</p>
@@ -686,12 +686,12 @@
 </ol>
 <p>∴$g^{mλ} = (1+k_gn)^{m} \equiv k_gnm+1 \pmod{n^2}$</p>
 <p>∴$r^{nλ} = (1+k_nn)^{n} \equiv k_nn^2+1 \equiv 1\pmod{n^2}$</p>
-<p>∴$L(g^{mλ}*r^{nλ}\pmod{n^2}) = L(k_gnm+1)=mk_g$</p>
+<p>∴$L(g^{mλ}\cdot r^{nλ}\pmod{n^2}) = L(k_gnm+1)=mk_g$</p>
 <p>又∴$L(g^λ\pmod{n^2}) = k_g$</p>
 <p>∴②式： $L(g^{mλ} \cdot r^{nλ} \pmod{n^2})\cdot L(g^λ \pmod{n^2})^{-1} \pmod{n}$ =&gt; $mk_g\cdot k_g^{-1} \equiv m \pmod n$</p>
 <p>证毕</p>
 <h4 id="The-second-pattern"><a href="#The-second-pattern" class="headerlink" title="The second pattern"></a>The second pattern</h4><p>由 $L(c^λ \pmod{n^2} \cdot μ) \pmod{n}$</p>
-<p>有 $L(g^{mλ}*r^{nλ} \pmod{n^2} \cdot μ) \pmod{n}$  ①</p>
+<p>有 $L(g^{mλ}\cdot r^{nλ} \pmod{n^2} \cdot μ) \pmod{n}$  ①</p>
 <p>其中$λ = (p-1)*(q-1)， μ = φ(n)^{-1} \pmod{n}$</p>
 <p>∵$r^{nλ} = r^{n(p-1) \cdot (q-1)} = r^{φ(n^2)}$</p>
 <p>由欧拉定理：$r^{φ(n^2)} \equiv 1 \pmod{n^2}$</p>
@@ -707,27 +707,27 @@
 <h2 id="DASCTF四月月赛-not-RSA"><a href="#DASCTF四月月赛-not-RSA" class="headerlink" title="DASCTF四月月赛 not RSA"></a>DASCTF四月月赛 not RSA</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number import getPrime as bytes_to_long</span><br><span class="line"><span class="keyword">from</span><span class="built_in"> secret </span>import flag,p,q</span><br><span class="line"><span class="keyword">from</span> sympy import isprime,nextprime</span><br><span class="line">import random</span><br><span class="line"></span><br><span class="line"><span class="attribute">m</span>=bytes_to_long(flag)</span><br><span class="line"><span class="attribute">n</span>=p*q</span><br><span class="line"><span class="attribute">g</span>=n+1</span><br><span class="line"><span class="attribute">r</span>=random.randint(1,n)</span><br><span class="line"></span><br><span class="line">c=(pow(g,m,n*n)*pow(r,n,n*n))%(n*n)</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">print</span> <span class="string">"c=%d"</span>%(c)</span><br><span class="line"><span class="builtin-name">print</span> <span class="string">"n=%d"</span>%(n)</span><br></pre></td></tr></table></figure>
 
 <p>可以看到，这一题就是用的paillier cryptosystem，且参数用的是上文中的The second pattern</p>
-<p>但是我们计算λ = φ(n) = (p-1)*(q-1) ，需要用到p和q</p>
+<p>但是我们计算$λ = φ(n) = (p-1)\cdot (q-1)$ ，需要用到p和q</p>
 <p>这里我们直接上yafu分解n发现可以成功分解，原因是p与q其实非常接近，所以其实直接对n开根然后再在附近寻找素数就能找到p、q了。</p>
 <p>所以构造解密脚本</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes,inverse</span><br><span class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> nextprime</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> iroot</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L</span><span class="params">(x,n)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (x<span class="number">-1</span>)/n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c=</span><br><span class="line">n=</span><br><span class="line"></span><br><span class="line"><span class="comment">#factor(n)</span></span><br><span class="line">a = iroot(n,<span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">p = nextprime(a)</span><br><span class="line">q = n//p</span><br><span class="line"><span class="keyword">assert</span> p*q == n</span><br><span class="line"></span><br><span class="line"><span class="comment">#根据解密公式，计算所需私钥对（λ，μ）</span></span><br><span class="line">Lambda=(p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">miu=inverse(Lambda,n*n)</span><br><span class="line">m=(L(pow(c,Lambda,n**<span class="number">2</span>),n)*miu)%n</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> long_to_bytes(m)</span><br></pre></td></tr></table></figure>
 
 <h2 id="Homomorphic-properties"><a href="#Homomorphic-properties" class="headerlink" title="Homomorphic properties"></a>Homomorphic properties</h2><h3 id="Homomorphic-addition-of-plaintexts"><a href="#Homomorphic-addition-of-plaintexts" class="headerlink" title="Homomorphic addition of plaintexts"></a>Homomorphic addition of plaintexts</h3><p>设D为解密函数，E为加密函数</p>
-<p>即：D(E(m1, r1)*E(m2,r2) mod n^2）≡ m1+m2 (mod n)</p>
-<h4 id="proof"><a href="#proof" class="headerlink" title="proof"></a>proof</h4><p>C = (g^m1) * (r1^n) * (g^m2) *(r2^n) mod n^2 </p>
-<p>&emsp;= g^(m1+m2)*(r1r2)^n mod n^2</p>
-<p>首先我们可以将m1+m2看作一个整体M，然后由于r1、r2是随机选的，所以r1*r2可以看作一个整体R，</p>
-<p>故C = g^M * R^n mod n^2</p>
-<p>由于gcd(r1,n) = 1; gcd(r2,n) = 1； =&gt; gcd(r1*r2, n) = 1，故R符合要求</p>
-<p>所以D(C) = M ≡ m1 + m2 (mod n)</p>
+<p>即：$D(E(m_1, r_1)\cdot (m_2,r_2) \pmod {n^2}）≡ m_1+m_2 \pmod n$</p>
+<h4 id="proof"><a href="#proof" class="headerlink" title="proof"></a>proof</h4><p>$C = (g^{m_1}) \cdot (r_1^n) \cdot (g^{m_2}) \cdot (r_2^n) \pmod {n^2} $</p>
+<p>&emsp;$= g^{m_1+m_2}\cdot (r_1\cdot r_2)^n \pmod {n^2}$</p>
+<p>首先我们可以将$m_1+m_2$看作一个整体$M$，然后由于$r_1、r_2$是随机选的，所以$r_1\cdot r_2$可以看作一个整体$R$</p>
+<p>故$C = g^M \cdot R^n \pmod {n^2}$</p>
+<p>由于$gcd(r_1,n) = 1; gcd(r_2,n) = 1； =&gt; gcd(r_1\cdot r_2, n) = 1$，故$R$符合要求</p>
+<p>所以$D(C) = M ≡ m_1 + m_2 \pmod n$</p>
 <h3 id="Homomorphic-multiplication-of-plaintexts"><a href="#Homomorphic-multiplication-of-plaintexts" class="headerlink" title="Homomorphic multiplication of plaintexts"></a>Homomorphic multiplication of plaintexts</h3><p>设D为解密函数，E为加密函数</p>
-<p>即：D(E(m1, r1)^k mod n^2）≡ km1 (mod n)</p>
-<h4 id="proof-1"><a href="#proof-1" class="headerlink" title="proof"></a>proof</h4><p>C = (g^m1) * (r1^n)^k&emsp;(mod n^2 )</p>
-<p>&emsp;=(g^km1)*(r1^(kn) )&emsp;(mod n^2)</p>
-<p>首先我们可以将km1看作一个整体M，然后由于r1是随机选的，所以r1^k可以看作一个整体R，</p>
-<p>故C = g^M * R^n mod n^2</p>
-<p>由于gcd(r1,n) = 1 =&gt; gcd(r1^k, n) = 1，故R符合要求</p>
-<p>所以D(C) = M ≡ km1 (mod n)</p>
+<p>即：$D(E(m_1, r_1)^k \pmod {n^2})≡ km_1 \pmod n$</p>
+<h4 id="proof-1"><a href="#proof-1" class="headerlink" title="proof"></a>proof</h4><p>$C = (g^{m_1}) \cdot (r_1^n)^k\pmod {n^2} $</p>
+<p>&emsp;$=(g^{km_1}\cdot (r_1^{kn} )\pmod {n^2}$</p>
+<p>首先我们可以将$km_1$看作一个整体$M$，然后由于$r_1$是随机选的，所以$r_1^k$可以看作一个整体R，</p>
+<p>故$C = g^M \cdot  R^n \pmod {n^2}$</p>
+<p>由于$gcd(r_1,n) = 1 =&gt; gcd(r_1^k, n) = 1$，故$R$符合要求</p>
+<p>所以$D(C) = M ≡ km_1 \pmod n$</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://en.wikipedia.org/wiki/Paillier_cryptosystem" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Paillier_cryptosystem</a></p>
 
       
@@ -746,7 +746,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-08, 12:05:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-12, 18:05:07</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-12, 18:24:26</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/08/密码学学习笔记之 paillier cryptosystem/" title="密码学学习笔记 之 paillier cryptosystem">http://jayxv.github.io/2020/05/08/密码学学习笔记之 paillier cryptosystem/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -849,7 +849,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#Write Up','#docker','#ECC','#Paillier','#Lattice','#Dsa','#LCG','#Rsa','#Rc4','#SM4','#python','#操作模式','#Abstract algebra','#private','#Nmap','#Linux','#book',],
+            'data': ['#Write Up','#Paillier','#docker','#ECC','#Lattice','#Dsa','#LCG','#Rsa','#Rc4','#SM4','#python','#Abstract algebra','#操作模式','#private','#Nmap','#Linux','#book',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
