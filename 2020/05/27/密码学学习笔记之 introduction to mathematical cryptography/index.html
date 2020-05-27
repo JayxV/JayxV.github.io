@@ -163,11 +163,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="Rsa">Rsa<small>(2)</small></div>
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                        <li><div data-rel="Rsa">Rsa<small>(2)</small></div>
                             
                         </li>
                             
@@ -320,11 +320,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color4">ECC</a>
+        <a class="color5">Sage</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color5">Sage</a>
+        <a class="color4">ECC</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -333,10 +333,6 @@
     
     <li class="article-tag-list-item">
         <a class="color4">SM4</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color4">Rsa</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -352,7 +348,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color5">Book</a>
+        <a class="color4">Rsa</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -360,11 +356,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color5">操作模式</a>
+        <a class="color5">Book</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color3">private</a>
+        <a class="color5">操作模式</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -373,6 +369,10 @@
     
     <li class="article-tag-list-item">
         <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">private</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -663,12 +663,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-27 21:08:22'>2020-05-27 21:05</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-27 21:14:27'>2020-05-27 21:05</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:4.4k</span>
+        <span>字数:4.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -703,7 +703,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>来，用 [introduction to mathematical cryptography]([<a href="https://github.com/JayxV/JayxV.github.io/blob/master/2020/05/27/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%20introduction%20to%20mathematical%20cryptography/introduction-to-mathematical-cryptography.pdf]" target="_blank" rel="noopener">https://github.com/JayxV/JayxV.github.io/blob/master/2020/05/27/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%20introduction%20to%20mathematical%20cryptography/introduction-to-mathematical-cryptography.pdf]</a>(<a href="https://github.com/JayxV/JayxV.github.io/blob/master/2020/05/27/密码学学习笔记之" target="_blank" rel="noopener">https://github.com/JayxV/JayxV.github.io/blob/master/2020/05/27/密码学学习笔记之</a> introduction to mathematical cryptography/introduction-to-mathematical-cryptography.pdf)) 入个门~</p>
+        <p>来，用 <a href="https://github.com/JayxV/JayxV.github.io/blob/master/2020/05/27/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%20introduction%20to%20mathematical%20cryptography/introduction-to-mathematical-cryptography.pdf" target="_blank" rel="noopener">introduction to mathematical cryptography</a> 入个门~</p>
 <h2 id="Lattices-and-Cryptography（Updating）"><a href="#Lattices-and-Cryptography（Updating）" class="headerlink" title="Lattices and Cryptography（Updating）"></a>Lattices and Cryptography（Updating）</h2><h3 id="A-congruential-public-key-cryptosystem"><a href="#A-congruential-public-key-cryptosystem" class="headerlink" title="A congruential public key cryptosystem"></a>A congruential public key cryptosystem</h3><p>首先来介绍一个低维度的NTRU。这里同你高中的朋友李华一样，我们这里的朋友仍然是Alice和Bob</p>
 <h4 id="preparation"><a href="#preparation" class="headerlink" title="preparation"></a>preparation</h4><p>Alice首先选一个要公开的大素数$q$，然后再选择他自己的私钥对$(f,g)$，其中，$f&lt; \sqrt{\frac{q}{2}},\sqrt{\frac{q}{4}}&lt;g&lt;\sqrt{\frac{q}{2}} $ 并且，$gcd(f,g) = 1$，然后Alice计算她的公钥 $h \equiv f^{-1}g \pmod q$。</p>
 <h4 id="encryption"><a href="#encryption" class="headerlink" title="encryption"></a>encryption</h4><p>Alice准备接受加密信息了，于是她首先将$h$传给Bob，然后Bob准备加密消息m，他首先随机选择一个临时密钥$r$，然后需要满足$0&lt;m&lt; \sqrt{\frac{q}{4}},0&lt;r&lt;\sqrt{\frac{q}{2}} $。然后他计算密文$e \equiv rh+m \pmod q$</p>
@@ -871,10 +871,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>密码学学习笔记 之 introduction to mathematical cryptography</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">4.4k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">4.3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-27, 21:05:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-27, 21:08:22</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-27, 21:14:27</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/27/密码学学习笔记之 introduction to mathematical cryptography/" title="密码学学习笔记 之 introduction to mathematical cryptography">http://jayxv.github.io/2020/05/27/密码学学习笔记之 introduction to mathematical cryptography/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -977,7 +977,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Paillier','#ECC','#Sage','#Rc4','#SM4','#Rsa','#Lattice','#Dsa','#LCG','#Book','#python','#操作模式','#private','#number theory','#Abstract algebra','#Nmap','#Linux','#book',],
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Paillier','#Sage','#ECC','#Rc4','#SM4','#Lattice','#Dsa','#LCG','#Rsa','#python','#Book','#操作模式','#number theory','#Abstract algebra','#private','#Nmap','#Linux','#book',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
