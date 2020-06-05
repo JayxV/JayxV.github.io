@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>密码学学习笔记 之 数论四大定理及应用 | Van1sh的小屋</title>
+  <meta name="keywords" content=" number theory , Abstract algebra ">
+  <meta name="description" content="密码学学习笔记 之 数论四大定理及应用 | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:34.852Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(28)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(10)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="私人小屋">私人小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_word_count" value="110.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">private</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class=""
+           href="/2020/05/03/待办事项/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="Van1sh 的 待办事项">Van1sh 的 待办事项</span>
+            <span class="post-date" title="2020-05-03 13:18:35">2020/05/03</span>
+        </a>
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之 introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/05/20/密码学学习笔记之RSA/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA">密码学学习笔记 之 RSA</span>
+            <span class="post-date" title="2020-05-20 20:40:00">2020/05/20</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之 paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="私人小屋 "
+           href="/2019/10/01/是某个失眠的夜晚/"
+           data-tag="private"
+           data-author="Van1sh" >
+            <span class="post-title" title="是某个失眠的夜晚">是某个失眠的夜晚</span>
+            <span class="post-date" title="2019-10-01 00:42:35">2019/10/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-密码学学习笔记之数论四大定理及应用" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">密码学学习笔记 之 数论四大定理及应用</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="密码小屋">密码小屋</a>/
+            
+                <a  data-rel="Basic">Basic</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">number theory</a>
+            
+            <a class="color2">Abstract algebra</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-06-05 13:45:40'>2019-12-03 15:30</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#欧拉定理"><span class="toc-text">欧拉定理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#证明"><span class="toc-text">证明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、M中任意两个数都不模n同余。"><span class="toc-text">一、M中任意两个数都不模n同余。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、M中的数除以n的余数全部与n互质。"><span class="toc-text">二、M中的数除以n的余数全部与n互质。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、根据我们证得的两个性质，就可以开始推式子了。"><span class="toc-text">三、根据我们证得的两个性质，就可以开始推式子了。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用：RSA的解密"><span class="toc-text">应用：RSA的解密</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#费马小定理（欧拉定理特殊型情况）"><span class="toc-text">费马小定理（欧拉定理特殊型情况）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#孙子定理（中国剩余定理-CRT）"><span class="toc-text">孙子定理（中国剩余定理 CRT）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#证明-1"><span class="toc-text">证明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#威尔逊定理"><span class="toc-text">威尔逊定理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#证明："><span class="toc-text">证明：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用：Rabin算法"><span class="toc-text">应用：Rabin算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定理1"><span class="toc-text">定理1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#证明：-1"><span class="toc-text">证明：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定理2"><span class="toc-text">定理2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#证明-2"><span class="toc-text">证明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定理3"><span class="toc-text">定理3</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#证明-3"><span class="toc-text">证明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rabin加密"><span class="toc-text">Rabin加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rabin解密"><span class="toc-text">Rabin解密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#i-p和q都是模4余3的数"><span class="toc-text">i)p和q都是模4余3的数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ii-p和q不是模4余3的数"><span class="toc-text">ii)p和q不是模4余3的数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目实例"><span class="toc-text">题目实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UNCTF-一句话加密"><span class="toc-text">UNCTF - 一句话加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#roarctf-babyrsa"><span class="toc-text">roarctf - babyrsa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HECTF-easy-rsa"><span class="toc-text">HECTF - easy_rsa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造GCD"><span class="toc-text">构造GCD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首发于<a href="https://www.anquanke.com/post/id/194137" target="_blank" rel="noopener">安全客</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>可以发现RSA中的很多攻击方法都是从数论四大定理推导出的，所以找时间好好学习了一下数论四大定理的证明及其应用场景——Rabin算法。</p>
+<h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2><p>若$n,a$为正整数，且$n,a$互素，即$gcd(a,n) = 1$，则</p>
+<p>$a^{φ(n)}\equiv1\pmod{n}$</p>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>首先，我们需要知道欧拉定理是什么：</p>
+<p> 数论上的欧拉定理，指的是</p>
+<p>$a^{φ(n)}\equiv1\pmod{n}$</p>
+<p>这个式子实在$a$和$n$互质的前提下成立的。</p>
+<p>证明</p>
+<p>首先，我们知道在1到$n$的数中，与n互质的一共有$φ(n$)个，所以我们把这$φ(n)$个数拿出来，放到设出的集合X中，即为$x_1,x_2……x_{φ(n)}$</p>
+<p>那么接下来，我们可以再设出一个集合为M，设M中的数为：</p>
+<p>$m_1=a∗x_1,m_2=a∗x_2……m_φ(n)=a∗x_{φ(n)}$</p>
+<p>下面我们证明两个推理：</p>
+<h4 id="一、M中任意两个数都不模n同余。"><a href="#一、M中任意两个数都不模n同余。" class="headerlink" title="一、M中任意两个数都不模n同余。"></a>一、M中任意两个数都不模n同余。</h4><p>反证法。</p>
+<p>证明：假设M中存在两个数设为$m_a,m_b$模$n$同余。</p>
+<p> 即$m_a\equiv m_b$</p>
+<p> 移项得到：$m_a−m_b=n∗k$</p>
+<p> 再将m用x来表示得到：$a∗x_a−a∗x_b=n∗k$</p>
+<p> 提取公因式得到：$a∗(x_a−x_b)=n∗k$</p>
+<p> 我们现在已知$a$与$n$互质，那么式子就可以转化为：</p>
+<p>$x_a−x_b\equiv 0 \pmod{n}$</p>
+<p>因为$a$中没有与$n$的公因子（1除外）所以$a !\equiv  0 \pmod{n}$ 所有只能是$ x_a−x_b\equiv 0\pmod{n}$。</p>
+<p> 又因为$x_a,x_b$都是小于$n$的并且不会相同，那么上述的式子自然全都不成立。</p>
+<p> 假设不成立。</p>
+<p>证得：$M$中任意两个数都不模$4$同余。</p>
+<h4 id="二、M中的数除以n的余数全部与n互质。"><a href="#二、M中的数除以n的余数全部与n互质。" class="headerlink" title="二、M中的数除以n的余数全部与n互质。"></a>二、M中的数除以n的余数全部与n互质。</h4><p>证明：我们已知$m_i=a∗x_i$</p>
+<p> 又因为$a$与$n$互质，$x_i$与$n$互质，所以可得$m_i$与$n$互质。</p>
+<p> 带入到欧几里得算法中推一步就好了。</p>
+<p> 即：</p>
+<p>$gcd(a∗xi,n)=gcd(mi,n)=gcd(n,mi mod n)=1$</p>
+<p>证毕。</p>
+<h4 id="三、根据我们证得的两个性质，就可以开始推式子了。"><a href="#三、根据我们证得的两个性质，就可以开始推式子了。" class="headerlink" title="三、根据我们证得的两个性质，就可以开始推式子了。"></a>三、根据我们证得的两个性质，就可以开始推式子了。</h4><p>首先，根据前两个推论可以知道，$M$中的数分别对应$X$中的每个数模$n$同余。</p>
+<p>（即是双射关系：首先M中的数在模n下不同余，即不相同，然后有$φ(n)$个$m$；其次有$φ(n)$个不相同的$x$与$n$互质，所以$m$与$x$是双射关系）</p>
+<p>所以可以得到：</p>
+<p>$m_1∗m_2∗……∗m_{φ(n)}\equiv x_1∗x_2∗……∗x_{φ(n)}\pmod{n}$</p>
+<p>现在我们把替换成x的形式，就可以得到：</p>
+<p>$a∗x_1∗a∗x_2∗……∗a∗x_{φ(n)}\equiv x_1∗x_2∗……∗x_{φ(n)}\pmod{n}$</p>
+<p>$a^{φ(n)}∗(x_1∗x_2……∗x_{φ(n)})\equiv x_1∗x_2……∗x_{φ(n)}\pmod{n}$</p>
+<p>$(a^φ(n)−1)∗(x_1∗x_2……∗x_{φ(n)})\equiv 0\pmod{n}$</p>
+<p>然后，由于$(x_1∗x_2……∗x_{φ(n)}) !\equiv 0\pmod{n}$</p>
+<p>所以    $(a^{φ(n)}−1)\equiv 0\pmod{n}$</p>
+<p>所以    $a^{φ(n)}\equiv 1\pmod{n}$</p>
+<h3 id="应用：RSA的解密"><a href="#应用：RSA的解密" class="headerlink" title="应用：RSA的解密"></a>应用：RSA的解密</h3><p>欧拉定理在RSA中可用于证明 $M\equiv C^d \pmod{N}$ ：</p>
+<p><img src="https://i.loli.net/2020/04/30/zmodaOUq2NSv6IP.png" alt="RSA解密验证"> </p>
+<h2 id="费马小定理（欧拉定理特殊型情况）"><a href="#费马小定理（欧拉定理特殊型情况）" class="headerlink" title="费马小定理（欧拉定理特殊型情况）"></a>费马小定理（欧拉定理特殊型情况）</h2><p> 对于质数p，任意整数a，均满足：$a^{p-1}\equiv 1 \pmod{p}$</p>
+<p>那么，$a^{p-2}$就是a在模p下的逆元了</p>
+<h2 id="孙子定理（中国剩余定理-CRT）"><a href="#孙子定理（中国剩余定理-CRT）" class="headerlink" title="孙子定理（中国剩余定理 CRT）"></a>孙子定理（中国剩余定理 CRT）</h2><p>设正整数$m_1,m_2…m_k$两两互素，则同余方程组<br>$x \equiv a_1 \pmod{m_1}$<br>$x \equiv a_2 \pmod{m_2}$<br>$x \equiv a_3 \pmod{m_3}$<br>…<br>$x \equiv a_k \pmod{m_k}$</p>
+<p>有整数解。并且在模$M = m_1 \cdot m_2 \cdot … \cdot m_k$下的解是唯一的，解为<br>$x \equiv (a_1M_1M_1^{-1} + a_2M_2M_2^{-1} + … + a_kM_kM_k^{-1}) \mod M$</p>
+<p>其中$M_i = M / m_i$，而$M_i^{-1}$为$M_i$模$m_i$的逆元。</p>
+<h3 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h3><p>具体证明如下：</p>
+<p>例：找出所有整数x,使其被3，5和7除时，余数分别为2，3和2</p>
+<p>$x\equiv 2 \pmod{3}$</p>
+<p>$x\equiv 3 \pmod{5}$</p>
+<p>$x\equiv 2 \pmod{7}$</p>
+<p>=&gt;      $x = △ + 3<em>5</em>7*t$  (△为期中的一个解，t为整数）</p>
+<p>在同余中最重要的观念就是求出第一个解，那么$x = △ + 3<em>5</em>7*t$就是通解。那怎么求一个解呢？</p>
+<p>利用同余的加性：</p>
+<p>把$x$拆成$a+b+c$,即$x = a + b + c            $</p>
+<p>令</p>
+<p>$a\equiv 2 \pmod{3}$</p>
+<p>$a\equiv 0 \pmod{5}$</p>
+<p>$a\equiv 0 \pmod{7}$</p>
+<p>=&gt; $a=35p$ ( 可以看到p取1的时候满足$a\equiv 2\pmod{3}$,即$a=35 $)</p>
+<p><strong>为何这样取？从接下来的取法可知：b 和 c 都会取 3 的倍数，这样子就能保证，x  mod 3 = 2，我们标记这样的取法为FLAG</strong> </p>
+<p>接下来要求b：</p>
+<p>$b\equiv 0\pmod{3}$</p>
+<p>$b\equiv 3\pmod{5}$</p>
+<p>$b\equiv 0\pmod{7}$</p>
+<p>=&gt;$b=21q$ (可以看到q取3的时候满足$b\equiv 3\pmod{5}$,即$b=63$)</p>
+<p>求c</p>
+<p>$c\equiv 0\pmod{3}$</p>
+<p>$c\equiv 0\pmod{5}$</p>
+<p>$c\equiv 2\pmod{7}$</p>
+<p>$=&gt;$$c=15m$(可以看到m取2的时候满足$c\equiv 2\pmod{7}$,即$c=30$)</p>
+<p>得</p>
+<p>$x\equiv 2\pmod{3}  \equiv  a + b + c$</p>
+<p>$x\equiv 3\pmod{5}  \equiv  a + b + c$</p>
+<p>$x\equiv 2\pmod{7}  \equiv  a + b + c$</p>
+<p>a  b  c 都求出来之后，可以利用同余的加性 </p>
+<p>$x = a + b + c = 128$是一个解，  $x = 128 + 105t $在适当调整$t$之后就可以求出$x$在任何范围内的解，比如说求最小正整数解，这时候$t$取$-1$，得$x=23$</p>
+<p>利用同余的乘性：</p>
+<p>之前令$x = a + b + c$,用同余的乘性之后$x = 2a’ + 3b’ + 2c’$    (此时令$a’=b’=c’=1$，就相当于同余的加性了)</p>
+<p>$a’\equiv 1\pmod{3} $</p>
+<p>$a’\equiv 0\pmod{5}$</p>
+<p>$a’\equiv 0\pmod{7}$</p>
+<p>$ =&gt;a’=35p$(可以看到p取2的时候满足$a’\equiv 1\pmod{3}$,即$a’=70$)</p>
+<p>接下来要求b’：</p>
+<p>$b’\equiv 0\pmod{3}$</p>
+<p>$b’\equiv 1\pmod{5}$</p>
+<p>$b’\equiv 0\pmod{7}$</p>
+<p>$=&gt;b’=21q$(可以看到$q$取1的时候满足$b’\equiv 1\pmod{5}$,即$b’=21$)</p>
+<p>现在来看c’</p>
+<p>$c’\equiv 0\pmod{3}$</p>
+<p>$c’\equiv 0\pmod{5} $</p>
+<p>$c’\equiv 1\pmod{7}$</p>
+<p>$=&gt;c’=15m$(可以看到m取1的时候满足$c’\equiv 1\pmod{7}$,即$c’=15$)</p>
+<p>有了$a’ b’ c’$之后就可以得到 $x = 2a’ + 3b’ + 2*c’ $<br>代入$a’ b’ c’$之后就可以得到$x$的一个解及其通解</p>
+<p>$x = 2<em>70 + 3</em>21 +2*15 $</p>
+<p>$x = 233 + 105t$</p>
+<p>在知道同余的加性和乘性之后再看下面这个公式就没有什么问题了</p>
+<p>$x \equiv (a_1M_1M_1^{-1} + a_2M_2M_2^{-1} + … + a_kM_kM_k^{-1}) \mod M$</p>
+<p>其中，$a_i$就是题目所要求的剩余，$M_1$就是前文提到的标记取法<strong>FLAG</strong>，而$M_1^{-1}$就是在同余的乘法性中为了满足$a_1’\equiv 1 \pmod{m_i}$</p>
+<h2 id="威尔逊定理"><a href="#威尔逊定理" class="headerlink" title="威尔逊定理"></a>威尔逊定理</h2><p>当且仅当p为素数时有，</p>
+<p> <strong>$(p−1) ! \equiv  −1\pmod{p}$</strong></p>
+<h3 id="证明："><a href="#证明：" class="headerlink" title="证明："></a>证明：</h3><p>首先：</p>
+<p>$p−1 \equiv  −1\pmod{p}$</p>
+<p>那么我们只需要证明 $(p−2)!\equiv 1\pmod{p} $</p>
+<p>也就是说，除去 $1$ 后，如果 $2,3,…,p−2$ 能够两两配对，且每对数乘积模 $p$ 后为 $1$ 的话，威尔逊定理就成立了，然后我们考虑这其实就是对于$ 2,3,…,p−2$去找 模 $p$ 意义下的逆元。</p>
+<p>然后考虑一下二次剩余里面的衍生知识，我们可以知道对于 $x^2\equiv 1\pmod{p}$只有两个解$（1，p-1）$，而这两个数已经被我们安排掉了，也就是说 $2,3,…,p−2$中不存在某个数的逆元是自己本身。</p>
+<p>然后 集合$ A={1,2,3,…p -1}$;  构成模p乘法的缩系，即任意$i∈A$ ,存在$j∈A$,使得:     $( i，j ) \equiv  1\pmod{p}$</p>
+<p>也就是说，除去$1$和$p-1$外，其余的两两配对互为逆元</p>
+<p>证毕</p>
+<h2 id="应用：Rabin算法"><a href="#应用：Rabin算法" class="headerlink" title="应用：Rabin算法"></a>应用：Rabin算法</h2><p>在解Rabin算法前，我们需要一些定理、推论</p>
+<h3 id="定理1"><a href="#定理1" class="headerlink" title="定理1"></a>定理1</h3><p>欧拉判别定理， c是模p的平方剩余的充要条件是 ，$(c^\frac{1}{2})^{φ(n)}  \equiv  1\pmod{p}$</p>
+<h4 id="证明：-1"><a href="#证明：-1" class="headerlink" title="证明："></a>证明：</h4><p>首先，由于$p$是一个奇素数，由费马小定理，$d^{p-1} \equiv 1 \pmod{p}$。但是$P-1$是一个偶数，所以有</p>
+<p>$(d^{ \frac{p-1}{2} } -1) \cdot (d^{ \frac{p-1}{2} }+1) \equiv 0 \pmod{p}$</p>
+<p>$p$ 是一个素数，所以$d^{ \frac{p-1}{2} } -1$ 和 $d^{ \frac{p-1}{2} }+1$中必有一个是$P$ 的倍数。因此$d^{ \frac{p-1}{2} }$模$P$的余数必然是1或-1。</p>
+<ul>
+<li>证明若$d$是模$p$二次剩余，则$d^{ \frac{p-1}{2}} \equiv 1 \pmod{p}$</li>
+</ul>
+<p>若$d$是模$p$二次剩余，则存在 $x^2 \equiv d \pmod{p}$，$p$跟$d$和$x$ 互质。根据费马小定理得：</p>
+<p>$d^{ \frac{p-1}{2}} \equiv x^{p-1} \equiv 1 \pmod{p}$</p>
+<ul>
+<li>证明若$d^{ \frac{p-1}{2} } \equiv 1 \pmod{p}$，则$d$是模$p$的二次剩余</li>
+</ul>
+<p>$p$ 是一个奇素数，所以关于$p$的原根存在。设$a$是$p$的一个原根，则存在$1 \le j \le p-1$使得$d=a^j$。于是</p>
+<p> $d^{ \frac{p-1}{2}} \equiv x^{p-1} \equiv 1 \pmod{p}$ </p>
+<p>$a$是$p$的一个原根，因此$a$模$p$的指数是$p-1$，于是$p-1$整除 $\frac{ j(p-1) }{2}$ 。这说明$j$是一个偶数。令 $i = \frac{j}{2}$ ，就有 $(a^i)^2 =a^{2i} = d$ 。$d$是模$p$ 的二次剩余 </p>
+<h3 id="定理2"><a href="#定理2" class="headerlink" title="定理2"></a>定理2</h3><p>二次同余式$x^2 \equiv  c \pmod{p}$的解为：</p>
+<p>​                                                $    x \equiv  ±c^\frac{p+1}{4}  \pmod{p}    $</p>
+<h4 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h4><p>由于p是素数，显然a与p互素，再由欧拉判别定理， a是模p的平方剩余的充要条件是 ，</p>
+<p>$(c^\frac{1}{2})^{φ(n)} \equiv  1\pmod{p}$</p>
+<p>即$(c^\frac{1}{2})^{p-1} \equiv  1\pmod{p}$</p>
+<p>带入原式，得$x^2 \equiv  c·(c^\frac{1}{2})^{p-1} \equiv  c^\frac{p+1}{2} \equiv  (c^\frac{p+1}{4})^2$</p>
+<p>则</p>
+<p>$x \equiv  ±c^\frac{p+1}{4}  \pmod{p}$</p>
+<h3 id="定理3"><a href="#定理3" class="headerlink" title="定理3"></a>定理3</h3><p>如果整数$c$满足：</p>
+<p>1） $c$为$p$的平方剩余</p>
+<p>2） $c$为$q$的平方剩余</p>
+<p>则：$ c$为$p*q$的平方剩余，解$x$为：</p>
+<p>$x\equiv±(c^\frac{p+1}{4}\pmod{p})\cdot(q^{-1}\pmod{p})\cdot q ± (c^\frac{q+1}{4}\pmod{q})\cdot (p^{-1}\pmod{q})·p\pmod{p\cdot q}$</p>
+<h4 id="证明-3"><a href="#证明-3" class="headerlink" title="证明"></a>证明</h4><p>二次同余式：    $x^2 \equiv  c\pmod{p*q}$</p>
+<p>等价于同余式组 ：    $x^2 \equiv  c \pmod{p}$        ①    </p>
+<p>​                                    $x^2 \equiv  c\pmod{q}$        ②</p>
+<p>由定理2</p>
+<p>①式解为    $x \equiv  ±c^\frac{p+1}{4}  \pmod{p}    $</p>
+<p>②式解为    $x \equiv  ±c^\frac{q+1}{4}  \pmod{q}$</p>
+<p>由CRT，解为 $x\equiv±(c^\frac{p+1}{4}\pmod{p})\cdot(q^{-1}\pmod{p})\cdot q ± (c^\frac{q+1}{4}\pmod{q})\cdot (p^{-1}\pmod{q})·p\pmod{p\cdot q}$</p>
+<h3 id="Rabin加密"><a href="#Rabin加密" class="headerlink" title="Rabin加密"></a>Rabin加密</h3><p>选择两个大素数$p$和$q$做为私钥</p>
+<p>计算$n = p * q$做为公钥</p>
+<p>若明文为m，则密文为$c \equiv  m^2 \pmod{n}$</p>
+<h3 id="Rabin解密"><a href="#Rabin解密" class="headerlink" title="Rabin解密"></a>Rabin解密</h3><p>我们首先计算出x1和x2，使得</p>
+<p>$x_1^2 \equiv  c \pmod{p}$，①</p>
+<p>$x_2^2 \equiv  c \pmod q)$，②</p>
+<h4 id="i-p和q都是模4余3的数"><a href="#i-p和q都是模4余3的数" class="headerlink" title="i)p和q都是模4余3的数"></a>i)p和q都是模4余3的数</h4><p>由于$p$是素数，显然$c$与$p$互素，再由定理2</p>
+<p>得   </p>
+<p>$x_1 \equiv  ±c^\frac{p+1}{4}  \pmod{p}$</p>
+<p>$x_2 \equiv  ±c^\frac{q+1}{4}  \pmod{q}$</p>
+<p>（一正一负，负的计算可简化为 模-正，如：$-x_1 \equiv  p - x_1  \pmod{p}$）</p>
+<p>从这里可以看出来如果$p$和$q$不是模$4$余$3$的话，c的指数就不是一个整数，也就不能用这个方法计算了</p>
+<p>接着我们求出$p$在模$q$下的逆，设为$a$，即$a*p \equiv  1\pmod{q}$</p>
+<p>然后我们求出$q$在模$p$下的逆，设为$b$，即$b*q \equiv  1 \pmod{p}$</p>
+<p>求出来a，b用于中国剩余定理</p>
+<p>带入 $x\equiv±(c^\frac{p+1}{4}\pmod{p})\cdot(q^{-1}\pmod{p})\cdot q ± (c^\frac{q+1}{4}\pmod{q})\cdot (p^{-1}\pmod{q})·p\pmod{p\cdot q}$</p>
+<p>得    $x \equiv±(c^\frac{p+1}{4}\pmod{p})·b\cdot q ±(c^\frac{q+1}{4}\pmod{q})\cdot a·p   \pmod{n}$</p>
+<p>设$c^\frac{p+1}{4}\pmod{p} $为$cp$，$c^\frac{q+1}{4} \pmod{q}$为$cq$</p>
+<p>$x_1 = (b \cdot q \cdot c_p+a \cdot p \cdot c_q )  \mod n$<br>$-x_1 = n - x_1$<br>$x_2= (b \cdot q \cdot c_p- a \cdot p \cdot c_q)  \mod n$<br>$-x_2 = n - x_2$</p>
+<p>其中有一个为我们想要的明文m。</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">n2s</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> hex(x)[<span class="number">2</span>:].decode(<span class="string">"hex"</span>)</span><br><span class="line"></span><br><span class="line">c = </span><br><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">n = p*q</span><br><span class="line">c_p = pow(c,(p+<span class="number">1</span>)/<span class="number">4</span>,p)</span><br><span class="line">c_q = pow(c,(q+<span class="number">1</span>)/<span class="number">4</span>,q)</span><br><span class="line">a = gmpy2.invert(p,q)</span><br><span class="line">b = gmpy2.invert(q,p)</span><br><span class="line">x = (b*q*c_p+a*p*c_q)%n</span><br><span class="line">y = (b*q*c_p-a*p*c_q)%n</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> n2s(x)</span><br><span class="line"><span class="keyword">print</span> n2s(n-x)</span><br><span class="line"><span class="keyword">print</span> n2s(y)</span><br><span class="line"><span class="keyword">print</span> n2s(n-y)</span><br></pre></td></tr></table></figure>
+
+<h4 id="ii-p和q不是模4余3的数"><a href="#ii-p和q不是模4余3的数" class="headerlink" title="ii)p和q不是模4余3的数"></a>ii)p和q不是模4余3的数</h4><p>这里涉及 <a href="https://en.wikipedia.org/wiki/Cipolla's_algorithm" target="_blank" rel="noopener">Cipolla’s algorithm</a> ，<a href="https://xz.aliyun.com/t/5113#toc-4" target="_blank" rel="noopener">先知</a>已经有一篇讲的不错的文章了 </p>
+<h2 id="题目实例"><a href="#题目实例" class="headerlink" title="题目实例"></a>题目实例</h2><h3 id="UNCTF-一句话加密"><a href="#UNCTF-一句话加密" class="headerlink" title="UNCTF - 一句话加密"></a>UNCTF - 一句话加密</h3><p>题目是给了一张图，隐写了一个模n</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">n</span> = <span class="number">0</span>xc2636ae5c3d8e43ffb97ab09028f1aac6c0bf6cd3d70ebca281bffe97fbe30dd</span><br></pre></td></tr></table></figure>
+
+<p>可以发现n不大，直接用yafu分解可得</p>
+<p><img src="https://i.loli.net/2020/04/30/542OKV3mC7N1PcM.png" alt="UNCTF - 一句话加密"></p>
+<p>但是找不到e，最后试了试rabin，成功破解</p>
+<p>exp用上面的那个就可</p>
+<h3 id="roarctf-babyrsa"><a href="#roarctf-babyrsa" class="headerlink" title="roarctf - babyrsa"></a>roarctf - babyrsa</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import sympy</span><br><span class="line">import random</span><br><span class="line">def myGetPrime():</span><br><span class="line">    A= getPrime(513)</span><br><span class="line">    <span class="builtin-name">print</span>(A)</span><br><span class="line">    <span class="attribute">B</span>=A-random.randint(1e3,1e5)</span><br><span class="line">    <span class="builtin-name">print</span>(B)</span><br><span class="line">    return sympy.nextPrime((B!)%A)</span><br><span class="line"><span class="attribute">p</span>=myGetPrime()</span><br><span class="line"><span class="comment">#A1=</span></span><br><span class="line"><span class="comment">#B1=</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">q</span>=myGetPrime()</span><br><span class="line"><span class="comment">#A2=</span></span><br><span class="line"><span class="comment">#B2=</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">r</span>=myGetPrime()</span><br><span class="line"><span class="attribute">n</span>=p*q*r</span><br><span class="line"><span class="comment">#n=</span></span><br><span class="line"><span class="attribute">c</span>=pow(flag,e,n)</span><br><span class="line"><span class="comment">#e=0x1001</span></span><br><span class="line"><span class="comment">#c=</span></span><br><span class="line"><span class="comment">#so,what is the flag?</span></span><br></pre></td></tr></table></figure>
+
+<p>加密中的<strong>(B!)%A</strong>的 <strong>!</strong> 在这里是阶乘的意思，所以显然这里要用到威尔逊定理，不然这么大的一个数的阶乘，根本吃不消好吧</p>
+<p>根据加密逻辑，这里是一个三素数系统，所以$φ(n) = (p-1)<em>(q-1)</em>(r-1)$，然后$r$肯定是要通过先求出$p，q$来得出</p>
+<p>然后关于$p$和$q$，题目给的信息都一样，所以求$p$和求q的解法肯定是一样的，</p>
+<p>所以题目简化为，<strong>根据A1,B1解p</strong></p>
+<p>而$p \equiv (B!)  \pmod{A}$ （B是一个比A小的数）</p>
+<p>虽然A，B均已给出且互素，但显然大数$B$的阶乘是不可能直接求得的，</p>
+<p>所以要用威尔逊定理简化计算</p>
+<p>简化过程如下：</p>
+<p>已知 $B! \equiv  P\pmod{A})$</p>
+<p>由于A是素数，所以有：        $(A-1)! \equiv  -1 \pmod{A}$</p>
+<p>​                   即$(A-1)(A-2)……(B+1)B! \equiv  -1 \pmod{A}$</p>
+<p>​         根据已知$(A-1)(A-2)……(B+1)P \equiv  -1 \pmod{A}$</p>
+<p>​                     变形为$(A-2)……(B+1)P \equiv  1 \pmod{A}$</p>
+<p>所以$p$即为$(A-2)(A-3)……(B+1)$ 在模$A $下的逆</p>
+<p>exp</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">from gmpy2 import *</span><br><span class="line">import sympy</span><br><span class="line"></span><br><span class="line">A1=</span><br><span class="line">B1=</span><br><span class="line">A2=</span><br><span class="line">B2=</span><br><span class="line">n=</span><br><span class="line">e=0x1001</span><br><span class="line">c=</span><br><span class="line"></span><br><span class="line">a = 1</span><br><span class="line">for i in range(A1-2,B1,-1):</span><br><span class="line">    a = a*i % A1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b = 1</span><br><span class="line">for i in range(A2-2,B2,-1):</span><br><span class="line">    b = b*i % A2</span><br><span class="line">    </span><br><span class="line">p = sympy.nextprime(invert(a,A1))</span><br><span class="line">q = sympy.nextprime(invert(b,A2))</span><br><span class="line">r=n/p/q</span><br><span class="line">phi = (p-1)*(q-1)*(r-1)</span><br><span class="line">d = invert(e,phi)</span><br><span class="line">m=pow(c,d,n)</span><br><span class="line">print hex(m)[2:].decode('hex')</span><br></pre></td></tr></table></figure>
+
+<h3 id="HECTF-easy-rsa"><a href="#HECTF-easy-rsa" class="headerlink" title="HECTF - easy_rsa"></a>HECTF - easy_rsa</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from gmpy2 import *</span><br><span class="line"></span><br><span class="line">from Crypto.Util import number</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">#e = have a try</span></span><br><span class="line">p = number.getPrime(1024)</span><br><span class="line"></span><br><span class="line">q = number.getPrime(1024)</span><br><span class="line"></span><br><span class="line">nothing = 251560377963038761190200797029988859033 <span class="comment"># getPrime(128)</span></span><br><span class="line"></span><br><span class="line">n = p*q</span><br><span class="line">fn = (p-1)*(q-1)</span><br><span class="line">d =inverse(e, fn)</span><br><span class="line">something=(p-1)*d+nothing</span><br><span class="line">enc = pow(flag, e, p*q)</span><br><span class="line"></span><br><span class="line"><span class="comment">#n=</span></span><br><span class="line"><span class="comment">#something=</span></span><br><span class="line"><span class="comment">#enc=</span></span><br></pre></td></tr></table></figure>
+
+<p>题目给了，nothing（下面记为r），something（下面记为s），其中$ (p-1)*d= s - r$</p>
+<p>目的很明确，就是分解大数n</p>
+<p>这一题的思路就是利用$GCD$来约出$n$的因子</p>
+<p>所以首先要获得一个$p$的倍数</p>
+<p>根据费马小定理</p>
+<p>$2^{p-1} \equiv  1 \pmod{p}$显然成立    (主要是为了利用题目中给出的$ (p-1)*d$）</p>
+<p>所以设$A = 2^{p-1} - 1 = kp$</p>
+<p>然后利用欧拉定理，我们直接利用上文中提到的RSA的解密证明中的结论</p>
+<p><img src="https://i.loli.net/2020/04/30/1mkjEzZBHAdD2bW.png" alt="欧拉定理"></p>
+<p>$(2^{p-1})^{ed}  \equiv  (2^{p-1})   \pmod{n}$</p>
+<p>由题，$(p-1)d = s - r$</p>
+<p>所以$A  \equiv  2^{p-1} - 1  \equiv   (2^{p-1})^{ed} - 1 \equiv   2^{es-er} - 1    \pmod{n}$</p>
+<p>所以  $gcd( 2^{es-er} - 1 , n) $</p>
+<p>即      $gcd(kp , pq) $</p>
+<p>即可得到     $p$</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"></span><br><span class="line">enc=</span><br><span class="line">n=</span><br><span class="line">something=</span><br><span class="line">nothing=</span><br><span class="line">e=<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        e=sympy.nextprime(e)</span><br><span class="line">        a=pow(<span class="number">2</span>,e*something-e*nothing,n)<span class="number">-1</span></span><br><span class="line">        p=libnum.gcd(a,n)</span><br><span class="line">        q=n/p</span><br><span class="line">        fn=(p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">        d=invert(e,fn)</span><br><span class="line">        flag=libnum.n2s(pow(enc,d,n))</span><br><span class="line">        <span class="keyword">if</span> <span class="string">"hebtu"</span> <span class="keyword">in</span> flag:</span><br><span class="line">            <span class="keyword">print</span> flag</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">	<span class="keyword">except</span>:</span><br><span class="line">    	<span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="构造GCD"><a href="#构造GCD" class="headerlink" title="构造GCD"></a>构造GCD</h3><p>可以看出，构造gcd来求大数n的因子以此来分解n是一种很好又很巧妙的方式,来看这一题</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import getPrime, isPrime, getRandomNBitInteger</span><br><span class="line">p = getPrime(512)</span><br><span class="line">q = getPrime(512)</span><br><span class="line">n=p*q</span><br><span class="line"></span><br><span class="line">a=int(pow((q+p),2019,n))</span><br><span class="line">b=int(pow(p+2019,q,n))</span><br><span class="line">n=</span><br><span class="line">a=</span><br><span class="line">b=</span><br></pre></td></tr></table></figure>
+
+<p>这里，我们要通过已给出的a和b，来分解n</p>
+<p>通过a，b和p，q的关系，我们要想办法用a,b凑出一个GCD来求出n的一个因子</p>
+<p>解题过程如下：</p>
+<p>由$ a \equiv  (p+q)^{2019} \pmod{n}$</p>
+<p>可得    $a \equiv  (p+q)^{2019} \equiv  p^{2019}  \pmod{q}$        【二项式展开定理】</p>
+<p>由$ b \equiv  (p+2019)^q \pmod{n}$</p>
+<p>可得 $b \equiv  (p+2019)^q \equiv  p+2019  \pmod{q}$            【费马小定理：$(p+2019)^q-1 \equiv  1 \pmod{q}$】</p>
+<p>所以$ a \equiv  (b - 2019)^{2019} \pmod{q}$</p>
+<p>​    即$ a =  (b - 2019)^2019 + kq$</p>
+<p>这样我们就可以凑出一个$GCD$</p>
+<p>$GCD（ (b - 2019)^{2019}-a，n）=  GCD（ Kq，n）= q$</p>
+<p>解题完毕</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这一次学习了数论四大定理的证明、应用，以及rabin密码的解法。发现其实很多解法、攻击方法都是多种定理的结合运用，有时候还要引出各种推论，很灵活</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>欧拉定理证明： <a href="https://www.cnblogs.com/wangxiaodai/p/9758242.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangxiaodai/p/9758242.html</a> </p>
+<p>中国剩余定理证明： <a href="https://blog.csdn.net/Rain722/article/details/53230707" target="_blank" rel="noopener">https://blog.csdn.net/Rain722/article/details/53230707</a> </p>
+<p>威尔逊定理证明： <a href="https://www.cnblogs.com/Judge/p/10755703.html" target="_blank" rel="noopener">https://www.cnblogs.com/Judge/p/10755703.html</a> </p>
+<p>Rabin算法： <a href="https://veritas501.space/2017/03/01/密码学笔记/" target="_blank" rel="noopener">https://veritas501.space/2017/03/01/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AC%94%E8%AE%B0/</a> </p>
+<p> <a href="https://xz.aliyun.com/t/5113" target="_blank" rel="noopener">https://xz.aliyun.com/t/5113</a> </p>
+<p> <a href="https://en.wikipedia.org/wiki/Rabin_cryptosystem" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Rabin_cryptosystem</a> </p>
+<p> <a href="https://blog.csdn.net/qq_24451605/article/details/45093911" target="_blank" rel="noopener">https://blog.csdn.net/qq_24451605/article/details/45093911</a> </p>
+<p>最后感谢Lur大佬的一手指点</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>密码学学习笔记 之 数论四大定理及应用</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">4.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-12-03, 15:30:25</p>
+    <p><span class="copy-title">最后更新:</span>2020-06-05, 13:45:40</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/03/密码学学习笔记之数论四大定理及应用/" title="密码学学习笔记 之 数论四大定理及应用">http://jayxv.github.io/2019/12/03/密码学学习笔记之数论四大定理及应用/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Paillier','#Sage','#ECC','#Lattice','#Dsa','#LCG','#Rsa','#Rc4','#SM4','#python','#number theory','#Abstract algebra','#private','#操作模式','#Book','#Nmap','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
