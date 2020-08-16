@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Web学习笔记 之 文件与序列化 | Van1sh的小屋</title>
+  <meta name="keywords" content=" Web , Files , Serialization ">
+  <meta name="description" content="Web学习笔记 之 文件与序列化 | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/categories/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:00:41.247Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(31)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(10)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(12)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="31">
+<input type="hidden" id="yelog_site_word_count" value="135.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记 之 coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记 之 文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记 之 SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记 之 XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack /"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/05/20/密码学学习笔记之RSA/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA">密码学学习笔记 之 RSA</span>
+            <span class="post-date" title="2020-05-20 20:40:00">2020/05/20</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Web学习笔记 之 文件与序列化" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Web学习笔记 之 文件与序列化</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web小屋">Web小屋</a>/
+            
+                <a  data-rel="Files related">Files related</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">Web</a>
+            
+            <a class="color1">Files</a>
+            
+            <a class="color4">Serialization</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-08-12 22:38:20'>2020-08-09 14:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#文件与序列化"><span class="toc-text">文件与序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化-amp-反序列化"><span class="toc-text">序列化&amp;反序列化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#魔术方法"><span class="toc-text">魔术方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#toString-NaN"><span class="toc-text">__toString()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#invoke"><span class="toc-text">__invoke()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件上传"><span class="toc-text">文件上传</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端绕过"><span class="toc-text">客户端绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器端MIME绕过"><span class="toc-text">服务器端MIME绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器端扩展名检测绕过"><span class="toc-text">服务器端扩展名检测绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#黑名单"><span class="toc-text">黑名单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#白名单"><span class="toc-text">白名单</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解析漏洞"><span class="toc-text">解析漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache解析漏洞"><span class="toc-text">Apache解析漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IIS解析漏洞"><span class="toc-text">IIS解析漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nginx解析漏洞"><span class="toc-text">Nginx解析漏洞</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件包含"><span class="toc-text">文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#htaccess"><span class="toc-text">.htaccess</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#user-ini"><span class="toc-text">.user.ini</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="文件与序列化"><a href="#文件与序列化" class="headerlink" title="文件与序列化"></a>文件与序列化</h1><p>&emsp;&emsp;这一章的标题是文件与序列化，因为反序列化的利用总是要用到unserialize()这个函数。而在实际场景中这个函数也许并不常见，但是如果有文件上传点的话，兴许是可以利用phar伪协议的。所以我想连着文件上传、文件包含一起整理下。</p>
+<h2 id="序列化-amp-反序列化"><a href="#序列化-amp-反序列化" class="headerlink" title="序列化&amp;反序列化"></a>序列化&amp;反序列化</h2><p>&emsp;&emsp;在开发过程中，如果遇到需要将数据存储，并且要保持他原来的类型就需要用到序列化。比如将一个对象序列化，顾名思义就是将这个对象以序列化的形式存储，方便下次使用的时候恢复。举个栗子就是，你想将变量$a = 1存起来，下次好直接用。如果你只是把他以字符串的形式存进了文件：“$a = 1”，那么下次读取文件的时候你也只能读到一串普通的字符串，也不是一个被赋值了的变量。</p>
+<p>序列化、反序列化用到的函数就是serialize和unserialize</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="keyword">array</span>(<span class="string">'a'</span> =&gt; <span class="string">'Apple'</span> ,<span class="string">'b'</span> =&gt; <span class="string">'banana'</span> , <span class="string">'c'</span> =&gt; <span class="string">'Coconut'</span>);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//序列化数组</span></span><br><span class="line">$s = serialize($a);</span><br><span class="line"><span class="keyword">echo</span> $s;</span><br><span class="line"><span class="comment">//输出结果：a:3:&#123;s:1:"a";s:5:"Apple";s:1:"b";s:6:"banana";s:1:"c";s:7:"Coconut";&#125;</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;br /&gt;&lt;br /&gt;'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//反序列化</span></span><br><span class="line">$o = unserialize($s);</span><br><span class="line">print_r($o);</span><br><span class="line"><span class="comment">//输出结果 Array ( [a] =&gt; Apple [b] =&gt; banana [c] =&gt; Coconut )</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;对于序列化的规则，比如<code>a:3:{s:1:&quot;a&quot;;s:5:&quot;Apple&quot;;s:1:&quot;b&quot;;s:6:&quot;banana&quot;;s:1:&quot;c&quot;;s:7:&quot;Coconut&quot;;}</code>这条序列化中字符的具体含义：a就代表这是一个数组（array），3代表这个数组里有三个元素，用分号隔开；每个元素分为两个部分：key、value。这里的s代表这里的key一个字符串，1代表这个key的长度，“a”就是key的值。紧接着的s代表这里的value是一个字符串，5代表这个value的长度，“Apple”就是value的值。如果这个数组不是键值对的形式话，那么序列化串则会将元素的下标作为key，int类型。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="keyword">array</span>(<span class="string">'a'</span> , <span class="string">'Apple'</span>, <span class="string">'b'</span> , <span class="string">'banana'</span>, <span class="string">'c'</span> , <span class="string">'Coconut'</span>);</span><br><span class="line"><span class="comment">//序列化数组</span></span><br><span class="line">$s = serialize($a);</span><br><span class="line"><span class="keyword">echo</span> $s;</span><br><span class="line"><span class="comment">//输出结果：a:6:&#123;i:0;s:1:"a";i:1;s:5:"Apple";i:2;s:1:"b";i:3;s:6:"banana";i:4;s:1:"c";i:5;s:7:"Coconut";&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;除了数组可以序列化，对象啥的也可以，O代表的是对象，对象中的属性的类型在序列化中也有会特殊的标识，但有些是不可打印字符，可以用base64编码来解决这个问题。</p>
+<p>&emsp;&emsp;在CTF解题过程中，利用点一般是出现在反序列化上。比如，我们之前提到字符串的序列化串会有专门一个表示字符串长度的值，这个值决定着反序列化时读取的字符串的长度【试想如果这个值比实际的值大了，或者小了，会产生啥问题呢？】。然后就是在对象的序列化时，php中魔术方法的存在了。</p>
+<p>推荐一下先知这篇文章：<a href="https://xz.aliyun.com/t/8082#toc-2" target="_blank" rel="noopener">怎样挖掘出属于自己的php反序列化链</a></p>
+<h2 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">__wakeup</span>() <span class="comment">//使用unserialize时触发</span></span><br><span class="line"><span class="selector-tag">__sleep</span>() <span class="comment">//使用serialize时触发</span></span><br><span class="line"><span class="selector-tag">__destruct</span>() <span class="comment">//对象被销毁时触发</span></span><br><span class="line"><span class="selector-tag">__call</span>() <span class="comment">//在对象上下文中调用不可访问的方法时触发</span></span><br><span class="line"><span class="selector-tag">__callStatic</span>() <span class="comment">//在静态上下文中调用不可访问的方法时触发</span></span><br><span class="line"><span class="selector-tag">__get</span>() <span class="comment">//用于从不可访问的属性读取数据</span></span><br><span class="line"><span class="selector-tag">__set</span>() <span class="comment">//用于将数据写入不可访问的属性</span></span><br><span class="line"><span class="selector-tag">__isset</span>() <span class="comment">//在不可访问的属性上调用isset()或empty()触发</span></span><br><span class="line"><span class="selector-tag">__unset</span>() <span class="comment">//在不可访问的属性上使用unset()时触发</span></span><br><span class="line"><span class="selector-tag">__toString</span>() <span class="comment">//把类当作字符串使用时触发</span></span><br><span class="line"><span class="selector-tag">__invoke</span>() <span class="comment">//当脚本尝试将对象调用为函数时触发</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="__toString()"></a>__toString()</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>   </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span>   </span></span><br><span class="line"><span class="class"></span>&#123;   </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span>   </span></span><br><span class="line"><span class="function">    </span>&#123;   </span><br><span class="line">        <span class="keyword">return</span> <span class="string">'__toString&lt;br /&gt;'</span>;   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="comment">// 创建一个对象   </span></span><br><span class="line">$object = <span class="keyword">new</span> TestClass(); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象被当作一个字符串   </span></span><br><span class="line"><span class="comment">//  __toString会被调用  </span></span><br><span class="line"><span class="keyword">echo</span> $object;   </span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">输出效果如下：</span><br><span class="line">__toString</span><br></pre></td></tr></table></figure>
+
+<h3 id="invoke"><a href="#invoke" class="headerlink" title="__invoke()"></a>__invoke()</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CallableClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span><span class="params">($param1, $param2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        var_dump($param1,$param2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">$obj  = <span class="keyword">new</span> CallableClass;</span><br><span class="line">$obj(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line">var_dump(is_callable($obj));</span><br><span class="line"></span><br><span class="line"><span class="comment">//实例化对象本身是不能被调用，但是类中如果实现 __invoke() 方法，则把实例对象当作方法调用，会自动调用到 __invoke() 方法，参数顺序相同。</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.cnblogs.com/nul1/p/8646034.html" target="_blank" rel="noopener">这里</a>有一些比较好的简单案例</p>
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p>文件上传本身其实没啥好讲的，就是服务端提供一个文件上传点，然后你可以上传文件。但有时候可能没有表单，那就得自己写脚本传了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="comment">#</span></span><br><span class="line">r = requests.session()</span><br><span class="line">file1 = &#123;<span class="string">'file'</span>: (<span class="string">"shell.&lt;br&gt;php"</span>,<span class="string">"&lt;?php  @eval($_POST['hhhm']); ?&gt;"</span>)&#125;</span><br><span class="line">r1 = r.post(url, files=file1)</span><br><span class="line">print(r1.text)</span><br></pre></td></tr></table></figure>
+
+<p>但如果服务端没有对上传的文件进行过滤的话，或者过滤的不够完善，则容易被攻击者趁虚而入。下面就讲一下文件后缀的绕过</p>
+<h3 id="客户端绕过"><a href="#客户端绕过" class="headerlink" title="客户端绕过"></a>客户端绕过</h3><p>&emsp;&emsp;浏览器禁用JavaScript；或者抓包修改后缀就可以了。</p>
+<h3 id="服务器端MIME绕过"><a href="#服务器端MIME绕过" class="headerlink" title="服务器端MIME绕过"></a>服务器端MIME绕过</h3><p>同样抓包修改数据包的content-type字段就可。</p>
+<p>常见的图片格式的MIME类型有以下 几种类型：</p>
+<p>PNG图像：image/png </p>
+<p>GIF图形： image/gif </p>
+<p>JPG图形：image/jpeg</p>
+<h3 id="服务器端扩展名检测绕过"><a href="#服务器端扩展名检测绕过" class="headerlink" title="服务器端扩展名检测绕过"></a>服务器端扩展名检测绕过</h3><h4 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h4><ol>
+<li><p>文件名大小写绕过：pHp，AsP</p>
+</li>
+<li><p>特殊文件名绕过</p>
+<p>&emsp;&emsp;在Windows下有一个特性就是如果文件后缀以点‘.’或者空格‘ ’结尾的后缀 名时，系统在保存文件时会自动去除点和空格。但要注意 Unix/Linux 系统没有 这个特性。因为有些服务器端的后缀名检测是取文件名最后一个.后面的字符串，拿这个字符串与黑名单列表对比</p>
+</li>
+<li><p>0x00截断绕过</p>
+<p>&emsp;&emsp;名后缀有一个%00字节，可以截断某些函数对文件名的判断。在许多语言函 数中，处理字符串的函数中0x00被认为是终止符。</p>
+<p>&emsp;&emsp;例如: 网站上传函数处理xxx.asp%00.jpg时，首先后缀名是合法的jpg格式，可以 上传，在保存文件时，遇到%00字符丢弃后面的 .jpg，文件后缀最终保存的后缀 名为xxx.asp</p>
+</li>
+</ol>
+<h4 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h4><ol>
+<li><p>截断绕过</p>
+<p>&emsp;&emsp;用像test.asp%00.jpg的方式进行截断，属于白名单文件</p>
+<p>&emsp;&emsp;【但是防御的话，就是检测的是啥后缀，就以啥后缀来保存，文件名再进行变化，比如用时间戳来替换，而非以原始文件名直接保存。】</p>
+</li>
+<li><p>接下来将要讨论的 解析/包含 漏洞绕过</p>
+</li>
+</ol>
+<h3 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h3><h4 id="Apache解析漏洞"><a href="#Apache解析漏洞" class="headerlink" title="Apache解析漏洞"></a>Apache解析漏洞</h4><p>&emsp;&emsp;CVE-2017-15715，上传一个文件名包含换行符的文件。注意，只能是<code>\x0A</code>，不能是<code>\x0D\x0A</code>，我们可以用hex功能在1.php后面添加一个<code>\x0A</code>。</p>
+<p>&emsp;&emsp;另一个是上传1.php.xxx，后面xxx随便来个不能被解析的东西，随后apache就会往前，直到找到一个能被解析的后缀名，比如这里的php。</p>
+<h4 id="IIS解析漏洞"><a href="#IIS解析漏洞" class="headerlink" title="IIS解析漏洞"></a>IIS解析漏洞</h4><p>&emsp;&emsp;IIS6.0有两个解析漏洞，一个是如果目录名包含asp 、asa、cer字符串，那么这个目录下所有的文 件都会按照 asp 去解析。</p>
+<p>&emsp;&emsp;例如： chaoasp/1.jpg</p>
+<p>&emsp;&emsp;因为文件名中有asp字样，所以该文件夹下的1.jpg文件打开时，会按照asp文件去解析执行</p>
+<p>另一个是只要文件名中含有.asp、.asa、.cer会优先按 asp 来解析</p>
+<p>&emsp;&emsp;IIS7.0/7.5是对php解析时有一个类似于Nginx的解析漏洞， 对任意文件名只要在URL后面追加 上字符串“/任意文件名.php”就会按照 php 的方式去解析 。</p>
+<p>&emsp;&emsp;例子 ： ”<a href="http://www.t/" target="_blank" rel="noopener">http://www.</a>baidu.com/upload/chao/1.jpg/chao.php”</p>
+<p>&emsp;&emsp;这种情况下访问1.jpg，该文件就会按照php格式被解析执行</p>
+<h4 id="Nginx解析漏洞"><a href="#Nginx解析漏洞" class="headerlink" title="Nginx解析漏洞"></a>Nginx解析漏洞</h4><p>&emsp;&emsp;一个是对任意文件名，在后面添加/任意文件名.php的解析漏洞，比如原本文件名是 test.jpg， 可以添加为 test.jpg/x.php 进行解析攻击。</p>
+<p>&emsp;&emsp;一种是对低版本的 Nginx 可以在任意文件名后面添加%00.php</p>
+<p>&emsp;&emsp;例如：127.0.0.1/sql-loads/load/chao.jpg%00.php</p>
+<p>&emsp;&emsp;那么chao.jpg也就被当作php格式文件执行</p>
+<p>&emsp;&emsp;nginx 0.5.* [Success] </p>
+<p>&emsp;&emsp;nginx 0.6.* [Success] </p>
+<p>&emsp;&emsp;nginx 0.7 &lt;= 0.7.65 [Success] </p>
+<p>&emsp;&emsp;nginx 0.8 &lt;= 0.8.37 [Success]</p>
+<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>文件包含一般涉及四个函数</p>
+<p>require()</p>
+<p>require_once()</p>
+<p>include()</p>
+<p>include_once()</p>
+<p>&emsp;&emsp;无论包含的文件是啥格式，txt还是jpg，被<code>&lt;?php ?&gt;</code>标签 【短标签也可】包裹的内容都会被当成php代码执行。因此，如果文件上传不能绕过后缀的话，能找到文件包含漏洞也同样实现攻击。而如果想读被包含文件的源码的话，就要用到php伪协议，因为php代码【除非你 <code>highlight_file(__FILE__);</code>了】是不可见的，需要用php的filter伪协议去base64编码一下——<code>php://filter/read=convert.base64-encode/resource=$path”</code></p>
+<p>&emsp;&emsp;但是如果有上传点，有过滤，然后又找不到文件包含，是否就无路了？倒也不尽然，那要看这个文件上传的点的过滤严不严格了，如果只是简简单单黑名单，那就，嘿嘿嘿~</p>
+<h3 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h3><p>&emsp;&emsp;.htaccess文件(或者”分布式配置文件”）,全称是Hypertext Access(超文本入口)。提供了针对目录改变配置的方法， 即，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。</p>
+<p>&emsp;&emsp;所以我们可以利用该文件来绕过文件上传时的过滤。前提是我们能上传该类型文件【如果能读写服务端的该文件也可】，具体方法就是上传包含如下内容的.htaccess文件</p>
+<p>方法1</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将文件名含有"dd"的解析成php文件</span></span><br><span class="line"><span class="section">&lt;FilesMatch "dd"&gt;</span></span><br><span class="line">  <span class="attribute"><span class="nomarkup">SetHandler</span></span> application/x-httpd-php</span><br><span class="line"><span class="section">&lt;/FilesMatch&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>方法2</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将文件后缀为.png的解析成php文件</span></span><br><span class="line">AddType  <span class="built_in">application</span>/x-httpd-php    .png</span><br></pre></td></tr></table></figure>
+
+<h3 id="user-ini"><a href="#user-ini" class="headerlink" title=".user.ini"></a>.user.ini</h3><p>&emsp;&emsp;具体可以看看<a href="https://segmentfault.com/a/1190000011552335?utm_source=tag-newest" target="_blank" rel="noopener">这篇文章</a>。<a href="[https://wooyun.js.org/drops/user.ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8.html](https://wooyun.js.org/drops/user.ini文件构成的PHP后门.html)">这篇</a>也不错</p>
+<p>&emsp;&emsp;自 PHP 5.3.0 起，PHP 支持基于每个目录的 .htaccess 风格的 INI 文件。此类文件<strong>仅</strong>被 CGI／FastCGI SAPI 处理。此功能使得 PECL 的 htscanner 扩展作废。如果使用 Apache，则用 .htaccess 文件有同样效果。即.user.ini可以修改配置，但是只有<a href="http://php.net/manual/zh/ini.list.php" target="_blank" rel="noopener">PHP_IN_USER模式的配置</a>才可以在.user.ini中设定。</p>
+<p>&emsp;&emsp;而可修改的配置中我们利用的比较多的就是<code>auto_prepend_file</code> ，</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">auto_prepend_file</span>=<span class="number">01</span>.gif</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;就是让所有php文件都“自动”包含 <code>01.gif</code> 这个文件，而这个文件可以是一个正常php文件，也可以是一个包含一句话的webshell。所以有一个要求就是.user.ini所在目录至少得有一个可访问的php文件。</p>
+<p>&emsp;&emsp;除了上传这两种能够修改配置的文件，如果能够找到反序列化链，但是却苦于没有unserialize()函数来利用，那么<a href="https://paper.seebug.org/680/" target="_blank" rel="noopener">phar伪协议</a>你值得了解。</p>
+<p>&emsp;&emsp;并且由于phar伪协议是靠文件内容中的标签来识别的，所以我们就可以通过添加任意的文件头+修改后缀名的方式将phar文件伪装成其他格式的文件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestObject</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @unlink(<span class="string">"phar.phar"</span>);</span><br><span class="line">    $phar = <span class="keyword">new</span> Phar(<span class="string">"phar.phar"</span>);</span><br><span class="line">    $phar-&gt;startBuffering();</span><br><span class="line">    $phar-&gt;setStub(<span class="string">"GIF89a"</span>.<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">//设置stub，增加gif文件头</span></span><br><span class="line">    $o = <span class="keyword">new</span> TestObject();</span><br><span class="line">    $phar-&gt;setMetadata($o); <span class="comment">//将自定义meta-data存入manifest</span></span><br><span class="line">    $phar-&gt;addFromString(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line">    <span class="comment">//签名自动计算</span></span><br><span class="line">    $phar-&gt;stopBuffering();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Web学习笔记 之 文件与序列化</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-08-09, 14:16:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-12, 22:38:20</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/08/09/Web学习笔记 之 文件与序列化/" title="Web学习笔记 之 文件与序列化">http://jayxv.github.io/2020/08/09/Web学习笔记 之 文件与序列化/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#ECC','#Paillier','#Web','#Files','#Serialization','#Rc4','#SM4','#Lattice','#Dsa','#LCG','#Knapsack','#Rsa','#SQL','#python','#Book','#操作模式','#number theory','#Abstract algebra','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
