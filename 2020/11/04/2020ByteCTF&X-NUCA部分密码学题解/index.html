@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>2020 ByteCTF&amp;X-NUCA | Van1sh的小屋</title>
+  <meta name="keywords" content=" Write Up ">
+  <meta name="description" content="2020 ByteCTF&amp;X-NUCA | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/categories/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:00:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(33)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(12)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(12)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="33">
+<input type="hidden" id="yelog_site_word_count" value="148.8k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack /"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/05/20/密码学学习笔记之RSA/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA">密码学学习笔记 之 RSA</span>
+            <span class="post-date" title="2020-05-20 20:40:00">2020/05/20</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-2020ByteCTF&amp;X-NUCA部分密码学题解" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">2020 ByteCTF&amp;X-NUCA</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="比赛小屋">比赛小屋</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">Write Up</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-12-17 14:25:56'>2020-11-04 10:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:10.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ByteCTF"><span class="toc-text">ByteCTF</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#noise"><span class="toc-text">noise</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解题流程："><span class="toc-text">解题流程：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#threshold"><span class="toc-text">threshold</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解题流程"><span class="toc-text">解题流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#X-NUCA"><span class="toc-text">X-NUCA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#weird"><span class="toc-text">weird</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解题流程-1"><span class="toc-text">解题流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#imposter"><span class="toc-text">imposter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解题流程-2"><span class="toc-text">解题流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首发于<a href="https://www.anquanke.com/post/id/221400" target="_blank" rel="noopener">安全客</a></p>
+<p>最近打了ByteCTF和X-NUCA两场比赛，题目质量很高，（Web手们都哭了）两场比赛自己也分别只做出两道密码学方向的题目，菜狗落泪。</p>
+<p>这里记录下自己解题的一个过程，可能废话比较多，当然也是希望能够表达的清楚。如果只是想看最终解题方法的读者可以直接跳解题流程。</p>
+<h2 id="ByteCTF"><a href="#ByteCTF" class="headerlink" title="ByteCTF"></a>ByteCTF</h2><h3 id="noise"><a href="#noise" class="headerlink" title="noise"></a>noise</h3><p>需要前置知识或了解：中国剩余定理</p>
+<p>task.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> urandom</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> choices</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">import</span> signal</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getrandbits</span><span class="params">(bit)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> int.from_bytes(urandom(bit &gt;&gt; <span class="number">3</span>), <span class="string">"big"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">proof_of_work</span><span class="params">()</span> -&gt; bool:</span></span><br><span class="line">    alphabet = string.ascii_letters + string.digits</span><br><span class="line">    nonce = <span class="string">""</span>.join(choices(alphabet, k=<span class="number">8</span>))</span><br><span class="line">    print(<span class="string">f'SHA256("<span class="subst">&#123;nonce&#125;</span>" + ?) starts with "00000"'</span>)</span><br><span class="line">    suffix = input().strip()</span><br><span class="line">    message = (nonce + suffix).encode(<span class="string">"Latin-1"</span>)</span><br><span class="line">    <span class="keyword">return</span> sha256(message).digest().hex().startswith(<span class="string">"00000"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    signal.alarm(<span class="number">60</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> proof_of_work():</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    secret = getrandbits(<span class="number">1024</span>)</span><br><span class="line">    print(<span class="string">"Listen...The secret iz...M2@9c0f*#aF()I!($Ud3;J..."</span></span><br><span class="line">          <span class="string">"Hello?...really noisy here again...God bless you get it..."</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">64</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            op = input().strip()</span><br><span class="line">            num = input().strip()</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> str.isnumeric(num):</span><br><span class="line">            print(<span class="string">"INVALID NUMBER"</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        num = int(num)</span><br><span class="line">        <span class="keyword">if</span> op == <span class="string">'god'</span>:</span><br><span class="line">            print(num * getrandbits(<span class="number">992</span>) % secret)</span><br><span class="line">        <span class="keyword">elif</span> op == <span class="string">'bless'</span>:</span><br><span class="line">            <span class="keyword">if</span> num == secret:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">                    <span class="keyword">from</span> flag <span class="keyword">import</span> FLAG</span><br><span class="line">                <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                    FLAG = <span class="string">"but something is error. Please contact the admin."</span></span><br><span class="line"></span><br><span class="line">                print(<span class="string">"CONGRATULATIONS %s"</span>%FLAG)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            print(<span class="string">"WRONG SECRET"</span>)</span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+
+<p>还好，第一题代码量不大，不错不错。看一看，这一题功能很简单，你输入一个数字，他返回给你一个，你的数字 乘上一个992bit的 随机数字  模上一个1024bit的secret 的结果。当然，每次连接上后生成的secret是随机的，但是连上一次，可以交互64次，此时secret是保持不变的。算上你需要一次交互来获取flag，那么就是需要在63次之内“猜”到这个随机生成的secret。</p>
+<p>好的，上式子，我们知道中国剩余定理是这样子的</p>
+<p>$m \equiv c_1 \pmod {n_1}$                                    $m = c_1+k_1n_1$</p>
+<p>$m \equiv c_2 \pmod {n_2}$            等价于            $m = c_2+k_2n_2$</p>
+<p>$m \equiv c_3 \pmod {n_3}$                                    $m = c_3+k_3n_3$                                                        </p>
+<p>注意这里的模是n，他们彼此互素，然后利用中国剩余定理就可以恢复m（如果m的bit位数小于所有n的bit位数之和的话）</p>
+<p>此时，如果k都等于1，那么，</p>
+<p>$m = c_1+n_1$                                $m = n_1+c_1$</p>
+<p>$m = c_2+n_2$            等价于        $m = n_2+c_2$        </p>
+<p>$m = c_3+n_3$                                $m = n_3+c_3$            </p>
+<p>此时n和c就好像等价了，并不能知道模数到底是哪个，换一个说法就是，n和c都可以看作是模数</p>
+<p>我们再回到这道题本身，设我们发送的值是$n_1,n_2,n_3$，secret为s，返回的值是$c_1,c_2,c_3$，</p>
+<p>那么就会有这么些式子</p>
+<p>$n_1 * randnum1  \equiv c_1 \pmod s = c_1+k_1s$</p>
+<p>$n_2 * randnum2  \equiv c_2 \pmod s= c_2+k_2s$</p>
+<p>$n_3 * randnum3  \equiv c_3 \pmod s= c_3+k_3s$</p>
+<p>此时如果k值都为1，再挪个位置，那么就有</p>
+<p>$s = n_1 * randnum1- c_1$</p>
+<p>$s = n_2* randnum2 - c_2$</p>
+<p>$s = n_3 * randnum3- c_3$</p>
+<p>此时如果我们式子两边去一个模$n_1,n_2,n_3$</p>
+<p>$s \equiv- c_1 \pmod{n_1}$</p>
+<p>$s \equiv- c_2 \pmod{n_2}$</p>
+<p>$s \equiv- c_3 \pmod{n_3}$</p>
+<p>这不就是中国剩余定理形式么？所以当等于1，我们就可以利用中国剩余定理来恢复这个secret</p>
+<p>需要满足的条件就是，$n*randnum = c+s$，还有就是n的bit位数之和要大于s的bit位数即1024</p>
+<p>当然，这就需要运气了，因为他远程生成的乘数是随机的992bit数字（当然是有可能会小于992bit的），而s是1024bit的数字，所以我们要发送的n大概就是32bit的素数，32*32=1024，所以在63次交互内我们需要服务器生成32个随机数是“好”的，所谓”好””就是要让这个k正好等于1。</p>
+<p>我们也可以先本地简单的测一测，可以选择比较小的数给他乘，这样子的k大概率会是0或者1，而0比较好判断，直接判断返回的值是否被我们发送过去的数整除就可以了。而是否正好等于1我们是无法判断的，但凡一组数据插入了一个让k不等于1或者0的数，那么整组数据就作废了。所以我们发送尽量小的数n，让k值大概率只落在0或者1上。</p>
+<p>测试代码：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from random import *</span><br><span class="line">primes = [<span class="number">4294966427</span>, <span class="number">4294966441</span>, <span class="number">4294966447</span>, <span class="number">4294966477</span>, <span class="number">4294966553</span>, <span class="number">4294966583</span>, <span class="number">4294966591</span>, <span class="number">4294966619</span>, <span class="number">4294966639</span>, <span class="number">4294966651</span>, <span class="number">4294966657</span>, <span class="number">4294966661</span>, <span class="number">4294966667</span>, <span class="number">4294966769</span>, <span class="number">4294966813</span>, <span class="number">4294966829</span>, <span class="number">4294966877</span>, <span class="number">4294966909</span>, <span class="number">4294966927</span>, <span class="number">4294966943</span>, <span class="number">4294966981</span>, <span class="number">4294966997</span>, <span class="number">4294967029</span>, <span class="number">4294967087</span>, <span class="number">4294967111</span>, <span class="number">4294967143</span>, <span class="number">4294967161</span>, <span class="number">4294967189</span>, <span class="number">4294967197</span>, <span class="number">4294967231</span>, <span class="number">4294967279</span>, <span class="number">4294967291</span>]</span><br><span class="line"></span><br><span class="line">for _ in range(<span class="number">20</span>):</span><br><span class="line">    secret = getrandbits(<span class="number">1024</span>)</span><br><span class="line">    for num in primes:</span><br><span class="line">            print(num * getrandbits(<span class="number">992</span>) // secret),</span><br><span class="line">    print</span><br></pre></td></tr></table></figure>
+
+<p>这里我们选择固定了随机数，然后经过20次的测试，下面是测试结果</p>
+<p><img src="https://i.loli.net/2020/12/17/l4VdMyeQmps7JPt.png" alt="image-20201102145925061"></p>
+<p>可以发现，生成的随机数似乎也具有一定程度的局部性，当k出现7，8这样比较大的数的时候，几乎整组的k都比较大，但大部分情况下，由于我们输入的素数比较小，还是只有0和1的情况偏多，但一般也是0偏多，所以，，看脸了，只要有一半以上的1，我们就成功了。</p>
+<h4 id="解题流程："><a href="#解题流程：" class="headerlink" title="解题流程："></a>解题流程：</h4><ol>
+<li>确定63个比较小的素数</li>
+<li>把这些值发送过去</li>
+<li>收到的值进行一个判断，是否被自己发过去的数整除，是就扔掉，否则就存起来</li>
+<li>存起来的数超过32个就可以进行CRT尝试恢复secret</li>
+<li>发送secret过去验证，要是没拿到flag就回到第2步，如此循环往复，加油吧，看你的脸了！</li>
+</ol>
+<p>exp：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">from hashlib import <span class="built_in">sha256</span></span><br><span class="line">from tqdm import tqdm</span><br><span class="line">from Crypto.Util.<span class="keyword">number</span> import *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def GCRT(mi, ai):</span><br><span class="line">    assert (isinstance(mi, <span class="keyword">list</span>) <span class="built_in">and</span> isinstance(ai, <span class="keyword">list</span>))</span><br><span class="line">    curm, cura = mi[<span class="number">0</span>], ai[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">m</span>, <span class="keyword">a</span>) in zip(mi[<span class="number">1</span>:], ai[<span class="number">1</span>:]):</span><br><span class="line">        d = <span class="keyword">int</span>(GCD(curm, <span class="keyword">m</span>))</span><br><span class="line">        <span class="keyword">c</span> = <span class="keyword">a</span> - cura</span><br><span class="line">        assert (<span class="keyword">c</span> % d == <span class="number">0</span>)</span><br><span class="line">        K = <span class="keyword">c</span> // d * inverse(curm // d, <span class="keyword">m</span> // d)</span><br><span class="line">        cura += curm * K</span><br><span class="line">        curm = curm * <span class="keyword">m</span> // d</span><br><span class="line">        cura %= curm</span><br><span class="line">    <span class="keyword">return</span> cura % curm, curm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def proof_of_work(<span class="keyword">sh</span>):</span><br><span class="line">    <span class="keyword">sh</span>.recvuntil(<span class="string">"SHA256(\""</span>)</span><br><span class="line">    nonce = <span class="keyword">sh</span>.recv(<span class="number">8</span>)</span><br><span class="line">    <span class="keyword">sh</span>.recvuntil(<span class="string">'with \"00000\"'</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="keyword">a</span> in tqdm(<span class="built_in">range</span>(<span class="number">0</span>x30, <span class="number">0</span>x7f)):</span><br><span class="line">        <span class="keyword">for</span> <span class="keyword">b</span> in <span class="built_in">range</span>(<span class="number">0</span>x30, <span class="number">0</span>x7f):</span><br><span class="line">            <span class="keyword">for</span> <span class="keyword">c</span> in <span class="built_in">range</span>(<span class="number">0</span>x30, <span class="number">0</span>x7f):</span><br><span class="line">                <span class="keyword">for</span> d in <span class="built_in">range</span>(<span class="number">0</span>x30, <span class="number">0</span>x7f):</span><br><span class="line">                    rest = chr(<span class="keyword">a</span>) + chr(<span class="keyword">b</span>) + chr(<span class="keyword">c</span>) + chr(d)</span><br><span class="line">                    <span class="keyword">m</span> = (nonce.decode(<span class="string">'latin1'</span>) + rest).encode(<span class="string">"Latin-1"</span>)</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">sha256</span>(<span class="keyword">m</span>).digest().hex().startswith(<span class="string">"00000"</span>):</span><br><span class="line">                        <span class="keyword">sh</span>.sendline(rest)</span><br><span class="line">                        <span class="keyword">sh</span>.recvuntil(<span class="string">'again...God bless you get it...'</span>)</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def io(<span class="keyword">sh</span>, num):</span><br><span class="line">    <span class="keyword">sh</span>.sendline(<span class="string">'god'</span>)</span><br><span class="line">    <span class="keyword">sh</span>.sendline(str(num))</span><br><span class="line">    tmp = <span class="keyword">sh</span>.recvuntil(<span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(tmp) &gt; <span class="number">100</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">int</span>(tmp)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">int</span>(<span class="keyword">sh</span>.recvuntil(<span class="string">'\n'</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">primes = [<span class="number">4294966427</span>, <span class="number">4294966441</span>, <span class="number">4294966447</span>, <span class="number">4294966477</span>, <span class="number">4294966553</span>, <span class="number">4294966583</span>, <span class="number">4294966591</span>, <span class="number">4294966619</span>, <span class="number">4294966639</span>, <span class="number">4294966651</span>, <span class="number">4294966657</span>, <span class="number">4294966661</span>, <span class="number">4294966667</span>, <span class="number">4294966769</span>, <span class="number">4294966813</span>, <span class="number">4294966829</span>, <span class="number">4294966877</span>, <span class="number">4294966909</span>, <span class="number">4294966927</span>, <span class="number">4294966943</span>, <span class="number">4294966981</span>, <span class="number">4294966997</span>, <span class="number">4294967029</span>, <span class="number">4294967087</span>, <span class="number">4294967111</span>, <span class="number">4294967143</span>, <span class="number">4294967161</span>, <span class="number">4294967189</span>, <span class="number">4294967197</span>, <span class="number">4294967231</span>, <span class="number">4294967279</span>, <span class="number">4294967291</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i in <span class="built_in">range</span>(<span class="number">2</span>**<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">sh</span> = remote(<span class="string">"182.92.153.117"</span>, <span class="number">30101</span>)</span><br><span class="line">    proof_of_work(<span class="keyword">sh</span>)</span><br><span class="line">    length = <span class="number">32</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">c</span> = []</span><br><span class="line">    <span class="built_in">index</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i in <span class="built_in">range</span>(<span class="number">63</span>):</span><br><span class="line">        tmp = io(<span class="keyword">sh</span>, primes[<span class="built_in">index</span>])</span><br><span class="line">        <span class="keyword">if</span> tmp%primes[<span class="built_in">index</span>] !=<span class="number">0</span>:		//这个判断是剔除<span class="keyword">k</span>等于<span class="number">0</span>的情况</span><br><span class="line">            <span class="keyword">c</span>.<span class="keyword">append</span>(-<span class="number">1</span> * tmp)</span><br><span class="line">            <span class="built_in">index</span> += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">index</span> &gt;= <span class="number">32</span>:		//如果超过<span class="number">32</span>个数的<span class="keyword">k</span>不等于<span class="number">0</span>，我们就可以拿来用了，但也不确定是否这<span class="number">32</span>个数都为<span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">index</span> &lt; <span class="number">32</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    secret = GCRT(primes, <span class="keyword">c</span>)[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">sh</span>.sendline(<span class="string">'bless'</span>)</span><br><span class="line">    <span class="keyword">sh</span>.sendline(str(secret))</span><br><span class="line">    tmp = <span class="keyword">sh</span>.recvuntil(<span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(tmp) &lt; <span class="number">5</span>:</span><br><span class="line">        tmp = <span class="keyword">sh</span>.recvuntil(<span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">b</span><span class="string">'WRONG'</span> in tmp:</span><br><span class="line">        <span class="keyword">sh</span>.<span class="keyword">close</span>()</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">print</span>(tmp)</span><br><span class="line">    <span class="keyword">sh</span>.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>比赛的时候大概跑了2min叭，运气还是可以的。</p>
+<h3 id="threshold"><a href="#threshold" class="headerlink" title="threshold"></a>threshold</h3><p>需要前置知识或了解：椭圆曲线相关性质</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br></pre></td><td class="code"><pre><span class="line">from gmssl import func, sm2</span><br><span class="line"><span class="comment">#from flag import FLAG</span></span><br><span class="line">flag=<span class="string">"Congratulations!"</span></span><br><span class="line">sm2p256v1_ecc_table = &#123;</span><br><span class="line">    <span class="string">'n'</span>: <span class="string">'FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFF7203DF6B21C6052B53BBF40939D54123'</span>,</span><br><span class="line">    <span class="string">'p'</span>: <span class="string">'FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF'</span>,</span><br><span class="line">    <span class="string">'g'</span>: <span class="string">'32c4ae2c1f1981195f9904466a39c9948fe30bbff2660be1715a4589334c74c7'</span> +</span><br><span class="line">         <span class="string">'bc3736a2f4f6779c59bdcee36b692153d0a9877cc62a474002df32e52139f0a0'</span>,</span><br><span class="line">    <span class="string">'a'</span>: <span class="string">'FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFC'</span>,</span><br><span class="line">    <span class="string">'b'</span>: <span class="string">'28E9FA9E9D9F5E344D5A9E4BCF6509A7F39789F515AB8F92DDBCBD414D940E93'</span>,</span><br><span class="line">&#125;</span><br><span class="line">n = <span class="string">'FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFF7203DF6B21C6052B53BBF40939D54123'</span></span><br><span class="line">G = <span class="string">'32c4ae2c1f1981195f9904466a39c9948fe30bbff2660be1715a4589334c74c7'</span> \</span><br><span class="line">    <span class="string">'bc3736a2f4f6779c59bdcee36b692153d0a9877cc62a474002df32e52139f0a0'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sign</span><span class="params">(tsm2)</span></span><span class="symbol">:</span></span><br><span class="line">    data = func.random_hex(len(n)) </span><br><span class="line">    k1_str = func.random_hex(len(n))</span><br><span class="line">    print(tsm2.send_p1(data, k1_str))</span><br><span class="line">    backdoor = input(<span class="string">'backdoor:'</span>).strip()</span><br><span class="line">    result = tsm2.output_p1(k1_str, backdoor)</span><br><span class="line">    print(result)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">verify</span><span class="params">(tsm2)</span></span><span class="symbol">:</span></span><br><span class="line">    message = input(<span class="string">'msg:'</span>).strip().encode().strip(b<span class="string">'\x00'</span>)</span><br><span class="line">    sign = input(<span class="string">'sign:'</span>).strip().encode().strip(b<span class="string">'\x00'</span>)</span><br><span class="line">    check = tsm2.verify(sign, message)</span><br><span class="line">    <span class="keyword">if</span> check is True <span class="keyword">and</span> message == b<span class="string">'Hello, Welcome to ByteCTF2020!'</span><span class="symbol">:</span></span><br><span class="line">        print(FLAG)</span><br><span class="line">    <span class="symbol">else:</span></span><br><span class="line">        print(check)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TSM2</span>(<span class="title">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(<span class="keyword">self</span>, sk)</span></span><span class="symbol">:</span></span><br><span class="line">        ecc_table = sm2p256v1_ecc_table</span><br><span class="line">        <span class="keyword">self</span>.ecc_table = ecc_table</span><br><span class="line">        <span class="keyword">self</span>.n = int(ecc_table[<span class="string">'n'</span>], <span class="number">16</span>)</span><br><span class="line">        <span class="keyword">self</span>.para_len = len(ecc_table[<span class="string">'n'</span>])</span><br><span class="line">        <span class="keyword">self</span>.ecc_a3 = (int(ecc_table[<span class="string">'a'</span>], base=<span class="number">16</span>) + <span class="number">3</span>) % int(ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">self</span>.sk = int(sk, <span class="number">16</span>)</span><br><span class="line">        <span class="keyword">self</span>.pk = <span class="keyword">self</span>._kg(<span class="keyword">self</span>.sk, ecc_table[<span class="string">'g'</span>])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.sks = int(func.random_hex(<span class="keyword">self</span>.para_len), <span class="number">16</span>)</span><br><span class="line">        <span class="keyword">self</span>.pks = pow((<span class="keyword">self</span>.sk + <span class="number">1</span>) * <span class="keyword">self</span>.sks, <span class="keyword">self</span>.n - <span class="number">2</span>, <span class="keyword">self</span>.n) % <span class="keyword">self</span>.n</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">send_p1</span><span class="params">(<span class="keyword">self</span>, data, k1_str)</span></span><span class="symbol">:</span></span><br><span class="line">        e = int(data, <span class="number">16</span>)</span><br><span class="line">        k1 = int(k1_str, <span class="number">16</span>)</span><br><span class="line">        k1 = k1 % <span class="keyword">self</span>.n</span><br><span class="line">        R1 = <span class="keyword">self</span>._kg(k1, <span class="keyword">self</span>.ecc_table[<span class="string">'g'</span>]) </span><br><span class="line">        <span class="keyword">return</span> <span class="string">'%064x%0128s'</span> % (e, R1) </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">output_p1</span><span class="params">(<span class="keyword">self</span>, k1_str, r_s2_s3)</span></span><span class="symbol">:</span></span><br><span class="line">        r = int(r_s2_s3[<span class="number">0</span><span class="symbol">:self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">        s2 = int(r_s2_s3[<span class="keyword">self</span>.<span class="symbol">para_len:</span><span class="number">2</span> * <span class="keyword">self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">        s3 = int(r_s2_s3[<span class="number">2</span> * <span class="keyword">self</span>.<span class="symbol">para_len:</span>], <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">        k1 = int(k1_str, <span class="number">16</span>)</span><br><span class="line">        d1 = <span class="keyword">self</span>.sks、</span><br><span class="line">        s = (d1 * k1 * s2 + d1 * s3 - r) % <span class="keyword">self</span>.n </span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">0</span> <span class="keyword">or</span> s == (<span class="keyword">self</span>.n - r)<span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> None</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'%064x%064x'</span> % (r, s)  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">verify</span><span class="params">(<span class="keyword">self</span>, Sign, data)</span></span><span class="symbol">:</span></span><br><span class="line">        r = int(Sign[<span class="number">0</span><span class="symbol">:self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">        s = int(Sign[<span class="keyword">self</span>.<span class="symbol">para_len:</span><span class="number">2</span> * <span class="keyword">self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">        e = int(data.hex(), <span class="number">16</span>)</span><br><span class="line">        t = (r + s) % <span class="keyword">self</span>.n</span><br><span class="line">        <span class="keyword">if</span> t == <span class="number">0</span><span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        P1 = <span class="keyword">self</span>._kg(s, <span class="keyword">self</span>.ecc_table[<span class="string">'g'</span>])</span><br><span class="line">        P2 = <span class="keyword">self</span>._kg(t, <span class="keyword">self</span>.pk)、</span><br><span class="line">        <span class="keyword">if</span> P1 == <span class="symbol">P2:</span></span><br><span class="line">            P1 = <span class="string">'%s%s'</span> % (P1, <span class="number">1</span>)</span><br><span class="line">            P1 = <span class="keyword">self</span>._double_point(P1)</span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            P1 = <span class="string">'%s%s'</span> % (P1, <span class="number">1</span>)</span><br><span class="line">            P1 = <span class="keyword">self</span>._add_point(P1, P2)</span><br><span class="line">            P1 = <span class="keyword">self</span>._convert_jacb_to_nor(P1)</span><br><span class="line"></span><br><span class="line">        x = int(P1[<span class="number">0</span><span class="symbol">:self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">        <span class="keyword">return</span> r == ((e + x) % <span class="keyword">self</span>.n)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_kg</span><span class="params">(<span class="keyword">self</span>, k, Point)</span></span>: </span><br><span class="line">        <span class="keyword">if</span> (k % <span class="keyword">self</span>.n) == <span class="number">0</span><span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">'0'</span> * <span class="number">128</span></span><br><span class="line">        Point = <span class="string">'%s%s'</span> % (Point, <span class="string">'1'</span>)</span><br><span class="line">        mask_str = <span class="string">'8'</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="keyword">self</span>.para_len - <span class="number">1</span>)<span class="symbol">:</span></span><br><span class="line">            mask_str += <span class="string">'0'</span></span><br><span class="line">        mask = int(mask_str, <span class="number">16</span>)</span><br><span class="line">        Temp = Point</span><br><span class="line">        flag = False</span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="keyword">self</span>.para_len * <span class="number">4</span>)<span class="symbol">:</span></span><br><span class="line">            <span class="keyword">if</span> <span class="symbol">flag:</span></span><br><span class="line">                Temp = <span class="keyword">self</span>._double_point(Temp)</span><br><span class="line">            <span class="keyword">if</span> (k &amp; mask) != <span class="number">0</span><span class="symbol">:</span></span><br><span class="line">                <span class="keyword">if</span> <span class="symbol">flag:</span></span><br><span class="line">                    Temp = <span class="keyword">self</span>._add_point(Temp, Point)</span><br><span class="line">                <span class="symbol">else:</span></span><br><span class="line">                    flag = True</span><br><span class="line">                    Temp = Point</span><br><span class="line">            k = k &lt;&lt; <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>._convert_jacb_to_nor(Temp)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_double_point</span><span class="params">(<span class="keyword">self</span>, Point)</span></span>: </span><br><span class="line">        l = len(Point)</span><br><span class="line">        len_2 = <span class="number">2</span> * <span class="keyword">self</span>.para_len</span><br><span class="line">        <span class="keyword">if</span> l &lt; <span class="keyword">self</span>.para_len * <span class="number">2</span><span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> None</span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            x1 = int(Point[<span class="number">0</span><span class="symbol">:self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">            y1 = int(Point[<span class="keyword">self</span>.<span class="symbol">para_len:</span>len_2], <span class="number">16</span>)</span><br><span class="line">            <span class="keyword">if</span> l == <span class="symbol">len_2:</span></span><br><span class="line">                z1 = <span class="number">1</span></span><br><span class="line">            <span class="symbol">else:</span></span><br><span class="line">                z1 = int(Point[<span class="symbol">len_2:</span>], <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">            T6 = (z1 * z1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T2 = (y1 * y1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T3 = (x1 + T6) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T4 = (x1 - T6) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T1 = (T3 * T4) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T3 = (y1 * z1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T4 = (T2 * <span class="number">8</span>) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T5 = (x1 * T4) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T1 = (T1 * <span class="number">3</span>) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T6 = (T6 * T6) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T6 = (<span class="keyword">self</span>.ecc_a3 * T6) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T1 = (T1 + T6) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            z3 = (T3 + T3) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T3 = (T1 * T1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T2 = (T2 * T4) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            x3 = (T3 - T5) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (T5 % <span class="number">2</span>) == <span class="number">1</span><span class="symbol">:</span></span><br><span class="line">                T4 = (T5 + ((T5 + int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)) <span class="meta">&gt;&gt; </span><span class="number">1</span>) - T3) % int(self.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            <span class="symbol">else:</span></span><br><span class="line">                T4 = (T5 + (T5 <span class="meta">&gt;&gt; </span><span class="number">1</span>) - T3) % int(self.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">            T1 = (T1 * T4) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            y3 = (T1 - T2) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">            form = <span class="string">'%%0%dx'</span> % <span class="keyword">self</span>.para_len</span><br><span class="line">            form = form * <span class="number">3</span></span><br><span class="line">            <span class="keyword">return</span> form % (x3, y3, z3)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_add_point</span><span class="params">(<span class="keyword">self</span>, P1, P2)</span></span>: </span><br><span class="line">        <span class="keyword">if</span> P1 == <span class="string">'0'</span> * <span class="number">128</span><span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">'%s%s'</span> % (P2, <span class="string">'1'</span>)</span><br><span class="line">        <span class="keyword">if</span> P2 == <span class="string">'0'</span> * <span class="number">128</span><span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">'%s%s'</span> % (P1, <span class="string">'1'</span>)</span><br><span class="line">        len_2 = <span class="number">2</span> * <span class="keyword">self</span>.para_len</span><br><span class="line">        l1 = len(P1)</span><br><span class="line">        l2 = len(P2)</span><br><span class="line">        <span class="keyword">if</span> (l1 &lt; len_2) <span class="keyword">or</span> (l2 &lt; len_2)<span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> None</span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            X1 = int(P1[<span class="number">0</span><span class="symbol">:self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">            Y1 = int(P1[<span class="keyword">self</span>.<span class="symbol">para_len:</span>len_2], <span class="number">16</span>)</span><br><span class="line">            <span class="keyword">if</span> l1 == <span class="symbol">len_2:</span></span><br><span class="line">                Z1 = <span class="number">1</span></span><br><span class="line">            <span class="symbol">else:</span></span><br><span class="line">                Z1 = int(P1[<span class="symbol">len_2:</span>], <span class="number">16</span>)</span><br><span class="line">            x2 = int(P2[<span class="number">0</span><span class="symbol">:self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">            y2 = int(P2[<span class="keyword">self</span>.<span class="symbol">para_len:</span>len_2], <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">            T1 = (Z1 * Z1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T2 = (y2 * Z1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T3 = (x2 * T1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T1 = (T1 * T2) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T2 = (T3 - X1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T3 = (T3 + X1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T4 = (T2 * T2) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T1 = (T1 - Y1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            Z3 = (Z1 * T2) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T2 = (T2 * T4) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T3 = (T3 * T4) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T5 = (T1 * T1) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T4 = (X1 * T4) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            X3 = (T5 - T3) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T2 = (Y1 * T2) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T3 = (T4 - X3) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            T1 = (T1 * T3) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">            Y3 = (T1 - T2) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">            form = <span class="string">'%%0%dx'</span> % <span class="keyword">self</span>.para_len</span><br><span class="line">            form = form * <span class="number">3</span></span><br><span class="line">            <span class="keyword">return</span> form % (X3, Y3, Z3)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_convert_jacb_to_nor</span><span class="params">(<span class="keyword">self</span>, Point)</span></span>: </span><br><span class="line">        len_2 = <span class="number">2</span> * <span class="keyword">self</span>.para_len</span><br><span class="line">        x = int(Point[<span class="number">0</span><span class="symbol">:self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">        y = int(Point[<span class="keyword">self</span>.<span class="symbol">para_len:</span>len_2], <span class="number">16</span>)</span><br><span class="line">        z = int(Point[<span class="symbol">len_2:</span>], <span class="number">16</span>)</span><br><span class="line">        z_inv = pow(z, int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>) - <span class="number">2</span>, int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>))</span><br><span class="line">        z_invSquar = (z_inv * z_inv) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">        z_invQube = (z_invSquar * z_inv) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">        x_new = (x * z_invSquar) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">        y_new = (y * z_invQube) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">        z_new = (z * z_inv) % int(<span class="keyword">self</span>.ecc_table[<span class="string">'p'</span>], base=<span class="number">16</span>)</span><br><span class="line">        <span class="keyword">if</span> z_new == <span class="number">1</span><span class="symbol">:</span></span><br><span class="line">            form = <span class="string">'%%0%dx'</span> % <span class="keyword">self</span>.para_len</span><br><span class="line">            form = form * <span class="number">2</span></span><br><span class="line">            <span class="keyword">return</span> form % (x_new, y_new)</span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            <span class="keyword">return</span> None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name_<span class="number">_</span> == <span class="string">'__main__'</span><span class="symbol">:</span></span><br><span class="line">    sk = func.random_hex(len(sm2p256v1_ecc_table[<span class="string">'n'</span>]))</span><br><span class="line">    tsm2 = TSM2(sk)</span><br><span class="line">    print(<span class="string">'pk:%s'</span>   %tsm2.pk)</span><br><span class="line">    print(<span class="string">'pks:%064x'</span>%tsm2.pks)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)<span class="symbol">:</span></span><br><span class="line">        op = input(<span class="string">'op: '</span>).strip()</span><br><span class="line">        <span class="keyword">if</span> op == <span class="string">'sign'</span><span class="symbol">:</span></span><br><span class="line">            sign(tsm2)</span><br><span class="line">        elif op == <span class="string">'verify'</span><span class="symbol">:</span></span><br><span class="line">            verify(tsm2)</span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            print(<span class="string">""</span><span class="string">"sign: sign message</span></span><br><span class="line"><span class="string">verify: verify message"</span><span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+
+<p>啊，这第二题画风就突变，好长的代码，让人失去欲望。但其实呢，大部分都是对sm2的一个实现，其实不用细究。这里我们就直接先提取关键部分，一步一步来啦。</p>
+<p>首先最上面的</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def <span class="keyword">sign</span>(tsm2):</span><br><span class="line">    data = func.random_hex(<span class="built_in">len</span>(n)) </span><br><span class="line">    k1_str = func.random_hex(<span class="built_in">len</span>(n))</span><br><span class="line">    <span class="keyword">print</span>(tsm2.send_p1(data, k1_str))</span><br><span class="line">    backdoor = <span class="built_in">input</span>(<span class="string">'backdoor:'</span>).strip()</span><br><span class="line">    result = tsm2.output_p1(k1_str, backdoor)</span><br><span class="line">    <span class="keyword">print</span>(result)</span><br><span class="line"></span><br><span class="line">def verify(tsm2):</span><br><span class="line">    message = <span class="built_in">input</span>(<span class="string">'msg:'</span>).strip().encode().strip(<span class="keyword">b</span><span class="string">'\x00'</span>)</span><br><span class="line">    <span class="keyword">sign</span> = <span class="built_in">input</span>(<span class="string">'sign:'</span>).strip().encode().strip(<span class="keyword">b</span><span class="string">'\x00'</span>)</span><br><span class="line">    check = tsm2.verify(<span class="keyword">sign</span>, message)</span><br><span class="line">    <span class="keyword">if</span> check <span class="keyword">is</span> True <span class="built_in">and</span> message == <span class="keyword">b</span><span class="string">'Hello, Welcome to ByteCTF2020!'</span>:</span><br><span class="line">        <span class="keyword">print</span>(FLAG)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">print</span>(check)</span><br></pre></td></tr></table></figure>
+
+<p>俩功能，一个是注册，一个是验证，获取flag的地方就是这个验证，他要求你对message进行一个签名，而message要求是b’Hello, Welcome to ByteCTF2020!’</p>
+<p>好的，那我们看看咋样才能给这个message签上名，去找找签名的验证函数。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">def</span> verify(<span class="keyword">self, </span>Sign, <span class="meta">data</span>):</span><br><span class="line">    r = int(Sign[<span class="number">0</span>:<span class="keyword">self.para_len], </span><span class="number">16</span>)</span><br><span class="line">    s = int(Sign[<span class="keyword">self.para_len:2 </span>* <span class="keyword">self.para_len], </span><span class="number">16</span>)</span><br><span class="line">    e = int(<span class="meta">data</span>.hex(), <span class="number">16</span>)</span><br><span class="line">    t = (r + s) % <span class="keyword">self.n</span></span><br><span class="line"><span class="keyword"> </span>   <span class="meta">if</span> t == <span class="number">0</span>:</span><br><span class="line">        return <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">P1</span> = <span class="keyword">self._kg(s, </span><span class="keyword">self.ecc_table['g'])</span></span><br><span class="line"><span class="keyword"> </span>   <span class="built_in">P2</span> = <span class="keyword">self._kg(t, </span><span class="keyword">self.pk)</span></span><br><span class="line"><span class="keyword"> </span>   <span class="meta">if</span> <span class="built_in">P1</span> == <span class="built_in">P2</span>:</span><br><span class="line">        <span class="built_in">P1</span> = <span class="string">'%s%s'</span> % (<span class="built_in">P1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">P1</span> = <span class="keyword">self._double_point(P1)</span></span><br><span class="line"><span class="keyword"> </span>   <span class="meta">else</span>:</span><br><span class="line">        <span class="built_in">P1</span> = <span class="string">'%s%s'</span> % (<span class="built_in">P1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">P1</span> = <span class="keyword">self._add_point(P1, </span><span class="built_in">P2</span>)</span><br><span class="line">        <span class="built_in">P1</span> = <span class="keyword">self._convert_jacb_to_nor(P1)</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"> </span>   x = int(<span class="built_in">P1</span>[<span class="number">0</span>:<span class="keyword">self.para_len], </span><span class="number">16</span>)</span><br><span class="line">    return r == ((e + x) % <span class="keyword">self.n)</span></span><br></pre></td></tr></table></figure>
+
+<p>这个验证函数有三个输入：r，s，e，然后这里有一个self._kg ，这个其实就是一个椭圆曲线上的一个乘法，所以P1 = s * g，g是椭圆曲线上的一个基点，P2 = t * pk ，代码前头有对pk的定义 <code>self.pk = self._kg(self.sk, ecc_table[&#39;g&#39;])</code>,所以就是P2 = ((r+s)%n) * sk * g，接下来的操作不难看出，这里就是两个点相加，这里可以print出来看一下输出，是一个点的坐标的十六进制表示的字符串的拼接，x就是这个点的x坐标。最后是一个判断 r == ((e + x) % self.n)</p>
+<p>首先e是固定的 b’Hello, Welcome to ByteCTF2020!’。我们能操作的就是r和s了，x是一个算出来的坐标，为了让这个判断成立，我们就需要构造我们的输入r，为了构造r得提前算出P1的x坐标，而P1=P1+P2 = s * g + ((r + s)%n) * sk * g。乍一看我们好像陷入了死锁。这里头怎么又出现了r？</p>
+<p>换个思路想想，虽然这里的P1是后来根据我们的输入算出来的，但其实我们也可以先固定这个P1。最后再精心构造一下输入，让他正好算出来是这个P1，</p>
+<p>所以假设我们已经知道最后的点P1了，就当他是2g好了，这样我们就可以算出x了，有了x，那么r也就固定下来了，那我们就就只需要构造s让它算出这个P1点了。</p>
+<p>我们知道，虽然椭圆曲线的加法和乘法不同于普通的四则运算，但是一些运算法则还是适用的，比如分配律、交换律这些，所以式子：P1=P1+P2 = s * g + ((r + s)%n) * sk * g 可以做一些变形，我们已经知道P1=2g了，外加这条曲线的阶是n（我承认我有赌的成分），所以有</p>
+<p>$2*g \equiv  s * g + (r + s) * sk * g \pmod n$</p>
+<p>$2 \equiv  s + (r+s)* sk \pmod n$</p>
+<p>$2 \equiv s*(sk+1) + r *sk  \pmod n$</p>
+<p>$s \equiv (2 -r*sk) *( sk+1)^{-1} \pmod n$</p>
+<p>其中r确定了，n确定了，只剩sk了，而sk其实也就是相当于这条椭圆曲线的私钥</p>
+<p>这是我们得回过头来看最初的sign函数了</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def sign(tsm2):</span><br><span class="line">    data = <span class="function"><span class="keyword">func</span>.<span class="title">random_hex</span><span class="params">(len<span class="params">(n)</span></span></span>) </span><br><span class="line">    k1_str = <span class="function"><span class="keyword">func</span>.<span class="title">random_hex</span><span class="params">(len<span class="params">(n)</span></span></span>)</span><br><span class="line">    <span class="built_in">print</span>(tsm2.send_p1(data, k1_str))</span><br><span class="line">    backdoor = input('backdoor:').strip()</span><br><span class="line">    result = tsm2.output_p1(k1_str, backdoor)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+
+<p>不能再明显了，backdoor都写给你了，显然是要利用这里来整到sk，</p>
+<p>data和k1_str都是不可控的随机数，</p>
+<p>然后print了send_p1函数的输出，</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_p1</span><span class="params">(<span class="keyword">self</span>, data, k1_str)</span></span><span class="symbol">:</span></span><br><span class="line">        e = int(data, <span class="number">16</span>)</span><br><span class="line">        k1 = int(k1_str, <span class="number">16</span>)</span><br><span class="line">        k1 = k1 % <span class="keyword">self</span>.n</span><br><span class="line">        R1 = <span class="keyword">self</span>._kg(k1, <span class="keyword">self</span>.ecc_table[<span class="string">'g'</span>]) </span><br><span class="line">        <span class="keyword">return</span> <span class="string">'%064x%0128s'</span> % (e, R1)</span><br></pre></td></tr></table></figure>
+
+<p>给的是data和一个R1，R1是k1 * g，是一个曲线上的点，好像没啥用啊，继续看</p>
+<p>拿到我们的输入后，程序把k1_str和我们的输入传给了output_p1并给了输出</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def output_p1(<span class="keyword">self</span>, k1_str, r_s2_s3):</span><br><span class="line">        r = <span class="keyword">int</span>(r_s2_s3[<span class="number">0</span>:<span class="keyword">self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">        s2 = <span class="keyword">int</span>(r_s2_s3[<span class="keyword">self</span>.para_len:<span class="number">2</span> * <span class="keyword">self</span>.para_len], <span class="number">16</span>)</span><br><span class="line">        s3 = <span class="keyword">int</span>(r_s2_s3[<span class="number">2</span> * <span class="keyword">self</span>.para_len:], <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">        k1 = <span class="keyword">int</span>(k1_str, <span class="number">16</span>)</span><br><span class="line">        d1 = <span class="keyword">self</span>.sks</span><br><span class="line">        s = (d1 * k1 * s2 + d1 * s3 - r) % <span class="keyword">self</span>.n </span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">0</span> <span class="keyword">or</span> s == (<span class="keyword">self</span>.n - r):</span><br><span class="line">            <span class="keyword">return</span> None</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'%064x%064x'</span> % (r, s)</span><br></pre></td></tr></table></figure>
+
+<p>给的是r和s，只要s不等于0，s+r不等于n，</p>
+<p>其中我们的输入应该是96字节的，分为三段，代表r，s2，s3，</p>
+<p>k1是就是k1_str的整型，程序之前生成的，d1是self.sks，这在代码里头是<code>self.sks = int(func.random_hex(self.para_len), 16)</code>也是一个随机数，但是它和sk跟pks有点关系：<code>self.pks = pow((self.sk + 1) * self.sks, self.n - 2, self.n) % self.n</code></p>
+<p>之所以扯到pks，因为程序一进去他就把这个值给我们了啊</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    sk = func.random_hex(len(sm2p256v1_ecc_table[<span class="string">'n'</span>]))</span><br><span class="line">    tsm2 = TSM2(sk)</span><br><span class="line">    <span class="keyword">print</span>(<span class="string">'pk:%s'</span>   %tsm2.pk)</span><br><span class="line">    <span class="keyword">print</span>(<span class="string">'pks:%064x'</span>%tsm2.pks)</span><br></pre></td></tr></table></figure>
+
+<p>根据pks的生成式子，其中除了sk和sks我们都知道，</p>
+<p>所以我们应该就是要利用这个pks，sks来恢复这个sk，但是怎么获得这个sks 也即 d1 呢，</p>
+<p><code>s = (d1 * k1 * s2 + d1 * s3 - r) % self.n</code></p>
+<p>让s2=0，s3=1，r=0，这样就能得到 s = d1 % n了</p>
+<p>显然d1 &lt; n ，故s = d1，并且 d1 + r != n，故能返回。</p>
+<p>那么至此，利用链就全了。</p>
+<h4 id="解题流程"><a href="#解题流程" class="headerlink" title="解题流程"></a>解题流程</h4><p>所以这道题的整个解题流程：</p>
+<ol>
+<li><p>构造backdoor = 191 * ‘0’ + ‘1’ 来获取sks，</p>
+</li>
+<li><p>利用pks来获取sk，</p>
+</li>
+<li><p>随便在曲线上取一个点，计算x，根据e来固定r</p>
+</li>
+<li><p>计算$s \equiv (2 -r*sk) *( sk+1)^{-1} \pmod n$</p>
+</li>
+<li><p>传入r，s，e，获取flag</p>
+</li>
+</ol>
+<p>exp</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">from gmssl import func, sm2</span><br><span class="line">from Crypto.Util.<span class="keyword">number</span> import *</span><br><span class="line"></span><br><span class="line">from TSM2 import *</span><br><span class="line"></span><br><span class="line">sk = func.random_hex(<span class="built_in">len</span>(sm2p256v1_ecc_table[<span class="string">'n'</span>]))</span><br><span class="line">tsm2 = TSM2(sk)</span><br><span class="line">from pwn import *</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"><span class="keyword">sh</span>=remote(<span class="string">"182.92.215.134"</span>,<span class="string">"30103"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"pk:"</span>)</span><br><span class="line">pk =<span class="keyword">int</span>(<span class="keyword">sh</span>.recvuntil(<span class="string">"\n"</span>)[:-<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"pks:"</span>)</span><br><span class="line">pks=<span class="keyword">int</span>(<span class="keyword">sh</span>.recvuntil(<span class="string">"\n"</span>)[:-<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">tsm2.pks=pks</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"op:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"sign"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"backdoor:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"0"</span>*<span class="number">191</span>+<span class="string">"1"</span>)</span><br><span class="line">sks = <span class="keyword">int</span>(<span class="keyword">sh</span>.recvuntil(<span class="string">"\n"</span>)[:-<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">tsm2.sks=sks</span><br><span class="line">tmp = inverse(tsm2.pks,tsm2.n)</span><br><span class="line">tsm2.sk=tmp*inverse(tsm2.sks,tsm2.n)%tsm2.n-<span class="number">1</span></span><br><span class="line">tsm2.pk = tsm2._kg(tsm2.sk, tsm2.ecc_table[<span class="string">'g'</span>])</span><br><span class="line">assert <span class="keyword">int</span>(tsm2.pk,<span class="number">16</span>)==pk</span><br><span class="line"><span class="keyword">print</span>(tsm2.sk)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"op:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"verify"</span>)</span><br><span class="line"><span class="keyword">e</span>=bytes_to_long(<span class="keyword">b</span><span class="string">'Hello, Welcome to ByteCTF2020!'</span>)</span><br><span class="line"><span class="keyword">b</span> = <span class="number">2</span></span><br><span class="line">B = tsm2._kg(<span class="keyword">b</span>, tsm2.ecc_table[<span class="string">'g'</span>])</span><br><span class="line"><span class="keyword">x</span> = <span class="keyword">int</span>(B[<span class="number">0</span>:tsm2.para_len], <span class="number">16</span>)</span><br><span class="line">r = ((<span class="keyword">e</span> + <span class="keyword">x</span>) % tsm2.n)</span><br><span class="line">#b = s + (s+r)*sk</span><br><span class="line">#b = s*(<span class="number">1</span>+sk) + r*sk</span><br><span class="line">#b - r*sk</span><br><span class="line">n=<span class="number">0</span>xFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFF7203DF6B21C6052B53BBF40939D54123</span><br><span class="line"><span class="keyword">print</span>(tsm2.sk,)</span><br><span class="line">s = (<span class="keyword">b</span> - r*tsm2.sk)*inverse(<span class="number">1</span>+tsm2.sk,n)%n</span><br><span class="line"><span class="keyword">sign</span> = <span class="string">'%064x%064x'</span> % (r, s)</span><br><span class="line"><span class="keyword">print</span>(<span class="keyword">sign</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"msg:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"Hello, Welcome to ByteCTF2020!"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"sign:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="keyword">sign</span>)</span><br><span class="line"><span class="keyword">sh</span>.interactive()</span><br></pre></td></tr></table></figure>
+
+<h2 id="X-NUCA"><a href="#X-NUCA" class="headerlink" title="X-NUCA"></a>X-NUCA</h2><h3 id="weird"><a href="#weird" class="headerlink" title="weird"></a>weird</h3><p>需要前置知识或了解：奇异爱德华曲线</p>
+<p>可参考资料：<a href="https://learnblockchain.cn/article/1627" target="_blank" rel="noopener">https://learnblockchain.cn/article/1627</a></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env sage</span><br><span class="line">from secret import FLAG</span><br><span class="line">assert FLAG.startswith(<span class="keyword">b</span><span class="string">"X-NUCA&#123;"</span>) <span class="built_in">and</span> FLAG.endswith(<span class="keyword">b</span><span class="string">"&#125;"</span>)</span><br><span class="line"></span><br><span class="line">def key_gen(bits):</span><br><span class="line">    <span class="keyword">while</span> True:</span><br><span class="line">        <span class="keyword">p</span> = random_prime(<span class="number">2</span>**bits)</span><br><span class="line">        q = random_prime(<span class="number">2</span>**bits)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">p</span> % <span class="number">4</span> == <span class="number">3</span> <span class="built_in">and</span> q % <span class="number">4</span> == <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">p</span> &lt; q:</span><br><span class="line">        <span class="keyword">p</span>, q = q, <span class="keyword">p</span></span><br><span class="line">    <span class="keyword">N</span> = <span class="keyword">p</span> * q</span><br><span class="line">    <span class="keyword">while</span> True:</span><br><span class="line">        <span class="keyword">x</span> = getrandbits(bits // <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">y</span> = getrandbits(bits // <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> gcd(<span class="keyword">x</span>, <span class="keyword">y</span>) == <span class="number">1</span> <span class="built_in">and</span> (<span class="keyword">x</span> * <span class="keyword">y</span>) &lt; (<span class="keyword">int</span>(<span class="built_in">sqrt</span>(<span class="number">2</span> * <span class="keyword">N</span>)) // <span class="number">12</span>):</span><br><span class="line">            <span class="keyword">e</span> = randint( <span class="keyword">int</span>(((<span class="keyword">p</span> + <span class="number">1</span>) * (q + <span class="number">1</span>) * <span class="number">3</span> * (<span class="keyword">p</span> + q) - (<span class="keyword">p</span> - q) * <span class="keyword">int</span>(<span class="keyword">N</span>**<span class="number">0.21</span>)) * <span class="keyword">y</span> / (<span class="keyword">x</span> * <span class="number">3</span> * (<span class="keyword">p</span> + q))), <span class="keyword">int</span>(((<span class="keyword">p</span> + <span class="number">1</span>) * (q + <span class="number">1</span>) * <span class="number">3</span> * (<span class="keyword">p</span> + q) + (<span class="keyword">p</span> - q) * <span class="keyword">int</span>(<span class="keyword">N</span>**<span class="number">0.21</span>)) * <span class="keyword">y</span> / (<span class="keyword">x</span> * <span class="number">3</span> * (<span class="keyword">p</span> + q))) )</span><br><span class="line">            <span class="keyword">if</span> gcd(<span class="keyword">e</span>, (<span class="keyword">p</span> + <span class="number">1</span>) * (q + <span class="number">1</span>)) == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">k</span> = inverse_mod(<span class="keyword">e</span>, (<span class="keyword">p</span> + <span class="number">1</span>) * (q + <span class="number">1</span>))</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">N</span>, <span class="keyword">e</span>, <span class="keyword">k</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    bits = <span class="number">1024</span></span><br><span class="line">    <span class="keyword">N</span>, <span class="keyword">e</span>, _ = key_gen(bits)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">pt</span> = (<span class="keyword">int</span>.from_bytes(FLAG[:<span class="number">32</span>], <span class="string">'big'</span>), <span class="keyword">int</span>.from_bytes(FLAG[<span class="number">32</span>:], <span class="string">'big'</span>))</span><br><span class="line">    ct = (<span class="number">0</span>, <span class="number">1</span>)    </span><br><span class="line">    d = (((<span class="keyword">pt</span>[<span class="number">1</span>])**<span class="number">2</span> - <span class="number">1</span>) * inverse_mod(((<span class="keyword">pt</span>[<span class="number">1</span>])**<span class="number">2</span> + <span class="number">1</span>) * (<span class="keyword">pt</span>[<span class="number">0</span>])**<span class="number">2</span>, <span class="keyword">N</span>)) % <span class="keyword">N</span></span><br><span class="line">    </span><br><span class="line">    # <span class="number">2000</span> years <span class="keyword">later</span>...:)</span><br><span class="line">    <span class="keyword">for</span> _ in <span class="built_in">range</span>(<span class="keyword">e</span>):</span><br><span class="line">        ct = ( <span class="keyword">int</span>((ct[<span class="number">0</span>] * <span class="keyword">pt</span>[<span class="number">1</span>] + ct[<span class="number">1</span>] * <span class="keyword">pt</span>[<span class="number">0</span>]) * inverse_mod(<span class="number">1</span> + d * ct[<span class="number">0</span>] * <span class="keyword">pt</span>[<span class="number">0</span>] * ct[<span class="number">1</span>] * <span class="keyword">pt</span>[<span class="number">1</span>], <span class="keyword">N</span>) % <span class="keyword">N</span>), <span class="keyword">int</span>((ct[<span class="number">1</span>] * <span class="keyword">pt</span>[<span class="number">1</span>] + d * ct[<span class="number">0</span>] * <span class="keyword">pt</span>[<span class="number">0</span>]) * inverse_mod(<span class="number">1</span> - d * ct[<span class="number">0</span>] * <span class="keyword">pt</span>[<span class="number">0</span>] * ct[<span class="number">1</span>] * <span class="keyword">pt</span>[<span class="number">1</span>], <span class="keyword">N</span>) % <span class="keyword">N</span>) )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">f</span> = <span class="keyword">open</span>(<span class="string">"output.txt"</span>, <span class="string">"wb"</span>)</span><br><span class="line">    <span class="keyword">f</span>.<span class="keyword">write</span>(str((<span class="keyword">e</span>, <span class="keyword">N</span>)).encode() + <span class="keyword">b</span><span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">f</span>.<span class="keyword">write</span>(str(ct).encode())</span><br><span class="line">    <span class="keyword">f</span>.<span class="keyword">close</span>()</span><br></pre></td></tr></table></figure>
+
+<p>好的，第一题代码量不多，不错不错（嗯？似曾相识，危。。）首先看看他的功能，加密方式是把flag拆成了左右两份，组成一个数对，然后做了e次的操作，得到一个ct数对。这里的e次操作其实就是一个奇异爱德华曲线的一个乘法操作。（题目名不就是weird么？）所以有了e作为加密的公钥，我们自然就要找私钥d，而私钥d，（我承认我有赌的成分）d=inverse(e,(p+1) * (q+1))，（曾经在一篇paper里看到过一眼，虽然用的并非奇异爱德华曲线）</p>
+<p><img src="https://i.loli.net/2020/12/17/CDvyNE26ImwhYZA.png" alt="image-20201102183336623"></p>
+<p>其中p，q是大数N的一个分解。这里阶的确定不是很严格，但先试试啦。那么要这么试的话就要分解N，那就要看到这个keygen的过程了，这里p，q的生成有一点点小要求，然后就是这个e的生成，为了生成这个e，还特意整了个x，y。最后要求gcd(e, (p+1) * (q+1))，唉，这，感觉我的猜测是对的好叭。到了这里，，这还不像西湖论剑的那一道题嘛<a href="https://mp.weixin.qq.com/s?__biz=MzU1MzE3Njg2Mw==&mid=100004157&idx=1&sn=ba121056137afd43cd1768c66f1cad20&chksm=7bf78b4d4c80025b9dec44e9cd33702f2a5174cafb491ddf893e5229e9e5909e1ffda4b550ec&xtrack=1&scene=0&subscene=10000&clicktime=1604313274&enterid=1604313274&ascene=7&devicetype=android-29&version=27001353&nettype=ctnet&abtest_cookie=AAACAA%3D%3D&lang=zh_CN&exportkey=A%2BEVclkqshGGX1AhhJLO4XU%3D&pass_ticket=BxnNKDSg4NDA9EVhX4ioGO7c%2Fv4T%2BEtwsPAmYnDNjByfyEKbNWLjsXUcxQLtmrfk&wx_header=1" target="_blank" rel="noopener">Wake me until May ends</a>。这道题相关的paper提到</p>
+<p>如果e满足一定的条件，</p>
+<p><img src="https://i.loli.net/2020/12/17/Xi7LcNKjHEbYUOJ.png" alt="image-20201102184915448"></p>
+<p>那么x，y就会在e/N的连分数上，并且通过x和y可以获得T：p+q的一个近似。</p>
+<p><img src="https://i.loli.net/2020/12/17/OLiZTxfQbUqVRWs.png" alt="image-20201102184201011"></p>
+<p>那么回到这道题本身，e的取值</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e = randint( <span class="name">int</span>(((<span class="name">p</span> + <span class="number">1</span>) * (q + 1) * <span class="number">3</span> * (p + q) - (p - q) * int(<span class="name">N**0</span>.<span class="number">21</span>)) * y / (x * <span class="number">3</span> * (p + q))), int(((p + 1) * (<span class="name">q</span> + <span class="number">1</span>) * 3 * (<span class="name">p</span> + q) + (<span class="name">p</span> - q) * int(N**0.21)) * y / (<span class="name">x</span> * 3 * (<span class="name">p</span> + q))) )</span><br></pre></td></tr></table></figure>
+
+<p>即$\frac{((p+1) * (q+1) * 3 * (p+q)-(p-q) * N^{0.21}) * y}{x * 3 * (p+q)}&lt;e&lt;\frac{((p+1) * (q+1) * 3 * (p+q)+(p-q) * N^{0.21}) * y}{x * 3 * (p+q)}$</p>
+<p>即$ex-(p+1) * (q+1) * y&lt;\frac{|(p-q) * N^{0.21}|}{3(p+q)} * y$</p>
+<p>这个范围与paper中给定的$|z|&lt;\frac{|p-q|}{3(p+q)}N^{\frac{1}{4}}y$很类似了，就是paper里头是用的$\phi(N)$，而题目用的是(p+1)(q+1)，但问题不大</p>
+<p>$ex-(p+1) * (q+1) * y = z$</p>
+<p>$ex - y(N + 1 + p + q) = z$</p>
+<p>$\frac{ex}{y}-N-p-q-1 = \frac{z}{y}$</p>
+<p>$\frac{ex}{y}-N-1 - \frac{z}{y} = p + q$</p>
+<p>算一下$\frac{z}{y}$即$\frac{|p-q|}{3(p+q)}N^{0.21}$的大小，约为2048 * 0.21 = 430bit</p>
+<p>现在姑且我们把$T =  \frac{ex}{y}-N-1$看作是p+q，然后计算$\rho = \frac{T+\sqrt{T^2 -4N}}{2}$，$\rho$作为p的一个近似，其中大约低430bit是不准确的。</p>
+<p>这个时候我们就要用到RSA密码系统中用到过的<a href="https://www.anquanke.com/post/id/213821" target="_blank" rel="noopener">Factoring with high bits known</a>，</p>
+<p><img src="https://i.loli.net/2020/12/17/fuX63akFOD4iSeg.png" alt="image-20201102192520897"></p>
+<p>显然这里有430bit的不确定位数是满足这个关系的，于是利用这个算法我们最终能成功的分解出p，q来</p>
+<p>然后就能算出这个私钥了。</p>
+<p>有了私钥了，这个曲线怎么算呢？</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = (((pt<span class="string">[1]</span>)**<span class="number">2</span> - <span class="number">1</span>) * inverse_mod(((pt<span class="string">[1]</span>)**<span class="number">2</span> + <span class="number">1</span>) * (pt<span class="string">[0]</span>)**<span class="number">2</span>, N)) % N</span><br><span class="line">    </span><br><span class="line">    # <span class="number">2000</span> years later...:)</span><br><span class="line">for _ in range(e):</span><br><span class="line">        ct = ( int((ct<span class="string">[0]</span> * pt<span class="string">[1]</span> + ct<span class="string">[1]</span> * pt<span class="string">[0]</span>) * inverse_mod(<span class="number">1</span> + d * ct<span class="string">[0]</span> * pt<span class="string">[0]</span> * ct<span class="string">[1]</span> * pt<span class="string">[1]</span>, N) % N), int((ct<span class="string">[1]</span> * pt<span class="string">[1]</span> + d * ct<span class="string">[0]</span> * pt<span class="string">[0]</span>) * inverse_mod(<span class="number">1</span> - d * ct<span class="string">[0]</span> * pt<span class="string">[0]</span> * ct<span class="string">[1]</span> * pt<span class="string">[1]</span>, N) % N) )</span><br></pre></td></tr></table></figure>
+
+<p>这里有个系数d，首先要计算出这个系数d</p>
+<p>这个系数d的计算要利用到题目给的ct，</p>
+<p>首先看到扭曲爱德华曲线的定义式</p>
+<p><img src="https://i.loli.net/2020/12/17/2XckCxZilOrKMwt.png" alt="image-20201102193536643"></p>
+<p>针对这一条曲线的加法公式是</p>
+<p><img src="https://i.loli.net/2020/12/17/qNTdBZHuekX2nAJ.png" alt="image-20201102193604325"></p>
+<p>针对这一道题他代码里的那个加法式子，我们会发现，这里相当于是扭曲爱德华曲线的系数a = -d</p>
+<p>那么再配上一个坐标(x,y)，我们就能计算出系数d了。</p>
+<p>其实这里可以做一个思考，这个系数d是有啥用？</p>
+<p>我们看到这个源码里这个系数d的生成代码<code>d = (((pt[1])**2 - 1) * inverse_mod(((pt[1])**2 + 1) * (pt[0])**2, N)) % N</code></p>
+<p>这里pt[0],pt[1]是flag明文前后两段的十进制数表示，所以d是由flag明文决定的。</p>
+<p>我们再变换上述扭曲爱德华曲线的方程：</p>
+<p>$ax^2 + y^2 = 1 + dx^2y^2$</p>
+<p>$dx^2y^2+dx^2=y^2 - 1$</p>
+<p>$d(x^2(y^2+1))=y^2 - 1$</p>
+<p>$d = (y^2-1) * ((y^2+1) * x^2)^{-1}$</p>
+<p>可以发现就是这个生成代码的方程式，pt[1]代表y，pt[0]代表x</p>
+<p>所以其实这个系数d的作用就是保证flag所代表的点在这条曲线上。</p>
+<p>好了，系数d也算出来了，怎么利用私钥来解密呢？</p>
+<p>显然不可能直接利用原来里的这个循环去加上这些点，</p>
+<p>信安数基中就提到过的重复倍加算法了解一下咯~</p>
+<h4 id="解题流程-1"><a href="#解题流程-1" class="headerlink" title="解题流程"></a>解题流程</h4><p>所以这道题的整个解题流程：</p>
+<ol>
+<li>利用连分数得到x，y（至于怎么确定x，y. 可以根据得到的x，y的bit位数，或者用x，y计算出来的T的bit位数来判断）</li>
+<li>利用Factoring with high bits known 分解出p，q</li>
+<li>计算私钥 prikey = inverse(e , (p+1) * (q+1))</li>
+<li>计算系数$d = (y^2-1) * ((y^2+1) * x^2)^{-1}$</li>
+<li>利用重复倍加算法做一个乘法计算 mt = d * ct</li>
+</ol>
+<p>exp</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">e</span>,<span class="keyword">N</span>=(,)</span><br><span class="line"><span class="keyword">c</span> = continued_fraction(<span class="keyword">e</span>/<span class="keyword">N</span>)</span><br><span class="line"><span class="keyword">for</span> i in <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="keyword">c</span>)):</span><br><span class="line">    <span class="keyword">y</span>=<span class="keyword">c</span>.numerator(i)</span><br><span class="line">    <span class="keyword">x</span>=<span class="keyword">c</span>.denominator(i)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">y</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    T = <span class="keyword">e</span>*<span class="keyword">x</span>//<span class="keyword">y</span>-<span class="keyword">N</span>-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="number">1023</span>&lt;(<span class="keyword">int</span>(T).bit_length()) &lt; <span class="number">1026</span>:	#根据T的bit位数来确定<span class="keyword">x</span>,<span class="keyword">y</span></span><br><span class="line">        <span class="keyword">print</span>(T)</span><br><span class="line">        <span class="keyword">print</span>(<span class="keyword">x</span>,<span class="keyword">int</span>(<span class="keyword">x</span>).bit_length())</span><br><span class="line">        <span class="keyword">print</span>(<span class="keyword">y</span>,<span class="keyword">int</span>(<span class="keyword">y</span>).bit_length())</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">from gmpy2 import *							#Factoring with high bits known</span><br><span class="line">_p = (T+iroot(T^<span class="number">2</span>-<span class="number">4</span>*<span class="keyword">N</span>,<span class="keyword">int</span>(<span class="number">2</span>))[<span class="number">0</span>])//<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">p</span> = <span class="keyword">int</span>(_p)</span><br><span class="line">n=<span class="keyword">N</span></span><br><span class="line">kbits = <span class="number">430</span></span><br><span class="line">PR.<span class="symbol">&lt;x&gt;</span> = PolynomialRing(Zmod(n))</span><br><span class="line"><span class="keyword">f</span> = <span class="keyword">x</span> + <span class="keyword">p</span></span><br><span class="line">x0 = <span class="keyword">f</span>.small_roots(<span class="keyword">X</span>=<span class="number">2</span>^kbits, beta=<span class="number">0.4</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">p</span> = <span class="keyword">p</span>+x0</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"p: "</span>, <span class="keyword">p</span>)</span><br><span class="line">assert n % <span class="keyword">p</span> == <span class="number">0</span></span><br><span class="line">q = n/<span class="keyword">int</span>(<span class="keyword">p</span>)</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"q: "</span>, q)</span><br><span class="line"></span><br><span class="line"><span class="keyword">x</span>,<span class="keyword">y</span>=(,)</span><br><span class="line"></span><br><span class="line">#-d*<span class="keyword">x</span>*^<span class="number">2</span> +<span class="keyword">y</span>^<span class="number">2</span> = <span class="number">1</span>+d*<span class="keyword">x</span>^<span class="number">2</span>*<span class="keyword">y</span>^<span class="number">2</span></span><br><span class="line"></span><br><span class="line">d = (<span class="number">1</span>-<span class="keyword">y</span>^<span class="number">2</span>)*inverse_mod(-<span class="keyword">x</span>^<span class="number">2</span>*<span class="keyword">y</span>^<span class="number">2</span>-<span class="keyword">x</span>^<span class="number">2</span>,<span class="keyword">N</span>)%<span class="keyword">N</span>					#计算系数d</span><br><span class="line">e_inv = inverse_mod(<span class="keyword">int</span>(<span class="keyword">e</span>),<span class="keyword">int</span>((<span class="keyword">int</span>(<span class="keyword">p</span>)+<span class="number">1</span>)*(<span class="keyword">int</span>(q)+<span class="number">1</span>)))		#计算私钥prikey</span><br><span class="line"></span><br><span class="line">def <span class="built_in">add</span>(ct,<span class="keyword">pt</span>):												#重复倍加算法的实现</span><br><span class="line">    ct = ( <span class="keyword">int</span>((ct[<span class="number">0</span>] * <span class="keyword">pt</span>[<span class="number">1</span>] + ct[<span class="number">1</span>] * <span class="keyword">pt</span>[<span class="number">0</span>]) * inverse_mod(<span class="number">1</span> + d * ct[<span class="number">0</span>] * <span class="keyword">pt</span>[<span class="number">0</span>] * ct[<span class="number">1</span>] * <span class="keyword">pt</span>[<span class="number">1</span>], <span class="keyword">N</span>) % <span class="keyword">N</span>), <span class="keyword">int</span>((ct[<span class="number">1</span>] * <span class="keyword">pt</span>[<span class="number">1</span>] + d * ct[<span class="number">0</span>] * <span class="keyword">pt</span>[<span class="number">0</span>]) * inverse_mod(<span class="number">1</span> - d * ct[<span class="number">0</span>] * <span class="keyword">pt</span>[<span class="number">0</span>] * ct[<span class="number">1</span>] * <span class="keyword">pt</span>[<span class="number">1</span>], <span class="keyword">N</span>) % <span class="keyword">N</span>) )</span><br><span class="line">    <span class="keyword">return</span> ct</span><br><span class="line">def mul_by_double_adding(ct,n):</span><br><span class="line">    <span class="keyword">pt</span> = (<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">pt</span> = <span class="built_in">add</span>(ct, <span class="keyword">pt</span>)</span><br><span class="line">        ct = <span class="built_in">add</span>(ct, ct)</span><br><span class="line">        n = n&gt;&gt;<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">pt</span>												</span><br><span class="line">(<span class="keyword">x</span>,<span class="keyword">y</span>)=mul_by_double_adding((<span class="keyword">x</span>,<span class="keyword">y</span>),e_inv)						#获取mt，得到flag</span><br><span class="line">from Crypto.Util.<span class="keyword">number</span> import long_to_bytes</span><br><span class="line"><span class="keyword">print</span>(long_to_bytes(<span class="keyword">x</span>)+long_to_bytes(<span class="keyword">y</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="imposter"><a href="#imposter" class="headerlink" title="imposter"></a>imposter</h3><p>Toy_AE.py</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">import</span> os</span><br><span class="line"><span class="symbol">from</span> Crypto.Cipher <span class="meta">import</span> AES</span><br><span class="line"><span class="symbol">from</span> Crypto.Util.<span class="keyword">strxor </span><span class="meta">import</span> <span class="keyword">strxor</span></span><br><span class="line"><span class="keyword">from </span>Crypto.Util.number <span class="meta">import</span> long_to_bytes, <span class="keyword">bytes_to_long</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">class </span>Toy_AE():</span><br><span class="line">    def __init__(<span class="keyword">self):</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">self.block_size </span>= <span class="number">16</span></span><br><span class="line">        <span class="keyword">self.n_size </span>= <span class="keyword">self.block_size</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">self.delta </span>= <span class="keyword">b'\x00' </span>* <span class="keyword">self.block_size</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">self.init_cipher()</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"> </span>   def init_cipher(<span class="keyword">self):</span></span><br><span class="line"><span class="keyword"> </span>       key = os.urandom(<span class="number">16</span>)</span><br><span class="line">        <span class="keyword">self.cipher </span>= AES.new(key = key, mode = AES.MODE_ECB)</span><br><span class="line"></span><br><span class="line">    def pad(<span class="keyword">self, </span>m, <span class="keyword">block_size):</span></span><br><span class="line"><span class="keyword"> </span>       return m <span class="meta">if</span> len(m) == <span class="keyword">block_size </span><span class="meta">else</span> (m + <span class="keyword">b'\x80' </span>+ (<span class="keyword">b'\x00' </span>* (<span class="keyword">block_size </span>- <span class="number">1</span> - len(m))))</span><br><span class="line"></span><br><span class="line">    def GF2_mul(<span class="keyword">self, </span>a, <span class="keyword">b, </span>n_size):</span><br><span class="line">        s = <span class="number">0</span></span><br><span class="line">        for <span class="keyword">bit </span>in <span class="keyword">bin(a)[2:]:</span></span><br><span class="line"><span class="keyword"> </span>           s = s &lt;&lt; <span class="number">1</span></span><br><span class="line">            <span class="meta">if</span> <span class="keyword">bit </span>== <span class="string">'1'</span>:</span><br><span class="line">                s ^= <span class="keyword">b</span></span><br><span class="line"><span class="keyword"> </span>       upper = <span class="keyword">bytes_to_long(long_to_bytes(s)[:-n_size])</span></span><br><span class="line"><span class="keyword"> </span>       lower = <span class="keyword">bytes_to_long(long_to_bytes(s)[-n_size:])</span></span><br><span class="line"><span class="keyword"> </span>       return upper ^ lower</span><br><span class="line"></span><br><span class="line">    def encrypt(<span class="keyword">self, </span>msg):</span><br><span class="line">        return <span class="keyword">self.A_EF(msg)</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"> </span>   def decrypt(<span class="keyword">self, </span>ct, _te):</span><br><span class="line">        msg, te = <span class="keyword">self.A_DF(ct)</span></span><br><span class="line"><span class="keyword"> </span>       return msg <span class="meta">if</span> _te == te <span class="meta">else</span> None</span><br><span class="line"></span><br><span class="line">    def A_EF(<span class="keyword">self, </span>msg):</span><br><span class="line">        <span class="keyword">self.Sigma </span>= <span class="keyword">b'\x00' </span>* <span class="keyword">self.n_size</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">self.L </span>= <span class="keyword">self.cipher.encrypt(b'ConvenienceFixed')</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">self.delta </span>= <span class="keyword">b'DeltaConvenience'</span></span><br><span class="line"><span class="keyword"> </span>       m = len(msg) // <span class="keyword">self.n_size</span></span><br><span class="line"><span class="keyword"> </span>       m += <span class="number">1</span> <span class="meta">if</span> (len(msg) % <span class="keyword">self.n_size) </span><span class="meta">else</span> <span class="number">0</span></span><br><span class="line">        M_list = [msg[i * <span class="keyword">self.n_size </span>: (i + <span class="number">1</span>) * <span class="keyword">self.n_size] </span>for i in range(m)]</span><br><span class="line">        C_list = []</span><br><span class="line">        for i in range(<span class="number">0</span>, (m-<span class="number">1</span>)//<span class="number">2</span>):</span><br><span class="line">            <span class="built_in">C1</span>, <span class="built_in">C2</span> = <span class="keyword">self.feistel_enc_2r(M_list[2*i], </span>M_list[<span class="number">2</span>*i +<span class="number">1</span>])</span><br><span class="line">            C_list.append(<span class="built_in">C1</span>)</span><br><span class="line">            C_list.append(<span class="built_in">C2</span>)</span><br><span class="line">            <span class="keyword">self.Sigma </span>= <span class="keyword">strxor(M_list[2*i </span>+<span class="number">1</span>], <span class="keyword">self.Sigma)</span></span><br><span class="line"><span class="keyword"> </span>           <span class="keyword">self.L </span>= long_to_bytes(<span class="keyword">self.GF2_mul(2, </span><span class="keyword">bytes_to_long(self.L), </span><span class="keyword">self.n_size))</span></span><br><span class="line"><span class="keyword"> </span>       <span class="meta">if</span> m &amp; <span class="number">1</span> == <span class="number">0</span>:</span><br><span class="line">            Z = <span class="keyword">self.cipher.encrypt(strxor(self.L, </span>M_list[-<span class="number">2</span>]))</span><br><span class="line">            Cm  =  <span class="keyword">strxor(Z[:len(M_list[-1])], </span>M_list[-<span class="number">1</span>])</span><br><span class="line">            Cm_1 = <span class="keyword">strxor(self.cipher.encrypt(strxor(strxor(self.L, </span><span class="keyword">self.delta), </span><span class="keyword">self.pad(Cm, </span><span class="keyword">self.block_size))), </span>M_list[-<span class="number">2</span>])</span><br><span class="line">            <span class="keyword">self.Sigma </span>= <span class="keyword">strxor(self.Sigma, </span><span class="keyword">strxor(Z, </span><span class="keyword">self.pad(Cm, </span><span class="keyword">self.block_size)))</span></span><br><span class="line"><span class="keyword"> </span>           <span class="keyword">self.L </span>= <span class="keyword">strxor(self.L, </span><span class="keyword">self.delta)</span></span><br><span class="line"><span class="keyword"> </span>           C_list.append(Cm_1)</span><br><span class="line">            C_list.append(Cm)</span><br><span class="line"><span class="symbol">        else:</span></span><br><span class="line">            Cm = <span class="keyword">strxor(self.cipher.encrypt(self.L)[:len(M_list[-1])], </span>M_list[-<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">self.Sigma </span>= <span class="keyword">strxor(self.Sigma, </span><span class="keyword">self.pad(M_list[-1], </span><span class="keyword">self.n_size))</span></span><br><span class="line"><span class="keyword"> </span>           C_list.append(Cm)</span><br><span class="line">        <span class="meta">if</span> len(M_list[-<span class="number">1</span>]) == <span class="keyword">self.n_size:</span></span><br><span class="line"><span class="keyword"> </span>           <span class="keyword">multer </span>= <span class="keyword">strxor(long_to_bytes(self.GF2_mul(3, </span><span class="keyword">bytes_to_long(self.L), </span><span class="keyword">self.n_size)), </span><span class="keyword">self.delta)</span></span><br><span class="line"><span class="keyword"> </span>       <span class="meta">else</span>:</span><br><span class="line">            <span class="keyword">multer </span>= long_to_bytes(<span class="keyword">self.GF2_mul(3, </span><span class="keyword">bytes_to_long(self.L), </span><span class="keyword">self.n_size))</span></span><br><span class="line"><span class="keyword"> </span>       TE = <span class="keyword">self.cipher.encrypt(strxor(self.Sigma, </span><span class="keyword">multer))</span></span><br><span class="line"><span class="keyword"> </span>       return <span class="keyword">b''.join(C_list), </span>TE</span><br><span class="line"></span><br><span class="line">    def A_DF(<span class="keyword">self, </span>ct):</span><br><span class="line">        <span class="keyword">self.Sigma </span>= <span class="keyword">b'\x00' </span>* <span class="keyword">self.n_size</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">self.L </span>= <span class="keyword">self.cipher.encrypt(b'ConvenienceFixed')</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">self.delta </span>= <span class="keyword">b'DeltaConvenience'</span></span><br><span class="line"><span class="keyword"> </span>       m = len(ct) // <span class="keyword">self.n_size</span></span><br><span class="line"><span class="keyword"> </span>       m += <span class="number">1</span> <span class="meta">if</span> (len(ct) % <span class="keyword">self.n_size) </span><span class="meta">else</span> <span class="number">0</span></span><br><span class="line">        C_list = [ct[i * <span class="keyword">self.n_size </span>: (i + <span class="number">1</span>) * <span class="keyword">self.n_size] </span>for i in range(m)]</span><br><span class="line">        M_list = []</span><br><span class="line">        for i in range(<span class="number">0</span>, (m-<span class="number">1</span>) // <span class="number">2</span>):</span><br><span class="line">            M1, M2 = <span class="keyword">self.feistel_dec_2r(C_list[2*i], </span>C_list[<span class="number">2</span>*i +<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">self.Sigma </span>= <span class="keyword">strxor(M2 </span>,<span class="keyword">self.Sigma)</span></span><br><span class="line"><span class="keyword"> </span>           <span class="keyword">self.L </span>= long_to_bytes(<span class="keyword">self.GF2_mul(2, </span><span class="keyword">bytes_to_long(self.L), </span><span class="keyword">self.n_size))</span></span><br><span class="line"><span class="keyword"> </span>           M_list.append(M1)</span><br><span class="line">            M_list.append(M2)</span><br><span class="line">        <span class="meta">if</span> m &amp; <span class="number">1</span> == <span class="number">0</span>:</span><br><span class="line">            Mm_1 = <span class="keyword">strxor(self.cipher.encrypt(strxor(strxor(self.L, </span><span class="keyword">self.delta), </span><span class="keyword">self.pad(C_list[-1], </span><span class="keyword">self.block_size))), </span>C_list[-<span class="number">2</span>])</span><br><span class="line">            Z = <span class="keyword">self.cipher.encrypt(strxor(self.L, </span>Mm_1))</span><br><span class="line">            Mm = <span class="keyword">strxor(Z[:len(C_list[-1])], </span>C_list[-<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">self.Sigma </span>= <span class="keyword">strxor(self.Sigma, </span><span class="keyword">strxor(Z, </span><span class="keyword">self.pad(C_list[-1], </span><span class="keyword">self.block_size)))</span></span><br><span class="line"><span class="keyword"> </span>           <span class="keyword">self.L </span>= <span class="keyword">strxor(self.L, </span><span class="keyword">self.delta)</span></span><br><span class="line"><span class="keyword"> </span>           M_list.append(Mm_1)</span><br><span class="line">            M_list.append(Mm)</span><br><span class="line"><span class="symbol">        else:</span></span><br><span class="line">            Mm = <span class="keyword">strxor(self.cipher.encrypt(self.L)[:len(C_list[-1])], </span>C_list[-<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">self.Sigma </span>= <span class="keyword">strxor(self.Sigma, </span><span class="keyword">self.pad(Mm, </span><span class="keyword">self.block_size))</span></span><br><span class="line"><span class="keyword"> </span>           M_list.append(Mm)</span><br><span class="line">        <span class="meta">if</span> len(C_list[-<span class="number">1</span>]) == <span class="keyword">self.n_size:</span></span><br><span class="line"><span class="keyword"> </span>           <span class="keyword">multer </span>= <span class="keyword">strxor(long_to_bytes(self.GF2_mul(3, </span><span class="keyword">bytes_to_long(self.L), </span><span class="keyword">self.n_size)), </span><span class="keyword">self.delta)</span></span><br><span class="line"><span class="keyword"> </span>       <span class="meta">else</span>:</span><br><span class="line">            <span class="keyword">multer </span>= long_to_bytes(<span class="keyword">self.GF2_mul(3, </span><span class="keyword">bytes_to_long(self.L), </span><span class="keyword">self.n_size))</span></span><br><span class="line"><span class="keyword"> </span>       TE = <span class="keyword">self.cipher.encrypt(strxor(self.Sigma, </span><span class="keyword">multer))</span></span><br><span class="line"><span class="keyword"> </span>       return <span class="keyword">b''.join(M_list), </span>TE</span><br><span class="line"></span><br><span class="line">    def feistel_enc_2r(<span class="keyword">self, </span>M1, M2):</span><br><span class="line">        <span class="built_in">C1</span> = <span class="keyword">strxor(self.cipher.encrypt(strxor(M1, </span><span class="keyword">self.L)), </span>M2)</span><br><span class="line">        <span class="built_in">C2</span> = <span class="keyword">strxor(self.cipher.encrypt(strxor(C1, </span><span class="keyword">strxor(self.L, </span><span class="keyword">self.delta))), </span>M1)</span><br><span class="line">        return <span class="built_in">C1</span>, <span class="built_in">C2</span></span><br><span class="line"></span><br><span class="line">    def feistel_dec_2r(<span class="keyword">self, </span><span class="built_in">C1</span>, <span class="built_in">C2</span>):</span><br><span class="line">        M1 = <span class="keyword">strxor(self.cipher.encrypt(strxor(C1, </span><span class="keyword">strxor(self.L, </span><span class="keyword">self.delta))), </span><span class="built_in">C2</span>)</span><br><span class="line">        M2 = <span class="keyword">strxor(self.cipher.encrypt(strxor(M1, </span><span class="keyword">self.L)), </span><span class="built_in">C1</span>)</span><br><span class="line">        return M1, M2</span><br></pre></td></tr></table></figure>
+
+<p>task.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Toy_AE <span class="keyword">import</span> Toy_AE</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> FLAG</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">proof_of_work</span><span class="params">()</span>:</span></span><br><span class="line">    random.seed(os.urandom(<span class="number">8</span>))</span><br><span class="line">    proof = <span class="string">b''</span>.join([random.choice(string.ascii_letters + string.digits).encode() <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">20</span>)])</span><br><span class="line">    digest = sha256(proof).hexdigest().encode()</span><br><span class="line">    print(<span class="string">"sha256(XXXX+%s) == %s"</span> % (proof[<span class="number">4</span>:],digest))</span><br><span class="line">    print(<span class="string">"Give me XXXX:"</span>)</span><br><span class="line">    x = input().encode()</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span> <span class="keyword">if</span> len(x) != <span class="number">4</span> <span class="keyword">or</span> sha256(x + proof[<span class="number">4</span>:]).hexdigest().encode() != digest <span class="keyword">else</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pack</span><span class="params">(uid, uname, token, cmd, appendix)</span>:</span></span><br><span class="line">    r = <span class="string">b''</span></span><br><span class="line">    r += <span class="string">b'Uid=%d\xff'</span> % uid</span><br><span class="line">    r += <span class="string">b'UserName=%s\xff'</span> % uname</span><br><span class="line">    r += <span class="string">b'T=%s\xff'</span> % token</span><br><span class="line">    r += <span class="string">b'Cmd=%s\xff'</span> % cmd</span><br><span class="line">    r += appendix</span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unpack</span><span class="params">(r)</span>:</span></span><br><span class="line">    data = r.split(<span class="string">b"\xff"</span>)</span><br><span class="line">    uid, uname, token, cmd, appendix = int(data[<span class="number">0</span>][<span class="number">4</span>:]), data[<span class="number">1</span>][<span class="number">9</span>:], data[<span class="number">2</span>][<span class="number">2</span>:], data[<span class="number">3</span>][<span class="number">4</span>:], data[<span class="number">4</span>]</span><br><span class="line">    <span class="keyword">return</span> (uid, uname, token, cmd, appendix)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">apply_ticket</span><span class="params">()</span>:</span></span><br><span class="line">    uid = int(input(<span class="string">"Set up your user id:"</span>)[:<span class="number">5</span>])</span><br><span class="line">    uname = input(<span class="string">"Your username:"</span>).encode(<span class="string">"ascii"</span>)[:<span class="number">16</span>]</span><br><span class="line">    <span class="keyword">if</span> uname == <span class="string">b"Administrator"</span>:</span><br><span class="line">        print(<span class="string">"Sorry, preserved username."</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    token = sha256(uname).hexdigest()[:max(<span class="number">8</span>, uid % <span class="number">16</span>)].encode(<span class="string">"ascii"</span>)</span><br><span class="line">    cmd = input(<span class="string">"Your command:"</span>).encode(<span class="string">"ascii"</span>)[:<span class="number">16</span>]</span><br><span class="line">    <span class="keyword">if</span> cmd == <span class="string">b"Give_Me_Flag"</span>:</span><br><span class="line">        print(<span class="string">"Not allowed!"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    appendix = input(<span class="string">"Any Appendix?"</span>).encode(<span class="string">"ascii"</span>)[:<span class="number">16</span>]</span><br><span class="line">    msg = pack(uid, uname, token, cmd, appendix)</span><br><span class="line">    ct, te = ae.encrypt(msg)</span><br><span class="line">    print(<span class="string">"Your ticket:%s"</span> % ct.hex())</span><br><span class="line">    print(<span class="string">"With my Auth:%s"</span> % te.hex())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_ticket</span><span class="params">()</span>:</span></span><br><span class="line">    ct = bytes.fromhex(input(<span class="string">"Ticket:"</span>))</span><br><span class="line">    te = bytes.fromhex(input(<span class="string">"Auth:"</span>))</span><br><span class="line">    msg = ae.decrypt(ct, te)</span><br><span class="line">    <span class="keyword">assert</span> msg</span><br><span class="line">    uid, uname, token, cmd, appendix = unpack(msg)</span><br><span class="line">    <span class="keyword">if</span> uname == <span class="string">b"Administrator"</span> <span class="keyword">and</span> cmd == <span class="string">b"Give_Me_Flag"</span>:</span><br><span class="line">        print(FLAG)</span><br><span class="line">        exit(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"Nothing happend."</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">menu</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"Menu:"</span>)</span><br><span class="line">    print(<span class="string">"[1] Apply Ticket"</span>)</span><br><span class="line">    print(<span class="string">"[2] Check Ticket"</span>)</span><br><span class="line">    print(<span class="string">"[3] Exit"</span>)</span><br><span class="line">    op = int(input(<span class="string">"Your option:"</span>))</span><br><span class="line">    <span class="keyword">assert</span> op <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">4</span>)</span><br><span class="line">    <span class="keyword">if</span> op == <span class="number">1</span>:</span><br><span class="line">        apply_ticket()</span><br><span class="line">    <span class="keyword">elif</span> op == <span class="number">2</span>:</span><br><span class="line">        check_ticket()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"Bye!"</span>)</span><br><span class="line">        exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    ae = Toy_AE()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> proof_of_work():</span><br><span class="line">        exit(<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            menu()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            exit(<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可恶，果然是这样吗。。不只代码长，甚至附件都有俩。害，慢慢啃咯。。。先不管这个加密的具体是啥，来看看功能是啥叭。程序有俩功能，提供ticket，和检查ticket，获取flag的点在检查ticket，</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def decrypt(self, <span class="keyword">ct</span>, _te):</span><br><span class="line">	msg, <span class="keyword">te</span> = self.A_DF(<span class="keyword">ct</span>)</span><br><span class="line">	<span class="keyword">return</span> msg <span class="keyword">if</span> _te == <span class="keyword">te</span> <span class="keyword">else</span> None</span><br><span class="line"></span><br><span class="line">msg = ae.decrypt(<span class="keyword">ct</span>, <span class="keyword">te</span>)</span><br><span class="line"><span class="keyword">assert</span> msg</span><br><span class="line">uid, uname, <span class="keyword">token</span>, cmd, appendix = unpack(msg)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> uname == b<span class="string">"Administrator"</span> and cmd == b<span class="string">"Give_Me_Flag"</span>:</span><br><span class="line">	<span class="keyword">print</span>(FLAG)</span><br></pre></td></tr></table></figure>
+
+<p>要求你的这个ticket代表的信息是，用户名是Administrator，要执行的命令是Give_Me_Flag，并且还要提供这个ticket的签名Auth来保证他的合法性。</p>
+<p>再来看看这个提供ticket有啥，</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def apply_ticket():</span><br><span class="line">    uid = int(<span class="keyword">input</span>(<span class="string">"Set up your user id:"</span>)[:5])</span><br><span class="line">    uname = <span class="keyword">input</span>(<span class="string">"Your username:"</span>).<span class="keyword">encode</span>(<span class="string">"ascii"</span>)[:16]</span><br><span class="line">    <span class="keyword">if</span> uname == b<span class="string">"Administrator"</span>:</span><br><span class="line">        <span class="keyword">print</span>(<span class="string">"Sorry, preserved username."</span>)</span><br><span class="line">        #<span class="built_in">return</span></span><br><span class="line">    <span class="keyword">token</span> = sha256(uname).hexdigest()[:<span class="built_in">max</span>(8, uid % 16)].<span class="keyword">encode</span>(<span class="string">"ascii"</span>)</span><br><span class="line">    cmd = <span class="keyword">input</span>(<span class="string">"Your command:"</span>).<span class="keyword">encode</span>(<span class="string">"ascii"</span>)[:16]</span><br><span class="line">    <span class="keyword">if</span> cmd == b<span class="string">"Give_Me_Flag"</span>:</span><br><span class="line">        <span class="keyword">print</span>(<span class="string">"Not allowed!"</span>)</span><br><span class="line">        #<span class="built_in">return</span></span><br><span class="line">    appendix = <span class="keyword">input</span>(<span class="string">"Any Appendix?"</span>).<span class="keyword">encode</span>(<span class="string">"ascii"</span>)[:16]</span><br><span class="line">    msg = pack(uid, uname, <span class="keyword">token</span>, cmd, appendix)</span><br></pre></td></tr></table></figure>
+
+<p>他要求你提供，uid，用户名，cmd，和额外的可选择的信息。其中，用户名不能等于Administrator，cmd不能等于Give_Me_Flag。（不然这题直接就没了。）然后他会生成一个你的用户名的sha256的摘要，至于存多少长读进你的message呢，由你的uid来决定。</p>
+<p><code>token = sha256(uname).hexdigest()[:max(8, uid % 16)].encode(&quot;ascii&quot;)</code></p>
+<p>然后一些限制是，除了uid最大为5位数字之外，其余输入最多只能16个字符，并且每个字符的ascii都得在0-128之间（由decode(‘ascii’)限制）。（不然你要是输入\xff，这题也直接就没了）</p>
+<p>所以题目意思很明确，你要伪造密文，并且还要能够构造对应的签名来通过合法性验证。让他解密信息后用户名为Administrator，cmd为Give_Me_Flag。然后由于对输入做的诸多限制，（甚至一次连接只能交互4次，除去一次来获取flag，只能交互三次，下一次连接就生成新的Toy_AE对象，生成新的key了）导致漏洞点大概率不会出现在这个task文件中，，那就要找这个Toy_AE算法的洞了。（啊，好长，不想看）</p>
+<p>一点点啃叭，先大致随便看看，然后我们有目的性的先来看看生成Auth的过程。（单独拎出来会清晰些）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.Sigma = <span class="string">b'\x00'</span> * <span class="keyword">self</span>.n_size</span><br><span class="line"><span class="keyword">self</span>.Sigma = strxor(M_list[<span class="number">2</span>*i +<span class="number">1</span>], <span class="keyword">self</span>.Sigma)</span><br><span class="line"><span class="keyword">if</span> 组数为偶数：</span><br><span class="line">	Z = <span class="keyword">self</span>.cipher.encrypt(strxor(<span class="keyword">self</span>.L, M_list[<span class="number">-2</span>]))</span><br><span class="line">	Cm  =  strxor(Z[:len(M_list[<span class="number">-1</span>])], M_list[<span class="number">-1</span>])</span><br><span class="line">	<span class="keyword">self</span>.Sigma = strxor(<span class="keyword">self</span>.Sigma, strxor(Z, <span class="keyword">self</span>.pad(Cm, <span class="keyword">self</span>.block_size)))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	<span class="keyword">self</span>.Sigma = strxor(<span class="keyword">self</span>.Sigma, <span class="keyword">self</span>.pad(M_list[<span class="number">-1</span>], <span class="keyword">self</span>.n_size))</span><br><span class="line">	TE = <span class="keyword">self</span>.cipher.encrypt(strxor(<span class="keyword">self</span>.Sigma, multer))</span><br><span class="line">TE = <span class="keyword">self</span>.cipher.encrypt(strxor(<span class="keyword">self</span>.Sigma, multer))</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，如果组数为偶数，就会多生成一个Z，而且生成的密文方式也会比较麻烦，那么我们就先利用那个附加信息来控制组数，尽量避免这个麻烦的东西。</p>
+<p>这样子的话Sigma第2块、第4块明文、填充后的第5块明文的异或，然后和multer</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> len(M_list[<span class="number">-1</span>]) == <span class="keyword">self</span>.n_size:</span><br><span class="line">	multer = strxor(long_to_bytes(<span class="keyword">self</span>.GF2_mul(<span class="number">3</span>, bytes_to_long(<span class="keyword">self</span>.L), <span class="keyword">self</span>.n_size)), <span class="keyword">self</span>.delta)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	multer = long_to_bytes(<span class="keyword">self</span>.GF2_mul(<span class="number">3</span>, bytes_to_long(<span class="keyword">self</span>.L), <span class="keyword">self</span>.n_size))</span><br></pre></td></tr></table></figure>
+
+<p>（multer和L有关，不可知，那就不管了）异或，最后AES加密，返回密文。</p>
+<p>由于AES的key也不可知，所以我们想要拿到Auth，没别的方法了。只能在传明文获取Auth时，让我们的msg的第二块和第四块和第五块和真正的能拿到FLAG的msg的明文保持一致了。</p>
+<p>这里一个做法就是，本地跑这个程序，把那些麻烦的PoW啥的去去掉，一些限制（比如用户名不能是Administrator）也去去掉，然后打印一些方便我们审计的信息，（当然，熟用那种自带debug编译器的大佬可以忽略，IDLE选手还是比较喜欢print debug大法）</p>
+<p>那就是怎么伪造密文了。</p>
+<p>先看看密文的生成</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">C1</span>, <span class="built_in">C2</span> = <span class="keyword">self.feistel_enc_2r(M_list[2*i], </span>M_list[<span class="number">2</span>*i +<span class="number">1</span>])</span><br><span class="line"><span class="symbol">def</span> feistel_enc_2r(<span class="keyword">self, </span>M1, M2):</span><br><span class="line">        <span class="built_in">C1</span> = <span class="keyword">strxor(self.cipher.encrypt(strxor(M1, </span><span class="keyword">self.L)), </span>M2)</span><br><span class="line">        <span class="built_in">C2</span> = <span class="keyword">strxor(self.cipher.encrypt(strxor(C1, </span><span class="keyword">strxor(self.L, </span><span class="keyword">self.delta))), </span>M1)</span><br><span class="line">        return <span class="built_in">C1</span>, <span class="built_in">C2</span></span><br></pre></td></tr></table></figure>
+
+<p>我们把明文和密文看成16字节一块，两块一组，两块明文对自己这组生成的密文有影响，但每组明文间的加密是独立的。也就是第一组（第一二块）明文不影响第二组（第三四块）明文生成的第二块密文。</p>
+<p>那么，如果我们的uid是1，用户名是Administrator，cmd是Give_Me_Flag，不加信息，</p>
+<p>（本地起这个程序，把用户名和cmd的限制给取消掉，然后打印一下M_list）</p>
+<p><img src="https://i.loli.net/2020/12/17/eR1q9kg6OMVJhfZ.png" alt="image-20201102204318891"></p>
+<p>我们会生成4块明文，<code>[b&#39;Uid=1\xffUserName=A&#39;, b&#39;dministrator\xffT=e&#39;, b&#39;7d3e769\xffCmd=Give&#39;, b&#39;_Me_Flag\xff&#39;]</code></p>
+<p>前面说了，为了让生成的Auth便于计算，我们要加入附加信息（Appendix）来控制明文组数。</p>
+<p>但这里先看看M_list叭，如果我们想要得到Auth，那么我们就得保证我们构造的用户名和cmd在不等于限定值的情况下，M_list的第二组和第四组与用户名为Administrator和cmd为Give_Me_Flag时的M_list的相应分组相同。</p>
+<p>这样子看过去，对于我们目前得到的这个M_list是很好构造的，由于Administrator的A在第一组，那么我们注册Bdministrator；由于Give_Me_Flag的Give在第三组，那么我们注册give_Me_Flag就好了。然后加一加Appendix控制下组数。但是注意到第二组最后一位是sha256的首位，而我们要是动了用户名，这个值大概率也有变，所以我们还得控制这个用户名的首位，可能不能是B，我们就在ascii 为0到128之间找一个字符*，让*dministrator的sha256的首位为e就可以了。经过测试，字符‘P’就是一个合适的值</p>
+<p><img src="https://i.loli.net/2020/12/17/tcLqimUel4NXygV.png" alt="image-20201102234733848"></p>
+<p>看，上面是目标Auth，下面是我们伪造的用户名和cmd获取的Auth，他们是一致的。所以Auth这一关过了。那就只剩下密文的伪造了。</p>
+<p>对于第一组，是由uid和用户名决定的。其中uid不用伪造，问题不大，但是用户名的密文咋办，我们用户名不能等于Administrator，但是又要搞到的Administrator的密文。</p>
+<p>这里用到的第一技巧就是，增加uid的长度，反正uid最后模16了，我们控制uid长度为5，用户名为Administratorr（多了一个r），这样子对照一下，</p>
+<p><img src="https://i.loli.net/2020/12/17/mdSovXRN5ZuQqgF.png" alt="image-20201102235135632"></p>
+<p>可以发现，多出来的那个r正好被挤到第三组去了，这样子我们的用户名既没有等于Administrator，但是又获得了前两块属于Administrator的msg的密文。</p>
+<p>ok。一半的工作完成。</p>
+<p>第二组，由于uid那么构造了，那么第二组明文就是这样子的，<code>b&#39;r\xffT=ab86207b\xffCmd&#39;, b&#39;=Give_Me_Flag\xff</code>由hash和cmd和组成（这里只是测试，附加信息就先不加了）。</p>
+<p>这里我们要的是cmd=Give_Me_Flag的密文，怎么伪造cmd呢？我们不能改变任何一个字符，不然由于AES的存在，密文整个就不一样了。但是输入的cmd又不能等于Give_Me_Flag。这里我们还是用前面的方法，由于这里分组加密的特性，我们把cmd顶到第二块的末尾，大概就是让第二组的第二块明文是这样子，</p>
+<p><code>&#39;Cmd=Give_Me_Flag&#39;</code></p>
+<p>刚好16个字节，然后我们的命令就可以改成Give_Me_Flagg，多的g到第五块去了，咱们就不用管了。至于怎么顶，这里就要利用uid了，在uid长度仍然保持为5的情况下，进行加减，控制hash的长度为12就好了，11111%16 = 7，那就用11116，</p>
+<p><img src="upload/image-20201103000537966.png" alt="image-20201103000537966"></p>
+<p>可以看到这样<code>\xffT=4110a98d23fc\xff</code>刚好占满了第二组第一块的16字节，<code>&#39;Cmd=Give_Me_Flag</code>占了另一块。而我们输入的cmd命令是Give_Me_Flagg，是能过验证的。这样交互，让他加密，就能得到明文：<code>b&#39;\xffT=4110a98d23fc\xff&#39;, b&#39;Cmd=Give_Me_Flag&#39;</code>生成的密文了。但是这里还有个问题，hash由用户名控制，用户名为Administrator的12位hash是e7d3e769f3f5，然而我们又不能注册用户为Administrator，那一个想法就是，碰撞，找一个由可见字符串组成的13位字符串（Administrator的长度），sha256后前12位为e7d3e769f3f5就可以了。然而这显然不现实，12位是96bit，有这算力，比特币不是随便挖？所以这题有解的一个原因就是，这个系统并没有验证用户名的hash，所以你随便整个用户名就好。</p>
+<p>但是新问题产生了，Auth的获取怎么办？现在我们的uid=11116，我们来看看用户名为Administrator，cmd为Give_Me_Flag的情况</p>
+<p><img src="https://i.loli.net/2020/12/17/mUTV2yFdIfXDirY.png" alt="image-20201103001239680"></p>
+<p>想要得到Auth，就得构造同样的第二块、第四块明文，第二块明文还好说，用户名我们多打一个字符就能绕过检查了，而这个字符也会被顶到第三块，对Auth没有影响，并且我们也可以uid相应的减1，让第四块密文不受到影响。但是第四块的明文本身就不好操作啊，这里要是也多打一个字符绕过的话，第五组就多了一个字符，这样产生的Auth就完全对不上了。</p>
+<p>所以要把证获取到正确的Auth，我们需要第二块，第四块，第五块分别为：<code>b&#39;me=Administrator&#39;, b&#39;Cmd=Give_Me_Flag&#39;, b&#39;\xff&#39;</code></p>
+<p>这里我的做法是，缩短uid为两位长，构造用户名为：me=Administrator，控制uid%16为8，构造cmd为Cmd=Give_Me_Flag</p>
+<p><img src="https://i.loli.net/2020/12/17/AZqsFpIwMEDCQlT.png" alt="image-20201103002724699"></p>
+<p>可以看到是完全一致的。如果此时打印出来了C_list的话，也会发现，此时这两组产生的C_list的最后一组也是一致的，因为我们这里M_list的到数两组是一致的。</p>
+<h4 id="解题流程-2"><a href="#解题流程-2" class="headerlink" title="解题流程"></a>解题流程</h4><p>所以这道题的整个解题流程：（交互可以直接手撸）</p>
+<ol>
+<li>uid：24，name：me=Administrator，cmd：Cmd=Give_Me_Flag        获取Auth和第三段密文</li>
+<li>uid：11116，name：me=Administratorr，后面随意                               获取第一段密文</li>
+<li>uid：11116，name：Administratos，cmd：Give_Me_Flagg                  获取第二段密文</li>
+<li>发送Auth和三段密文的拼接，获取flag</li>
+</ol>
+<p>exp</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"><span class="keyword">sh</span>=remote(<span class="string">"123.57.4.93"</span>,<span class="string">"45216"</span>)</span><br><span class="line">from pwnlib.util.iters import mbruteforce</span><br><span class="line">from hashlib import <span class="built_in">sha256</span></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line">def proof_of_work(<span class="keyword">sh</span>):</span><br><span class="line">    <span class="keyword">sh</span>.recvuntil(<span class="string">"XXXX+b\'"</span>)</span><br><span class="line">    suffix = <span class="keyword">sh</span>.recvuntil(<span class="string">"\'"</span>).decode(<span class="string">"utf8"</span>)[:-<span class="number">1</span>]</span><br><span class="line">    <span class="built_in">log</span>.success(suffix)</span><br><span class="line">    <span class="keyword">sh</span>.recvuntil(<span class="string">"== b\'"</span>)</span><br><span class="line">    cipher = <span class="keyword">sh</span>.recvuntil(<span class="string">"\'"</span>).decode(<span class="string">"utf8"</span>)[:-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">print</span>(suffix)</span><br><span class="line">    <span class="keyword">print</span>(cipher)</span><br><span class="line">    proof = mbruteforce(lambda <span class="keyword">x</span>: <span class="built_in">sha256</span>((<span class="keyword">x</span> + suffix).encode()).hexdigest() ==  cipher, <span class="built_in">string</span>.ascii_letters + <span class="built_in">string</span>.digits, length=<span class="number">4</span>, method=<span class="string">'fixed'</span>)</span><br><span class="line">    <span class="keyword">sh</span>.sendlineafter(<span class="string">"Give me XXXX:"</span>, proof)</span><br><span class="line">proof_of_work(<span class="keyword">sh</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"option:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">'1'</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"id:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">'24'</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"name:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"me=Administrator"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"and:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"Cmd=Give_Me_Flag"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"?"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">""</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"ket:"</span>)</span><br><span class="line">ticket=<span class="keyword">sh</span>.recvuntil(<span class="string">"\n"</span>)[:-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"Auth:"</span>)</span><br><span class="line">Auth=<span class="keyword">sh</span>.recvuntil(<span class="string">"\n"</span>)[:-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"option:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"1"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"id:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"65548"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"name:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"Administratorr"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"and:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"Give_Me_Flagg"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"?"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">""</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"ket:"</span>)</span><br><span class="line">ticket1=<span class="keyword">sh</span>.recvuntil(<span class="string">"\n"</span>)[:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"option:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">'1'</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"id:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">'65548'</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"name:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"Administratos"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"and:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">"Give_Me_Flagg"</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"?"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">""</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"ket:"</span>)</span><br><span class="line">ticket2=<span class="keyword">sh</span>.recvuntil(<span class="string">"\n"</span>)[:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"option:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(<span class="string">'2'</span>)</span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"Ticket:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(ticket1[:<span class="number">64</span>]+ticket2[<span class="number">64</span>:<span class="number">64</span>*<span class="number">2</span>]+ticket[-<span class="number">2</span>:])</span><br><span class="line"></span><br><span class="line"><span class="keyword">sh</span>.recvuntil(<span class="string">"Auth:"</span>)</span><br><span class="line"><span class="keyword">sh</span>.sendline(Auth)</span><br><span class="line"></span><br><span class="line"><span class="keyword">sh</span>.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>不得不说这一题出的很精妙，精妙到连输入字符的长度都卡的很死又恰到好处，uid的功能也很灵活，最后的突破点在一个hash未验证。解题花了快一个晚上，除了啃了好久的代码，主要是各种试错。想了很多种构造的方法，包括字节翻转绕过之类的，最后都被一一否决。</p>
+<p>但最后构造出来了并拿到flag还是很开心的，虽然再一次认识到了自己和大佬们间的差距。（队伍最后只解出来了两道密码学和一道逆向，差了2名与决赛资格失之交臂，还是挺可惜的）</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这两场比赛的四道题目的质量算是比较高叭，byte是两道公钥密码，一个是CRT和脸，一个sm2，。x-nuca是一个奇异爱德华曲线，和一个不知道是不是自创的分组密码。（要是验证hash的话这样的算法系统应该没别的漏洞了，叭？）然后x-nuca还有一道我没解出来的是LWE，格密码的东西，还是比较生疏。</p>
+<p>总的来说这两场比赛，从中确实还是学到了许多东西。也稍微锻炼了下心性（那么长的代码一开始真的让人望而却步，但是一点点啃下来，发现也还好啦。并没有想象中的那么复杂（因为复杂的地方我直接不看，哈哈哈哈））。</p>
+<p>Stay hungry, stay foolish.</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>2020 ByteCTF&amp;X-NUCA</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">10.4k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-11-04, 10:00:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-12-17, 14:25:56</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/" title="2020 ByteCTF&amp;X-NUCA">http://jayxv.github.io/2020/11/04/2020ByteCTF&amp;X-NUCA部分密码学题解/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#Sage','#docker','#ECC','#Paillier','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#SQL','#python','#Book','#number theory','#Abstract algebra','#操作模式','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
