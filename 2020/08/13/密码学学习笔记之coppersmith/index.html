@@ -428,11 +428,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color4">XSS</a>
+        <a class="color5">Nmap</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color5">Nmap</a>
+        <a class="color4">XSS</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -761,7 +761,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-12-17 22:49:04'>2020-08-13 10:00</time>
+        创建时间:<time class="date" title='更新时间: 2020-12-18 14:48:01'>2020-08-13 10:00</time>
         
     </div>
     <div class="article-meta">
@@ -975,7 +975,7 @@
 <p>$∴2k(\frac{N+1}{2}+\frac{-p-q}{2})+1\equiv 0 \pmod{e}$</p>
 <p>设$A=\frac{N+1}{2}，y=\frac{-p-q}{2}),x=2k$，可得式子：$f(k,y)=1+x * (A+y)$</p>
 <p>如果我们能在模$e$下解得该方程的根$x,y$，由$ed=1+x * (A+y)$就可以得到$d$了。</p>
-<p>但具体怎么去求解这个方程呢？这就涉及多元coppersmith’s method了，超纲了吖，所以这里先用了github上的一个脚本<a href="https://github.com/mimoo/RSA-and-LLL-attacks/blob/master/boneh_durfee.sage" target="_blank" rel="noopener">boneh_durfee.sage</a>。这里的适用条件是$d&lt;N^0.292$</p>
+<p>但具体怎么去求解这个方程呢？这就涉及多元coppersmith’s method了，超纲了吖，所以这里先用了github上的一个脚本<a href="https://github.com/mimoo/RSA-and-LLL-attacks/blob/master/boneh_durfee.sage" target="_blank" rel="noopener">boneh_durfee.sage</a>。这里的适用条件是$d&lt;N^{0.292}$</p>
 <h1 id="思考-amp-总结"><a href="#思考-amp-总结" class="headerlink" title="思考&amp;总结"></a>思考&amp;总结</h1><p>​        在coppersmith’s method的边界计算中，由于推理中存在的不等式，格基规约算法在不同情况有不同的表现等问题，导致coppersmith’s method的边界其实比较模糊，而构造不同的格也会计算出不同的边界值，有不同的效果。所以，在考虑时间和空间复杂度的情况下，是否会存在某种最优的构造方法呢？</p>
 <p>​        好了，这里大概是大部分的对单元coppersmith’s method的应用实例了。最后一手Boneh Durfee Attack利用了多元coppersmith‘s method，这算是埋了一手伏笔么？</p>
 
@@ -995,7 +995,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">7.6k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-08-13, 10:00:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-12-17, 22:49:04</p>
+    <p><span class="copy-title">最后更新:</span>2020-12-18, 14:48:01</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/08/13/密码学学习笔记之coppersmith/" title="密码学学习笔记 之 Coppersmith’s Method">http://jayxv.github.io/2020/08/13/密码学学习笔记之coppersmith/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -1098,7 +1098,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#ECC','#Paillier','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#SQL','#python','#Book','#number theory','#Abstract algebra','#操作模式','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#ECC','#Paillier','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#SQL','#python','#Book','#number theory','#Abstract algebra','#操作模式','#Nmap','#XSS','#Coppersmith’s Method','#Linux','#book',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
