@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>2020 De1CTF | Van1sh的小屋</title>
-  <meta name="keywords" content=" Write Up ">
-  <meta name="description" content="2020 De1CTF | Van1sh的小屋">
+  <title>密码学学习笔记 之 密码学随笔 | Van1sh的小屋</title>
+  <meta name="keywords" content=" Crypto ">
+  <meta name="description" content="密码学学习笔记 之 密码学随笔 | Van1sh的小屋">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
 <meta property="og:type" content="website">
@@ -765,9 +765,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-2020De1CTF" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-密码学学习笔记之密码学随笔" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">2020 De1CTF</h1>
+        <h1 class="article-title">密码学学习笔记 之 密码学随笔</h1>
     
     <div class="article-meta">
         
@@ -777,26 +777,26 @@
         
         <span class="book">
             
-                <a  data-rel="比赛小屋">比赛小屋</a>
+                <a  data-rel="密码小屋">密码小屋</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color4">Write Up</a>
+            <a class="color2">Crypto</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-24 18:33:22'>2020-05-05 15:57</time>
+        创建时间:<time class="date" title='更新时间: 2021-01-01 17:09:10'>2021-01-01 00:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:893</span>
+        <span>字数:1.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -815,7 +815,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NLFSR"><span class="toc-text">NLFSR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#easyRSA"><span class="toc-text">easyRSA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ECDH"><span class="toc-text">ECDH</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Homomorphic"><span class="toc-text">Homomorphic</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -831,29 +831,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>题目和exp塞<a href="https://github.com/JayxV/JayxV.github.io/blob/master/2020/05/05/2020De1CTF/2020De1CFT.zip" target="_blank" rel="noopener">这里</a>了。</p>
-<h3 id="NLFSR"><a href="#NLFSR" class="headerlink" title="NLFSR"></a>NLFSR</h3><p>改编自<a href="https://wiki.x10sec.org/crypto/streamcipher/fsr/nfsr/" target="_blank" rel="noopener">2018年的强网杯streamgame3</a>，式子可以化简</p>
-<p>(ao * bo) ^ (bo * co) ^ (bo * do) ^ co ^ do = (ao * bo) ^ (bo * (co ^ do)) ^ (co ^ do)</p>
-<p>[把co ^ do 设为=&gt;eo ]   =&gt;   (ao * bo) ^ (bo *eo )) ^  eo   这样子又只有三个寄存器了。</p>
-<p>然后我们看一下关系</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ao <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">for</span> bo <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">        <span class="keyword">for</span> eo <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">print</span> ao,bo,eo,(ao*bo)^(bo*eo)^eo</span><br><span class="line">            </span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span></span><br><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>这样子，ao、eo 和输出有75%相同，这里可以用相关攻击。bo的话，爆破就好了。</p>
-<p>这里说说自己对相关攻击的理解。线性反馈位移寄存器是用来生成密钥流的嘛，然后良好生成方式应该是输出的每一位为0和1的概率都应该是0.5，<del>这里的lfsr应该也是比较良好的吧，俺猜的，有现题了，就懒狗了，没有做测试，</del> 所以我们才有上面的表。</p>
-<p>然后我们先爆破a，当ao和输出（不用全部输出啦，题目给的量有点大，随便来个1000位大概就好了）的75%相同时，大概就确定a了。</p>
-<p>然后我们同时爆破c,d。当co^do 和输出的%75相同时，大概就确定c,d了。（出题人有良心，c 和 d 给的都比较短）</p>
-<p>最后我们爆破b，把之前得到的a,c,d带入到加密程序，如果输出和题目给的输出完全相同就可了。（这次也不用测全部，来个50位，100位也就足够了。）</p>
-<h3 id="easyRSA"><a href="#easyRSA" class="headerlink" title="easyRSA"></a>easyRSA</h3><p>是<a href="https://gist.github.com/LurkNoi/dfe86ed4d16776242251318b380336e7" target="_blank" rel="noopener">2019年D3CTF common</a>一题的一个part</p>
-<p>直接用当时出题人给的题解exp， 换一换alpha的值，用解出来的phi求解私钥，解密密文，观察解密后的明文是否为flag就好</p>
-<p><del>题做出来了，但其实原理并没有懂，是一个大坑，等俺哪天学会了再说哈哈哈哈哈</del></p>
-<h3 id="ECDH"><a href="#ECDH" class="headerlink" title="ECDH"></a>ECDH</h3><p>NCCIP问题，直接构造出低阶点P（记录P的阶为N），然后发送给服务端，让他算出key，之后加密自己的输入，我们拿来异或自己的输入从而得到key，然后根据key的值（和P的关系）可以得到secret模N的一个剩余，即secret%N，多发送几个，最后来一波CRT就好。</p>
-<p>具体步骤、细节俺会专门再写一篇。  <del>在做了，在做了</del></p>
-<h3 id="Homomorphic"><a href="#Homomorphic" class="headerlink" title="Homomorphic"></a>Homomorphic</h3><p><del>这道题俺其实连解密原理都没搞懂，自己对多项式还是不够了解熟悉，所以这题就本地搭好，然后测！就硬测！</del></p>
-<p>经过测试，发现该算法如其名，具有加法同态。并且发送(1,1,1,1,,,,,,1)和(1,1,1,,,,,1)过去解密得到的明文的ascii值是0。</p>
-<p>所以直接把服务端给的flag的所有密文(FLAG)（44对，88组多项式），每一对中每一组的每一个系数都减1，发送回去给服务端解密就好。然后index输入0（多项式的表达，列表里头好像第一个是常数，也就是我们要的m），得到一位flag的ascii码，44次交互得到flag。</p>
-<p><del>没懂原理，测试出来的而已哈哈哈哈哈哈哈哈</del></p>
-<p>感觉这是非预期，毕竟让我们交互2^10次，出题人应该是看了这篇<a href="https://arxiv.org/pdf/1906.07127.pdf" target="_blank" rel="noopener">paper</a>，想让我们恢复私钥的吧哈哈哈哈哈哈哈哈。<del>俺以后有空一定看，一定看</del>    、</p>
-<p>PS：badmonkey师傅好像是根据这个来的，恢复了私钥，TQL!!!</p>
+        <p>​        元旦快乐嗷，2021年水的第一篇博客，就来随便聊聊密码学叭，欢迎感兴趣的朋友一起交流讨论吖~</p>
+<p>​        密码学这个学科，和战争是离不开关系的，从以前的罗马战争，到最近一次的大战——第二次世界大战，都有密码学活跃的身影，并且对战局也有着非常重要的影响。但在这个相对和平而互联网发展迅速的年代，密码学则活跃在各种传输、交易等协议中。</p>
+<p>​        从历史上看，1945年前，密码学这门学科可以看作一门艺术，而1945年后，信息论之父——香农，发表的一篇《Communication Theory of Secrecy Systems》指出，数据安全是基于密钥的保密性而不是算法的保密性，从此，密码学正式开始被称为一门学科，现代密码学的设计也都基于这个原则。继而是1976年现代密码学之父Whitfield Diffie和Martin Edward  Hellman提出的公钥密码学思想，被誉为密码学发展史上唯一的真正革命。从此现代密码也朝着公钥密码的方向发展。</p>
+<p>​        可能刚接触CTF的同学会觉得密码学相对其他方向门槛低。确实，如果接触的古典密码比较多的话，是会有这种感觉，因为古典密码也是出现在算力不足的年代，大多流程、理论也还是比较简单，从而也很容易被攻破。而现代密码的发明都会基于一些数学上的难题，所以学习密码学，有一个比较好的数理基础就比较重要。</p>
+<p>​        再谈谈目前的密码学算法。可以简单的分为对称密码和公钥密码（也就是非对称密码），一般来说在一个协议里，对称密码用来加解密传输的信息（因为算起来快），公钥密码用来加密传输对称密码的密钥。其中公钥密码比较常见而著名的就是基于大数分解难题的RSA、基于离散对数问题的DSA、基于椭圆曲线上离散对数问题的ECC。由于都是在有限域上，所以用的都是模运算。对称密码则可进一步拆成流密码和分组密码，其中比较重要的运算法则则是具有对合性的异或运算。流密码的思想就是通过一个初始状态，能生成一堆尽可能真随机的密钥流，用来异或明文信息得到密文信息，解密人只需要掌握这个初始状态就可以了。分组密码则是将明文和密钥输入，通过一些列复杂的的运算网络，然后计算出密文。</p>
+<p>​        所以我们要学什么？</p>
+<p>​        密码学也可以有两个终极方向，攻和守，你可以运用所学去攻破现在正在运行的算法，也可以运用所学去防御现在甚至是未来会出现的攻击手法。而在此前，你至少得把现存的一些用的比较多的密码算法给了解一遍叭，把现存的攻击手法也都给学会叭。而看懂原理、学会攻击，你至少得有相应的基础知识积累叭。</p>
+<p>​        学科上，数学、线性代数、信息安全数学基础这基本科可以算是密码学的基础课。这里说的是数学，包括但不限于高中数学、高等数学，甚至也有可能会出现一些奥赛的东西。然后是线性代数，里面的很多概念都是很有用的（虽然学的时候可能是云里雾里的，所以推荐去看一些课外的书，加深一些理解会吸收的比较好些）。最接近的就是信息安全数学基础，其实也就是抽象代数，模运算、模逆元、原根等等这些概念，还有很多运算性质，数论四大定理等等。把基础打好，对于后面一些具体密码算法的学习才容易理解。至于密码学更多的实体算法，<a href="https://github.com/JayxV/Van1sh_Utility/blob/main/paper%26book/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E2%80%94%E5%B8%B8%E7%94%A8%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B.pdf" target="_blank" rel="noopener">《深入浅出密码学》</a>是很不错的一本入门书籍。更进一步的与数学有关的密码学学习可以看看这本<a href="https://github.com/JayxV/Van1sh_Utility/blob/main/paper%26book/introduction-to-mathematical-cryptography.pdf" target="_blank" rel="noopener">《introduction-to-mathematical-cryptography》</a>。</p>
+<p>​        总之，基础很重要！基础很重要！基础很重要！</p>
+<p>​        而现在有CTF这个“工具”，你可以在学习理论知识的同时付诸于实践，更加深理解，我觉得这才是CTF带给我们真正有用的，有价值的东西。它是一个很好的工具，一个学习、交流平台。诚然在CTF竞赛中拿到flag、取得名次、赢取奖金让人兴奋，但打CTF不可能会是一个终极目标。它只是一个开始…</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
@@ -867,12 +854,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>2020 De1CTF</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">893</span></p>
+    <p><span class="copy-title">文章标题:</span>密码学学习笔记 之 密码学随笔</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-05-05, 15:57:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-24, 18:33:22</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/05/2020De1CTF/" title="2020 De1CTF">http://jayxv.github.io/2020/05/05/2020De1CTF/</a>
+    <p><span class="copy-title">发布时间:</span>2021-01-01, 00:00:00</p>
+    <p><span class="copy-title">最后更新:</span>2021-01-01, 17:09:10</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2021/01/01/密码学学习笔记之密码学随笔/" title="密码学学习笔记 之 密码学随笔">http://jayxv.github.io/2021/01/01/密码学学习笔记之密码学随笔/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -882,6 +869,46 @@
 
 
 
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
     
 
 
