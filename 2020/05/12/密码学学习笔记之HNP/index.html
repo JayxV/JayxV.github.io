@@ -312,7 +312,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="37">
-<input type="hidden" id="yelog_site_word_count" value="156.7k">
+<input type="hidden" id="yelog_site_word_count" value="156.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -837,7 +837,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-07-13 11:56:52'>2020-05-12 10:00</time>
+        创建时间:<time class="date" title='更新时间: 2021-05-06 21:41:37'>2020-05-12 10:00</time>
         
     </div>
     <div class="article-meta">
@@ -913,11 +913,11 @@
 <li>再生成三个随机数，用AES加密加密flag，key由前两个随机数组成，分别取第一个随机数和第二个随机数的高64位拼起来，iv由第三个随机数组成</li>
 </ol>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>从题目流程来看，我们目的只有一个，恢复seed。</p>
-<h4 id="step1-公式转化-1"><a href="#step1-公式转化-1" class="headerlink" title="step1-公式转化"></a>step1-公式转化</h4><p>LCG生成随机数的公式为：$s_{i+1} = a*s_i+b\pmod{m}$<img src="https://i.loli.net/2020/05/09/9YZKClW4tPdzmbS.png" alt></p>
+<h4 id="step1-公式转化-1"><a href="#step1-公式转化-1" class="headerlink" title="step1-公式转化"></a>step1-公式转化</h4><p>LCG生成随机数的公式为：$s_{i+1} = a*s_i+b\pmod{m}$</p>
 <p>但是这一题，我们只知道$s_1$ 到$s_{20}$的高64位，所以我们将$s_i$分为h、l高低位两部分，其中$h_i$已知。所以有</p>
 <p>$(h_{2}+l_{2}) \equiv a*(h_1 + l_1 )+b\pmod{m}$</p>
 <p>$l_{2} \equiv a * l _ 1+a * h _ 1+b-h _ {2}\pmod{m}$</p>
-<p>$l_{2} \equiv A _ 1 * l _ 1+B _ 1\pmod{m}$ 【$设A _ = a; B _ 1 = a * h _ 1+b-h _ {2}$】</p>
+<p>$l_{2} \equiv A _ 1 * l _ 1+B _ 1\pmod{m}$ 【$设A _1 = a; B _ 1 = a * h _ 1+b-h _ {2}$】</p>
 <p>$l _ {3} \equiv a * l _ {2}+a * h _ {2}+b-h _ {3}\pmod{m}$</p>
 <p>$l _ {3} \equiv a * A_1 * l _ {1}+a * B_1+a * h_{2}+b-h _ {3}\pmod{m}$</p>
 <p>$l _ {3} \equiv A _ {2} * l _ {1}+B _ {2}\pmod{m}$【$设A _ {2} = a * A _ 1; B _ {2} = a * B _ 1+a * h _ {2}+b-h _ {3}$】</p>
@@ -959,7 +959,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">2.7k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-12, 10:00:57</p>
-    <p><span class="copy-title">最后更新:</span>2020-07-13, 11:56:52</p>
+    <p><span class="copy-title">最后更新:</span>2021-05-06, 21:41:37</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/12/密码学学习笔记之HNP/" title="密码学学习笔记 之 HNP">http://jayxv.github.io/2020/05/12/密码学学习笔记之HNP/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
