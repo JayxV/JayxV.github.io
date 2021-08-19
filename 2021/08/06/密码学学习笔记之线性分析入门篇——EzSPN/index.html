@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>密码学学习笔记 之 线性分析入门篇——EzSPN | Van1sh的小屋</title>
+  <meta name="keywords" content=" SPN , 线性密码分析 ">
+  <meta name="description" content="密码学学习笔记 之 线性分析入门篇——EzSPN | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(39)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(13)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(16)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="39">
+<input type="hidden" id="yelog_site_word_count" value="165.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack /"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-密码学学习笔记之线性分析入门篇——EzSPN" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">密码学学习笔记 之 线性分析入门篇——EzSPN</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="密码小屋">密码小屋</a>/
+            
+                <a  data-rel="Block">Block</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">SPN</a>
+            
+            <a class="color2">线性密码分析</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2021-08-19 21:12:17'>2021-08-06 09:24</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础概念"><span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代分组密码的加密流程"><span class="toc-text">迭代分组密码的加密流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内积"><span class="toc-text">内积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性掩码"><span class="toc-text">线性掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性逼近表达式"><span class="toc-text">线性逼近表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性壳"><span class="toc-text">线性壳</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性特征"><span class="toc-text">线性特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性壳的线性概率"><span class="toc-text">线性壳的线性概率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性特征的线性概率"><span class="toc-text">线性特征的线性概率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线性区分器"><span class="toc-text">线性区分器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤1"><span class="toc-text">步骤1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤2"><span class="toc-text">步骤2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤3"><span class="toc-text">步骤3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤4"><span class="toc-text">步骤4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤5"><span class="toc-text">步骤5</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-NPUCTF2020-EzSPN"><span class="toc-text">实例-[NPUCTF2020]EzSPN</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首发于<a href="https://www.anquanke.com/post/id/250029" target="_blank" rel="noopener">安全客</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>上一篇了解了一下差分分析，这次我们结合一道CTF题目聊一聊线性分析</p>
+<p>同属于选择明文的差分分析不同，线性分析属于已知明文攻击方法，它通过寻找明文和密文之间的一个“有效”的线性逼近表达式，将分组密码与随机置换区分开来，并再此基础上进行密钥恢复攻击。</p>
+<p>在正式介绍线性分析之前，我们还是要介绍一下相关的基础概念，参考《分组密码的攻击方法与实例分析》一书</p>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>首先还是给出和差分分析一样的一个迭代分组密码的加密流程</p>
+<h3 id="迭代分组密码的加密流程"><a href="#迭代分组密码的加密流程" class="headerlink" title="迭代分组密码的加密流程"></a><strong>迭代分组密码的加密流程</strong></h3><p>假设所讨论的迭代分组密码为</p>
+<p>$E:{0,1}^n × {0,1}^l \rightarrow {0,1}^n$，</p>
+<p>其中 $n$ 为分组长度， $l$ 为密钥长度，任给 $k \in {0,1}^l, E(\cdot,k)$ 是 ${0,1}^n$ 上的置换，加密函数 $E_k(\cdot)$ 由子密钥 $k_i$ 控制的轮函数 $F(\cdot,k_i) = F _ {k _ i}(\cdot)$ 迭代 $r$ 次生成，即</p>
+<p>$E_ k(x)=F _ {k _ r} \circ F _ { k _ {r-1}} \circ \cdots \circ F _ {k _ {2}} \circ F _ {k _ {1}(x)}$ </p>
+<p>其中，轮密钥 $k_i,i=1,2,\cdots,r,$ 由密钥拓展算法对种子密钥 $k$ 进行拓展生成，为方便起见，假设第 $i$ 轮输入和输出分别为 $Y_{i-1}$ 和 $Y_i$，即 $Y_i = F_ {k _i}(Y _ {i-1})$；若明文为$X$ ，则第一轮输入为 $Y_0 = X$；若该分组密码算法有 $r$ 轮，且设密文为 $Z$，则 $Z = Y_r$</p>
+<p><img src="https://i.loli.net/2021/07/16/c6fw2oDg43kVPbv.png" alt="image-20210716094603863"></p>
+<h3 id="内积"><a href="#内积" class="headerlink" title="内积"></a>内积</h3><p>设 $a,b \in {0,1}^n, a = (a_1,a_2,\dots, a_n),b = (b_1,b_2,\dots,b_n),$ 向量 a 与 b 的内积定义为 $a \cdot b = \oplus a_i \cdot b_i ,i \in [1,n]$, 其中 $a_i \cdot b_i$ 表示比特 $a_i$ 与 $b_i$ 的与运算，即二元域$\mathbb{F}_2$ 上的乘法运算，$\oplus$ 表示异或运算，即二元域$\mathbb{F}_2$ 上的加法运算</p>
+<h3 id="线性掩码"><a href="#线性掩码" class="headerlink" title="线性掩码"></a>线性掩码</h3><p>（这是一个比较重要的概念）</p>
+<p>设$X \in {0,1}^n$，$X$ 的线性掩码定义为某个向量$\Gamma X \in {0,1}^n, \Gamma X $ 和 $X$ 的内积代表 $X$ 的某些分量的线性组合，即 $\Gamma X \cdot X = {\oplus X_i | \Gamma X_i = 1} $</p>
+<p>可以举个简单的例子，比如$X = (0,1,1,0,0,1,1,0)$，$\Gamma X = 6 = 0b110={0,0,0,0,0,1,1,0}$，所以$\Gamma X \cdot X $ 就代表着 $X$ 的第六，第七两个元素的值相互异或，也就是$\Gamma X \cdot X = X_5 \oplus X_6 = 1\oplus 1 = 0$</p>
+<h3 id="线性逼近表达式"><a href="#线性逼近表达式" class="headerlink" title="线性逼近表达式"></a>线性逼近表达式</h3><p>设迭代分组密码的轮函数为$F(x,k)$，给定一对线性掩码 $(\alpha,\beta)$，称$\alpha \cdot x \oplus \beta \cdot F(x,k)$ 为 $F(x,k)$ 的线性逼近表达式，同样，称$a \cdot x \oplus \beta \cdot E(x,k)$ 为分组密码 $E(x,k)$ 的线性逼近表达式。</p>
+<p>假设$p(\alpha,\beta) = Prob_{X,K}{ \alpha \cdot X = \beta \cdot F(x,k)},$ 则 $p$ 表示线性逼近表达式 $\alpha \cdot X \oplus \beta \cdot F(X,K) = 0$ 的概率，在线性密码分析中，一般采用偏差、相关性和势的概念来描述逼近表达式的概率特性，依次定义为 </p>
+<p>$\epsilon _ F(\alpha,\beta) = p(\alpha,\beta)-\frac{1}{2}$</p>
+<p>$Cor _ F(\alpha,\beta) = 2p(\alpha,\beta)-1$</p>
+<p>$Pot _ F(\alpha,\beta) = (p(\alpha,\beta)-\frac{1}{2})^2$</p>
+<p>将掩码$(\alpha,\beta)$所对应的线性逼近表达式的线性概率定义为 $LP(\alpha,\beta) = (2 \cdot Prob_{X,K}{ \alpha \cdot X = \beta \cdot F(x,k)}-1)^2$</p>
+<p>研究线性表达式的概率特性可以简单地描述为研究一对线性掩码的概率特性，即输入掩码 $\alpha$ 到 输出掩码 $\beta$ 的概率传播特性。</p>
+<h3 id="线性壳"><a href="#线性壳" class="headerlink" title="线性壳"></a>线性壳</h3><p>迭代分组密码的一条 $i$ 轮线性壳是指一对掩码$(\beta_0,\beta_i)$，其中$\beta_0$ 是输入掩码，$\beta_i$ 是输出掩码。</p>
+<h3 id="线性特征"><a href="#线性特征" class="headerlink" title="线性特征"></a>线性特征</h3><p>迭代分组密码的一条$i$ 轮线性特征$\Omega = (\beta_0,\beta_i,\cdots , \beta_i)$ 是指当掩码为$\beta_0$ 在 $i$ 轮加密的过程中，中间状态$Y_j$ 的掩码为$\beta_j$，其中 $1 \le j \le i.$</p>
+<p>线性特征和线性壳的区别在于，线性壳仅仅给定了输入掩码和输入掩码，中间状态的掩码值未指定；而线性特征不仅给定了输入输出掩码，还指定了中间状态的掩码值。</p>
+<h3 id="线性壳的线性概率"><a href="#线性壳的线性概率" class="headerlink" title="线性壳的线性概率"></a>线性壳的线性概率</h3><p>迭代分组密码的一条 $i$ 轮线性壳$(\beta_0,\beta_i)$的线性概率 $LP(\alpha,\beta)$ 也可记为 $LP(\alpha \rightarrow \beta)$，是指在输入 $X$, 轮密钥 $K_1,K_2,\cdots,K_i$ 取值独立且均匀分布的情形下，当输入掩码为$\beta_0$ ，在经过$i$ 轮加密后，输出掩码为$\beta_i$ 的线性概率。</p>
+<h3 id="线性特征的线性概率"><a href="#线性特征的线性概率" class="headerlink" title="线性特征的线性概率"></a>线性特征的线性概率</h3><p>类比于线性壳的线性概率，当输入掩码为$\beta_0$，在加密过程中，中间状态$Y_j$ 的掩码取值为$\beta_j$ 的线性概率，其中 $1 \le j \le i$。</p>
+<p>好的，有了如上的前置知识，我们来讲讲我们如何用线性分析来区别随机置换$\mathcal{R}$  和分组密码。</p>
+<h1 id="线性区分器"><a href="#线性区分器" class="headerlink" title="线性区分器"></a>线性区分器</h1><p>先给出一个命题，对${0,1}^n $上的随机置换$\mathcal{R}$,任意给定掩码$\alpha,\beta,\alpha \neq 0,\beta \neq0,$ 则 $LP(\alpha,\beta ) = 0,$ 即 偏差$\epsilon(\alpha,\beta) = 0$</p>
+<p>如果我们找到了一条 $r-1$ 轮线性逼近表达式 $(\alpha,\beta)$，其线性概率$LP(\alpha,\beta) \neq 0$，即偏差$\epsilon(\alpha,\beta) \neq 0$。则利用该线性逼近表达式可以将 $r-1$ 轮的加密算法与随即置换区分开来，利用该线性区分器就可以对分组密码进行密钥恢复攻击。假设攻击 $r$ 轮加密算法，为获得第 $r$ 轮 的轮密钥的攻击步骤如下。</p>
+<h3 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h3><p>寻找一个 $r - 1$轮的线性逼近表达式$(\alpha,\beta)$，设其偏差为$\epsilon$，使得 $|\epsilon(\alpha,\beta)|$ 较大。</p>
+<h3 id="步骤2"><a href="#步骤2" class="headerlink" title="步骤2"></a>步骤2</h3><p>根据区分器的输出，攻击者确定要恢复的第 $r$ 轮轮密钥 $k_r$（或者其部分比特）：设攻击的密钥比特长度为 $l$，对每个可能的候选密钥$gk_i, 0 \le i \le 2^l -1$，设置相应的 $2^l$ 个计数器 $\lambda_i$，并初始化。</p>
+<h3 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h3><p>均匀随机地选取明文 $X$，在同一个未知密钥 $k$ 下加密，（一般是让拥有密钥地服务端帮你加密）获得相应地密文 $Z$, 这里选择明文地数目为 $m \approx c \cdot \frac{1}{\epsilon ^2}$，$c$ 为某个常数。</p>
+<h3 id="步骤4"><a href="#步骤4" class="headerlink" title="步骤4"></a>步骤4</h3><p>对一个密文$Z$，我们用自己猜测地第 $r$ 轮轮密钥 $gk_i$（或其部分比特）对其进行第 $r$ 轮解密得到$Y_{r-1}$，然后我们计算线性逼近表达式 $\alpha x \cdot X \oplus \beta \cdot Y_{r-1}$ 是否为0，若成立，则给相应计数器$\lambda_i$ 加 1</p>
+<h3 id="步骤5"><a href="#步骤5" class="headerlink" title="步骤5"></a>步骤5</h3><p>将 $2^l$ 个计数器中$|\frac{\lambda_i}{m} - \frac{1}{2}|$ 最大地指所对应地密钥 $gk_i$（或其部分比特）作为攻击获得地正确密钥值。</p>
+<p><strong>Remark</strong> 针对步骤1中，我们如何去寻找一个高概率地 $r -1 $ 轮线性逼近表达式呢？例如针对一个S盒，我们可以选择穷举所有的输入、并获得相应的输出，然后穷举输入掩码、输出掩码，去获取这个S盒的相关线性特性。</p>
+<p>下面就根据一道CTF中出现的赛题来解释分析上述过程。</p>
+<h2 id="实例-NPUCTF2020-EzSPN"><a href="#实例-NPUCTF2020-EzSPN" class="headerlink" title="实例-[NPUCTF2020]EzSPN"></a>实例-[NPUCTF2020]EzSPN</h2><p>task.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> binascii <span class="keyword">import</span> hexlify, unhexlify</span><br><span class="line"><span class="keyword">import</span> Crypto.Random.random <span class="keyword">as</span> random</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line">SZ = <span class="number">8</span></span><br><span class="line">coef = [<span class="number">239</span>, <span class="number">163</span>, <span class="number">147</span>, <span class="number">71</span>, <span class="number">163</span>, <span class="number">75</span>, <span class="number">219</span>, <span class="number">73</span>]</span><br><span class="line">sbox = list(range(<span class="number">256</span>))</span><br><span class="line">random.shuffle(sbox)</span><br><span class="line">sboxi = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">256</span>):</span><br><span class="line">    sboxi.append(sbox.index(i))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doxor</span><span class="params">(l1,l2)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [x[<span class="number">0</span>]^x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> zip(l1,l2)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trans</span><span class="params">(blk)</span>:</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>, SZ, <span class="number">8</span>):</span><br><span class="line">        bits = [bin(x)[<span class="number">2</span>:].rjust(<span class="number">8</span>,<span class="string">'0'</span>) <span class="keyword">for</span> x <span class="keyword">in</span> blk[k:k+<span class="number">8</span>]]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">            res.append(int(<span class="string">''</span>.join([x[(i+<span class="number">1</span>) % <span class="number">8</span>] <span class="keyword">for</span> x <span class="keyword">in</span> bits]),<span class="number">2</span>))</span><br><span class="line">        res[k:k+<span class="number">8</span>] = [(coef[i] * res[k+i]) % <span class="number">256</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>)]</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt_block</span><span class="params">(pt, ks)</span>:</span></span><br><span class="line">    cur = doxor(pt, ks[:SZ])</span><br><span class="line">    cur = [sbox[x] <span class="keyword">for</span> x <span class="keyword">in</span> cur]</span><br><span class="line">    cur = trans(cur)</span><br><span class="line">    cur = [sboxi[x] <span class="keyword">for</span> x <span class="keyword">in</span> cur]</span><br><span class="line">    cur = doxor(cur, ks[SZ:])</span><br><span class="line">    <span class="keyword">return</span> cur</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(pt, k)</span>:</span></span><br><span class="line">    x = <span class="number">0</span> <span class="keyword">if</span> len(pt)%SZ==<span class="number">0</span> <span class="keyword">else</span> (SZ-len(pt)%SZ)</span><br><span class="line">    pt += [x]*x</span><br><span class="line">    ct = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(pt), SZ):</span><br><span class="line">        res = encrypt_block([x <span class="keyword">for</span> x <span class="keyword">in</span> pt[i:i+SZ]], k)</span><br><span class="line">        ct += <span class="string">''</span>.join([<span class="string">"&#123;:02x&#125;"</span>.format(xx) <span class="keyword">for</span> xx <span class="keyword">in</span> res])</span><br><span class="line">    <span class="keyword">return</span> ct</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doout</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(x) % <span class="number">16</span>:</span><br><span class="line">        x = (<span class="number">16</span> - len(x) % <span class="number">16</span>) * <span class="string">"0"</span> + x</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doin</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> list(unhexlify(x))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">genkeys</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> list(os.urandom(<span class="number">2</span>*SZ))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    print(sbox)</span><br><span class="line">    key = genkeys()</span><br><span class="line">    ct = encrypt(flag, key)</span><br><span class="line">    print(ct)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        pt = doin(input())</span><br><span class="line">        print(doout(encrypt(pt, key)))</span><br></pre></td></tr></table></figure>
+
+<p>题目提供一个交互，能够加密你的输入并返回密文。所以这里是否可以采用差分分析的攻击方法呢，但这里我们讨论的线性分析，所以我们就用线性分析来做这道题目里。</p>
+<p>那么看到这里所用加密系统的流程。</p>
+<p>关键函数是encrypt_block(pt, ks)，</p>
+<p>首先是一个明文和一半的密钥异或，然后是进入S盒（题目每次随机生成并提供S盒具体内容），然后trans一下，再进入一个逆S盒，最后再和另一半的密钥异或。</p>
+<p>看到这个trans函数，这里有一个int(‘’.join([x[(i+1) % 8] for x in bits]),2)，这个（i+1%8）有点类似位移的效果，然后是乘以了一个系数，但这个系数已经定死了，所以没有什么关系。</p>
+<p>首先测一个这个trans函数的一个位移效果，大概类似这样</p>
+<p><img src="https://i.loli.net/2021/08/06/UZGgqeIWRouP2A8.png" alt="image-20210806135326890"></p>
+<p>然后整个流程图（画的丑了点）<img src="https://i.loli.net/2021/08/10/KxArtmd2UP91SIE.png" alt="image-20210806142706120"></p>
+<p>那么针对这道题，我们利用线性分析攻击手法，</p>
+<p>首先<strong>步骤1</strong>，我们去分析S盒的线性特性以找到使得线性表达式偏差大的掩码对$(\alpha，\beta)$。我们穷举所有的S盒的可能的输入并计算出相应的输出，然后穷举所有的输入、输出掩码的组合，然后根据其是否符合满足线性逼近表达式 $\alpha \cdot X \oplus \beta \cdot F(X,K) = 0$ 来更新计数器，最后我们计算相应的偏差表offset</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def linearSbox():</span><br><span class="line">    <span class="built_in">global</span> linearInput	</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">256</span>):</span><br><span class="line">        si = sbox[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">256</span>):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">256</span>):</span><br><span class="line">                <span class="keyword">a</span> = bitxor(i, j) <span class="comment"># 线性估计输入</span></span><br><span class="line">                b = bitxor(si, k) <span class="comment"># 线性估计输出 </span></span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">a</span> == b:</span><br><span class="line">                    <span class="built_in">offset</span>[j][k] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">256</span>):</span><br><span class="line">        <span class="built_in">offset</span>[i] = [<span class="built_in">abs</span>(x - <span class="number">128</span>) / <span class="number">256</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">offset</span>[i]]</span><br><span class="line">    <span class="keyword">for</span> linearOutput <span class="keyword">in</span> range(<span class="number">256</span>):</span><br><span class="line">        cur = [x[linearOutput] <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">offset</span>]</span><br><span class="line">        linearInput.append(cur.index(<span class="built_in">max</span>(cur)))</span><br></pre></td></tr></table></figure>
+
+<p>其中j是输入掩码，k是输出掩码。</p>
+<p>这里的offset以输入掩码为行，输出掩码为列，所以这里的cur是获取同一输出掩码下不同输入掩码的偏差</p>
+<p><strong>并且在linearInput中记录下同一输入掩码下使得线性表达式偏差最大的输出掩码。</strong></p>
+<p>这里我们简单看一下输出的offset表</p>
+<p><img src="https://i.loli.net/2021/08/09/n4pJ5iLtaZDrfPx.png" alt="image-20210809171058522"></p>
+<p>可以看到列表的第一行很特殊，除了第一个是0.5这个极大的值以外，其他都是0。因为在输入掩码为0、输出掩码也为0的话，肯定是能够满足的情况下，针对所有的输入、输出肯定是都能满足线性逼近表达式的，所以偏差达到了最大，0.5。但是换做其他输出掩码的话，针对所有的输出，其最后的表达式的结果分布得很均匀，所以偏差为0。</p>
+<p>再举第二行第一列的0.03131…这个值的含义：就是针对所有的256个输入，当输入掩码为1，输出掩码为1时的线性逼近表达式的偏差。即有 256 * （0.03+0.5） ≈ 135 个输入满足（或者不满足）这个线性逼近表达式。</p>
+<p>有了S盒的线性特性之后，<strong>步骤2</strong>是设置一个计数器conter，然后我们开始进入<strong>步骤3</strong>搜集明文密文对。就随机选择明文，发送给服务端，然后接收服务端返回的密文即可。</p>
+<p>接着开始<strong>步骤4</strong>，由于这里有两轮加密，然后我们在步骤1已经生成了关于单个S盒的一个offset表，这个就相当于是 $1$ 轮线性特征了，那么我们接下来就按照线性分析的攻击思路，</p>
+<p>这里我们按字节猜测密钥，首先拿一个密文的第一个字节，异或第一个字节的密钥（枚举）后从S逆盒出去，然后把系数cof除掉，再根据P盒，把这个值换到相应的位置，然后这里我们根据S盒的线性特征选取合适的输出、输入掩码对我们的这对输入进行测试。若满足线性逼近表达式，则True计数加一，否则False计数加一。</p>
+<p>最后<strong>步骤5</strong>，针对每个字节我们都测一万对，取结果偏差最大的key值。这样就完成了密钥每个字节的猜测。</p>
+<p>结合代码再细细讲一遍</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">def calcOffset(pt, <span class="keyword">ct</span>, j, guessed_key):  # 猜测第j段子密钥</span><br><span class="line">    pt = <span class="keyword">list</span>(unhexlify(pt))</span><br><span class="line">    <span class="keyword">ct</span> = <span class="keyword">list</span>(unhexlify(<span class="keyword">ct</span>))</span><br><span class="line">    <span class="keyword">ct</span>[j] ^= guessed_key</span><br><span class="line">    <span class="keyword">ct</span>[j] = sbox[<span class="keyword">ct</span>[j]] # sbox即为sboxi的逆</span><br><span class="line">    <span class="keyword">ct</span>[j] = (<span class="keyword">ct</span>[j] * coef[j]) % 256</span><br><span class="line">    u1 = bitxor(pt[0], linearInput[1 &lt;&lt; ((6 - j) % 8)])</span><br><span class="line">    u2 = bitxor(<span class="keyword">ct</span>[j], 0b10000000)</span><br><span class="line">    <span class="keyword">if</span> u1 == u2:</span><br><span class="line">        <span class="keyword">return</span> True</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def linearAttack():</span><br><span class="line">    key2 = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(8): # 第二轮子密钥的第i段</span><br><span class="line">        <span class="keyword">count</span> = [0 <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="keyword">range</span>(256)]</span><br><span class="line">        <span class="keyword">for</span> guessed_key <span class="keyword">in</span> <span class="keyword">range</span>(256):</span><br><span class="line">            <span class="keyword">print</span>(<span class="string">"[+] Cracking key...(&#123;&#125;-&#123;&#125;)"</span>.<span class="keyword">format</span>(i, guessed_key))</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="keyword">range</span>(10000):</span><br><span class="line">                <span class="keyword">if</span> calcOffset(plain[j], cipher[j], i, guessed_key) == True:</span><br><span class="line">                    <span class="keyword">count</span>[guessed_key] += 1</span><br><span class="line">        bias = [<span class="built_in">abs</span>(x - 5000) / 10000 <span class="keyword">for</span> x <span class="keyword">in</span> <span class="keyword">count</span>]</span><br><span class="line">        key2.<span class="keyword">append</span>(bias.<span class="built_in">index</span>(<span class="built_in">max</span>(bias)))</span><br><span class="line">    <span class="keyword">return</span> key2</span><br></pre></td></tr></table></figure>
+
+<p>linearAttack()中我们主要关注那个循环。这里调用了calcOffset函数，传入了一对明文密文对（plain[j], cipher[j]）、索引（i）、以及猜测的密钥（guessed_key）。</p>
+<p>在calcOffset中，首先用密文异或了guessed_key，然后根据值获取从Sbox的输入，然后乘以了coef（这里已经是原来coef的逆了），接着是u2 = bitxor(ct[j], 0b10000000)，用了0b10000000作为掩码，即选取了密文的第一个bit。然后选取 linearInput[1 &lt;&lt; ((6 - j) % 8)] 做为明文第一个字节的掩码。</p>
+<p>为什么只选明文的第一个字节，以及其掩码的选取这里可能看的不是很直观，因为这里其实包含了两部分。</p>
+<p>我们需要回去注意到P盒。当这里j=0，即爆破第一个字节的密钥时，我们选取的是密文的第1个字节，掩码选的是第1个bit，那么这是从P盒输入的哪个bit传来的呢，从P盒我们可以看到这是P盒输入的第一个字节的第2bit传来的，那么P盒输入的第2bit，实际上就是S盒输出的第2bit，也就是S盒的输出掩码为0b01000000，也就是1 &lt;&lt; 6。而这个 linearInput 存的就是<strong>输出掩码为某个值的使得线性逼近表达式偏差最大的输入掩码</strong>。</p>
+<p><img src="https://i.loli.net/2021/08/10/XwUzR6DlbWJFiu1.png" alt="image-20210810092540611"></p>
+<p>当我们选取密文第二个字节的时候，根据P盒，第二个字节第1个bit来自于明文第一个字节第3个bit，也就是0b00100000，也就是1 &lt;&lt; 5，同理可推</p>
+<p>所以这里只用选明文的第一个字节，密文不同字节的第一个比特，且输入掩码为 linearInput[1 &lt;&lt; ((6 - j) % 8)]。</p>
+<p>另外可能还有一个问题，S盒的输入不是明文啊，应该是明文异或了第一个段密钥。确实，但是试想一下，在线性逼近表达式的这个式子中，密钥部分相互异或后，最后无非就是0或者1，而且由于密钥固定，所以针对固定的输入掩码，这个值是固定的。对于返回结果没有影响或者只是一个取反的效果。而我们是根据偏移来判断的，所以正并不影响结果，key的具体的值在这里也就没什么影响。</p>
+<p>举个例子，如果输入掩码是0b00110011，输入掩码是0b00001111，那么由于密钥的存在，线性逼近表达式就是这么写：$X_2 \oplus X_3 \oplus X_6\oplus X_7 \oplus K_2 \oplus K_3\oplus K_6\oplus K_7 = Y_4\oplus Y_5 \oplus Y_6 \oplus Y_7$</p>
+<p>其中$K_2 \oplus K_3\oplus K_6\oplus K_7$ 这部分无非就是等于 0 或者 1，对于结果没有影响或者只是一个取反的效果，对偏差则没有影响。</p>
+<p>爆破出第二部分key的每一个字节之后，我们就可以逆算法流程。由于S盒是双射的，用明文、密文、第二部分key就可以去恢复第一部分的key，然后再写一个解密函数就可以解决这道问题了，</p>
+<p>来自出题人的exp:</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">import os, sys</span><br><span class="line">from binascii import hexlify, unhexlify</span><br><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SZ = 8</span><br><span class="line">offset = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(256)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(256)]  #Sbox线性估计offset</span><br><span class="line">linearInput = []</span><br><span class="line">sbox, sboxi, plain, cipher = [], [], [], []</span><br><span class="line">enc_flag = None</span><br><span class="line">coef = [15, 11, 155, 119, 11, 99, 83, 249]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def getData(ip, port):</span><br><span class="line">    <span class="keyword">global</span> enc_flag, sbox, sboxi</span><br><span class="line">    io = remote(ip, port)</span><br><span class="line">    sbox_str = io.recvline()</span><br><span class="line">    sbox = eval(sbox_str)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(256):</span><br><span class="line">    	sboxi.<span class="keyword">append</span>(sbox.<span class="built_in">index</span>(i))</span><br><span class="line">    enc_flag = io.recvline().strip().<span class="keyword">decode</span>(<span class="string">"utf8"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(10000):</span><br><span class="line">        <span class="keyword">print</span>(<span class="string">"[+] Getting data...(&#123;&#125;/10000)"</span>.<span class="keyword">format</span>(i))</span><br><span class="line">        pt = hexlify(os.urandom(8)).<span class="keyword">decode</span>(<span class="string">"utf8"</span>)</span><br><span class="line">        plain.<span class="keyword">append</span>(pt)</span><br><span class="line">        io.sendline(pt)</span><br><span class="line">        <span class="keyword">ct</span> = io.recvline().strip().<span class="keyword">decode</span>(<span class="string">"utf8"</span>)</span><br><span class="line">        <span class="keyword">print</span>(<span class="keyword">ct</span>,pt)</span><br><span class="line">        cipher.<span class="keyword">append</span>(<span class="keyword">ct</span>)</span><br><span class="line">    io.<span class="keyword">close</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def doxor(l1, l2):</span><br><span class="line">    <span class="keyword">return</span> [x[0] ^ x[1] <span class="keyword">for</span> x <span class="keyword">in</span> <span class="keyword">zip</span>(l1, l2)]</span><br><span class="line"></span><br><span class="line"># 线性层</span><br><span class="line">def trans(blk):</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="keyword">range</span>(0, SZ, 8):</span><br><span class="line">        cur = blk[k:k+8]</span><br><span class="line">        cur = [(cur[i] * coef[i]) % 256 <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(8)]</span><br><span class="line">        bits = [bin(x)[2:].rjust(8, '0') <span class="keyword">for</span> x <span class="keyword">in</span> cur]</span><br><span class="line">        bits = bits[-1:] + bits[:-1]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(8):</span><br><span class="line">            res.<span class="keyword">append</span>(int(''.join([x[i] <span class="keyword">for</span> x <span class="keyword">in</span> bits]), 2))</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def bitxor(<span class="keyword">n</span>, mask):</span><br><span class="line">    bitlist = [int(x) <span class="keyword">for</span> x <span class="keyword">in</span> bin(<span class="keyword">n</span> &amp; mask)[2:]]</span><br><span class="line">    <span class="keyword">return</span> bitlist.<span class="keyword">count</span>(1) % 2</span><br><span class="line"></span><br><span class="line"># Sbox线性估计</span><br><span class="line">def linearSbox():</span><br><span class="line">    <span class="keyword">global</span> linearInput	</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(256):</span><br><span class="line">        si = sbox[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="keyword">range</span>(256):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="keyword">range</span>(256):</span><br><span class="line">                a = bitxor(i, j) # 线性估计输入</span><br><span class="line">                b = bitxor(si, k) # 线性估计输出 </span><br><span class="line">                <span class="keyword">if</span> a == b:</span><br><span class="line">                    offset[j][k] += 1</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(256):</span><br><span class="line">        offset[i] = [<span class="built_in">abs</span>(x - 128) / 256 <span class="keyword">for</span> x <span class="keyword">in</span> offset[i]]</span><br><span class="line">    <span class="keyword">for</span> linearOutput <span class="keyword">in</span> <span class="keyword">range</span>(256):</span><br><span class="line">        cur = [x[linearOutput] <span class="keyword">for</span> x <span class="keyword">in</span> offset]</span><br><span class="line">        linearInput.<span class="keyword">append</span>(cur.<span class="built_in">index</span>(<span class="built_in">max</span>(cur)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def calcOffset(pt, <span class="keyword">ct</span>, j, guessed_key):  # 猜测第j段子密钥</span><br><span class="line">    pt = <span class="keyword">list</span>(unhexlify(pt))</span><br><span class="line">    <span class="keyword">ct</span> = <span class="keyword">list</span>(unhexlify(<span class="keyword">ct</span>))</span><br><span class="line">    <span class="keyword">ct</span>[j] ^= guessed_key</span><br><span class="line">    <span class="keyword">ct</span>[j] = sbox[<span class="keyword">ct</span>[j]] # sbox即为sboxi的逆</span><br><span class="line">    <span class="keyword">ct</span>[j] = (<span class="keyword">ct</span>[j] * coef[j]) % 256</span><br><span class="line">    u1 = bitxor(pt[0], linearInput[1 &lt;&lt; ((6 - j) % 8)])</span><br><span class="line">    u2 = bitxor(<span class="keyword">ct</span>[j], 0b10000000)</span><br><span class="line">    <span class="keyword">if</span> u1 == u2:</span><br><span class="line">        <span class="keyword">return</span> True</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def linearAttack():</span><br><span class="line">    key2 = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(8): # 第二轮子密钥的第i段</span><br><span class="line">        <span class="keyword">count</span> = [0 <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="keyword">range</span>(256)]</span><br><span class="line">        <span class="keyword">for</span> guessed_key <span class="keyword">in</span> <span class="keyword">range</span>(256):</span><br><span class="line">            <span class="keyword">print</span>(<span class="string">"[+] Cracking key...(&#123;&#125;-&#123;&#125;)"</span>.<span class="keyword">format</span>(i, guessed_key))</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="keyword">range</span>(10000):</span><br><span class="line">                <span class="keyword">if</span> calcOffset(plain[j], cipher[j], i, guessed_key) == True:</span><br><span class="line">                    <span class="keyword">count</span>[guessed_key] += 1</span><br><span class="line">        bias = [<span class="built_in">abs</span>(x - 5000) / 10000 <span class="keyword">for</span> x <span class="keyword">in</span> <span class="keyword">count</span>]</span><br><span class="line">        key2.<span class="keyword">append</span>(bias.<span class="built_in">index</span>(<span class="built_in">max</span>(bias)))</span><br><span class="line">    <span class="keyword">return</span> key2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def getkey(key2):</span><br><span class="line">    <span class="keyword">ct</span> = <span class="keyword">list</span>(unhexlify(cipher[0]))</span><br><span class="line">    pt = <span class="keyword">list</span>(unhexlify(plain[0]))</span><br><span class="line">    cur = doxor(<span class="keyword">ct</span>, key2)</span><br><span class="line">    cur = [sbox[x] <span class="keyword">for</span> x <span class="keyword">in</span> cur]</span><br><span class="line">    cur = trans(cur)</span><br><span class="line">    cur = [sboxi[x] <span class="keyword">for</span> x <span class="keyword">in</span> cur]</span><br><span class="line">    key = doxor(cur, pt) + key2</span><br><span class="line">    <span class="keyword">return</span> key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def decrypt_block(<span class="keyword">ct</span>, key):</span><br><span class="line">    cur = doxor(<span class="keyword">ct</span>, key[SZ:])</span><br><span class="line">    cur = [sbox[x] <span class="keyword">for</span> x <span class="keyword">in</span> cur]</span><br><span class="line">    cur = trans(cur)</span><br><span class="line">    cur = [sboxi[x] <span class="keyword">for</span> x <span class="keyword">in</span> cur]</span><br><span class="line">    cur = doxor(cur, key[:SZ])</span><br><span class="line">    <span class="keyword">return</span> cur</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def decrypt(<span class="keyword">ct</span>, key):</span><br><span class="line">    pt = b''</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(0, len(<span class="keyword">ct</span>), SZ * 2):</span><br><span class="line">        block_ct = <span class="keyword">list</span>(unhexlify(<span class="keyword">ct</span>[i : i + SZ * 2]))</span><br><span class="line">        block_pt = decrypt_block(block_ct, key)</span><br><span class="line">        pt += bytes(block_pt)</span><br><span class="line">    <span class="keyword">return</span> pt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    getData('node4.buuoj.cn', 27125)</span><br><span class="line">    linearSbox()</span><br><span class="line">    key2 = linearAttack()</span><br><span class="line">    key = getkey(key2)</span><br><span class="line">    <span class="keyword">print</span>(key)</span><br><span class="line">    flag = decrypt(enc_flag, key)</span><br><span class="line">    <span class="keyword">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>那么对于这道简单的两轮分组密码的线性分析就到此告一段落了，但对于分组密码的学习不会到此为止，因为，还有高阶差分、截断差分、不可能差分……</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li>《分组密码的攻击方法与实例分析》(李超,孙兵,李瑞林) SS=12567685</li>
+<li><a href="https://0xdktb.top/2020/04/19/WriteUp-NPUCTF-Crypto/EzSPN.pdf" target="_blank" rel="noopener">https://0xdktb.top/2020/04/19/WriteUp-NPUCTF-Crypto/EzSPN.pdf</a></li>
+</ol>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>密码学学习笔记 之 线性分析入门篇——EzSPN</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">4.9k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2021-08-06, 09:24:25</p>
+    <p><span class="copy-title">最后更新:</span>2021-08-19, 21:12:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/" title="密码学学习笔记 之 线性分析入门篇——EzSPN">http://jayxv.github.io/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#Book','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book','#DES','#差分密码分析','#SPN','#线性密码分析',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

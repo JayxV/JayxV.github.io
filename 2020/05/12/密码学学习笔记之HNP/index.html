@@ -127,7 +127,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(37)</small></div></li>
+    <li><div class="all active">全部文章<small>(39)</small></div></li>
     
         
             
@@ -147,7 +147,7 @@
     
         
             
-            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(14)</small></div>
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(16)</small></div>
                 
                     <ul class="sub hide">
                         
@@ -179,7 +179,7 @@
                             
                         </li>
                             
-                        <li><div data-rel="Block">Block<small>(1)</small></div>
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
                             
                         </li>
                             
@@ -311,8 +311,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="37">
-<input type="hidden" id="yelog_site_word_count" value="156.6k">
+<input type="hidden" id="yelog_site_posts_number" value="39">
+<input type="hidden" id="yelog_site_word_count" value="165.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -487,6 +487,22 @@
         <a class="color5">book</a>
     </li>
     
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
     <div class="clearfix"></div>
 </div>
 
@@ -505,6 +521,22 @@
             <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
         </a>
         
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
         <a  class="比赛小屋 "
            href="/2021/04/04/2021HFCTF/"
            data-tag="Write Up"
@@ -517,7 +549,7 @@
            href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
            data-tag="RE"
            data-author="Van1sh" >
-            <span class="post-title" title="逆向学习笔记之drinkSomeTea">逆向学习笔记之drinkSomeTea</span>
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
             <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
         </a>
         
@@ -837,7 +869,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2021-05-06 21:41:37'>2020-05-12 10:00</time>
+        创建时间:<time class="date" title='更新时间: 2021-08-15 13:17:34'>2020-05-12 10:00</time>
         
     </div>
     <div class="article-meta">
@@ -927,15 +959,15 @@
 <p>这里给出生成新A 和B 的脚本</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">b=<span class="number">153582801876235638173762045261195852087</span></span><br><span class="line">a=<span class="number">107763262682494809191803026213015101802</span></span><br><span class="line">m=<span class="number">226649634126248141841388712969771891297</span></span><br><span class="line"></span><br><span class="line">h = [<span class="number">0</span>,<span class="number">7800489346663478448</span>,<span class="number">11267068470666042741</span>,<span class="number">5820429484185778982</span>,<span class="number">6151953690371151688</span>,<span class="number">548598048162918265</span>,<span class="number">1586400863715808041</span>,<span class="number">7464677042285115264</span>,<span class="number">4702115170280353188</span>,<span class="number">5123967912274624410</span>,<span class="number">8517471683845309964</span>,<span class="number">2106353633794059980</span>,<span class="number">11042210261466318284</span>,<span class="number">4280340333946566776</span>,<span class="number">6859855443227901284</span>,<span class="number">3149000387344084971</span>,<span class="number">7055653494757088867</span>,<span class="number">5378774397517873605</span>,<span class="number">8265548624197463024</span>,<span class="number">2898083382910841577</span>,<span class="number">4927088585601943730</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(h)):</span><br><span class="line">	h[i] &lt;&lt;= <span class="number">64</span></span><br><span class="line">A = [<span class="number">1</span>]</span><br><span class="line">B = [<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(h)<span class="number">-1</span>):</span><br><span class="line">	A.append(a*A[i<span class="number">-1</span>] % m)</span><br><span class="line">	B.append((a*B[i<span class="number">-1</span>]+a*h[i]+b-h[i+<span class="number">1</span>]) % m)</span><br><span class="line">print(A[<span class="number">1</span>:])</span><br><span class="line">print(B[<span class="number">1</span>:])</span><br></pre></td></tr></table></figure>
 
-<h4 id="step2-构造Lattice-1"><a href="#step2-构造Lattice-1" class="headerlink" title="step2-构造Lattice"></a>step2-构造Lattice</h4><p>现在我们二十条与 $l$ 相关的方程组了。即</p>
-<p>$l_{i+1} \equiv A_i*l_i+B_i\pmod{m}$</p>
-<p>$l_{i+1} = A_i*l_i+B_i+k_im$</p>
-<p>且对于 $l$ 我们真的一无所知么？我们其实知道 $l$ 是小于2^64的，即 $l$ 最大为64bit。这样与前面一道题就很类似了。</p>
+<h4 id="step2-构造Lattice-1"><a href="#step2-构造Lattice-1" class="headerlink" title="step2-构造Lattice"></a>step2-构造Lattice</h4><p>现在我们二十条与 $l_1$ 相关的方程组了。即</p>
+<p>$l_{i+1} \equiv A_i*l_1+B_i\pmod{m}$</p>
+<p>$l_{i+1} = A_i*l_1+B_i+k_im$</p>
+<p>且对于 $l_i$ 我们真的一无所知么？我们其实知道 $l_i$ 是小于2^64的，即 $l$ 最大为64bit。这样与前面一道题就很类似了。</p>
 <p>于是我们构造Lattice</p>
 <p>$M =<br>\begin{bmatrix}<br>m  &amp;   &amp;      &amp;    &amp;   &amp;   \newline<br>&amp; m &amp;      &amp;    &amp;   &amp;   \newline<br>&amp;   &amp;\ddots&amp;    &amp;   &amp;   \newline<br>&amp;   &amp;      &amp; m  &amp;   &amp;   \newline<br>A_1&amp;A_2&amp;\dots &amp; A_{19}&amp;1&amp;   \newline<br>B_1&amp;B_2&amp;\dots &amp; B_{19}&amp;0&amp; 2^{64}\newline<br>\end{bmatrix}$</p>
 <p>然后这里就会存在一个向量        $v =<br>\begin{bmatrix}<br>k_1 &amp; k_2 &amp; \cdots &amp; k_{19} &amp; l_1 &amp; 1<br>\end{bmatrix}$ 使得</p>
 <p>$vM =<br>\begin{bmatrix}<br>k_1 &amp; k_2 &amp; \cdots &amp; k_{19} &amp; l_1 &amp; 1<br>\end{bmatrix}<br>\begin{bmatrix}<br>m  &amp;   &amp;      &amp;    &amp;   &amp;   \newline<br>&amp; m &amp;      &amp;    &amp;   &amp;   \newline<br>&amp;   &amp;\ddots&amp;    &amp;   &amp;   \newline<br>&amp;   &amp;      &amp; m  &amp;   &amp;   \newline<br>A_1&amp;A_2&amp;\dots &amp; A_{19}&amp;1&amp;   \newline<br>B_1&amp;B_2&amp;\dots &amp; B_{19}&amp;0&amp; 2^{64} \newline<br>\end{bmatrix} = \begin{bmatrix}<br>l_2 &amp;<br>l_3 &amp;<br>\cdots &amp;<br>l_{20}  &amp;<br>l_1 &amp;<br>2^{64}<br>\end{bmatrix}<br>= v_l$</p>
-<p>其中$l_1$即为$s_1$的低位，拼上其高位，在利用a, b, m就能会恢复seed了</p>
+<p>其中$l_1$即为$s_1$的低位，拼上其高位，在利用a, b, m就能恢复seed了</p>
 <h4 id="step3-LLL-1"><a href="#step3-LLL-1" class="headerlink" title="step3-LLL"></a>step3-LLL</h4><p>&emsp;&emsp;这里我们的$v_l$向量每一位都只有约64bit，显然，它是整个格中比较短的向量了，且我们一共有19组数据，那么直接对这个Lattice M运用LLL算法就可以找到$v_l$了。（格中参数$2^{64}$的选取道理与上面一致）</p>
 <p>完整exp：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">#sage</span></span><br><span class="line"><span class="string">b=153582801876235638173762045261195852087</span></span><br><span class="line"><span class="string">a=107763262682494809191803026213015101802</span></span><br><span class="line"><span class="string">m=226649634126248141841388712969771891297</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">h = [0,7800489346663478448,11267068470666042741,5820429484185778982,6151953690371151688,548598048162918265,1586400863715808041,7464677042285115264,4702115170280353188,5123967912274624410,8517471683845309964,2106353633794059980,11042210261466318284,4280340333946566776,6859855443227901284,3149000387344084971,7055653494757088867,5378774397517873605,8265548624197463024,2898083382910841577,4927088585601943730]</span></span><br><span class="line"><span class="string">for i in range(len(h)):</span></span><br><span class="line"><span class="string">	h[i] &lt;&lt;= 64</span></span><br><span class="line"><span class="string">A = [1]</span></span><br><span class="line"><span class="string">B = [0]</span></span><br><span class="line"><span class="string">for i in range(1, len(h)-1):</span></span><br><span class="line"><span class="string">	A.append(a*A[i-1] % m)</span></span><br><span class="line"><span class="string">	B.append((a*B[i-1]+a*h[i]+b-h[i+1]) % m)</span></span><br><span class="line"><span class="string">A = A[1:]</span></span><br><span class="line"><span class="string">B = B[1:]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">M = matrix(ZZ, 21, 21)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">for i in range(19):</span></span><br><span class="line"><span class="string">    M[i, i] = m</span></span><br><span class="line"><span class="string">    M[19, i] = A[i]</span></span><br><span class="line"><span class="string">    M[20, i] = B[i]</span></span><br><span class="line"><span class="string">    M[i, 19] = M[i, 20] = 0</span></span><br><span class="line"><span class="string">M[19, 19] =  1</span></span><br><span class="line"><span class="string">M[20, 20] = 2^64</span></span><br><span class="line"><span class="string">M[19, 20]= 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#print(B)</span></span><br><span class="line"><span class="string">vl = M.LLL()[0]</span></span><br><span class="line"><span class="string">l1 = vl[-2]</span></span><br><span class="line"><span class="string">h1 = h[1]</span></span><br><span class="line"><span class="string">s1 = l1+h1</span></span><br><span class="line"><span class="string">#s1 = a*seed+b %m</span></span><br><span class="line"><span class="string">seed = ((s1 - b)*inverse_mod(a,m))%m</span></span><br><span class="line"><span class="string">print(seed)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment">#python</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LCG</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, bit_length)</span>:</span></span><br><span class="line">		b = <span class="number">153582801876235638173762045261195852087</span></span><br><span class="line">		a = <span class="number">107763262682494809191803026213015101802</span></span><br><span class="line">		m = <span class="number">226649634126248141841388712969771891297</span></span><br><span class="line">		seed = <span class="number">73991202721494681711496408225724067994</span></span><br><span class="line">		self._key = &#123;<span class="string">'a'</span>:a, <span class="string">'b'</span>:b, <span class="string">'m'</span>:m&#125;</span><br><span class="line">		self._state = seed</span><br><span class="line">        </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span></span><br><span class="line">		self._state = (self._key[<span class="string">'a'</span>] * self._state + self._key[<span class="string">'b'</span>]) % self._key[<span class="string">'m'</span>]</span><br><span class="line">		<span class="keyword">return</span> self._state</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">export_key</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> self._key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_lcg</span><span class="params">()</span>:</span></span><br><span class="line">    rand_iter = LCG(<span class="number">128</span>)</span><br><span class="line">    key = rand_iter.export_key()</span><br><span class="line">    f = open(<span class="string">"key"</span>, <span class="string">"w"</span>)</span><br><span class="line">    f.write(str(key))</span><br><span class="line">    <span class="keyword">return</span> rand_iter</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">leak_data</span><span class="params">(rand_iter)</span>:</span></span><br><span class="line">    f = open(<span class="string">"old"</span>, <span class="string">"w"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        f.write(str(rand_iter.next() &gt;&gt; <span class="number">64</span>) + <span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">return</span> rand_iter</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(rand_iter)</span>:</span></span><br><span class="line">    f = open(<span class="string">"ct"</span>, <span class="string">"wb"</span>)</span><br><span class="line">    key = rand_iter.next() &gt;&gt; <span class="number">64</span></span><br><span class="line">    key = (key &lt;&lt; <span class="number">64</span>) + (rand_iter.next() &gt;&gt; <span class="number">64</span>)</span><br><span class="line">    key = long_to_bytes(key).ljust(<span class="number">16</span>, <span class="string">b'\x00'</span>)</span><br><span class="line">    iv = long_to_bytes(rand_iter.next()).ljust(<span class="number">16</span>, <span class="string">b'\x00'</span>)</span><br><span class="line">    cipher = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">    pt = flag + (<span class="number">16</span> - len(flag) % <span class="number">16</span>) * chr(<span class="number">16</span> - len(flag) % <span class="number">16</span>)</span><br><span class="line">    ct = cipher.encrypt(pt.encode())</span><br><span class="line">    f.write(ct)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(rand_iter)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"ct"</span>, <span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    	flag = f.read()</span><br><span class="line"></span><br><span class="line">    key = rand_iter.next() &gt;&gt; <span class="number">64</span></span><br><span class="line">    key = (key &lt;&lt; <span class="number">64</span>) + (rand_iter.next() &gt;&gt; <span class="number">64</span>)</span><br><span class="line">    key = long_to_bytes(key).ljust(<span class="number">16</span>, <span class="string">b'\x00'</span>)</span><br><span class="line">    iv = long_to_bytes(rand_iter.next()).ljust(<span class="number">16</span>, <span class="string">b'\x00'</span>)</span><br><span class="line">    cipher = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">    ct = cipher.decrypt(flag)</span><br><span class="line">    print(ct)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    rand_iter = gen_lcg()</span><br><span class="line">    rand_iter = leak_data(rand_iter)</span><br><span class="line">    decrypt(rand_iter)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
@@ -959,7 +991,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">2.7k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-12, 10:00:57</p>
-    <p><span class="copy-title">最后更新:</span>2021-05-06, 21:41:37</p>
+    <p><span class="copy-title">最后更新:</span>2021-08-15, 13:17:34</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/05/12/密码学学习笔记之HNP/" title="密码学学习笔记 之 HNP">http://jayxv.github.io/2020/05/12/密码学学习笔记之HNP/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -1062,7 +1094,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#Book','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#Book','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book','#DES','#差分密码分析','#SPN','#线性密码分析',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

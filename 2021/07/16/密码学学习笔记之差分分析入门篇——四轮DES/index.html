@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>密码学学习笔记 之 差分分析入门篇——四轮DES | Van1sh的小屋</title>
+  <meta name="keywords" content=" DES , 差分密码分析 ">
+  <meta name="description" content="密码学学习笔记 之 差分分析入门篇——四轮DES | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(39)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(13)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(16)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="39">
+<input type="hidden" id="yelog_site_word_count" value="165.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack /"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-密码学学习笔记之差分分析入门篇——四轮DES" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">密码学学习笔记 之 差分分析入门篇——四轮DES</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="密码小屋">密码小屋</a>/
+            
+                <a  data-rel="Block">Block</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">DES</a>
+            
+            <a class="color2">差分密码分析</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2021-08-19 21:12:42'>2021-07-16 09:24</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础概念"><span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4轮-DES-算法的差分分析"><span class="toc-text">4轮 DES 算法的差分分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者的“翻译”"><span class="toc-text">笔者的“翻译”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-text">结语</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首发于<a href="https://www.anquanke.com/post/id/249403" target="_blank" rel="noopener">安全客</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>密码学学习笔记断更快半年了，最近又重新拾起了对密码学的学习，以一篇对四轮DES的差分分析“复出”。</p>
+<p>对于差分密码分析的学习，参考《分组密码的攻击方法与实例分析》</p>
+<p>这里就不重新介绍一遍DES的算法流程了，网上一大把。我们研究对DES算法的分析时，由于DES的初始置换及其逆置换均以公开，故在安全性分析时就可以将其忽略。另外我们这里暂且只分析四轮DES，所以有很多概率相关的概念也可以暂时不用涉及。</p>
+<p>DES差分分析的关键就在于其S盒差分分布的不均匀特性，何为不均匀特性，即相同的差分进入S盒，输出的差分是不均匀分布的。</p>
+<p>不过在详细介绍之前，还是先声明一些概念比较好。</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p><strong>迭代分组密码的加密流程</strong></p>
+<p>假设所讨论的迭代分组密码为</p>
+<p>$E:{0,1}^n × {0,1}^l \rightarrow {0,1}^n$，</p>
+<p>其中 $n$ 为分组长度， $l$ 为密钥长度，任给 $k \in {0,1}^l, E(\cdot,k)$ 是 ${0,1}^n$ 上的置换，加密函数 $E_k(\cdot)$ 由子密钥 $k_i$ 控制的轮函数 $F(\cdot,k_i) = F _ {k _ i}(\cdot)$ 迭代 $r$ 次生成，即</p>
+<p>$E_ k(x)=F _ {k _ r} \circ F _ { k _ {r-1}} \circ \cdots \circ F _ {k _ {2}} \circ F _ {k _ {1}(x)}$ </p>
+<p>其中，轮密钥 $k_i,i=1,2,\cdots,r,$ 由密钥拓展算法对种子密钥 $k$ 进行拓展生成，为方便起见，假设第 $i$ 轮输入和输出分别为 $Y_{i-1}$ 和 $Y_i$，即 $Y_i = F_ {k _i}(Y _ {i-1})$；若明文为$X$ ，则第一轮输入为 $Y_0 = X$；若该分组密码算法有 $r$ 轮，且设密文为 $Z$，则 $Z = Y_r$</p>
+<p><img src="https://i.loli.net/2021/07/16/c6fw2oDg43kVPbv.png" alt="image-20210716094603863"></p>
+<p><strong>差分值</strong></p>
+<p>设 $X,X^* \in {0,1}^n,$ 则 $X$ 和 $X ^ <em>$ 的差分值定义为 $\Delta X = X \oplus X^</em>$</p>
+<p><strong>差分对</strong></p>
+<p>设 $\alpha , \beta \in {0,1}^n,$ 假设迭代分组密码的输入对$(X,X^<em>)$ 的差分值为 $X \oplus X^</em> = \alpha$，经过 $i$ 轮加密之后，输出对 $(Y_i,Y_i^<em>)  $ 的差分值为 $Y_i \oplus Y_i^</em> = \beta$，则称$(\alpha,\beta)$ 为该分组密码的一个 $i$ 轮差分对，特别地，当 $i=1$ 时，$(\alpha , \beta)$显示了论函数 $F$ 的差分传播特性，称 $\alpha$ 为 $F$ 的输入差分，$\beta$ 为 $F$ 的输出差分。</p>
+<p>由于这里我们暂且之分析四轮DES，故上述概念就已足够。</p>
+<p>首先我们先分析输入差分经过论函数 $F$ 的基本组件后输出差分的性质：</p>
+<ol>
+<li>密钥加：$(x \oplus k) \oplus(x^* \oplus k) = x \oplus x^*$</li>
+<li>拓展变换 $E$：$E(x \oplus k)\oplus E(x^* \oplus k) = E(x \oplus k \oplus x^* \oplus k) = E(x \oplus x^*)$</li>
+<li>$S$ 盒：$S(x) \oplus S(x^<em>) = y \oplus y^</em>$，结果不确定，不仅与$x \oplus x^*$ 有关，还与 $x$ 有关</li>
+<li>$P$ 置换：$P(y) \oplus P(y^<em>) = P(y\oplus y^</em>)$</li>
+</ol>
+<p>我们可以看到，基本组件中除 $S$  盒外，其他线性组件的差分传播都是确定的，只有 $S$ 盒这个非线性组件使得差分传播存在不确定性。而一般来说，只有通过不确定性才能获得信息量，因此，<strong>对论函数的差分分析在本质上是根据 $S$ 盒的差分传播特性来恢复密钥。</strong></p>
+<p>因此，为恢复轮函数 $F$ 中进入第 $i$ 个 $S$ 盒的密钥，我们选择明文对 $(x,x^<em>)$，使得进入第 $i$ 个 $S$ 盒的输入差分非零。然后我们需要获得此次轮函数的输出差分$\Delta = F(x\oplus k)\oplus F(x^</em> \oplus k)$，根据 $P$ 置换的可逆性，求得 $\delta = P^{-1}(\Delta)$，<strong>由$(E(x),E(x^*),\delta)$ 可建立第 $i$ 个 $S$ 盒的差分分析模型。</strong>（注：这里的$E(x),E(x^*)$ 为拓展变换 $E$）</p>
+<h2 id="4轮-DES-算法的差分分析"><a href="#4轮-DES-算法的差分分析" class="headerlink" title="4轮 DES 算法的差分分析"></a>4轮 DES 算法的差分分析</h2><p>流程图如下</p>
+<p><img src="https://i.loli.net/2021/07/16/Rn3cVTrO5yw7b1f.png" alt="image-20210716102741455"></p>
+<p>我们记：</p>
+<ol>
+<li>明文对和相应的差分记为$(P,P^*)$ 和 $P’$</li>
+<li>密文对和相应的差分记为$(T,T^*)$ 和 $T’$</li>
+<li>明文左半部分、右半部分及其差分记为$(L,R)$ 和 $(L’,R’)$</li>
+<li>密文左半部分、右半部分及其差分记为$(l,r)$ 和 $(l’,r’)$</li>
+<li>第1、2、3、4轮函数的输入和输入差分依次记为$a,b,c,d$ 和 $a’, b’,c’,d’$</li>
+<li>第1、2、3、4轮函数的输出和输出差分依次记为$A,B,C,D$ 和 $A’, B’,C’,D’$</li>
+</ol>
+<p>4轮DES的差分分析本质上仍然是对S和的差分分析，</p>
+<ol>
+<li><p>首先我们由密文对 $T = (l,r),T^* = (l^<em>,r^</em>),$可以获得第4轮轮函数的输入对$(r,r^<em>)$，进而也可以获得8个 $S$ 盒的输入对（密钥加之前的数据）为 $(E(r),E(r^</em>));$ <strong>简单分析 $S$ 盒针对差分的扩散特性以及拓展变换 $E$ 的性质可知，第 4 轮轮函数的输入差分 $r’$ 也即 $d’$ 经过拓展变换 $E$ 后（成为 $S$ 盒的输入差分)，$E(r’)$ 几乎会让 8 个 $S$ 盒 都活跃，即这个 8 个 $S$ 盒的输入差分都非0。</strong></p>
+</li>
+<li><p>第 4 轮轮函数的输出差分为 $D’ = l’ \oplus c’ = l’ \oplus a’ \oplus B’$ ,其中 $l’ = l \oplus l^<em>$，已知。$a’ = 00000000$，$B’ = P(*0000000)$，其中 $</em>$ 为未知的 4 比特向量，表示当第 2 轮轮函数中第一个 $S$ 盒 $S_1$ 的输入差分为 04（由于拓展变换）时可能的输出差分，未知。从而，第4轮轮函数中 8 个 $S$ 盒的输出差分为 $P^{-1}(D’)=P^{-1}(l’ \oplus P(<em>0000000)) = P^{-1}(l’) \oplus (</em>0000000)$，可求。故第四轮中$S_2,S _3,S _ 4, S _ 5, S _ 6, S _ 7, S _ 8$ 共 7 个$S$ 盒的输出差分均可求。</p>
+</li>
+<li><p>由上述两个步骤我们可以建立对7个$S$ 盒的差分分析模型，通过对$S$ 盒的差分分析，我们可以恢复 $7 × 6 = 42$ bit 的轮密钥，由密钥拓展算法，其他 $14$ bit 的密钥可通过穷尽搜索恢复。</p>
+<p>上述攻击中我们未能恢复第 4 轮中进入第一个 $S$ 盒的密钥，是因为它的输出差分未知，因此我们可以选择另外的明文差分，让第二轮的输入差分经过拓展变换后导致第 1 个 $S$ 盒不活跃，即输入差分为0，这样我们就可求得第四轮中第 1 个 $S$ 盒得差分输出了。进而只用再穷尽搜索其他 $8$bit 密钥。</p>
+</li>
+</ol>
+<p>好的，上面大部分是《分组密码的攻击方法与实例分析》书中的原话。现在，我再用通俗易懂的话来翻译翻译。（也就是讲的再细一点啦）</p>
+<h2 id="笔者的“翻译”"><a href="#笔者的“翻译”" class="headerlink" title="笔者的“翻译”"></a>笔者的“翻译”</h2><p>我们看到，首先我们构造差分 $L’$为 20000000 ，$R’$ 为 00000000，这没什么问题，右下角的x脚标说明这是个十六进制表示，不过注意这里的$L’,R’$已经是$IP$ 置换过后的了，不是明文差分 $X’$ 的左右两部分哦，是$IP(X’)$的左右两部分。</p>
+<p>然后我们这些个差分进入<strong>第一轮</strong>，右边的$a’=00000000$ 进到 $F$ 轮函数，由于是$00000000$，怎么线性非线性变换都没所谓，先$E$ 盒拓展，再轮密钥加，最后出了$S$ 盒也还是 $00000000$，再走一个$P$盒置换$P(00000000)$也还是 $00000000$。<strong>所以第一轮走完</strong>，左边差分等于 $A’ \oplus L’=00000000 \oplus 20000000=20000000$，右边还是原来的 $a’=00000000$</p>
+<p><strong>到了第二轮</strong>，这个轮函数的输入是 $b’ = A’ \oplus L’=20000000$，先先$E$ 盒拓展，变成40000000，然后分为八组进入$S$ 盒，显然后面 7 组都是0，不会激活 $S$ 盒，那出来还是0。（可能会突然疑惑，轮密钥加呢？看到最上面的差分经过 $F$ 函数各个组件的性质第一条，差分不受轮密钥加的影响，所以后面也都不管它了）但是第一组是以差分为 4 进入 $S$ 盒的，由于性质第三条，$S$ 盒的输出差分不确定，这与输出差分有关，也与具体的输出有关。所以，这一轮 $S$ 盒的输出差分为 <strong>*0000000</strong>，之后还得 $P$ 盒置换，所以$B’ = P(<em>0000000)$。*</em>那么第二轮走完*<em>，左边等于$B’ \oplus R’ = P(</em>0000000) \oplus 00000000=P(*0000000)$，右边等于$b’ = 20000000$</p>
+<p><strong>开始第三轮</strong>，这一轮开始就要乱起来了。首先这个轮函数的输入是 $c’ = B’ \oplus R’= P(*00000000)$，我们看一下具体的 $P$ 盒，</p>
+<p><img src="https://i.loli.net/2021/07/16/RqXyO4evtG2ITh1.png" alt="image-20210716145106845"></p>
+<p>这里我们不确定的前四个bit被扩散到了第3，5，6，8组，也就是说现在我们的$c’ = 00<em>0**0</em>$，然后这里还要先$E$ 盒拓展，看看 $E$ 盒</p>
+<p><img src="https://i.loli.net/2021/07/16/8yswI2QWfiuENgK.png" alt="image-20210716152720348"></p>
+<p>那么进入$S$ 盒前<img src="https://i.loli.net/2021/07/19/DbuGAxfJZm7roQU.png" alt="image-20210719103406864"></p>
+<p>可以看到，几乎每一组都被”污染了“，只剩第5组还是 0 那么 $C’ = <strong><em>*0</em></strong>$，然后这里还有一个 $P$ 盒置换，<strong>那么第三轮走完，</strong>左边等于$C’ \oplus b’ = 20000000 \oplus P(<strong><em>*0</em></strong>)$，右边等于$c’ = <strong><em>*0</em></strong>$（注，这里 * 为不确定的意思，进入$S$ 盒前的 * 大概率不等于出 $S$ 盒后的 *）</p>
+<p><strong>到最后的第四轮了</strong>，此时进入 $S$ 盒的是$d’ = C’ \oplus b’$,万幸只有四轮，所以$d’ = r’$,由于$r’$ 是可由最后的输出密文右半部分求一个$IP$ 逆置换而来，因此，$d’$ 已知。</p>
+<p>我们直接计算$d’$ 可以发现 $d’$几乎不会有 0 bit，也可以推一下，因为 $d’ = P(<strong><em>*0</em></strong>) \oplus 20000000$，而由于这个$P$ 盒置换，第5组最终也会被”污染“，那么可以预见，每一组进入 $S$ 盒的差分都被”污染“了，也就是说每一个 $S$ 盒都会被激活。这也就是书中所说的<strong>简单分析 $S$ 盒针对差分的扩散特性以及拓展变换 $E$ 的性质可知，第 4 轮轮函数的输入差分 $r’$ 也即 $d’$ 经过拓展变换 $E$ 后（成为 $S$ 盒的输入差分)，$E(r’)$ 几乎会让 8 个 $S$ 盒 都活跃，即这个 8 个 $S$ 盒的输入差分都非0。</strong></p>
+<p>那么到此四轮DES分析完毕。其实也就说明了一个问题，进入第四轮的 $S$ 盒的输入会激活所有的 $S$ 盒，然后进入第四轮 $S$ 盒的输入差分已知，从第四轮后面7个 $S$ 盒出来的输出差分可求，由此我们可以建立对这7个$S$ 盒的差分分析模型以求出第四轮的轮密钥。</p>
+<p>接下来简单讲讲具体怎么求。</p>
+<p>首先拿到最后的输出明文差分 $Y’$,首先对右半边求 $IP$ 逆置换得到 $d’=r’$，然后对其用 $E$盒 做拓展置换。先打住，我们去求一下第四轮 $S$ 盒 的输出差分$P^{-1}(D’)$</p>
+<p>我们拿到输出明文差分$Y’$,对做半边求 $IP$ 逆置换得到 $l’ = c’ \oplus D’$,这个$c’ = a’ \oplus B’ = 00000000 \oplus P(<em>00000000) $，所以$P^{-1}(D’) = P^{-1}(c’ \oplus l’)=P^{-1}(a’ \oplus B’ \oplus l’) = P^{-1}(P(</em>0000000) \oplus l’)$</p>
+<p>好了，我们有了$S$盒输入差分$E(IP^{-1}(Y’_r))$，有了 $S$ 盒输出差分 $P^{-1}(P(*0000000) \oplus IP^{-1}(Y’_l)$，现在我们对每个 $S$ 盒开始爆破其相干的轮密钥分组了</p>
+<p>第四轮的轮密钥会分为8组，分别和经过 $E$ 盒拓展置换的 8 组输入异或后最终进入 $S$ 盒。这8组输入差分在与轮密钥异或前后是不会变的，但是我们再次强调前面提到过的第三条性质：<strong>$S$ 盒：$S(x) \oplus S(x^<em>) = y \oplus y^</em>$，结果不确定，不仅与$x \oplus x^*$ 有关，还与 $x$ 有关</strong>。输入的差分没变，但是两次输入的具体值因为轮密钥的异或，会发生变化。因此改变这里的轮密钥，是会使得 $S$ 盒的输出差分受影响的。</p>
+<p>但是呢，但是呢，我们不是已经知道输出差分了么？啊哈，那么很显然了，我们只要不断地尝试每个 $S$ 盒那一组的轮密钥——轮密钥加，再 $S$ 盒输出差分，然后对比我们已知的输出差分，如果匹配，则该轮密钥放入待选集合。由于每个 $S$ 盒只用到 6bit 轮密钥，因此穷举复杂度只有 $7× 2^6$，完全可以接受。然后会出现多解的情况。换一组具有相同差分（非必须，差分为40000000 00000000也可）的明文输入，得到一个新的解集，再取交集即可。根据实际情况，一般取四对差分明文就能有很大概率解出 42 bit的轮密钥。</p>
+<p>然后现在有两个选择，一个是选择复杂度为 $2^{14}$ 穷举，另一个是换一下差分，不要激活到第一个 $S$ 盒就行。这样就能恢复全部的48 bit密钥，然后再进行复杂度为 $2^8$ 的穷举，两种复杂度倒也都是能接受的。</p>
+<p>有了48bit的轮密钥后，我们知道密钥拓展用的压缩 $P$ 盒</p>
+<ol>
+<li>所以我们先根据 $P$ 盒将 48 bit 的密钥位置先还原，</li>
+<li>剩下的空位再直接穷举，最后得到56bit的轮密钥，</li>
+<li>然后根据轮密钥生成的方式，将第四轮轮密钥还原成最初的密钥，</li>
+<li>然后我们选取一对服务端生成的明文密文对，用我们的密钥对明文进行加密，</li>
+<li>观察得到的密文是否与服务端生成的密文一致，若一致则得到正确密钥，否则回到第二步。</li>
+</ol>
+<p>至此，4轮DES差分就到此结束了。可以看到，还没有用到概率论的知识，这是因为轮次比较少，前面我们分析的每一轮都是确定的，而等轮次增大到8轮以后就要开始引入统计分析与概率论了，取寻找概率较大的差分路径，这才是差分分析的完全体。</p>
+<p><strong>Remark</strong>：前面我们提到，<strong>DES差分分析的关键就在于其S盒差分分布的不均匀特性，何为不均匀特性，即相同的差分进入S盒，输出的差分是不均匀分布的。</strong>现在回头来看看这句话应该就能理解了，如果S盒差分分布均匀，相同地输入差分能够得到相同的输出差分，那么，我们就没办法去穷举验证我们的轮密钥了，因为我们没有了标准去区分密钥的正确与否。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>差分分析入门篇到此告一段落，希望接下来能有进阶篇叭，如果我学的会，能够理解的话哈哈哈哈哈哈哈哈哈哈哈哈哈。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>密码学学习笔记 之 差分分析入门篇——四轮DES</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.7k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2021-07-16, 09:24:25</p>
+    <p><span class="copy-title">最后更新:</span>2021-08-19, 21:12:42</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/" title="密码学学习笔记 之 差分分析入门篇——四轮DES">http://jayxv.github.io/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#Book','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book','#DES','#差分密码分析','#SPN','#线性密码分析',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
