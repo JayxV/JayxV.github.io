@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>区块链学习笔记之初探以太坊 | Van1sh的小屋</title>
+  <meta name="keywords" content=" ETH ">
+  <meta name="description" content="区块链学习笔记之初探以太坊 | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(43)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(14)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="合约小屋"><i class="fold iconfont icon-right"></i>合约小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="contract">contract<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(16)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="43">
+<input type="hidden" id="yelog_site_word_count" value="181.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ETH</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/11/区块链学习笔记之paradigm-CTF babysandbox/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之paradigm-CTF babysandbox">区块链学习笔记之paradigm-CTF babysandbox</span>
+            <span class="post-date" title="2022-02-11 16:22:00">2022/02/11</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/01/23/区块链学习笔记之RealWorld体验赛/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之RealWorld体验赛——TransferFrom">区块链学习笔记之RealWorld体验赛——TransferFrom</span>
+            <span class="post-date" title="2022-01-23 00:11:00">2022/01/23</span>
+        </a>
+        
+        <a  class="合约小屋 "
+           href="/2021/12/22/区块链学习笔记之初探以太坊/"
+           data-tag="ETH"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之初探以太坊">区块链学习笔记之初探以太坊</span>
+            <span class="post-date" title="2021-12-22 10:16:00">2021/12/22</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/08/23/2021 祥云杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 祥云杯">2021 祥云杯</span>
+            <span class="post-date" title="2021-08-23 14:07:00">2021/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack/"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-区块链学习笔记之初探以太坊" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">区块链学习笔记之初探以太坊</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="合约小屋">合约小屋</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">ETH</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2022-02-14 20:42:54'>2021-12-22 10:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取测试币"><span class="toc-text">获取测试币</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rinkeby"><span class="toc-text">rinkeby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ropsten"><span class="toc-text">ropsten</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RPC"><span class="toc-text">RPC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MetaMask"><span class="toc-text">MetaMask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合约"><span class="toc-text">合约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#remix"><span class="toc-text">remix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#脚本交互"><span class="toc-text">脚本交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署合约"><span class="toc-text">部署合约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#opcode"><span class="toc-text">opcode</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;属于是一个密码手不好好学密码，又来以太坊开新坑了。主要是之前在先知上看到对一道智能合约练习题目的<a href="https://xz.aliyun.com/t/2718" target="_blank" rel="noopener">解析</a>，里面用到了ECDSA相关的临时密钥重用攻击，从而恢复了合约owner的私钥。虽然在读了签名的生成代码（python的web3模块）后意识到了在实际运用中几乎是碰不见这样的场景，但由此也是对智能合约产生了那么一丢丢兴趣，<del>从而开始走上了又一条不归路</del></p>
+<p>&emsp;&emsp;在写下这篇文章前已经是学了些以太坊相关的杂七杂八的知识，所以也是想通过这么一篇文章来对之前习得的知识做一个梳理、总结，也希望给初学者们提供一点“前车之鉴”。但由于是初学，也还没有很深入的去看以太坊的底层源码，所以对以太坊的一些东西应该还是会存在一些想当然的误解，希望在学习的过程中能不断的勘误，当然有大佬指正则是更好了。</p>
+<p>&emsp;&emsp;区块链这么个大概念这里就不重复的叙述了，相关的资料和书籍也都有很多，我们直接切入主题。首先我们需要知道的是，作为一个去中心化的东西，没了中心化，那谁提供服务呢？是处于世界各地的节点，P2P的模式，就是每一个人都是服务的享受着，也是服务的提供者。我们在接受信息的同时也在传递并维护（感觉提供服务，维护信息主要还是矿工做的事）着信息。每个人都可以作为一个节点，但这个节点呢，也有区别，它可以在不同的链中。我们知道除了主链以外呢，还会有很多测试链，是的呀，项目落地前总的先测试一下叭，本地测试可以搭私链，想让更多的人访问的话也可以选择那些公认的测试链。在私链上你可以给自己账户生成很多测试代币，测试链上你可以找相应的水管（faucets），水管是啥？就是无偿获取测试币的地方。</p>
+<p>&emsp;&emsp;如何领取测试币，以ropsten和rinkeby为例</p>
+<h2 id="获取测试币"><a href="#获取测试币" class="headerlink" title="获取测试币"></a>获取测试币</h2><h3 id="rinkeby"><a href="#rinkeby" class="headerlink" title="rinkeby"></a>rinkeby</h3><p>&emsp;&emsp;原来的水管似乎有点问题，可以去这里<a href="https://faucets.chain.link/rinkeby，输入你的账户（可以利用MetaMask插件生成一个账户）地址，一次可以获取0.1eth" target="_blank" rel="noopener">https://faucets.chain.link/rinkeby，输入你的账户（可以利用MetaMask插件生成一个账户）地址，一次可以获取0.1eth</a></p>
+<p><img src="https://s2.loli.net/2022/02/14/Gn7AFlcshJSaui4.png" alt="image-20220214111434710"></p>
+<p><img src="https://s2.loli.net/2022/02/14/1OsGxuzvHknbrBI.png" alt="image-20220214111403997"></p>
+<h3 id="ropsten"><a href="#ropsten" class="headerlink" title="ropsten"></a>ropsten</h3><p>&emsp;&emsp;到<a href="https://faucet.ropsten.be/" target="_blank" rel="noopener">https://faucet.ropsten.be/</a> 这里输入你的账户地址，一次会给【0.3】eth，不过要等比较久似乎。</p>
+<p>&emsp;&emsp;还有一个就是MetaMask的水管<a href="https://faucet.metamask.io/" target="_blank" rel="noopener">https://faucet.metamask.io/</a></p>
+<p><img src="https://s2.loli.net/2022/02/14/xiQaL7NTARYJ5ZC.png" alt="image-20220214140125865"></p>
+<p>&emsp;&emsp;上面是获取 1 eth，下面是给他捐 eth（如果你账户上有很多 eth 的话就没法再获取了）</p>
+<p>&emsp;&emsp;前面提到了两个链，我们可以把这两个链理解成两个平行世界，在这个世界里的交易和那个世界里是毫无关系的，但这两个时间中与合约相关的规则都是一样的，比如部署的合约地址运算规则，部署合约消耗的gas之类的。并且一个账户也是可以在所有链上存在的。</p>
+<h2 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h2><p>&emsp;&emsp;那么我们如何连接上这些链呢？我这用的是RPC，可以理解为链上的一个节点，你通过这个节点作为媒介和链上的其他账户进行交互。那么如何获取一个RPC呢，可以选择去infura.io注册一个账户，创建一个项目，它会提供相应的代理RPC【比如这里就是ropsten的】<img src="https://s2.loli.net/2022/02/14/Hob7z1ksOaedpg3.png" alt="image-20220214143229332"></p>
+<p>&emsp;&emsp;然后你再程序里【以python为例】输入<code>w3 = Web3(HTTPProvider(&quot;https://ropsten.infura.io/v3/*************&quot;))</code> 相当于就是连上这条测试链了。不过你还得在配置里允许一些在进行交易的时候用的方法，不然就都会被ban</p>
+<p><img src="https://s2.loli.net/2022/02/14/eNPuQDUY1BAbHmr.png" alt="image-20220214143540312"></p>
+<p>&emsp;&emsp;另一个比较方便的是用MetaMask</p>
+<h2 id="MetaMask"><a href="#MetaMask" class="headerlink" title="MetaMask"></a>MetaMask</h2><p>&emsp;&emsp;用MetaMask钱包插件去管理账户还是挺方便的。之所以称之为“钱包”，是因为在里面你不仅可以保存多个账户，也可以根据场景随意的进行主链、测试链的切换。具体安装和注册这里就不介绍了，google商店走一波就好。弄好了之后，在上面注册或者导入一个账户，然后我们点击头像-&gt;设置-&gt;网络，选择你想看的链，就能看到MetaMask用的RPC了（其实也是infura的）</p>
+<p><img src="https://s2.loli.net/2022/02/14/RvUNG1F8gEkXMaT.png" alt="image-20220214144122140"></p>
+<h2 id="合约"><a href="#合约" class="headerlink" title="合约"></a>合约</h2><p>&emsp;&emsp;现在呢我们有自己的账户了，那么该怎么去和其他外部账户和合约账户交互呢？和外部账户的交互就只有转账了，这个可以用MetaMask，至于和合约账户的交互，这里比较方便的就是用remix，有<a href="http://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.7.0+commit.9e61f92b.js" target="_blank" rel="noopener">在线</a>的，也有离线的（我一般比较喜欢用在线的）</p>
+<h3 id="remix"><a href="#remix" class="headerlink" title="remix"></a>remix</h3><p>&emsp;&emsp;首先得有一个合约，solidityx相关的就不在这里涉及了。然后编译（建议翻墙，不然好像没编译器用）</p>
+<p><img src="https://s2.loli.net/2022/02/14/BDdVqoU1EI3gSxP.png" alt="image-20220214152039716"></p>
+<p>;然后就可以选择部署</p>
+<p><img src="https://s2.loli.net/2022/02/14/quQVGWZvRBPoXS1.png" alt="image-20220214152420679"></p>
+<p>1.部署的环境有三种</p>
+<p><img src="https://s2.loli.net/2022/02/14/Z8XV5EyzDaTAUkb.png" alt="image-20220214152454547"></p>
+<p>&emsp;前两个都是JVM，纯纯本地测试用了</p>
+<p>&emsp;第三个就是和你的MetaMask交互，用测试链</p>
+<p>&emsp;第四个就是你自己提供的RPC，就是私链（这个我还没用过，好像在RPC那里另外设置一下）</p>
+<p>2.部署账户，如果是JVM的话，他会给账户，而且有足够的钱，如果是测试链，他会获取你MetaMask用的账户，第三种没用过，，还不知道</p>
+<p>3.设置一个部署合约会花的gas的上限</p>
+<p>4.往部署的合约里塞点初始的资金（可选）</p>
+<p>5.选择你编译好的要部署的合约</p>
+<p>6.有些合约部署的时候需要参数，这根据你合约的构造函数来的</p>
+<p>7.如果合约已经部署好了（被你，或者是别人），可以直接填入那个合约部署的地址</p>
+<p>&emsp;&emsp;部署好了之后就可以开始交互了</p>
+<p><img src="https://s2.loli.net/2022/02/14/AgViESPGCj9QbX2.png" alt="image-20220214153314709"></p>
+<p>&emsp;&emsp;合约的名字旁边就是合约的地址，然后下面是一个可以调用的方法。需要参数的它会给个框框出来。有些调用只是获取一些值，不涉及更改合约的状态，也就不需要gas和value，会直接返回值。而有些称之为交易的调用，是需要gas，（有的还要value）这个时候你的MetaMask会跳出来，帮你打包好交易，计算好要花的gas，设置一个合理的gasPrice，确定nonce，并签好名，最后让你点确定是否允许这次交易（毕竟是要花钱的事，还是得问问你的）。可以看到，MetaMask还是很好用的，不仅帮你存账户，和remix联动还可以帮你构造交易。但有时候会遇到私链，然后remix又用不上，这个时候，麻烦大了。</p>
+<h3 id="脚本交互"><a href="#脚本交互" class="headerlink" title="脚本交互"></a>脚本交互</h3><p>&emsp;&emsp;作为一个密码手，肯定还是比较用python去操作的。这里要用的是python的web3模块，pip安装走一波就好了。</p>
+<h3 id="部署合约"><a href="#部署合约" class="headerlink" title="部署合约"></a>部署合约</h3><p>&emsp;&emsp;在部署合约之前，我们要先做一些准备工作，你得把合约给编译好（好像有python和solc-x联动的东西，但是我没用起来，所以我还是用的remix去编译的）然后拿到合约的字节码和ABI(接口)，<img src="https://s2.loli.net/2022/02/14/edbFUEhPBaOiCAf.png" alt="image-20220214155811685"></p>
+<p>&emsp;&emsp;接着决定在哪条链上部署这个合约，是作为一个业务在主链上运行呢？还是先部署到测试链上做一个测试，又或者是想部署到自己的私链上。不同的选择我们就需要用到不同的RPC，所以第一步，我们先得初始化，RPC作为一个参数，这里用的是私链</p>
+<p><code>from web3 import Web3</code></p>
+<p><code>w3 = Web3(HTTPProvider(&quot;http://114.115.157.63:8545/&quot;))</code></p>
+<p>然后部署合约是需要花钱的，花钱的话，我们就得需要一个账户</p>
+<p><code>w3.eth.account.from_key(&#39;0x6160feb8eb4**********************&#39;)</code></p>
+<p>可以先看看账户里的eth余额：</p>
+<p><code>w3.eth.get_balance(account.address)</code></p>
+<p>要是不多的话，就按照上述方法去搞点先</p>
+<p>接着部署合约,需要字节码和abi</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">contract=w3.eth.contract(abi=abi,bytecode=opcode)</span><br><span class="line">construct_txn = contract.constructor(<span class="string">"hello"</span>).buildTransaction(&#123;</span><br><span class="line"><span class="section">'from': account.address,</span></span><br><span class="line"><span class="section">'nonce': w3.eth.getTransactionCount(account.address),</span></span><br><span class="line"><span class="section">'gas': 5000000,</span></span><br><span class="line"><span class="section">'gasPrice': w3.toWei('21', 'gwei')&#125;)</span></span><br><span class="line">signed = account.signTransaction(construct_txn) <span class="comment"># 用账户对交易签名	</span></span><br><span class="line">tx_id = w3.eth.sendRawTransaction(signed.rawTransaction)</span><br><span class="line">receipt = w3.eth.waitForTransactionReceipt(tx_id)</span><br><span class="line">address = receipt.contractAddress</span><br><span class="line">contract_instance= w3.eth.contract(address=address, abi=abi)</span><br></pre></td></tr></table></figure>
+
+<p>下面是完整的创建合约的代码</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">from web3 import Web3</span><br><span class="line">w3 = Web3() <span class="meta"># 提前设置好了环境变量，给好RPC了</span></span><br><span class="line"><span class="meta"># w3 = Web3(HTTPProvider("http:<span class="comment">//114.115.157.63:8545/"))</span></span></span><br><span class="line">account = w3.eth.account.from_key('0x<span class="number">6160</span>feb8eb4*********************') <span class="comment">//设定外部账户</span></span><br><span class="line"></span><br><span class="line">abi=[</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"inputs"</span>: [</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="string">"internalType"</span>: <span class="string">"string"</span>,</span><br><span class="line">				<span class="string">"name"</span>: <span class="string">"_greeting"</span>,</span><br><span class="line">				<span class="string">"type"</span>: <span class="string">"string"</span></span><br><span class="line">			&#125;</span><br><span class="line">		],</span><br><span class="line">		<span class="string">"stateMutability"</span>: <span class="string">"nonpayable"</span>,</span><br><span class="line">		<span class="string">"type"</span>: <span class="string">"constructor"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"inputs"</span>: [],</span><br><span class="line">		<span class="string">"name"</span>: <span class="string">"greet"</span>,</span><br><span class="line">		<span class="string">"outputs"</span>: [</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="string">"internalType"</span>: <span class="string">"string"</span>,</span><br><span class="line">				<span class="string">"name"</span>: <span class="string">""</span>,</span><br><span class="line">				<span class="string">"type"</span>: <span class="string">"string"</span></span><br><span class="line">			&#125;</span><br><span class="line">		],</span><br><span class="line">		<span class="string">"stateMutability"</span>: <span class="string">"view"</span>,</span><br><span class="line">		<span class="string">"type"</span>: <span class="string">"function"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"inputs"</span>: [],</span><br><span class="line">		<span class="string">"name"</span>: <span class="string">"isSolved"</span>,</span><br><span class="line">		<span class="string">"outputs"</span>: [</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="string">"internalType"</span>: <span class="string">"bool"</span>,</span><br><span class="line">				<span class="string">"name"</span>: <span class="string">""</span>,</span><br><span class="line">				<span class="string">"type"</span>: <span class="string">"bool"</span></span><br><span class="line">			&#125;</span><br><span class="line">		],</span><br><span class="line">		<span class="string">"stateMutability"</span>: <span class="string">"view"</span>,</span><br><span class="line">		<span class="string">"type"</span>: <span class="string">"function"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"inputs"</span>: [</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="string">"internalType"</span>: <span class="string">"string"</span>,</span><br><span class="line">				<span class="string">"name"</span>: <span class="string">"_greeting"</span>,</span><br><span class="line">				<span class="string">"type"</span>: <span class="string">"string"</span></span><br><span class="line">			&#125;</span><br><span class="line">		],</span><br><span class="line">		<span class="string">"name"</span>: <span class="string">"setGreeting"</span>,</span><br><span class="line">		<span class="string">"outputs"</span>: [],</span><br><span class="line">		<span class="string">"stateMutability"</span>: <span class="string">"nonpayable"</span>,</span><br><span class="line">		<span class="string">"type"</span>: <span class="string">"function"</span></span><br><span class="line">	&#125;</span><br><span class="line">]</span><br><span class="line">opcode=<span class="string">"60806040523480156200001157600080fd5b5060405162000a0038038062000a00833981810160405281019062000037919062000185565b80600090805190602001906200004f92919062000057565b50506200035a565b82805462000065906200026b565b90600052602060002090601f016020900481019282620000895760008555620000d5565b82601f10620000a457805160ff1916838001178555620000d5565b82800160010185558215620000d5579182015b82811115620000d4578251825591602001919060010190620000b7565b5b509050620000e49190620000e8565b5090565b5b8082111562000103576000816000905550600101620000e9565b5090565b60006200011e6200011884620001ff565b620001d6565b9050828152602081018484840111156200013d576200013c6200033a565b5b6200014a84828562000235565b509392505050565b600082601f8301126200016a576200016962000335565b5b81516200017c84826020860162000107565b91505092915050565b6000602082840312156200019e576200019d62000344565b5b600082015167ffffffffffffffff811115620001bf57620001be6200033f565b5b620001cd8482850162000152565b91505092915050565b6000620001e2620001f5565b9050620001f08282620002a1565b919050565b6000604051905090565b600067ffffffffffffffff8211156200021d576200021c62000306565b5b620002288262000349565b9050602081019050919050565b60005b838110156200025557808201518184015260208101905062000238565b8381111562000265576000848401525b50505050565b600060028204905060018216806200028457607f821691505b602082108114156200029b576200029a620002d7565b5b50919050565b620002ac8262000349565b810181811067ffffffffffffffff82111715620002ce57620002cd62000306565b5b80604052505050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b600080fd5b600080fd5b600080fd5b600080fd5b6000601f19601f8301169050919050565b610696806200036a6000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806364d98f6e14610046578063a413686214610064578063cfae321714610080575b600080fd5b61004e61009e565b60405161005b919061045d565b60405180910390f35b61007e600480360381019061007991906102ee565b61012f565b005b610088610149565b6040516100959190610478565b60405180910390f35b6000806040518060400160405280600e81526020017f48656c6c6f436861696e466c6167000000000000000000000000000000000000815250905060006040516020016100eb9190610446565b6040516020818303038152906040528051906020012081604051602001610112919061042f565b604051602081830303815290604052805190602001201491505090565b80600090805190602001906101459291906101db565b5050565b6060600080546101589061057a565b80601f01602080910402602001604051908101604052809291908181526020018280546101849061057a565b80156101d15780601f106101a6576101008083540402835291602001916101d1565b820191906000526020600020905b8154815290600101906020018083116101b457829003601f168201915b5050505050905090565b8280546101e79061057a565b90600052602060002090601f0160209004810192826102095760008555610250565b82601f1061022257805160ff1916838001178555610250565b82800160010185558215610250579182015b8281111561024f578251825591602001919060010190610234565b5b50905061025d9190610261565b5090565b5b8082111561027a576000816000905550600101610262565b5090565b600061029161028c846104bf565b61049a565b9050828152602081018484840111156102ad576102ac610640565b5b6102b8848285610538565b509392505050565b600082601f8301126102d5576102d461063b565b5b81356102e584826020860161027e565b91505092915050565b6000602082840312156103045761030361064a565b5b600082013567ffffffffffffffff81111561032257610321610645565b5b61032e848285016102c0565b91505092915050565b6103408161052c565b82525050565b600061035182610505565b61035b8185610510565b935061036b818560208601610547565b6103748161064f565b840191505092915050565b600061038a82610505565b6103948185610521565b93506103a4818560208601610547565b80840191505092915050565b600081546103bd8161057a565b6103c78186610521565b945060018216600081146103e257600181146103f357610426565b60ff19831686528186019350610426565b6103fc856104f0565b60005b8381101561041e578154818901526001820191506020810190506103ff565b838801955050505b50505092915050565b600061043b828461037f565b915081905092915050565b600061045282846103b0565b915081905092915050565b60006020820190506104726000830184610337565b92915050565b600060208201905081810360008301526104928184610346565b905092915050565b60006104a46104b5565b90506104b082826105ac565b919050565b6000604051905090565b600067ffffffffffffffff8211156104da576104d961060c565b5b6104e38261064f565b9050602081019050919050565b60008190508160005260206000209050919050565b600081519050919050565b600082825260208201905092915050565b600081905092915050565b60008115159050919050565b82818337600083830152505050565b60005b8381101561056557808201518184015260208101905061054a565b83811115610574576000848401525b50505050565b6000600282049050600182168061059257607f821691505b602082108114156105a6576105a56105dd565b5b50919050565b6105b58261064f565b810181811067ffffffffffffffff821117156105d4576105d361060c565b5b80604052505050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b600080fd5b600080fd5b600080fd5b600080fd5b6000601f19601f830116905091905056fea26469706673582212209cce412db5124da5bd7a28a1aa2aeb517cd2dab7e64a3f1fc01bb3dd97d5ca3564736f6c63430008070033"</span></span><br><span class="line"></span><br><span class="line">contract=w3.eth.contract(abi=abi,bytecode=opcode)</span><br><span class="line">construct_txn = contract.constructor(<span class="string">"hello"</span>).buildTransaction(&#123;</span><br><span class="line">'from': account.address,</span><br><span class="line">'nonce': w3.eth.getTransactionCount(account.address),</span><br><span class="line">'gas': <span class="number">5000000</span>,</span><br><span class="line">'gasPrice': w3.toWei('21', 'gwei')&#125;)</span><br><span class="line">signed = account.signTransaction(construct_txn) <span class="meta"># 用账户对交易签名	</span></span><br><span class="line">tx_id = w3.eth.sendRawTransaction(signed.rawTransaction)</span><br><span class="line">receipt = w3.eth.waitForTransactionReceipt(tx_id)</span><br><span class="line">address = receipt.contractAddress</span><br><span class="line">contract_instance= w3.eth.contract(address=address, abi=abi)</span><br><span class="line"></span><br><span class="line">&gt;&gt; construct_txn</span><br><span class="line"></span><br><span class="line">&#123;'value': <span class="number">0</span>,</span><br><span class="line"> 'chainId': <span class="number">3</span>,</span><br><span class="line"> 'from': '0x5bE571f66D2f98eFf8EB<span class="number">27047537</span>5f2D34d47B0B',</span><br><span class="line"> 'nonce': <span class="number">5</span>,</span><br><span class="line"> 'gas': <span class="number">5000000</span>,</span><br><span class="line"> 'gasPrice': <span class="number">21000000000</span>,</span><br><span class="line"> 'data': '0x<span class="number">60806040523480</span><span class="number">15620000115760</span><span class="number">0080</span>fd5b<span class="number">506040516200</span>0a<span class="number">003803806200</span>0a<span class="number">00833981810160</span><span class="number">40528101906200</span><span class="number">00379190620001</span><span class="number">8556</span>5b<span class="number">80600090805190</span><span class="number">60200190620000</span>4f<span class="number">92919062000057</span>565b<span class="number">5050620003</span>5a565b<span class="number">82805462000065</span><span class="number">90620002</span>6b565b<span class="number">90600052602060</span><span class="number">00209060</span>1f<span class="number">01602090048101</span><span class="number">92826200008957</span><span class="number">60008555620000</span>d<span class="number">5565</span>b<span class="number">8260</span>1f<span class="number">10620000</span>a<span class="number">45780516</span>0ff<span class="number">19168380011785</span><span class="number">55620000</span>d<span class="number">5565</span>b<span class="number">82800160010185</span><span class="number">558215620000</span>d<span class="number">5579182015</span>b<span class="number">82811115620000</span>d<span class="number">45782518255916</span><span class="number">02001919060010</span><span class="number">19062000</span>0b<span class="number">7565</span>b5b<span class="number">509050620000</span>e<span class="number">4919062000</span>0e<span class="number">8565</span>b<span class="number">509056</span>5b5b<span class="number">80821115620001</span><span class="number">03576000816000</span><span class="number">90555060010162</span><span class="number">0000</span>e<span class="number">9565</span>b<span class="number">509056</span>5b<span class="number">6000620001</span>1e<span class="number">62000118846200</span>01ff565b<span class="number">620001</span>d<span class="number">6565</span>b<span class="number">90508281526020</span><span class="number">81018484840111</span><span class="number">15620001</span>3d<span class="number">57620001</span>3c<span class="number">620003</span>3a565b5b<span class="number">620001</span>4a<span class="number">84828562000235</span>565b<span class="number">50939250505056</span>5b<span class="number">60008260</span>1f<span class="number">830112620001</span>6a<span class="number">57620001696200</span><span class="number">033556</span>5b5b<span class="number">8151620001</span>7c<span class="number">84826020860162</span><span class="number">00010756</span>5b<span class="number">91505092915050</span>565b<span class="number">60006020828403</span><span class="number">1215620001</span>9e<span class="number">57620001</span>9d<span class="number">6200034456</span>5b5b<span class="number">600082015167</span>ffffffffffffffff<span class="number">811115620001</span>bf<span class="number">57620001</span>be<span class="number">620003</span>3f565b5b<span class="number">620001</span>cd<span class="number">84828501620001</span><span class="number">5256</span>5b<span class="number">91505092915050</span>565b<span class="number">6000620001</span>e<span class="number">262000</span>1f<span class="number">5565</span>b<span class="number">9050620001</span>f<span class="number">0828262000</span>2a<span class="number">1565</span>b<span class="number">91905056</span>5b<span class="number">60006040519050</span><span class="number">9056</span>5b<span class="number">600067</span>ffffffffffffffff<span class="number">821115620002</span>1d<span class="number">57620002</span>1c<span class="number">6200030656</span>5b5b<span class="number">62000228826200</span><span class="number">034956</span>5b<span class="number">90506020810190</span><span class="number">5091905056</span>5b<span class="number">6000</span>5b<span class="number">83811015620002</span><span class="number">55578082015181</span><span class="number">84015260208101</span><span class="number">90506200023856</span>5b<span class="number">83811115620002</span><span class="number">65576000848401</span>525b<span class="number">5050505056</span>5b<span class="number">60006002820490</span><span class="number">50600182168062</span><span class="number">0002845760</span>7f<span class="number">82169150</span>5b<span class="number">60208210811415</span><span class="number">620002</span>9b<span class="number">57620002</span>9a<span class="number">620002</span>d<span class="number">7565</span>b5b<span class="number">5091905056</span>5b<span class="number">620002</span>ac<span class="number">826200034956</span>5b<span class="number">810181811067</span>ffffffffffffffff<span class="number">82111715620002</span>ce<span class="number">57620002</span>cd<span class="number">6200030656</span>5b5b<span class="number">80604052505050</span>565b7f4e487b<span class="number">71000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00600052602260</span><span class="number">045260246000</span>fd5b7f4e487b<span class="number">71000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00600052604160</span><span class="number">045260246000</span>fd5b<span class="number">600080</span>fd5b<span class="number">600080</span>fd5b<span class="number">600080</span>fd5b<span class="number">600080</span>fd5b<span class="number">600060</span>1f<span class="number">1960</span>1f<span class="number">83011690509190</span><span class="number">5056</span>5b<span class="number">61069680620003</span>6a<span class="number">6000396000</span>f3fe<span class="number">60806040523480</span><span class="number">15610010576000</span>80fd5b<span class="number">50600436106100</span><span class="number">415760003560</span>e01c<span class="number">806364</span>d98f6e<span class="number">14610046578063</span>a<span class="number">41368621461006</span><span class="number">457806</span>3cfae<span class="number">32171461008057</span>5b<span class="number">600080</span>fd5b<span class="number">6100</span>4e<span class="number">6100</span>9e565b<span class="number">6040516100</span>5b<span class="number">91906104</span>5d565b<span class="number">60405180910390</span>f35b<span class="number">6100</span>7e<span class="number">60048036038101</span><span class="number">90610079919061</span>02ee565b<span class="number">6101</span>2f565b005b<span class="number">61008861014956</span>5b<span class="number">60405161009591</span><span class="number">9061047856</span>5b<span class="number">60405180910390</span>f35b<span class="number">60008060405180</span><span class="number">60400160405280</span>600e<span class="number">8152602001</span>7f<span class="number">4865</span>6c6c6f<span class="number">43686169</span>6e466c<span class="number">61670000000000</span><span class="number">00000000000000</span><span class="number">00000000000081</span><span class="number">52509050600060</span><span class="number">40516020016100</span>eb<span class="number">919061044656</span>5b<span class="number">60405160208183</span><span class="number">03038152906040</span><span class="number">52805190602001</span><span class="number">20816040516020</span><span class="number">01610112919061</span>042f565b<span class="number">60405160208183</span><span class="number">03038152906040</span><span class="number">52805190602001</span><span class="number">20149150509056</span>5b<span class="number">80600090805190</span><span class="number">60200190610145</span><span class="number">9291906101</span>db565b<span class="number">505056</span>5b<span class="number">60606000805461</span><span class="number">0158906105</span>7a565b<span class="number">8060</span>1f<span class="number">01602080910402</span><span class="number">60200160405190</span><span class="number">81016040528092</span><span class="number">91908181526020</span><span class="number">01828054610184</span><span class="number">906105</span>7a565b<span class="number">80156101</span>d<span class="number">15780601</span>f<span class="number">106101</span>a<span class="number">65761010080835</span><span class="number">40402835291602</span><span class="number">00191610</span>1d<span class="number">1565</span>b<span class="number">82019190600052</span><span class="number">602060002090</span>5b<span class="number">81548152906001</span><span class="number">01906020018083</span><span class="number">116101</span>b<span class="number">457829003601</span>f<span class="number">16820191</span>5b<span class="number">50505050509050</span><span class="number">9056</span>5b<span class="number">8280546101</span>e<span class="number">79061057</span>a565b<span class="number">90600052602060</span><span class="number">00209060</span>1f<span class="number">01602090048101</span><span class="number">92826102095760</span><span class="number">00855561025056</span>5b<span class="number">8260</span>1f<span class="number">10610222578051</span>60ff<span class="number">19168380011785</span><span class="number">5561025056</span>5b<span class="number">82800160010185</span><span class="number">55821561025057</span><span class="number">918201</span>5b<span class="number">828111156102</span>4f<span class="number">57825182559160</span><span class="number">20019190600101</span><span class="number">9061023456</span>5b5b<span class="number">5090506102</span>5d<span class="number">919061026156</span>5b<span class="number">509056</span>5b5b<span class="number">808211156102</span>7a<span class="number">57600081600090</span><span class="number">55506001016102</span><span class="number">6256</span>5b<span class="number">509056</span>5b<span class="number">60006102916102</span>8c<span class="number">846104</span>bf565b<span class="number">6104</span>9a565b<span class="number">90508281526020</span><span class="number">81018484840111</span><span class="number">156102</span>ad<span class="number">576102</span>ac<span class="number">61064056</span>5b5b<span class="number">6102</span>b<span class="number">88482856105385</span>65b<span class="number">50939250505056</span>5b<span class="number">60008260</span>1f<span class="number">8301126102</span>d<span class="number">557610</span>2d<span class="number">461063</span>b565b5b<span class="number">81356102</span>e<span class="number">58482602086016</span><span class="number">1027</span>e565b<span class="number">91505092915050</span>565b<span class="number">60006020828403</span><span class="number">12156103045761</span><span class="number">03036106</span>4a565b5b<span class="number">600082013567</span>ffffffffffffffff<span class="number">81111561032257</span><span class="number">61032161064556</span>5b5b<span class="number">6103</span>2e<span class="number">848285016102</span>c<span class="number">0565</span>b<span class="number">91505092915050</span>565b<span class="number">610340816105</span>2c565b<span class="number">8252505056</span>5b<span class="number">60006103518261</span><span class="number">050556</span>5b<span class="number">6103</span>5b<span class="number">818561051056</span>5b<span class="number">93506103</span>6b<span class="number">81856020860161</span><span class="number">054756</span>5b<span class="number">610374816106</span>4f565b<span class="number">84019150509291</span><span class="number">505056</span>5b<span class="number">60006103</span>8a<span class="number">8261050556</span>5b<span class="number">61039481856105</span><span class="number">2156</span>5b<span class="number">93506103</span>a<span class="number">48185602086016</span><span class="number">10547565</span>b<span class="number">80840191505092</span><span class="number">91505056</span>5b<span class="number">600081546103</span>bd<span class="number">816105</span>7a565b<span class="number">6103</span>c<span class="number">78186610521565</span>b<span class="number">94506001821660</span><span class="number">0081146103</span>e<span class="number">25760018114610</span>3f<span class="number">357610426565</span>b60ff<span class="number">19831686528186</span><span class="number">01935061042656</span>5b<span class="number">6103</span>fc<span class="number">856104</span>f<span class="number">0565</span>b<span class="number">6000</span>5b<span class="number">838110156104</span>1e<span class="number">57815481890152</span><span class="number">60018201915060</span><span class="number">20810190506103</span>ff565b<span class="number">83880195505050</span>5b<span class="number">50505092915050</span>565b<span class="number">60006104</span>3b<span class="number">82846103</span>7f565b<span class="number">91508190509291</span><span class="number">505056</span>5b<span class="number">60006104528284</span><span class="number">6103</span>b<span class="number">0565</span>b<span class="number">91508190509291</span><span class="number">505056</span>5b<span class="number">60006020820190</span><span class="number">50610472600083</span><span class="number">018461033756</span>5b<span class="number">9291505056</span>5b<span class="number">60006020820190</span><span class="number">50818103600083</span><span class="number">01526104928184</span><span class="number">61034656</span>5b<span class="number">90509291505056</span>5b<span class="number">60006104</span>a<span class="number">4610</span>4b<span class="number">5565</span>b<span class="number">90506104</span>b<span class="number">08282610</span>5ac565b<span class="number">91905056</span>5b<span class="number">60006040519050</span><span class="number">9056</span>5b<span class="number">600067</span>ffffffffffffffff<span class="number">8211156104</span>da<span class="number">576104</span>d<span class="number">961060</span>c565b5b<span class="number">6104</span>e<span class="number">38261064</span>f565b<span class="number">90506020810190</span><span class="number">5091905056</span>5b<span class="number">60008190508160</span><span class="number">00526020600020</span><span class="number">905091905056</span>5b<span class="number">60008151905091</span><span class="number">905056</span>5b<span class="number">60008282526020</span><span class="number">82019050929150</span><span class="number">5056</span>5b<span class="number">60008190509291</span><span class="number">505056</span>5b<span class="number">60008115159050</span><span class="number">91905056</span>5b<span class="number">82818337600083</span><span class="number">83015250505056</span>5b<span class="number">6000</span>5b<span class="number">83811015610565</span><span class="number">57808201518184</span><span class="number">01526020810190</span><span class="number">506105</span>4a565b<span class="number">83811115610574</span><span class="number">57600084840152</span>5b<span class="number">5050505056</span>5b<span class="number">60006002820490</span><span class="number">50600182168061</span><span class="number">05925760</span>7f<span class="number">82169150</span>5b<span class="number">60208210811415</span><span class="number">6105</span>a<span class="number">657610</span>5a<span class="number">5610</span>5dd565b5b<span class="number">5091905056</span>5b<span class="number">6105</span>b<span class="number">58261064</span>f565b<span class="number">810181811067</span>ffffffffffffffff<span class="number">821117156105</span>d<span class="number">457610</span>5d<span class="number">361060</span>c565b5b<span class="number">80604052505050</span>565b7f4e487b<span class="number">71000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00600052602260</span><span class="number">045260246000</span>fd5b7f4e487b<span class="number">71000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00600052604160</span><span class="number">045260246000</span>fd5b<span class="number">600080</span>fd5b<span class="number">600080</span>fd5b<span class="number">600080</span>fd5b<span class="number">600080</span>fd5b<span class="number">600060</span>1f<span class="number">1960</span>1f<span class="number">83011690509190</span><span class="number">5056</span>fea<span class="number">26469706673582</span><span class="number">212209</span>cce412db<span class="number">5124</span>da5bd7a28a1aa2aeb517cd2dab7e64a3f1fc01bb3dd97d5ca<span class="number">356473</span>6f6c<span class="number">63430008070033</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000020000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">056865</span>6c6c6f<span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">000000000000</span>',</span><br><span class="line"> 'to': b''&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;可以看到，部署合约的交易，里面的data是创建合约的opcode然后额外加了点东西，目标合约（to）是空的，</p>
+<p>&emsp;&emsp;注意到部署的这个过程，首先我们输入了些参数构造了交易，包括交易发起者，nonce，gas 和 gasPrice。但看到construct_txn还返回了其他东西，是因为我们给了足够多的参数（opcode和abi），所以模块能帮我们构造好。如果我们拿不到abi，那么我们就得自己去构造整个完整的交易了（下面会讨论这种情况），</p>
+<p>&emsp;&emsp;好了，交易构造完成了，为了证明这个交易确确实实是你发起的，你还需要为这个交易进行签名</p>
+<p><code>signed = account.signTransaction(tx_hash)</code></p>
+<p>&emsp;&emsp;之后我们就可以发起这笔合法交易了</p>
+<p><code>tx_id = w3.eth.sendRawTransaction(signed.rawTransaction)</code></p>
+<p>&emsp;&emsp;返回的tx_id就是这笔交易的哈希，你可以在区块链浏览器上输出这个hash来查看这笔交易的状态，是成功了，还是失败了，也可以用 getTransactionReceipt ， getTransaction  和 waitForTransactionReceipt 等函数进行查看</p>
+<p>&emsp;&emsp;然后我们就可以合约进行交互了。</p>
+<p>&emsp;&emsp;调用一些不需要花费gas的查询功能比较简单，比如调用合约的 greet 函数 <code>contract_instance.functions.greet().call()</code></p>
+<p>&emsp;&emsp;如果是那些需要改变状态的函数【也称之为交易】，就需要币了，也就是钱。涉及到钱，那肯定就是要比较麻烦了。比如这里我先调用合约的 setGreeting 函数，首先我们要构造好这个交易，一个交易的内容包括，来源账户（from)，目标账户（to），消耗的gas（gas），gas的价格（gasPrice），来源账户的交易序号（nonce），交易的内容【要执行的代码】（data），交易中夹带的金额（value）。</p>
+<p>注意到几个特殊情况，</p>
+<p>&emsp;&emsp;部署合约的交易的目标账户（to）是空的（0），</p>
+<p>&emsp;&emsp;转账交易的数据（data）是空的，</p>
+<p>&emsp;&emsp;下面是调用部署好的合约里的 setGreeting 函数的交易细节，可以看到其实和合约部署没有太大的区别，无非是不同函数的调用。然后data稍微不一样。（部署合约的data就是合约的opcode+调用构造函数的opcode，普通函数的调用就是调用函数的opcode）</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tx_hash = contract_instance.functions.setGreeting(<span class="string">"HelloChainFlag"</span>).buildTransaction(&#123;'gas': <span class="number">1000000</span>,</span><br><span class="line">'gasPrice': w3.toWei('21', 'gwei'), 'from': account.address,</span><br><span class="line">'nonce': w3.eth.getTransactionCount(account.address)&#125;) <span class="meta"># 构造交易</span></span><br><span class="line"></span><br><span class="line">signed = account.signTransaction(tx_hash) <span class="meta"># 用账户对交易签名	</span></span><br><span class="line">tx_id = w3.eth.sendRawTransaction(signed.rawTransaction)</span><br><span class="line">print(w3.eth.getTransactionReceipt(tx_id.hex()))</span><br><span class="line">print(w3.eth.getTransaction(tx_id.hex()))</span><br><span class="line">=========================================================================================</span><br><span class="line">AttributeDict(&#123;'blockHash': HexBytes('0x0fae6f7b46dd6ac<span class="number">907418</span>3b1b<span class="number">1550</span>b0fa857c7d406fb4b6ea03d<span class="number">3703</span>b<span class="number">694256</span>1'), 'blockNumber': <span class="number">11681286</span>, 'contractAddress': None, 'cumulativeGasUsed': <span class="number">267017</span>, 'effectiveGasPrice': <span class="number">21000000000</span>, 'from': '0x5bE571f66D2f98eFf8EB<span class="number">27047537</span>5f2D34d47B0B', 'gasUsed': <span class="number">27050</span>, 'logs': [], 'logsBloom': HexBytes('0x<span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000</span>'), 'status': <span class="number">1</span>, 'to': '0xbE7a<span class="number">7817</span>Dd15eafeAD<span class="number">791707</span>8D51C30Ca9E13fFf', 'transactionHash': HexBytes('0xcf8c3a<span class="number">5549</span>aea014fe8ac5e<span class="number">5316</span>b<span class="number">4670</span>c91f9b97b43a02ef<span class="number">6241</span>4b77aa3c481b'), 'transactionIndex': <span class="number">2</span>, 'type': '0x0'&#125;)</span><br><span class="line"></span><br><span class="line">AttributeDict(&#123;'blockHash': HexBytes('0x0fae6f7b46dd6ac<span class="number">907418</span>3b1b<span class="number">1550</span>b0fa857c7d406fb4b6ea03d<span class="number">3703</span>b<span class="number">694256</span>1'), 'blockNumber': <span class="number">11681286</span>, 'from': '0x5bE571f66D2f98eFf8EB<span class="number">27047537</span>5f2D34d47B0B', 'gas': <span class="number">1000000</span>, 'gasPrice': <span class="number">21000000000</span>, 'hash': HexBytes('0xcf8c3a<span class="number">5549</span>aea014fe8ac5e<span class="number">5316</span>b<span class="number">4670</span>c91f9b97b43a02ef<span class="number">6241</span>4b77aa3c481b'), 'input': '0xa<span class="number">41368620000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000002</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000000000</span><span class="number">00000000</span>e<span class="number">4865</span>6c6c6f<span class="number">43686169</span>6e466c<span class="number">61670000000000</span><span class="number">00000000000000</span><span class="number">000000000000</span>', 'nonce': <span class="number">5</span>, 'r': HexBytes('0x5cb92f983c3c5d6cf2c1b<span class="number">66781514</span>b9fa790ad135c522b051c841d2a<span class="number">7173</span>cc2d'), 's': HexBytes('0x16abebfd0fa522f54a33f0fe691d81c92a5c7c6ea<span class="number">647534</span>ff7ffd<span class="number">9461</span>1f7b4af'), 'to': '0xbE7a<span class="number">7817</span>Dd15eafeAD<span class="number">791707</span>8D51C30Ca9E13fFf', 'transactionIndex': <span class="number">2</span>, 'type': '0x0', 'v': <span class="number">41</span>, 'value': <span class="number">0</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;我们getTransactionReceipt 从中可以看到这笔交易所在的区块序号（blockNumber），区块哈希（blockHash），整个区块消耗的gas（cumulativeGasUsed），gas的价格（effectiveGasPrice），这个交易消耗的gas（gasUsed），交易的状态（status），交易的发起者（from），交易的接收者（to），交易哈希（transactionHash），交易日志（logs）【与触发事件有关】</p>
+<p>&emsp;&emsp;getTransaction返回的值主要有这么几个不同，多了一个input，r，s，v。其中 r 和 s 是做ECDSA签名时用的值，是在验证签名的时候需要用到的参数，input记录了合约调用的信息，如果是0x，则说明是非合约调用，否则为合约调用，其实也就是我们的交易data。注意到，如果没有合约源码(合约不开源)，那么我们就没法搞到abi文件，那么也就不能直接去调用合约的方法。这个时候就只能手动构造交易了。</p>
+<p>需要填写以下参数</p>
+<p>&emsp;from : 自己合约的地址（好像不填就是默认的签名这个交易的account）<br>&emsp;nonce：这个可以通过w3.eth.getTransactionCount(account.address)获取<br>&emsp;gas：这个自己设<br>&emsp;gasPrice：这个也可以自己设，但是也可以用默认的w3.eth.gasPrice<br>&emsp;to：这个你要交易的合约地址，部署合约为空<br>&emsp;value：此次交易要不要eth，<br>&emsp;data：交易的opcode，转账为空，其余情况下面单独讨论<br>&emsp;chainId : 所在交易的链的id</p>
+<h3 id="opcode"><a href="#opcode" class="headerlink" title="opcode"></a>opcode</h3><p>&emsp;&emsp;可以看见，其他值的问题都不大，但是这个data，就需要了解一下以太坊的应用二进制接口，参考<a href="https://blog.csdn.net/JonasErosonAtsea/article/details/109236544" target="_blank" rel="noopener">https://blog.csdn.net/JonasErosonAtsea/article/details/109236544</a></p>
+<p>以合约方法function transfer(address to, uint tokens) 为例;</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">input数据分为<span class="number">3</span>个部分：</span><br><span class="line"></span><br><span class="line"><span class="number">4</span> 字节，是方法名的哈希，例如：a9059cbb</span><br><span class="line"><span class="number">32</span>字节，放以太坊地址，目前以太坊地址是<span class="number">20</span>个字节，高位补<span class="number">0</span></span><br><span class="line">例如：<span class="number">000000000000000000000000</span>abcabcabcabcabcabcabcabcabcabcabcabcabca</span><br><span class="line"></span><br><span class="line"><span class="number">32</span>字节，是需要传输的代币数量，这里是<span class="number">1</span>*<span class="number">10</span>^<span class="number">18</span> GNT</span><br><span class="line">例如：<span class="number">0000000000000000000000000000000000000000000000000</span>de0b6b3a7640000</span><br><span class="line"></span><br><span class="line">所有这些加在一起就是交易数据：</span><br><span class="line"></span><br><span class="line">a9059cbb000000000000000000000000abcabcabcabcabcabcabcabcabcabcabcabcabca0000000000000000000000000000000000000000000000000de0b6b3a7640000</span><br></pre></td></tr></table></figure>
+
+<p>回到这里，我们的input是</p>
+<p><code>0xa41368620000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000c68656c6c6f2056616e6973680000000000000000000000000000000000000000</code></p>
+<p>前四字节是要调用的函数的哈希（以叫函数选择器） 0xa4136862 </p>
+<p><img src="https://s2.loli.net/2021/12/24/7yljoqCG4NSuEez.png" alt="image-20211224174808777"></p>
+<p>然后32字节是 0x0000000000000000000000000000000000000000000000000000000000000020</p>
+<p>这里先盲猜一下是从参数编码块起0x20的位置开始读内容</p>
+<p>再32字节是0x000000000000000000000000000000000000000000000000000000000000000c</p>
+<p>我们传进去字符串的长度 0x0c = 12</p>
+<p>再32字节是0x68656c6c6f2056616e6973680000000000000000000000000000000000000000</p>
+<p>我们传进去的字符串（末尾填充）</p>
+<p><img src="https://s2.loli.net/2021/12/24/3Fh1QMcNBmXdJ8w.png" alt="image-20211224175113352"></p>
+<p>更多情况参考<a href="https://learnblockchain.cn/docs/solidity/abi-spec.html" target="_blank" rel="noopener">https://learnblockchain.cn/docs/solidity/abi-spec.html</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&emsp;&emsp;这篇我们主要聊了一下，利用MetaMask创建管理以太坊（外部）账户，获取测试链上的测试代币，如何利用remix部署合约，联动MetaMask与合约进行交互，如何利用python的web3模块部署合约、进行交易，以及交易的一些细节，包括交易所需要的构造参数，交易的签名，以及交易的返回值，最后我们简单的聊了聊与合约调用相关的以太坊的应用二进制接口，也就是合约调用相关opcode的构造。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>区块链学习笔记之初探以太坊</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.9k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2021-12-22, 10:16:00</p>
+    <p><span class="copy-title">最后更新:</span>2022-02-14, 20:42:54</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2021/12/22/区块链学习笔记之初探以太坊/" title="区块链学习笔记之初探以太坊">http://jayxv.github.io/2021/12/22/区块链学习笔记之初探以太坊/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#Sage','#docker','#CTF','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#DES','#差分密码分析','#Rsa','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#Book','#Nmap','#XSS','#Coppersmith’s Method','#Linux','#book','#ETH',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
