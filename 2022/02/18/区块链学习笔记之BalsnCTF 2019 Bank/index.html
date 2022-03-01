@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>密码学学习笔记 之 密码学随笔 | Van1sh的小屋</title>
-  <meta name="keywords" content=" Crypto ">
-  <meta name="description" content="密码学学习笔记 之 密码学随笔 | Van1sh的小屋">
+  <title>区块链学习笔记之Balsn CTF 2019 - Bank | Van1sh的小屋</title>
+  <meta name="keywords" content=" CTF ">
+  <meta name="description" content="区块链学习笔记之Balsn CTF 2019 - Bank | Van1sh的小屋">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
 <meta property="og:type" content="website">
@@ -917,9 +917,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-密码学学习笔记之密码学随笔" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-区块链学习笔记之BalsnCTF 2019 Bank" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">密码学学习笔记 之 密码学随笔</h1>
+        <h1 class="article-title">区块链学习笔记之Balsn CTF 2019 - Bank</h1>
     
     <div class="article-meta">
         
@@ -929,26 +929,28 @@
         
         <span class="book">
             
-                <a  data-rel="密码小屋">密码小屋</a>
+                <a  data-rel="合约小屋">合约小屋</a>/
+            
+                <a  data-rel="contract">contract</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color2">Crypto</a>
+            <a class="color4">CTF</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2021-01-02 12:49:30'>2021-01-01 00:00</time>
+        创建时间:<time class="date" title='更新时间: 2022-02-23 09:28:41'>2022-02-18 14:45</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.3k</span>
+        <span>字数:3.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -967,7 +969,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#状态变量储存结构"><span class="toc-text">状态变量储存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#映射和动态数组"><span class="toc-text">映射和动态数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞：局部变量未初始化"><span class="toc-text">漏洞：局部变量未初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Balsn-CTF-2019-Bank"><span class="toc-text">Balsn CTF 2019 - Bank</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解题步骤"><span class="toc-text">解题步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序流程"><span class="toc-text">程序流程</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -983,16 +985,78 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp; &emsp;元旦快乐嗷，2021年水的第一篇博客，就来随便聊聊密码学叭，欢迎感兴趣的朋友一起交流讨论吖~</p>
-<p>&emsp; &emsp;密码学这个学科，和战争是离不开关系的，从以前的罗马战争，到最近一次的大战——第二次世界大战，都有密码学活跃的身影，并且对战局也有着非常重要的影响。但在这个相对和平而互联网发展迅速的年代，密码学则活跃在各种传输、交易等协议中。</p>
-<p>&emsp; &emsp;从历史上看，1945年前，密码学这门学科可以看作一门艺术，而1945年后，信息论之父——香农，发表的一篇《Communication Theory of Secrecy Systems》指出，数据安全是基于密钥的保密性而不是算法的保密性，从此，密码学正式开始被称为一门学科，现代密码学的设计也都基于这个原则。继而是1976年现代密码学之父Whitfield Diffie和Martin Edward  Hellman提出的公钥密码学思想，被誉为密码学发展史上唯一的真正革命。从此现代密码也朝着公钥密码的方向发展。</p>
-<p>&emsp; &emsp;可能刚接触CTF的同学会觉得密码学相对其他方向门槛低。确实，如果接触的古典密码比较多的话，是会有这种感觉，因为古典密码也是出现在算力不足的年代，大多流程、理论也还是比较简单，从而也很容易被攻破。而现代密码的发明都会基于一些数学上的难题，所以学习密码学，有一个比较好的数理基础就比较重要。</p>
-<p>&emsp; &emsp;再谈谈目前的密码学算法。可以简单的分为对称密码和公钥密码（也就是非对称密码），一般来说在一个协议里，对称密码用来加解密传输的信息（因为算起来快），公钥密码用来加密传输对称密码的密钥。其中公钥密码比较常见而著名的就是基于大数分解难题的RSA、基于离散对数问题的DSA、基于椭圆曲线上离散对数问题的ECC。由于都是在有限域上，所以用的都是模运算。对称密码则可进一步拆成流密码和分组密码，其中比较重要的运算法则则是具有对合性的异或运算。流密码的思想就是通过一个初始状态，能生成一堆尽可能真随机的密钥流，用来异或明文信息得到密文信息，解密人只需要掌握这个初始状态就可以了。分组密码则是将明文和密钥输入，通过一些列复杂的的运算网络，然后计算出密文。</p>
-<p>&emsp; &emsp;所以我们要学什么？</p>
-<p>&emsp; &emsp;密码学也可以有两个终极方向，攻和守，你可以运用所学去攻破现在正在运行的算法，也可以运用所学去防御现在甚至是未来会出现的攻击手法。而在此前，你至少得把现存的一些用的比较多的密码算法给了解一遍叭，把现存的攻击手法也都给学会叭。而看懂原理、学会攻击，你至少得有相应的基础知识积累叭。</p>
-<p>&emsp; &emsp;学科上，数学、线性代数、信息安全数学基础这基本科可以算是密码学的基础课。这里说的是数学，包括但不限于高中数学、高等数学，甚至也有可能会出现一些奥赛的东西。然后是线性代数，里面的很多概念都是很有用的（虽然学的时候可能是云里雾里的，所以推荐去看一些课外的书，加深一些理解会吸收的比较好些）。最接近的就是信息安全数学基础，其实也就是抽象代数，模运算、模逆元、原根等等这些概念，还有很多运算性质，数论四大定理等等。把基础打好，对于后面一些具体密码算法的学习才容易理解。至于密码学更多的实体算法，<a href="https://github.com/JayxV/Van1sh_Utility/blob/main/paper%26book/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E2%80%94%E5%B8%B8%E7%94%A8%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B.pdf" target="_blank" rel="noopener">《深入浅出密码学》</a>是很不错的一本入门书籍。更进一步的与数学有关的密码学学习可以看看这本<a href="https://github.com/JayxV/Van1sh_Utility/blob/main/paper%26book/introduction-to-mathematical-cryptography.pdf" target="_blank" rel="noopener">《introduction-to-mathematical-cryptography》</a>。</p>
-<p>&emsp; &emsp;总之，基础很重要！基础很重要！基础很重要！</p>
-<p>&emsp; &emsp;而现在有CTF这个“工具”，你可以在学习理论知识的同时付诸于实践，更加深理解，我觉得这才是CTF带给我们真正有用的，有价值的东西。它是一个很好的工具，一个学习、交流平台。诚然在CTF竞赛中拿到flag、取得名次、赢取奖金让人兴奋，但打CTF不可能会是一个终极目标。它只是一个开始…</p>
+        <p>其实这道题应该算是比较过时了，只有solidity 0.5.0 以前可能才会出现的漏洞，感觉主要是结构体未初始化造成的一个变量覆盖，以及程序流的劫持，有一点pwn的感觉在里面。所以通过这道题也是对solidity的存储机制有了一定的了解。</p>
+<h2 id="状态变量储存结构"><a href="#状态变量储存结构" class="headerlink" title="状态变量储存结构"></a>状态变量储存结构</h2><p>参考登链社区的<a href="https://learnblockchain.cn/docs/solidity/internals/layout_in_storage.html" target="_blank" rel="noopener">solidity中文文档</a>，除了映射(mapping) 和 动态数组 的静态大小变量都是从位置 0 开始连续放置在存储（storage）中，如果可能的话，存储大小少于32字节的多个变量会被打包到一个存储插槽中(storage slot)，（所以一个slot就是32字节的大小），规则如下：</p>
+<ol>
+<li>slot的第一项会以向右对齐的方式存储</li>
+<li>基本类型仅使用存储他们所需字节大小的存储空间</li>
+<li>如果一个slot的剩余空间不足以放下接下来的基本变量，那么它会移到下一个slot</li>
+<li>结构体和数组的数据总是会占用一整个新的slot，但结构体或数组中的每一项还是会以上述规则打包。即不会出现一个slot里出现两个结构体或者两个数组的情况，即使一个结构体或数组也许仅仅占用了2字节。</li>
+</ol>
+<p>还有更多比较细节的东西，就不再这篇文章里提出来了，感兴趣的读者可以去看看文档深入了解。</p>
+<h3 id="映射和动态数组"><a href="#映射和动态数组" class="headerlink" title="映射和动态数组"></a>映射和动态数组</h3><p>由于映射和动态数组的大小是不可预知的，所以他们使用keccak256来计算找到值得位置或数组的起始位置，映射和动态数组本身会根据上述规则在某个位置 $p$ 处占满一个slot（或递归的将该规则应用到映射的映射或者数组的数组），对于动态数组，此slot会存储数组中元素的数量；对于映射，这个插槽不用，但这个茅坑还是得占，这样可以使得两个映射之后会使用不同的散列分布。</p>
+<p>对于动态数组，数组的起始位置会位于 <code>keccak256(p)</code> 处，对于映射，映射中的每个键对应的值会位于 <code>keccak256(k||p)</code> 处，（||是连接符，代码：<code>keccak256(abi.encodePacked(k, p))</code>）如果这个值不是基本类型（比如是个结构体），那么就通过加偏移来确定。</p>
+<p>例子</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: GPL-3.0 pragma solidity &gt;=0.4.0 &lt;0.9.0;</span></span><br><span class="line"></span><br><span class="line">contract C &#123;</span><br><span class="line">	struct S &#123; <span class="keyword">uint</span> a; <span class="keyword">uint</span> b; &#125; </span><br><span class="line">	<span class="keyword">uint</span> x; </span><br><span class="line">	mapping(<span class="keyword">uint</span> =&gt; mapping(<span class="keyword">uint</span> =&gt; S)) data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上述合约，<code>data[4][9].b</code> 的位置为<code>keccak256(uint256(9)|| keccak256(uint256(4)||uint256(1))) + 1</code></p>
+<p>解释一下，首先 <code>struct S { uint a; uint b; }</code> 只是一个结构体的定义，并没有定义变量，所以不占用slot，<code>uint x</code> 占用slot0，然后 <code>mapping(uint =&gt; mapping(uint =&gt; S)) data;</code> 会占用slot 1，所以 <code>data[4]</code> 的值的位置就是 <code>keccak256(uint256(4)||uint256(1))</code>，然后这个地方呢不是一个基本类型，是一个 <code>mapping(uint =&gt; S)</code> 的映射，所以这个映射占用了slot_keccak256(uint256(4)||uint256(1))，然后再去这个映射的键值为9的值，所以这个地址就是在<code>keccak256(uint256(9)|| keccak256(uint256(4)||uint256(1)))</code>，再然后，这个地方仍然不是一个基本类型，是一个结构体，这个结构体里 <code>uint a</code> 会占用一个slot，<code>uint b</code> 会占用一个slot，所以 a 的偏移是 0 ，b 的偏移是 1，所以最后为<code>keccak256(uint256(9)|| keccak256(uint256(4)||uint256(1))) + 1</code>。</p>
+<h2 id="漏洞：局部变量未初始化"><a href="#漏洞：局部变量未初始化" class="headerlink" title="漏洞：局部变量未初始化"></a>漏洞：局部变量未初始化</h2><p>如果智能合约函数声明了临时的动态数组或者sturct，而没有指定“位置”（storage 还是 memory），且没有进行初始化，那么这些变量将默认为”存储指针”，且指向slot0。</p>
+<p>漏洞合约例子</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">contract NameRegistrar &#123;</span><br><span class="line">    bool <span class="keyword">public</span> unlocked = <span class="literal">false</span>;<span class="comment">// 用来锁定注册状态</span></span><br><span class="line">    struct NameRecord &#123;</span><br><span class="line">        bytes32 name;</span><br><span class="line">        address mappedAddresss;</span><br><span class="line">    &#125;</span><br><span class="line">    mapping(address =&amp;gt; NameRecord) <span class="keyword">public</span> registeredNameRecord;</span><br><span class="line">    mapping(bytes32 =&amp;gt; address) <span class="keyword">public</span> resolve;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">register</span></span>(bytes32 _name, address _mappedAddresss) <span class="keyword">public</span>  &#123;</span><br><span class="line">        <span class="comment">//构造一个新的 NameRecord</span></span><br><span class="line">        NameRecord <span class="keyword">new</span><span class="type">Record</span>;</span><br><span class="line">        <span class="keyword">new</span><span class="type">Record</span>.name = _name;</span><br><span class="line">        <span class="keyword">new</span><span class="type">Record</span>.mappedAddresss = _mappedAddresss;</span><br><span class="line">        resolve[_name] = _mappedAddresss;</span><br><span class="line">        registeredNameRecord[msg.sender] = <span class="keyword">new</span><span class="type">Record</span>;</span><br><span class="line">        require(unlocked);<span class="comment">//仅在智能合约处在 unlocked 状态下允许注册</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意到该合约在register中定义了一个newRecord，未指定位置，也没有初始化，所以该结构体的指针指向slot0，如果对name赋值，将修改slot0，从而覆盖unlocked变量，如果name的最后1byte为1，那么unlocked即被修改为True，从而绕过最后的限制。</p>
+<h2 id="Balsn-CTF-2019-Bank"><a href="#Balsn-CTF-2019-Bank" class="headerlink" title="Balsn CTF 2019 - Bank"></a>Balsn CTF 2019 - Bank</h2><p>好了，搞懂前面三个问题，我们就可以来看看这个题目了。</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0</span>.<span class="number">4</span>.<span class="number">24</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">contract <span class="keyword">Bank </span>&#123;</span><br><span class="line">    event SendEther(<span class="keyword">address </span><span class="keyword">addr);</span></span><br><span class="line"><span class="keyword"> </span>   event SendFlag(<span class="keyword">address </span><span class="keyword">addr);</span></span><br><span class="line"><span class="keyword"> </span>   </span><br><span class="line">    <span class="keyword">address </span>public owner<span class="comment">;</span></span><br><span class="line">    uint randomNumber = <span class="number">0</span><span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    constructor() public &#123;</span><br><span class="line">        owner = msg.sender<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    struct SafeBox &#123;</span><br><span class="line">        <span class="keyword">bool </span>done<span class="comment">;</span></span><br><span class="line">        function(uint, <span class="keyword">bytes12) </span>internal callback<span class="comment">;</span></span><br><span class="line">        <span class="keyword">bytes12 </span>hash<span class="comment">;</span></span><br><span class="line">        uint value<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    SafeBox[] safeboxes<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    struct FailedAttempt &#123;</span><br><span class="line">        uint idx<span class="comment">;</span></span><br><span class="line">        uint time<span class="comment">;</span></span><br><span class="line">        <span class="keyword">bytes12 </span>triedPass<span class="comment">;</span></span><br><span class="line">        <span class="keyword">address </span><span class="keyword">origin;</span></span><br><span class="line"><span class="keyword"> </span>   &#125;</span><br><span class="line">    mapping(<span class="keyword">address </span>=&gt; FailedAttempt[]) failedLogs<span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">    modifier onlyPass(uint idx, <span class="keyword">bytes12 </span>pass) &#123;</span><br><span class="line">        if (<span class="keyword">bytes12(sha3(pass)) </span>!= safeboxes[idx].hash) &#123;</span><br><span class="line">            FailedAttempt info<span class="comment">;</span></span><br><span class="line">            info.idx = idx<span class="comment">;</span></span><br><span class="line">            info.time = now<span class="comment">;</span></span><br><span class="line">            info.triedPass = pass<span class="comment">;</span></span><br><span class="line">            info.<span class="keyword">origin </span>= tx.<span class="keyword">origin;</span></span><br><span class="line"><span class="keyword"> </span>           failedLogs[msg.sender].push(info)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            _<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function deposit(<span class="keyword">bytes12 </span>hash) payable public returns(uint) &#123;</span><br><span class="line">        SafeBox <span class="keyword">box;</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">box.done </span>= false<span class="comment">;</span></span><br><span class="line">        <span class="keyword">box.hash </span>= hash<span class="comment">;</span></span><br><span class="line">        <span class="keyword">box.value </span>= msg.value<span class="comment">;</span></span><br><span class="line">        if (msg.sender == owner) &#123;</span><br><span class="line">            <span class="keyword">box.callback </span>= sendFlag<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            require(msg.value &gt;= <span class="number">1</span> ether)<span class="comment">;</span></span><br><span class="line">            <span class="keyword">box.value </span>-= <span class="number">0</span>.<span class="number">01</span> ether<span class="comment">;</span></span><br><span class="line">            <span class="keyword">box.callback </span>= sendEther<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        safeboxes.push(<span class="keyword">box);</span></span><br><span class="line"><span class="keyword"> </span>       return safeboxes.length-1<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function withdraw(uint idx, <span class="keyword">bytes12 </span>pass) public payable &#123;</span><br><span class="line">        SafeBox <span class="keyword">box </span>= safeboxes[idx]<span class="comment">;</span></span><br><span class="line">        require(!<span class="keyword">box.done);</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">box.callback(idx, </span>pass)<span class="comment">;</span></span><br><span class="line">        <span class="keyword">box.done </span>= true<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function sendEther(uint idx, <span class="keyword">bytes12 </span>pass) internal onlyPass(idx, pass) &#123;</span><br><span class="line">        msg.sender.transfer(safeboxes[idx].value)<span class="comment">;</span></span><br><span class="line">        emit SendEther(msg.sender)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function sendFlag(uint idx, <span class="keyword">bytes12 </span>pass) internal onlyPass(idx, pass) &#123;</span><br><span class="line">        require(msg.value &gt;= <span class="number">100000000</span> ether)<span class="comment">;</span></span><br><span class="line">        emit SendFlag(msg.sender)<span class="comment">;</span></span><br><span class="line">        selfdestruct(owner)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>合约并不算长。首先我们看拿到flag的条件，不难注意到最后有一个sendFlag函数，会触发SendFlag事件，然后出题人那边部署的Listen监听到后就会给我们发送flag了。调用sendFlag的话，在deposit，如果是合约所有者调用的话，就会把box.callback 改成 sendFlag（顾名思义，猜测这玩意儿应该有点像那个回调函数叭），然后再调用withdraw就会触发这个box的callback，不过box有很多，需要指定一个，然后还得给一个pass，因为sendFlag被onlyPass修饰，要求<code>(bytes12(sha3(pass)) != safeboxes[idx].hash)</code>，问题不大，hash和pass都是可控的。至于要求合约所有者调用，这个问题不大，注意到deposit里的 <code>SafeBox box</code>，对box的声明并没有指定位置和初始化，所有该结构体指针是指向slot0的，而存储owner的地方正是在slot0，可以先排一下</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------------------------------</span><br><span class="line">|     unused (12)     |          owner (20)         | &lt;- slot 0</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">|                 randomNumber (32)                 | &lt;- slot 1</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">|               safeboxes.length (32)               | &lt;- slot 2</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">|       occupied by failedLogs but unused (32)      | &lt;- slot 3</span><br><span class="line">-----------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>然后box的是</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------------------------------</span><br><span class="line">| unused (11) | hash (12) | callback (8) | done (1) |</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">|                     value (32)                    |</span><br><span class="line">-----------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>所以我们可以控制callback，hash 两个变量的值，还有个done是0，不过没事，我们可以换账户么，换个末尾是0的就行。所以完全可以把原来的owner覆盖成我们自己。但是问题来了，他要求<code>require(msg.value &gt;= 100000000 ether)</code>，这个就比较过分了，好像有点难顶。</p>
+<p>但是又发现，这个modifier里声明的 <code>FailedAttempt info;</code> 也是未指定位置和初始化的。那它也能改点东西啊。看看它的结构</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------------------------------</span><br><span class="line">|                      idx (32)                     |</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">|                     time (32)                     |</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">|          origin (20)         |   triedPass (12)   |</span><br><span class="line">-----------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>他占三个slot，所以它能改到slot2，也就是safeboxes的长度。safeboxes是一个动态数组，failedLogs 是一个映射，但他们都是存储在storage上的，所以有没有可能，我是说可能，他们是可以重叠的。只要safeboxes的长度比他们各自起始位置的差值的二分之一大就可以了。也就是 <code>keccak245(msg.address()||3) -keccak256(2) &lt; safebox.length // 2</code> （因为一个box占俩slot）</p>
+<p>重叠之后能干嘛，重叠之后 failedLogs 里的 某个 info 通过修改 triedPass 就能覆盖safeboxes里某个box的callback了。把callback覆盖成sendFlag？格局小了，那不还是得要100000000eth，直接给他跳到 <code>emit SendFlag(msg.sender)</code> ，pwn！那我们怎么知道<code>emit SendFlag(msg.sender)</code>的位置在哪儿呢？看汇编，<a href="https://ethervm.io/decompile/ropsten/0x85B0446Dc5B5f32cbB674Dc8e49Fc27Ebaff2Ee2" target="_blank" rel="noopener">https://ethervm.io/decompile/ropsten/0x85B0446Dc5B5f32cbB674Dc8e49Fc27Ebaff2Ee2</a> 根据100000000eth的特征我们找到<img src="https://s2.loli.net/2022/02/18/GW3NQPcLY4v2XmC.png" alt="image-20220218161934386"></p>
+<p>（EVM好像只让jump到jumpdest的地方），所以我们往070F跳。</p>
+<p>然后这个覆盖是在修饰器里造成的，所以我们需要调用一次deposit ，转进去1 eth使得safeboxes[0] 的 callback 是 sendEther 从而方便之后调用withdraw可以触发修饰器里对info的写。</p>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
+<li>计算<code>target = keccak256(keccak256(msg.sender||3)) + 2</code>，这个是 failedLogs [msg.sender].”origin+tridPasss” 的地方，我们要改这里【注意这里有两次keccak，一次是mapping的，一次是failedLogs[]的，实际部署的时候在这里踩坑了】</li>
+<li>计算<code>base = keccak256(2)</code>，这个是safeboxes的起始位置</li>
+<li>计算<code>idx = (target-base)//2</code> 这个是要改的位置和safeboxes开始的位置之间能塞多少个box</li>
+<li>如果 <code>(target-base) % 2 == 1</code>，说明不是正正好塞满整数个box，那么idx += 2，我们要用到下两个box，这个box和下一个box都改不到。</li>
+<li>如果 <code>(msg.sender &lt;&lt; (12*8)) &lt; idx</code> 得换一个账户，因为safeboxes的长度是用 tx.origin 去覆盖的，最后的值会是  <code>tx.origin &lt;&lt; (12*8) + Pass</code></li>
+<li>用 1 eth 调用一下 <code>deposit(0x000000000000000000000000)</code></li>
+<li>调用 <code>withdraw(0, 0x111111111111110000070f00)</code>，如果step4中 (target-base) % 2 == 1，那么这一步执行两次</li>
+<li>最后再调用一下<code>withdraw(idx, 0x000000000000000000000000)</code> 就能触发emit SendFlag(msg.sender);事件了。</li>
+</ol>
+<h3 id="程序流程"><a href="#程序流程" class="headerlink" title="程序流程"></a>程序流程</h3><p>前三步应该没有什么问题，只是一个简单的距离计算，就像pwn里面的溢出你需要算填充多少字节一样。</p>
+<p>第四步有一个分类讨论了就，如果正好被2整除，那么就是这样子的一个情况</p>
+<p><img src="https://s2.loli.net/2022/02/23/QuYynMbzmOvtK8X.png" alt="image-20220218173428749"></p>
+<p>此时我们修改failedLogs [0] 的 pass 就能够改到 safeboxes[idx] 的 callback</p>
+<p>但如果是不被2整除，就稍微麻烦些，storage上应该是这样</p>
+<p><img src="https://s2.loli.net/2022/02/18/RsHuc7OXmCVzpqk.png" alt="image-20220218173330674"></p>
+<p>我们需要修改failedLogs [1] 的 pass 才能改到 safeboxes[idx+2] 的 callback</p>
+<p>第六步调用<code>deposit(0x000000000000000000000000)</code>，转个 1eth，此时 safeboxes[0].callback = sendEther，safeboxes[0].hash = 0x000000000000000000000000，safeboxes[0].done = false，safeboxes.value = 0.99eth</p>
+<p>第七步调用 <code>withdraw(0, 0x111111111111110000070f00)</code> ，此时会调用sendEther函数，进入修饰器，由于不满足 <code>(bytes12(sha3(pass)) != safeboxes[idx].hash)</code>，所以开始写info，<code>info.idx = 0，info.time = now，info.triedPass = 0x111111111111110000070f00，info.origin = tx.origin</code> 。注意此时info的值会修改slot0,slot1,slot2的值，所以此时<code>owner=0，randomNumber = now，safeboxes.length = tx.origin &lt;&lt; (12*8) + 0x111111111111110000070f00</code>，然后把这个info推进 failedLogs [0]，但推进faileLogs[0] 的同时，也把 safeboxes[idx].callback 改成了 111111110000070f</p>
+<p>如果之前(target-base) % 2 == 1，那么再执行一次，前面的不变，不过又把一个info推进到了 failedLogs [1] ，此时会把 safeboxes[idx+2].callback 给改了。</p>
+<p>最后调用<code>withdraw(idx, 0x000000000000000000000000)</code>，执行 <code>box.callback(idx, pass);</code>，此时 box.callback 已经被劫持到了 emit SendFlag(msg.sender) 的位置，触发事件，收flag。</p>
+<p>【然而事情并非如我所愿，实际操作的时候卡在最后一步了，】</p>
+<p><img src="https://s2.loli.net/2022/02/18/yJM9YzvOGRfPeZ2.png" alt="image-20220218213341705"></p>
+<p>我这里给的pass是0xdeadbe00000000000008FF00（因为我的jumpdest是08ff），此时我的账户地址是0x5B38Da6a701c568545dCfcB03FcB875f56beddC4，我查的是safeboxes[23098898392122849103790042457787377065045997405586824991915591150521413904160]，返回的是数组该处的hash值为0xb03fcb875f56beddc4deadbe，就是我账户地址的后半部分和我pass的前3个字节，说明我调用withdraw后，修饰器写了info，</p>
+<p><img src="https://s2.loli.net/2022/02/18/gCGjhNy6tU8o79b.png" alt="img"></p>
+<p>推进failedLogs 的同时也改了safeboxes该处的值。且属于safeboxes该处结构体的callback属性的值应该是00000000000008FF，正好8个字节，然后最后的00是属于done的。那么按理说，我们withdraw数组该处box的时候，会直接执行这个box的callback，也就是0x08ff，但是，，我失败了。</p>
+<p><img src="https://s2.loli.net/2022/02/18/97duFPwEoZeyjlX.png" alt="image-20220218213234763"></p>
+<p>【破案了，兄弟们，搞了半天之后去问zbr，才发现，是反编译的时候，把constructor code给搞进去了，所以偏移错了，不是8ff，是89a，我直接拿着input去反编译的，第一次报错，连汇编都没出来，然后我把复制的0x给删掉了之后，字节码出来了，但是伪代码没出来<img src="https://s2.loli.net/2022/02/18/k6jusv3OB9WJNL5.png" alt="image-20220218215623573"></p>
+<p>然后选择性忽略了这一行小字。他说的是我可能把constructor code（不知道具体干啥的，反正应该是部署的时候给JVM看的，也许是设定了JVM部署时要用的参数啊什么什么的，不了解，也没google到，不知道哪里能搞到权威指南看）带进去了，要删掉，通常是从第一个6080（6060）删到第二个6080（6060），日，，删了之后，伪代码也出来了</p>
+<p><img src="https://s2.loli.net/2022/02/18/nXQWRGugT8HorOC.png" alt="image-20220218215830157"></p>
+<p>寄！</p>
+<p>pass改成0xdeadbe000000000000089a00</p>
+<p><img src="https://s2.loli.net/2022/02/18/qY3vaMtx2jW4X7l.png" alt="image-20220218215925025"></p>
+<p>起飞！【踩坑记录就不删了，警醒一下自己属于是】</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
@@ -1006,12 +1070,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>密码学学习笔记 之 密码学随笔</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
+    <p><span class="copy-title">文章标题:</span>区块链学习笔记之Balsn CTF 2019 - Bank</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
-    <p><span class="copy-title">发布时间:</span>2021-01-01, 00:00:00</p>
-    <p><span class="copy-title">最后更新:</span>2021-01-02, 12:49:30</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2021/01/01/密码学学习笔记之密码学随笔/" title="密码学学习笔记 之 密码学随笔">http://jayxv.github.io/2021/01/01/密码学学习笔记之密码学随笔/</a>
+    <p><span class="copy-title">发布时间:</span>2022-02-18, 14:45:00</p>
+    <p><span class="copy-title">最后更新:</span>2022-02-23, 09:28:41</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2022/02/18/区块链学习笔记之BalsnCTF 2019 Bank/" title="区块链学习笔记之Balsn CTF 2019 - Bank">http://jayxv.github.io/2022/02/18/区块链学习笔记之BalsnCTF 2019 Bank/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
