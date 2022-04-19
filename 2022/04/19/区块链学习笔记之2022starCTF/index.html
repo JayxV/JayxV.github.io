@@ -6,17 +6,17 @@
   <meta name="keywords" content=" CTF ">
   <meta name="description" content="区块链学习笔记之2022starCTF——TreasureHunter | Van1sh的小屋">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Van1sh的小屋">
-<meta property="og:url" content="http://jayxv.github.io/tags/index.html">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
 <meta property="og:site_name" content="Van1sh的小屋">
-<meta property="og:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-14T07:59:54.000Z">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Van1sh的小屋">
-<meta name="twitter:description" content="It is not ignorance and weakness but arrogance that destroys mankind">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -179,11 +179,11 @@
                             
                         </li>
                             
-                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
                             
                         </li>
                             
-                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
                             
                         </li>
                             
@@ -440,6 +440,14 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a class="color3">Lattice</a>
     </li>
     
@@ -449,14 +457,6 @@
     
     <li class="article-tag-list-item">
         <a class="color4">LCG</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color4">Rc4</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color4">SM4</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -969,7 +969,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2022-04-19 19:16:05'>2022-04-19 15:23</time>
+        创建时间:<time class="date" title='更新时间: 2022-04-19 19:22:07'>2022-04-19 15:23</time>
         
     </div>
     <div class="article-meta">
@@ -1081,7 +1081,7 @@
 <p><img src="https://s2.loli.net/2022/04/19/lMOJBijgDFEAnQG.png" alt="image-20220419133150875"></p>
 <p><img src="https://s2.loli.net/2022/04/19/QL4MYkrZghSomyx.png" alt="image-20220419134750426"></p>
 <p>然后由于msg.sender在验证的时候是不参与计算的，所以其实我们直接传入这两个哈希，然后分别调用两次0x50就好了。opcode为</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009c"</span>, <span class="string">"0xe9f810898db8dc62342eaa122fd26525362f2b70bd462edef6e4e34093d66c17"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>, <span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, </span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009c"</span>, </span><br><span class="line"><span class="string">"0xe9f810898db8dc62342eaa122fd26525362f2b70bd462edef6e4e34093d66c17"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>,</span><br><span class="line"><span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
 
 <p>我们首先将msg.sender这个叶子压栈，然后调用0x50，根据opcode，首先会取msg.sender 在0x9c处的比特，然后决定是msg.sender的值是作为左叶子还是右叶子，不过此时是无所谓的，因为msg.sender的value是0，并不会影响merge后的哈希。然后再进行一个0x50，高度取的是msg.sender在0x9f处（也就是最高处）的比特，这里我们有进行构造，我们的msg.sender最高比特都是0，所以此时我们的0xe9f810….是作为左叶子，0xba13a…..作为右叶子，然后merge，得到我们的root，从而通过验证。</p>
 <p><img src="https://s2.loli.net/2022/04/19/jxSEq5mtv9w2Bpo.png" alt="image-20220419135005041"></p>
@@ -1095,7 +1095,7 @@
 <p><img src="https://s2.loli.net/2022/04/19/kVZXGtcCU4woq6F.png" alt="image-20220419140101457"></p>
 <p>于是我们故技重施，利用0x423b9e9e1b3 和 0xba13a52ab7 ，再次插入一个用户</p>
 <p>opcode</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009a"</span>, <span class="string">"0x423b9e9e1b3a1cfbd4c7d075391785c44def9c2884281cc63e0a78fcc3bb7f66"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>, <span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, </span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009a"</span>, </span><br><span class="line"><span class="string">"0x423b9e9e1b3a1cfbd4c7d075391785c44def9c2884281cc63e0a78fcc3bb7f66"</span>, </span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>,</span><br><span class="line"><span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
 
 <p>这一次我们用的地址是0x06F07E646D6724874e72FCE7f3AC534cfbEC754a，9a处的比特为1，叶子哈希为0xdea1d3dc0931a8116ca4692f0a3d6387eebbd4ba4e95d671b154412eade4d22c，merge后哈希为0x4e951b5440112027d135d0f1dc97bff8127bec7439f8a54ff6a6b6a164764c64，新的根哈希为0xb8bb540e2e9243c6d081375dfb652f6a87fcfb246c0a461b315e3e530bbbf0f8</p>
 <p>验证一下</p>
@@ -1103,13 +1103,13 @@
 <p>所以新的树是这个样子</p>
 <p><img src="https://s2.loli.net/2022/04/19/Icq4SXdkB2vxnEf.png" alt="image-20220419143909100"></p>
 <p>继续第三个，</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>, <span class="string">"0x4e951b5440112027d135d0f1dc97bff8127bec7439f8a54ff6a6b6a164764c64"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>, <span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, </span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>, </span><br><span class="line"><span class="string">"0x4e951b5440112027d135d0f1dc97bff8127bec7439f8a54ff6a6b6a164764c64"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>,</span><br><span class="line"><span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
 
 <p>地址用的是0x49Bb1e658D6EE866215D11037A6De1712Ed81B83，0x9e处还是1，叶子哈希为0x111b8a732fb70d95860bf6aa916f2973cf45ab797aac6af673dd0cf1f9918c71，merge后是0x4b3f7ee71efd14747b6620f1919bcdc78724d8a862e987596a1179a6b460be05，根哈希为0xd7266ab3d5607bd49580f90162ff62ce4ac844488a07d38926c0511b687dd6e9</p>
 <p><img src="https://s2.loli.net/2022/04/19/UokB5trLNGsFCfP.png" alt="image-20220419144322580"></p>
 <p><img src="https://s2.loli.net/2022/04/19/7UuVtvPXGk9DE6K.png" alt="image-20220419144525369"></p>
 <p>最后一个</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>, <span class="string">"0x4b3f7ee71efd14747b6620f1919bcdc78724d8a862e987596a1179a6b460be05"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>, <span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x4b3f7ee71efd14747b6620f1919bcdc78724d8a862e987596a1179a6b460be05"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>,</span><br><span class="line"><span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
 
 <p>地址为0x6a95Ad9945396aF307B6d0D99F5382F8C781B4f4,0x9c处为1，叶子哈希为0x34de1d313ec0366dafd9277ff42bea64676a6b426da826971d07d836ca7cf583，merge后为0x03f38c848024ba3006373acb4175da682ce9d4e1ade10e0472919f30f664b1e4，根哈希为0x1b70984cd043483aee663bdaa93a102faaadf0d7b5c429830cf3b5cc14d41429</p>
 <p><img src="https://s2.loli.net/2022/04/19/6132uwnLFipRbxd.png" alt="image-20220419144947376"></p>
@@ -1126,13 +1126,13 @@
 <p><img src="https://s2.loli.net/2022/04/19/h1sOrpgMi45Sqwt.png" alt="image-20220419150255055"></p>
 <p>可以看到，在0x9a处两个地址开始不一样，所以0x48的时候，高度要填0x9a，然后，显然，由于前面要求的地址必须从小到大，aset肯定是0，也就是意味着，先入栈的叶子必然是左叶子，这就是为什么我们之前把树往左边构造</p>
 <p>以此类推，高度分别需要填0x9a,0x9e,0x9e，最后我们在进行一次0x50，和0xba13a52ab72 merge一下，最终opcode</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009c"</span>, <span class="string">"0xe9f810898db8dc62342eaa122fd26525362f2b70bd462edef6e4e34093d66c17"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009a"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>,</span><br><span class="line"><span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009c"</span>,</span><br><span class="line"><span class="string">"0xe9f810898db8dc62342eaa122fd26525362f2b70bd462edef6e4e34093d66c17"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009a"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>,</span><br><span class="line"><span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://s2.loli.net/2022/04/19/phTv9dtePWQN4xY.png" alt="image-20220419150800278"></p>
 <p>成功</p>
 <h4 id="findkey"><a href="#findkey" class="headerlink" title="findkey"></a>findkey</h4><p>在findkey中，四片叶子都不参与计算，所以我们显然要构造opcode，然后利用0x50，将用于生成root的 0x03f38c848024 和 0xba13a52ab 塞进去就好了。</p>
 <p>所以我们先把叶子压进去，与先前一样利用0x48把他们都merge了，此时stackValue里的值都还是0，然后我们调用两次0x50将 0x03f38c848024 和 0xba13a52ab 分别放入，最后就能计算出我们的目标root了。最终opcode</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009a"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009c"</span>, <span class="string">"0x03f38c848024ba3006373acb4175da682ce9d4e1ade10e0472919f30f664b1e4"</span>, <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, <span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>, <span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009a"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000004c"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000048"</span>,</span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009e"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009c"</span>,</span><br><span class="line"><span class="string">"0x03f38c848024ba3006373acb4175da682ce9d4e1ade10e0472919f30f664b1e4"</span>,</span><br><span class="line"><span class="string">"0x0000000000000000000000000000000000000000000000000000000000000050"</span>, </span><br><span class="line"><span class="string">"0x000000000000000000000000000000000000000000000000000000000000009f"</span>, </span><br><span class="line"><span class="string">"0xba13a52ab72064627701ac75ab564f7e786d093c655849458536cc689abdf8e2"</span>]</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://s2.loli.net/2022/04/19/ECurJGPmd8sUgSc.png" alt="image-20220419151446293"></p>
 <p>成功。</p>
@@ -1159,7 +1159,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">5.4k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2022-04-19, 15:23:00</p>
-    <p><span class="copy-title">最后更新:</span>2022-04-19, 19:16:05</p>
+    <p><span class="copy-title">最后更新:</span>2022-04-19, 19:22:07</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2022/04/19/区块链学习笔记之2022starCTF/" title="区块链学习笔记之2022starCTF——TreasureHunter">http://jayxv.github.io/2022/04/19/区块链学习笔记之2022starCTF/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -1262,7 +1262,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#DES','#差分密码分析','#Rsa','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#ETH','#Book','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Rc4','#SM4','#Lattice','#Dsa','#LCG','#Knapsack','#DES','#差分密码分析','#Rsa','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#ETH','#Book','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
