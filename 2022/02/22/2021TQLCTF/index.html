@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>2022 TQLCTF | Van1sh的小屋</title>
+  <meta name="keywords" content=" Write Up ">
+  <meta name="description" content="2022 TQLCTF | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(50)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="合约小屋"><i class="fold iconfont icon-right"></i>合约小屋<small>(8)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="contract">contract<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="区块链靶场">区块链靶场<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(16)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="50">
+<input type="hidden" id="yelog_site_word_count" value="209k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ETH</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/06/29/区块链学习笔记之2022ACTF-bet2loss/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022ACTF—bet2loss">区块链学习笔记之2022ACTF—bet2loss</span>
+            <span class="post-date" title="2022-06-29 15:23:00">2022/06/29</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/04/19/区块链学习笔记之2022starCTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022starCTF——TreasureHunter">区块链学习笔记之2022starCTF——TreasureHunter</span>
+            <span class="post-date" title="2022-04-19 15:23:00">2022/04/19</span>
+        </a>
+        
+        <a  class="合约小屋 区块链靶场 "
+           href="/2022/03/08/区块链靶场刷题之cpaturetheether/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="cpature the ether">cpature the ether</span>
+            <span class="post-date" title="2022-03-08 11:03:00">2022/03/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/28/2022 SUSCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 SUSCTF">2022 SUSCTF</span>
+            <span class="post-date" title="2022-02-28 11:18:35">2022/02/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/22/2021TQLCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 TQLCTF">2022 TQLCTF</span>
+            <span class="post-date" title="2022-02-22 22:22:22">2022/02/22</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/18/区块链学习笔记之BalsnCTF 2019 Bank/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之Balsn CTF 2019 - Bank">区块链学习笔记之Balsn CTF 2019 - Bank</span>
+            <span class="post-date" title="2022-02-18 14:45:00">2022/02/18</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/15/区块链学习笔记之BalsnCTF 2020 IdleGame/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之BalsnCTF 2020 IdleGame">区块链学习笔记之BalsnCTF 2020 IdleGame</span>
+            <span class="post-date" title="2022-02-15 15:39:00">2022/02/15</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/11/区块链学习笔记之paradigm-CTF babysandbox/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之paradigm-CTF babysandbox">区块链学习笔记之paradigm-CTF babysandbox</span>
+            <span class="post-date" title="2022-02-11 16:22:00">2022/02/11</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/01/23/区块链学习笔记之RealWorld体验赛/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之RealWorld体验赛——TransferFrom">区块链学习笔记之RealWorld体验赛——TransferFrom</span>
+            <span class="post-date" title="2022-01-23 00:11:00">2022/01/23</span>
+        </a>
+        
+        <a  class="合约小屋 "
+           href="/2021/12/22/区块链学习笔记之初探以太坊/"
+           data-tag="ETH"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之初探以太坊">区块链学习笔记之初探以太坊</span>
+            <span class="post-date" title="2021-12-22 10:16:00">2021/12/22</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/08/23/2021 祥云杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 祥云杯">2021 祥云杯</span>
+            <span class="post-date" title="2021-08-23 14:07:00">2021/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack/"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-2021TQLCTF" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">2022 TQLCTF</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="比赛小屋">比赛小屋</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">Write Up</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2022-06-29 13:04:04'>2022-02-22 22:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目流程"><span class="toc-text">题目流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-text">题目分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解题思路"><span class="toc-text">解题思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#step1-获取token1对应乱序规则"><span class="toc-text">step1 获取token1对应乱序规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#step2-用token1’-替换token1"><span class="toc-text">step2 用token1’ 替换token1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#step3-枚举token2进行解密获取flag"><span class="toc-text">step3 枚举token2进行解密获取flag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ps"><span class="toc-text">ps:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解题流程与脚本编写"><span class="toc-text">解题流程与脚本编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Signature"><span class="toc-text">Signature</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hardrsa"><span class="toc-text">hardrsa</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        周末的TQLCTF，出题人确实TQL，这篇主要是想详细分析一下密码学赛题中的OTP一题，末尾也会简单过一下另外两道题，一道是非预期，另一道分析起来还是值得再开一篇，但是解起来还是比较方便（因为有现成的板子）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> secrets</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line"><span class="comment">#from secret import flag, secret_1, secret_2, flag_token</span></span><br><span class="line">flag=<span class="string">'TQLCTF&#123;eee67011-f2a0-4f5f-ae48-1de28c76939x&#125;'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ========================================================================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InvalidChar</span><span class="params">(Exception)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DangerousToken</span><span class="params">(Exception)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">valid_char = [ord(x) <span class="keyword">for</span> x <span class="keyword">in</span> string.digits +</span><br><span class="line">              string.ascii_letters + string.punctuation]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_valid</span><span class="params">(s: bytes)</span>:</span></span><br><span class="line">    r = list(map(<span class="keyword">lambda</span> x: x <span class="keyword">in</span> valid_char, s))</span><br><span class="line">    <span class="keyword">if</span> <span class="literal">False</span> <span class="keyword">in</span> r:</span><br><span class="line">        <span class="keyword">raise</span> InvalidChar(r.index(<span class="literal">False</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getrandbits</span><span class="params">(token: bytes, k: int)</span> -&gt; int:</span></span><br><span class="line">    random.seed(token)</span><br><span class="line">    <span class="keyword">return</span> random.getrandbits(k)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bytes_xor_int</span><span class="params">(s: bytes, r: int, length: int)</span> -&gt; bytes:</span></span><br><span class="line">    s = int.from_bytes(s, <span class="string">'little'</span>)</span><br><span class="line">    <span class="keyword">return</span> (s ^ r).to_bytes(length, <span class="string">'little'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__byte_shuffle</span><span class="params">(s: int)</span> -&gt; int:</span></span><br><span class="line">    bits = list(bin(s)[<span class="number">2</span>:].zfill(<span class="number">8</span>))</span><br><span class="line">    random.shuffle(bits)</span><br><span class="line">    <span class="keyword">return</span> int(<span class="string">''</span>.join(bits), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__byte_shuffle_re</span><span class="params">(s: int)</span> -&gt; int:</span></span><br><span class="line">    s = bin(s)[<span class="number">2</span>:].zfill(<span class="number">8</span>)</span><br><span class="line">    idx = list(range(<span class="number">8</span>))</span><br><span class="line">    random.shuffle(idx)</span><br><span class="line">    s = <span class="string">''</span>.join([s[idx.index(i)] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>)])</span><br><span class="line">    <span class="keyword">return</span> int(s, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bits_shuffle</span><span class="params">(s: bytes)</span> -&gt; bytes:</span></span><br><span class="line">    s = bytearray(s)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        s[i] = __byte_shuffle(s[i])</span><br><span class="line">    <span class="keyword">return</span> bytes(s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bits_shuffle_re</span><span class="params">(s: bytes)</span> -&gt; bytes:</span></span><br><span class="line">    s = bytearray(s)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        s[i] = __byte_shuffle_re(s[i])</span><br><span class="line">    <span class="keyword">return</span> bytes(s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bytes_shuffle</span><span class="params">(token: bytes, s: bytes)</span> -&gt; bytes:</span></span><br><span class="line">    random.seed(token)</span><br><span class="line">    s = bytearray(s)</span><br><span class="line">    random.shuffle(s)</span><br><span class="line">    <span class="keyword">return</span> bytes(s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bytes_shuffle_re</span><span class="params">(token: bytes, s: bytes)</span> -&gt; bytes:</span></span><br><span class="line">    random.seed(token)</span><br><span class="line">    idx = list(range(len(s)))</span><br><span class="line">    random.shuffle(idx)</span><br><span class="line">    r = bytearray(len(s))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        r[idx[i]] = s[i]</span><br><span class="line">    <span class="keyword">return</span> bytes(r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(s: str, token=<span class="params">(None, None)</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> token[<span class="number">0</span>] <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> token[<span class="number">1</span>] <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        token = (secrets.randbits(<span class="number">32</span>).to_bytes(<span class="number">4</span>, <span class="string">'little'</span>),</span><br><span class="line">                 secrets.randbits(<span class="number">32</span>).to_bytes(<span class="number">4</span>, <span class="string">'little'</span>))</span><br><span class="line">    s: bytes = s.encode()</span><br><span class="line"></span><br><span class="line">    check_valid(s)</span><br><span class="line"></span><br><span class="line">    r = getrandbits(token[<span class="number">0</span>]+secret_1, <span class="number">8</span>*len(s))</span><br><span class="line">    s = bytes_xor_int(s, r, len(s))</span><br><span class="line">    s = bits_shuffle(s)</span><br><span class="line">    s += token[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    s = bytes_shuffle(token[<span class="number">1</span>]+secret_2, s)</span><br><span class="line">    s += token[<span class="number">1</span>]</span><br><span class="line">    s = s.hex()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(s: str)</span>:</span></span><br><span class="line">    s: bytes = bytes.fromhex(s)</span><br><span class="line"></span><br><span class="line">    s, token_1 = s[:<span class="number">-4</span>], s[<span class="number">-4</span>:]</span><br><span class="line">    s = bytes_shuffle_re(token_1+secret_2, s)</span><br><span class="line"></span><br><span class="line">    s, token_0 = s[:<span class="number">-4</span>], s[<span class="number">-4</span>:]</span><br><span class="line">    r = getrandbits(token_0+secret_1, <span class="number">8</span>*len(s))</span><br><span class="line">    s = bits_shuffle_re(s)</span><br><span class="line">    s = bytes_xor_int(s, r, len(s))</span><br><span class="line"></span><br><span class="line">    check_valid(s)</span><br><span class="line"></span><br><span class="line">    s = s.decode()</span><br><span class="line">    <span class="keyword">if</span> (len(s) == len(flag)) + (token_0 == flag_token[<span class="number">0</span>]) + (token_1 == flag_token[<span class="number">1</span>]) &gt;= <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">raise</span> DangerousToken</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt_flag</span><span class="params">()</span>:</span></span><br><span class="line">    flag_enc = encrypt(flag, flag_token)</span><br><span class="line">    print(<span class="string">f'flag: <span class="subst">&#123;flag_enc&#125;</span>'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rebuild</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> secret_1, secret_2, flag_token</span><br><span class="line">    secret_1 = os.urandom(<span class="number">64</span>)</span><br><span class="line">    secret_2 = os.urandom(<span class="number">64</span>)</span><br><span class="line">    flag_token = (os.urandom(<span class="number">4</span>), os.urandom(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">choose_mode</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Choose function:'</span>)</span><br><span class="line">    print(<span class="string">'0: encrypt'</span>)</span><br><span class="line">    print(<span class="string">'1: decrypt'</span>)</span><br><span class="line">    print(<span class="string">'2: rebuild'</span>)</span><br><span class="line">    mode = int(input(<span class="string">'&gt; '</span>))</span><br><span class="line">    <span class="keyword">assert</span> <span class="number">0</span> &lt;= mode &lt;= <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> mode</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Welcome to Nano OTP Box!'</span>)</span><br><span class="line">    rebuild()</span><br><span class="line">    encrypt_flag()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            mode = choose_mode()</span><br><span class="line">            <span class="keyword">if</span> mode == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">'Please input original message.'</span>)</span><br><span class="line">                msg = input(<span class="string">'&gt; '</span>)</span><br><span class="line">                print(<span class="string">'encrypted message:'</span>, encrypt(msg))</span><br><span class="line">            <span class="keyword">elif</span> mode == <span class="number">1</span>:</span><br><span class="line">                print(<span class="string">'Please input encrypted message.'</span>)</span><br><span class="line">                msg = input(<span class="string">'&gt; '</span>)</span><br><span class="line">                print(<span class="string">'original message:'</span>, decrypt(msg))</span><br><span class="line">            <span class="keyword">elif</span> mode == <span class="number">2</span>:</span><br><span class="line">                rebuild()</span><br><span class="line">                encrypt_flag()</span><br><span class="line">        <span class="keyword">except</span> InvalidChar <span class="keyword">as</span> e:</span><br><span class="line">            print(<span class="string">'The original message contains invalid characters: pos'</span>, e)</span><br><span class="line">        <span class="keyword">except</span> DangerousToken:</span><br><span class="line">            print(<span class="string">'The encrypted message contains dangerous token'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="题目流程"><a href="#题目流程" class="headerlink" title="题目流程"></a>题目流程</h2><p>加密：需要一共四个参数，分别是secret1，secre2，token0，token1，其中secret为64bytes，token为4bytes</p>
+<ol>
+<li>首先以secre1与token0的拼接作为随机数种子初始化一个随机数生成器</li>
+<li>利用上述随机数生成器 getrandbits 生成随机数r，与明文异或，小端序</li>
+<li>然后对每一个字节进行一个bit级别的乱序（还是用的上面的随机数生成器）</li>
+<li>将输出拼接上token0</li>
+<li>然后以secre2与token1的拼接作为随机数种子初始化一个随机数生成器</li>
+<li>利用上述随机数生成器对整个字符串进行一个bytes级别的乱序</li>
+<li>最后拼接上token1，输出密文</li>
+</ol>
+<p>解密：</p>
+<ol>
+<li>将输入密文的后四个字节取出作为token1</li>
+<li>以secre2与token1的拼接作为随机数种子初始化一个随机数生成器</li>
+<li>利用上述随机数生成器对整个字符串进行一个bytes级别的乱序恢复</li>
+<li>将输出的后四个字节取出作为token2</li>
+<li>以secre1与token0的拼接作为随机数种子初始化一个随机数生成器</li>
+<li>然后对每一个字节进行一个bit级别的乱序恢复</li>
+<li>继续利用上述随机数生成器 getrandbits 生成随机数r，与step6的输出异或，小端序</li>
+<li>对上述输出进行检查，如果有一个非法字符（定义了可见字符集为合法字符），则会报错，并输出该字符在字符串中的位置</li>
+<li>如果明文的长度与flag的长度相等，token0与flag_token0相等，token1与flag_token1相等，三者满足二，则会报错，并返回dangerous token</li>
+<li>通过检查，则返回解密后的明文字符串。</li>
+</ol>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目每次加密都对明文进行一次的异或，然后对每个字节进行一个bit级别的乱序，很像DES里的S盒，盒的数量就是字节数，最后进行一个byte级别的乱序，类似DES里的P盒。OTP体现在token0和token1决定了随机方式，只要token不同，那么每次的随机方式则不同。题目也做了限制，用于flag加密的token0和token1也不允许<strong>同时</strong>用于一条密文的解密。</p>
+<p><img src="https://s2.loli.net/2022/02/22/O3RqYLNZdATyIn1.png" alt="image-20220222150817219"></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>对于题目限制的三个条件，明文长度，token0，token1，其中token1我们是知道的（就在密文后面），但token1只对应一种字节级别的乱序方式，如果我们能够获取乱序方式，token1是可以被代替的。而token0与随机数生成有关，几乎是不可替代的，想要解密flag，这个地方不能碰。那么我们字符串的长度，我们就需要取舍了，少一位，或者多一位。</p>
+<h3 id="step1-获取token1对应乱序规则"><a href="#step1-获取token1对应乱序规则" class="headerlink" title="step1 获取token1对应乱序规则"></a>step1 获取token1对应乱序规则</h3><p>​        那么如何替换token1呢，也就是找到token1所对用的乱序方式。我们注意到题目提供的一个check，如果有非法字符，他会报错，并给出错误字节的位置，那么切入点就在这里了。只有token1与字节位置相关，试想一下，如果我们把flag的密文传回去，那肯定不会报错，但如果我们改了flag密文的一个字节呢？比如我们改了第一个字节的第二个bit，那么在解密的时候，打个比方在byte乱序恢复的时候第一个字节到了第八个字节，然后再进行bit乱序恢复的时候第二个bit到了第一个bit，然后进行一个随机数r的异或，显然，如果一切正常，第八个字节的第一个bit肯定是0，但是由于我们对它进行了一次修改，此时他肯定是1，那么就会报错，报明文的第八个字符是非法的，此时我们即获得了一条映射关系：第八个字节会被调到第一个字节。如下图所示</p>
+<p><img src="https://s2.loli.net/2022/02/22/81gnsLMPTjY4hui.png" alt="image-20220222151334666"></p>
+<p>可以明确的是，对每个字节的每个bit进行修改，八次修改里面，至少会爆一次错，因为如果改到了最高位，字符必然是非法的。如果有多次报错，那么报错的位置也必然是同一处。但我们手里的密文，除了最后四个字节是token1，在前面的48（一共有52个字符）字节中，还有四个是属于token0的，如果我们改到了token0的字节，八次修改，极大概率应该是都会报错，而且八次报错中大概率会出现不一样的错误位置，因为token0是与异或随机数r相关的，动了token0，那么随机数r会整个被改动，会影响到所有字节。</p>
+<h3 id="step2-用token1’-替换token1"><a href="#step2-用token1’-替换token1" class="headerlink" title="step2 用token1’ 替换token1"></a>step2 用token1’ 替换token1</h3><p>由此我们进行48*8次交互就能够确定token1所对应的乱序规则，并且能确定token0所在的位置，但是我们不知道他们之间的相对顺序。但好在只有4字节，只需要$A_4^4 = 24$ 次尝试即可。有了映射规则后，我们就能够自己把flag的顺序调回去。然后我们给它一个新的token1’，并给他以token1’的规则进行乱序。这样服务器那边收到密文后，再以token1’的规则恢复乱序，也就还是正常的flag的顺序了。至于token1’的获取和token1’规则的获取，我们只需要进行一次正常加解密，再利用上述方式走一遍就可以了。</p>
+<h3 id="step3-枚举token2进行解密获取flag"><a href="#step3-枚举token2进行解密获取flag" class="headerlink" title="step3 枚举token2进行解密获取flag"></a>step3 枚举token2进行解密获取flag</h3><p>但是token0不能动，我们得动一下字符的长度，这里我选择加一位。即我们再恢复了flag的顺序后，再在末尾加一个字符，再加上token0（24种中的一种）。然后去向服务申请45字节（flag是44个字节）消息的加密，获取相应的token1’，求出相应的token1’ 的乱序规则，然后将其应用到我们恢复好顺序的flag上。只要我们token0顺序对了，然后拿去给服务器解密，应该就是能成功，的叭？</p>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps:"></a>ps:</h3><p>这里还有一个问题，就是随机数r的选取，他利用的getrandbit，这个随机数生成的方式是4个字节一组，先生成的数放小端，最后不满四字节的部分取大端，所以这里如果少取1字节，那么解密的时候，就算给了flag用的token0和token1，那么最后随机数异或的时候也会导致最后三字节因为错位异或而导致解密处别的字符，</p>
+<p><img src="https://s2.loli.net/2022/02/22/miK3UkbdDhAYo9V.png" alt="image-20220222152421530"></p>
+<p>如上图所示，flag加密的时候是44个字节，这里异或的时候用的是小端序，所以最后四个字节 ” } z y x  “，会和 “ a b c d “进行异或，但如果解密的时候，你少传了一个字符，把最后一个 ‘}’ 给丢掉了，那么他在异或的时候，会是” z y x” 和 “a b c” 异或，就这么错位了。所以解密的时候就会寄，如果运气好可见的话，你还能看到flag的前面40个字节，运气不好就会报字符非法了（算每一个字符合法概率为1/2，都合法只有1/8的概率）。（虽然后续会有补救的方法，但确实太过于麻烦）所以我们这里选5字节，多出的一字节要是解密失败——报位置44处非法字符，那说明我们的token0顺序对了，我们换一个字节继续试就好了。</p>
+<h2 id="解题流程与脚本编写"><a href="#解题流程与脚本编写" class="headerlink" title="解题流程与脚本编写"></a>解题流程与脚本编写</h2><p>由于复现的时候场景已经关闭，这里直接利用源代码进行本地测试。</p>
+<p>设置的flag为 ‘TQLCTF{eee67011-f2a0-4f5f-ae48-1de28c76939a}’</p>
+<p>secret_1, secret_2, flag_token参数都没有设置，直接开局调用一个rebuild</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> TQLOPT <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">flag_enc = encrypt(flag, flag_token)</span><br><span class="line">c = long_to_bytes(int(flag_enc,<span class="number">16</span>))</span><br><span class="line">table_from_to=&#123;&#125;</span><br><span class="line">token1to=[]</span><br><span class="line">c = list(c)</span><br><span class="line"><span class="comment"># 异或flag_enc的各个bit以得到token1所对应的乱序规则</span></span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(len(c)<span class="number">-4</span>):	<span class="comment"># 最后四个字节是token1</span></span><br><span class="line">    times = <span class="number">0</span>	<span class="comment">#记录invalid次数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        tempc = c.copy()</span><br><span class="line">        tempc[index] ^= <span class="number">1</span> &lt;&lt; i</span><br><span class="line">        tempstr = <span class="string">''</span>.join(chr(i) <span class="keyword">for</span> i <span class="keyword">in</span> tempc)</span><br><span class="line">        tempbytes = tempstr.encode(<span class="string">'latin1'</span>)</span><br><span class="line">        templong = bytes_to_long(tempbytes)</span><br><span class="line">        temphex = hex(templong)[<span class="number">2</span>:].rjust(<span class="number">104</span>,<span class="string">'0'</span>)	<span class="comment"># 这里只是想把异或c的一个bit然转成hex而已，绕了一圈属于是</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            decrypt(temphex)</span><br><span class="line">        <span class="keyword">except</span> InvalidChar <span class="keyword">as</span> e:	<span class="comment"># 由于是本地调试，我直接捕获异常了，如果是远程交互，可能还需要写一个正则匹配一下返回值</span></span><br><span class="line">            fr0m = str(e)</span><br><span class="line">            times += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span> DangerousToken:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">if</span> times == <span class="number">8</span>:	<span class="comment"># 如果八次全错，说明我们改到token0了，记录下位置</span></span><br><span class="line">        token1to.append(index)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        table_from_to[fr0m] = index</span><br><span class="line"><span class="comment"># 至此，我们获取到了密文中token0的位置，已经相应的token1所对应的映射关系 table_from_to</span></span><br><span class="line"><span class="comment"># 故技重施，加密一个45字节的msg，获取token1' 已经其对应的映射关系 table11_to_from，这里反正记是方便后面的调用</span></span><br><span class="line"></span><br><span class="line">msg = <span class="string">'a'</span>*<span class="number">45</span></span><br><span class="line">msg_enc = encrypt(msg)</span><br><span class="line">token11 = msg_enc[<span class="number">-8</span>:]</span><br><span class="line">table11_to_from=&#123;&#125;</span><br><span class="line">token11to=[]</span><br><span class="line"></span><br><span class="line">c = long_to_bytes(int(msg_enc,<span class="number">16</span>))</span><br><span class="line">c = list(c)</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(len(c)<span class="number">-4</span>):</span><br><span class="line">    times = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        tempc = c.copy()</span><br><span class="line">        tempc[index] ^= <span class="number">1</span> &lt;&lt; i</span><br><span class="line">        tempstr = <span class="string">''</span>.join(chr(i) <span class="keyword">for</span> i <span class="keyword">in</span> tempc)</span><br><span class="line">        tempbytes = tempstr.encode(<span class="string">'latin1'</span>)</span><br><span class="line">        templong = bytes_to_long(tempbytes)</span><br><span class="line">        temphex = hex(templong)[<span class="number">2</span>:].rjust((<span class="number">45</span>+<span class="number">8</span>)*<span class="number">2</span>,<span class="string">'0'</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            decrypt(temphex)</span><br><span class="line">        <span class="keyword">except</span> InvalidChar <span class="keyword">as</span> e:</span><br><span class="line">            fr0m = str(e)</span><br><span class="line">            times += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span> DangerousToken:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">if</span> times == <span class="number">8</span>:</span><br><span class="line">        token11to.append(index)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        table11_to_from[index] = fr0m</span><br><span class="line"><span class="comment"># 现在我们按照table_from_to，把flag的顺序调回来，</span></span><br><span class="line"></span><br><span class="line">c = long_to_bytes(int(flag_enc,<span class="number">16</span>)).decode(<span class="string">'latin1'</span>)</span><br><span class="line">rec = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">52</span><span class="number">-8</span>):</span><br><span class="line">	rec += c[table_from_to[str(i)]]</span><br><span class="line">token0 = <span class="string">''</span>.join(c[token1to[i]] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> list(permutations(token0,<span class="number">4</span>)):</span><br><span class="line">    token00 = list(each)</span><br><span class="line">    rectmp = rec+[<span class="string">'0'</span>] + token00	<span class="comment">#然后加上一个字节，加上24种token0，</span></span><br><span class="line"></span><br><span class="line">    rec_s = <span class="string">""</span></span><br><span class="line">    token00index=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">53</span><span class="number">-4</span>):</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> table11_to_from.keys():</span><br><span class="line">            rec_s += rectmp[int(table11_to_from[i])]	<span class="comment"># 按照table11_to_from乱序,剩下四个空用token0去补</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            rec_s += token00[token00index]</span><br><span class="line">            token00index += <span class="number">1</span></span><br><span class="line">        tempbytes = rec_s.encode(<span class="string">'latin1'</span>)</span><br><span class="line">        templong = bytes_to_long(tempbytes)</span><br><span class="line">        temphex = hex(templong)[<span class="number">2</span>:].rjust((<span class="number">45</span>+<span class="number">4</span>)*<span class="number">2</span>,<span class="string">'0'</span>)	</span><br><span class="line">        temphex += token11	<span class="comment">#加上token1'，再拿去解密</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        Token0=<span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">'TQLCTF'</span> <span class="keyword">in</span> decrypt(temphex):</span><br><span class="line">            print(decrypt(temphex))</span><br><span class="line">            exit()	<span class="comment"># 运气好一步到位</span></span><br><span class="line">    <span class="keyword">except</span> InvalidChar <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">if</span> str(e) == <span class="string">'44'</span>:</span><br><span class="line">       		Token0 = token00	<span class="comment">#如果44出错说明token0对了，去换字节就好</span></span><br><span class="line">        	<span class="keyword">break</span></span><br><span class="line">            </span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> Token0:	<span class="comment">#实测下来发现就算token0对了，它解密后最开头的四个字节还是会异或出错，这就不是很清楚原因了，直接再来一遍好了。</span></span><br><span class="line">    print(<span class="string">"Try again"</span>)</span><br><span class="line">    exit()</span><br><span class="line">    </span><br><span class="line">table = list(string.digits + string.ascii_letters + string.punctuation)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> table:</span><br><span class="line">    rectmp = rec+[each] + Token0    <span class="comment">#	故技重施2，换字节，直到最后一个异或完是可打印字符</span></span><br><span class="line">    rec_s = <span class="string">""</span></span><br><span class="line">    token00index=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">53</span><span class="number">-4</span>):</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> table11_to_from.keys():</span><br><span class="line">            rec_s += rectmp[int(table11_to_from[i])]    <span class="comment"># 按照table11_to_from乱序,剩下四个空用token0去补</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            rec_s += Token0[token00index]</span><br><span class="line">            token00index += <span class="number">1</span></span><br><span class="line">        tempbytes = rec_s.encode(<span class="string">'latin1'</span>)</span><br><span class="line">        templong = bytes_to_long(tempbytes)</span><br><span class="line">        temphex = hex(templong)[<span class="number">2</span>:].rjust((<span class="number">45</span>+<span class="number">4</span>)*<span class="number">2</span>,<span class="string">'0'</span>) </span><br><span class="line">        temphex += token11  <span class="comment">#加上token1'，再拿去解密</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'TQLCTF'</span> <span class="keyword">in</span> decrypt(temphex):</span><br><span class="line">            print(decrypt(temphex))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/02/22/oOjt5GcNMAbVEK8.png" alt="image-20220222145819669"></p>
+<p>本地跑跑还是快的。远程多试几次应该也还好。</p>
+<h2 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h2><p>看了半天，觉得熟悉，但是还是不知道是什么签名系统。后来才知道这似乎就是GGH的签名系统，以前只知道GGH的加密。。有非预期，直接对公钥pk进行规约就能当私钥用：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sk</span> = pk.BKZ(block_size = <span class="number">20</span>)</span><br><span class="line"><span class="attr">v</span> = hash_msg(<span class="string">""</span>)</span><br><span class="line"><span class="attr">e</span> = signature(sk,v)</span><br></pre></td></tr></table></figure>
+
+<p>或者用BKZ求v的cvp</p>
+<h2 id="hardrsa"><a href="#hardrsa" class="headerlink" title="hardrsa"></a>hardrsa</h2><p>涉及二元copper，和MRCTF2021 的 strangeCRT有一点点区别，这里的dp比较大，但是用MRCTF2021 <a href="https://www.anquanke.com/post/id/237898?from=timeline#h2-3" target="_blank" rel="noopener">官方的wp</a> 的脚本，稍微改改参数，还是能用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">beta = <span class="number">0.233</span></span><br><span class="line">delta = <span class="number">0.226</span></span><br><span class="line">amplification = <span class="number">1024</span></span><br><span class="line">alpha = <span class="number">0.9987</span></span><br><span class="line"></span><br><span class="line">modulus = e</span><br><span class="line">mm = <span class="number">5</span></span><br><span class="line">ss = <span class="number">0</span></span><br><span class="line">tt = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">Xp = int(<span class="number">2</span> * N ** (alpha + beta + delta  - <span class="number">1</span>))</span><br><span class="line">Yp = int(N**beta)</span><br><span class="line">Yq = int(<span class="number">2</span> * N ** (<span class="number">1</span> - beta) )</span><br><span class="line"></span><br><span class="line"><span class="comment">#下面求G basis的时候，取个三组，会快些</span></span><br><span class="line">I = ideal(all_pol[:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+<p>就是改了一下bound和格子，参考 <a href="https://www.iacr.org/archive/pkc2006/39580001/39580001.pdf" target="_blank" rel="noopener">New_attacks_on_RSA_with_small_secret_CRT-exponents</a></p>
+<p><img src="https://s2.loli.net/2022/02/22/5P3ztsERwYbTe2j.png" alt="image-20220222153758524"></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>2022 TQLCTF</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.5k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2022-02-22, 22:22:22</p>
+    <p><span class="copy-title">最后更新:</span>2022-06-29, 13:04:04</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2022/02/22/2021TQLCTF/" title="2022 TQLCTF">http://jayxv.github.io/2022/02/22/2021TQLCTF/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#DES','#差分密码分析','#Rsa','#RE','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#ETH','#Book','#Nmap','#XSS','#Coppersmith’s Method','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
