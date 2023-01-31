@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>TLS 1.2 协议（一） | Van1sh的小屋</title>
+  <meta name="keywords" content=" TLS 1.2 ">
+  <meta name="description" content="TLS 1.2 协议（一） | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(57)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(18)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="合约小屋"><i class="fold iconfont icon-right"></i>合约小屋<small>(8)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="contract">contract<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="区块链靶场">区块链靶场<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(17)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="协议小屋">协议小屋<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="论文小屋">论文小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="漏洞小屋">漏洞小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="57">
+<input type="hidden" id="yelog_site_word_count" value="270.8k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TLS 1.2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">paper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">small private exponent</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">continued_fraction</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ETH</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Book</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Shadowsocks</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="密码小屋 Basic "
+           href="/2020/05/27/密码学学习笔记之introduction to mathematical cryptography/"
+           data-tag="Book"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 introduction to mathematical cryptography">密码学学习笔记 之 introduction to mathematical cryptography</span>
+            <span class="post-date" title="2020-05-27 21:05:00">2020/05/27</span>
+        </a>
+        
+        <a  class="漏洞小屋 "
+           href="/2023/01/30/Shadowsocks Redirect Attack/"
+           data-tag="Shadowsocks"
+           data-author="Van1sh" >
+            <span class="post-title" title="Shadowsocks Redirect Attack">Shadowsocks Redirect Attack</span>
+            <span class="post-date" title="2023-01-30 17:14:00">2023/01/30</span>
+        </a>
+        
+        <a  class="协议小屋 "
+           href="/2022/12/15/TLS1.2协议分析（二）/"
+           data-tag="TLS 1.2"
+           data-author="Van1sh" >
+            <span class="post-title" title="TLS 1.2 协议（二）">TLS 1.2 协议（二）</span>
+            <span class="post-date" title="2022-12-15 10:24:00">2022/12/15</span>
+        </a>
+        
+        <a  class="协议小屋 "
+           href="/2022/12/08/TLS1.2协议分析（一）/"
+           data-tag="TLS 1.2"
+           data-author="Van1sh" >
+            <span class="post-title" title="TLS 1.2 协议（一）">TLS 1.2 协议（一）</span>
+            <span class="post-date" title="2022-12-08 21:10:00">2022/12/08</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2022/11/15/密码学学习笔记之连分数/"
+           data-tag="continued_fraction"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记之连分数">密码学学习笔记之连分数</span>
+            <span class="post-date" title="2022-11-15 17:59:00">2022/11/15</span>
+        </a>
+        
+        <a  class="论文小屋 "
+           href="/2022/10/17/Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent/"
+           data-tag="paper,small private exponent"
+           data-author="Van1sh" >
+            <span class="post-title" title="Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent">Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent</span>
+            <span class="post-date" title="2022-10-17 15:31:00">2022/10/17</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/09/14/2022 cryptoctf/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 CryptoCTF">2022 CryptoCTF</span>
+            <span class="post-date" title="2022-09-14 17:16:00">2022/09/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/08/30/2021 cryptoctf/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 CryptoCTF">2021 CryptoCTF</span>
+            <span class="post-date" title="2022-08-30 13:30:00">2022/08/30</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/06/29/区块链学习笔记之2022ACTF-bet2loss/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022ACTF—bet2loss">区块链学习笔记之2022ACTF—bet2loss</span>
+            <span class="post-date" title="2022-06-29 15:23:00">2022/06/29</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/04/19/区块链学习笔记之2022starCTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022starCTF——TreasureHunter">区块链学习笔记之2022starCTF——TreasureHunter</span>
+            <span class="post-date" title="2022-04-19 15:23:00">2022/04/19</span>
+        </a>
+        
+        <a  class="合约小屋 区块链靶场 "
+           href="/2022/03/08/区块链靶场刷题之cpaturetheether/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="cpature the ether">cpature the ether</span>
+            <span class="post-date" title="2022-03-08 11:03:00">2022/03/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/28/2022 SUSCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 SUSCTF">2022 SUSCTF</span>
+            <span class="post-date" title="2022-02-28 11:18:35">2022/02/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/22/2021TQLCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 TQLCTF">2022 TQLCTF</span>
+            <span class="post-date" title="2022-02-22 22:22:22">2022/02/22</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/18/区块链学习笔记之BalsnCTF 2019 Bank/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之Balsn CTF 2019 - Bank">区块链学习笔记之Balsn CTF 2019 - Bank</span>
+            <span class="post-date" title="2022-02-18 14:45:00">2022/02/18</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/15/区块链学习笔记之BalsnCTF 2020 IdleGame/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之BalsnCTF 2020 IdleGame">区块链学习笔记之BalsnCTF 2020 IdleGame</span>
+            <span class="post-date" title="2022-02-15 15:39:00">2022/02/15</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/11/区块链学习笔记之paradigm-CTF babysandbox/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之paradigm-CTF babysandbox">区块链学习笔记之paradigm-CTF babysandbox</span>
+            <span class="post-date" title="2022-02-11 16:22:00">2022/02/11</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/01/23/区块链学习笔记之RealWorld体验赛/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之RealWorld体验赛——TransferFrom">区块链学习笔记之RealWorld体验赛——TransferFrom</span>
+            <span class="post-date" title="2022-01-23 00:11:00">2022/01/23</span>
+        </a>
+        
+        <a  class="合约小屋 "
+           href="/2021/12/22/区块链学习笔记之初探以太坊/"
+           data-tag="ETH"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之初探以太坊">区块链学习笔记之初探以太坊</span>
+            <span class="post-date" title="2021-12-22 10:16:00">2021/12/22</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/08/23/2021 祥云杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 祥云杯">2021 祥云杯</span>
+            <span class="post-date" title="2021-08-23 14:07:00">2021/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack/"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-TLS1.2协议分析（一）" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">TLS 1.2 协议（一）</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="协议小屋">协议小屋</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">TLS 1.2</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2023-01-31 16:17:50'>2022-12-08 21:10</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:10.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TLS-1-2-完整流程"><span class="toc-text">TLS 1.2 完整流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端请求（Client-Hello"><span class="toc-text">客户端请求（Client Hello)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端回应（Server-Hello）"><span class="toc-text">服务端回应（Server Hello）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端证书（Server-Certificate）"><span class="toc-text">服务端证书（Server Certificate）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端交换密钥生成（Server-Key-Exchange-Generation）"><span class="toc-text">服务端交换密钥生成（Server Key Exchange Generation）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端发送交换密钥（Server-Key-Exchange）"><span class="toc-text">服务端发送交换密钥（Server Key Exchange）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端回复完毕（Server-Hello-Done）"><span class="toc-text">服务端回复完毕（Server Hello Done）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端交换密钥生成（Client-Key-Exchange-Generation）"><span class="toc-text">客户端交换密钥生成（Client Key Exchange Generation）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端发送交换密钥（Client-Key-Exchange）"><span class="toc-text">客户端发送交换密钥（Client Key Exchange）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端通讯密钥计算（Client-Encryption-Keys-Calculation）"><span class="toc-text">客户端通讯密钥计算（Client Encryption Keys Calculation）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端启用加密通讯（Client-Change-Cipher-Spec）"><span class="toc-text">客户端启用加密通讯（Client Change Cipher Spec）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端握手完毕（Client-Handshake-Finished）"><span class="toc-text">客户端握手完毕（Client Handshake Finished）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端通讯密钥计算（Server-Encryption-Keys-Calculation）"><span class="toc-text">服务端通讯密钥计算（Server Encryption Keys Calculation）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端启用加密通讯（Server-Change-Cipher-Spec）"><span class="toc-text">服务端启用加密通讯（Server Change Cipher Spec）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端握手完毕（Client-Handshake-Finished）"><span class="toc-text">服务端握手完毕（Client Handshake Finished）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双方正式进行加密通讯（Application-Data）"><span class="toc-text">双方正式进行加密通讯（Application Data）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客服端关闭连接（Client-Close-Notify）"><span class="toc-text">客服端关闭连接（Client Close Notify）</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前学习了很多与密码学相关的理论，但其实一直忽视了密码学在实际生活，尤其是网络世界中的应用，未知攻，焉知防。但是连其本身的体制流程都不了解，又如何攻呢？于是在学习密码学这个方向上的漏洞挖掘之前，还想了解一下当前密码学的实际应用场景。那么自然是先从我们的网络通讯协议TLS入手。参考网站<a href="https://tls12.xargs.org/" target="_blank" rel="noopener">The Illustrated TLS 1.2 Connection</a>，其本身已经是对 TLS 1.2 细致入微的解读了，因此笔者也只是稍添一点自己的解读，方便读者也方便自己理解其流程的背后逻辑。。</p>
+<h2 id="TLS-1-2-完整流程"><a href="#TLS-1-2-完整流程" class="headerlink" title="TLS 1.2 完整流程"></a>TLS 1.2 完整流程</h2><p><img src="https://s2.loli.net/2022/11/23/DdajvJ6XfiINYqu.png" alt="TLS 1.2 完整流程"></p>
+<p>上述是从未建立过 TLS 连接的客户端与服务端完整的通讯流程。</p>
+<ol>
+<li>首先用户发出握手消息，请求建立连接</li>
+<li>服务端收到消息后，首先会发送自己的证书给用户，证明自己是用户想要连接的对象。然后会在本地生成一个交换密钥，用于生成通讯密钥（对于熟悉DH密钥交换协议的读者应该不难理解），并发送给用户。</li>
+<li>用户收到服务端的证书并验证后，本地生成一个交换密钥，随后利用服务端的交换密钥计算生成通讯密钥，并用该通讯密钥加密一段验证消息，这段验证消息包含在此之前握手阶段所发送所有握手消息的哈希值。最后将用户端的交换密钥和加密后的验证消息发送给服务端。用户端握手阶段完毕，准备进行加密通讯。</li>
+<li>服务端收到用户的交换密钥后也计算生成通讯密钥并解密用户端发来的密文，随后也会用这个通讯密钥加密一段验证消息发送给用户。这段验证消息同样是在此之前握手阶段所发送所有握手消息的哈希值。服务端握手阶段完毕，准备进行加密通讯。</li>
+<li>用户收到服务端发来的验证密文，利用通讯密钥解密后，如果解密明文通过验证，那么加密通讯开始。</li>
+<li>通讯结束后，由用户端发出关闭连接的告警消息，该告警消息也是加密的。</li>
+</ol>
+<p>至此，一次完整的加密通讯就完成了。</p>
+<p>在粗略的熟悉了流程后，也许读者会有诸多疑问？是不是每一次通讯都要协商密钥呢？握手信息里都有些啥呢？我们继续往下，对 TLS 进行一个”庖丁解牛“。</p>
+<h3 id="客户端请求（Client-Hello"><a href="#客户端请求（Client-Hello" class="headerlink" title="客户端请求（Client Hello)"></a>客户端请求（Client Hello)</h3><p>示例：<code>16 03 01 00 a5 01 00 00 a1 03 03 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f 00 00 20 cc a8 cc a9 c0 2f c0 30 c0 2b c0 2c c0 13 c0 09 c0 14 c0 0a 00 9c 00 9d 00 2f 00 35 c0 12 00 0a 01 00 00 58 00 00 00 18 00 16 00 00 13 65 78 61 6d 70 6c 65 2e 75 6c 66 68 65 69 6d 2e 6e 65 74 00 05 00 05 01 00 00 00 00 00 0a 00 0a 00 08 00 1d 00 17 00 18 00 19 00 0b 00 02 01 00 00 0d 00 12 00 10 04 01 04 03 05 01 05 03 06 01 06 03 02 01 02 03 ff 01 00 01 00 00 12 00 00</code></p>
+<p>客户端最开始的请求包括以下内容</p>
+<ul>
+<li>protocol version （协商协议版本）</li>
+<li>client random data (used later in the handshake) （客户端随机数）</li>
+<li>an optional session id to resume （可选项，已建立的会话id）</li>
+<li>a list of cipher suites（使用的密码学组件）</li>
+<li>a list of compression methods（使用的数据压缩方式）</li>
+<li>a list of extensions（拓展项列表）</li>
+</ul>
+<p><strong>记录标头 Record Header</strong> ：<code>16 03 01 00 a5</code></p>
+<p>0x16：握手记录的标识符</p>
+<p>0x03 0x01：表示协议 3.1 版本，即 TLS 1.0；但我们这里不是TLS 1.2 协议么？这是为了兼容部分服务器，如果协议版本高于 TLS1.0，可能会握手失败）</p>
+<p>0x00 0xa5：长度——接下来将有 165 字节的握手消息</p>
+<p><strong>握手标头 Handshake Header</strong>：<code>01 00 00 a1</code></p>
+<p>0x01：客户端请求（ Client Hello）的标识符</p>
+<p>0x00 0x00 0xa1： 长度——接下来将有161字节的请求消息</p>
+<p><strong>客户端所用协议版本：</strong><code>03 03</code></p>
+<p>0x03 0x03：TLS 1.2</p>
+<p><strong>客户端随机数（32字节）：</strong> <code>00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f</code></p>
+<p>0x00 0x01 0x02 … 0x1f：随机数</p>
+<p><strong>会话 ID （Session ID）</strong>：<code>00</code></p>
+<p>0x00：长度——接下来将用 0 个字节表示会话ID的长度（如果之前建立过连接，那么就会有一个会话ID，32字节）</p>
+<p><strong>可选密码学组件 Cipher Suites：</strong> <code>00 20 cc a8 cc a9 c0 2f c0 30 c0 2b c0 2c c0 13 c0 09 c0 14 c0 0a 00 9c 00 9d 00 2f 00 35 c0 12 00 0a</code></p>
+<p>0x00 0x20：接下来将用 32 个字节表示可选密码学组件</p>
+<p>0xcc 0xa8：TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256</p>
+<p>0xcc 0xa9：TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256</p>
+<p>0xc0 0x2f：TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</p>
+<p>0xc0 0x30：TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</p>
+<p>0xc0 0x2b：TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</p>
+<p>0xc0 0x2c：TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384</p>
+<p>0xc0 0x13：TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</p>
+<p>0xc0 0x09：TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA</p>
+<p>0xc0 0x14：TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA</p>
+<p>0xc0 0x0a：TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA</p>
+<p>0x00 0x9c：TLS_RSA_WITH_AES_128_GCM_SHA256</p>
+<p>0x00 0x9d：TLS_RSA_WITH_AES_256_GCM_SHA384</p>
+<p>0x00 0x2f：TLS_RSA_WITH_AES_128_CBC_SHA</p>
+<p>0x00 0x35：TLS_RSA_WITH_AES_256_CBC_SHA</p>
+<p>0xc0 0x12：TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA</p>
+<p>0x00 0x0a：TLS_RSA_WITH_3DES_EDE_CBC_SHA</p>
+<p><strong>数据压缩方法：</strong><code>01 00</code></p>
+<p>0x01：长度——接下来将用 1 个字节表示数据压缩方法</p>
+<p>0x00：不压缩，压缩的特性会削弱加密数据的安全性（参见CRIME）。因此，该功能已从未来的TLS协议中删除。</p>
+<p><strong>拓展项：</strong></p>
+<p>0x00 0x58：长度——接下来会使用 88 个字节表示拓展内容；</p>
+<ol>
+<li><p><strong>服务器名称（Server Name）</strong></p>
+<p><code>00 00 00 18 00 16 00 00 13 65 78 61 6d 70 6c 65 2e 75 6c 66 68 65 69 6d 2e 6e 65 74</code></p>
+<p>客户端提供了它联系的服务器的名称，也称为SNI（服务器名称指示）。</p>
+<p>如果没有此扩展，HTTPS服务器将无法为单个IP地址（虚拟主机）上的多个主机名提供服务，因为在协商TLS会话并发出HTTP请求之前，它无法知道要发送哪个主机名的证书。</p>
+<p>0x00 0x00：Server Name 的标识符</p>
+<p>0x00 0x18：长度——Server Name 将占用24个字节</p>
+<p>0x00 0x16：长度——列表第一个（也是唯一一个）元素将占用22个字节</p>
+<p>0x00：列表类型是 “DNS hostname”</p>
+<p>0x13：长度——hostname 将占用 19 个字节</p>
+<p>0x65 0x78 0x61 … 0x6e 0x65 0x74 ：具体的hostname：”example.ulfheim.net”</p>
+</li>
+<li><p><strong>状态请求 (Status Request ):</strong></p>
+<p><code>00 05 00 05 01 00 00 00 00</code></p>
+<p>客户端允许服务器在其响应中提供OCSP信息。OCSP可用于检查证书是否已被吊销。</p>
+<p>但是由于服务器是根据客户端的拓展项一一进行回复的，所以客户端在这里需要发送一个该扩展的空内容，这样服务器在返回时就可以用数据填充该扩展然后进行回复。</p>
+<p>0x00 0x05：Status Request的标识符</p>
+<p>0x00 0x05：长度——Status Request 将占用 5 个字节</p>
+<p>0x01：证书状态类型：OCSP</p>
+<p>0x00：回复者ID信息的长度：这里是客户端，所以是0</p>
+<p>0x00：所请求的消息的拓展消息的长度：这里是客户端，所以是0</p>
+</li>
+<li><p><strong>（密码学体制）支持的群结构 (Supported Groups)：</strong></p>
+<p><code>00 0a 00 0a 00 08 00 1d 00 17 00 18 00 19</code></p>
+<p>客户端表示它支持4条曲线的椭圆曲线（EC）加密。此扩展最初命名为“椭圆曲线”，但已重命名为“Supported Groups”，以便与其他密码类型通用。</p>
+<p>0x00 0x0a：Supported Groups的标识符</p>
+<p>0x00 0x0a：Supported Groups的具体内容将占用 10 个字节</p>
+<p>0x00 0x08：长度——曲线列表将占用 8 字节</p>
+<p>0x00 0x1d：表示曲线 “x25519”</p>
+<p>0x00 0x17：表示曲线 “secp256r1”</p>
+<p>0x00 0x18：表示曲线 “secp384r1”</p>
+<p>0x00 0x19：表示曲线 “secp521r1”</p>
+</li>
+<li><p><strong>椭圆曲线表示形式 (EC Point Formats)：</strong></p>
+<p><code>00 0b 00 02 01 00</code></p>
+<p>在椭圆曲线（EC）加密过程中，客户端和服务器将以压缩或未压缩的形式交换所选点的信息。此扩展表示客户端只能解析来自服务器的未压缩信息。</p>
+<p>在TLS的下一版本中，不存在协商点的能力（而是为每条曲线预先选择一个点），因此不会发送此扩展。</p>
+<p>0x00 0x0b：EC points format 的标识符</p>
+<p>0x00 0x02：长度——EC points format 的具体内容将占用 2 个字节</p>
+<p>0x01：长度——所支持格式列表中元素占用 1 个字节</p>
+<p>0x00：表示格式：不压缩</p>
+</li>
+<li><p><strong>签名算法 (Signature Algorithms)：</strong></p>
+<p><code>00 0d 00 12 00 10 04 01 04 03 05 01 05 03 06 01 06 03 02 01 02 03</code></p>
+<p>随着TLS的发展，有必要支持更强的签名算法（如SHA-256），同时仍支持使用MD5和SHA1的早期实现。此扩展指示客户端能够理解哪些签名算法，并可能影响服务器向客户端发送的证书的选择。</p>
+<p>0x00 0x0d：Signature Algorithms 的标识符</p>
+<p>0x00 0x12：长度——Signature Algorithms的内容将占用18字节</p>
+<p>0x00 0x10：长度——支持签名列表中元素将占用 16 个字节</p>
+<p>0x04 0x01：RSA/PKCS1/SHA256</p>
+<p>0x04 0x03：ECDSA/SECP256r1/SHA256</p>
+<p>0x05 0x01：RSA/PKCS1/SHA384</p>
+<p>0x05 0x03：ECDSA/SECP384r1/SHA384</p>
+<p>0x06 0x01：RSA/PKCS1/SHA512</p>
+<p>0x06 0x03：ECDSA/SECP521r1/SHA512</p>
+<p>0x02 0x01：RSA/PKCS1/SHA1</p>
+<p>0x02 0x03：ECDSA/SHA1</p>
+</li>
+<li><p><strong>重新协商信息 (Renegotiation Info)：</strong></p>
+<p><code>ff 01 00 01 00</code></p>
+<p>此扩展是为了防止利用TLS重新协商的攻击类型。</p>
+<p>此协议的下一版本（TLS 1.3）已删除重新协商的功能，因此将来不再需要此扩展。</p>
+<p>0xff 0x01：Renegotiation Info 的标识符</p>
+<p>0x00 0x01：长度——Renegotiation Info 的内容将占用1字节</p>
+<p>0x00：Renegotiation Info 具体内容的长度为 0，因为这是一次新的连接</p>
+</li>
+<li><p><strong>签名证书时间戳 (SCT，signed certificate timestamp)：</strong></p>
+<p><code>00 12 00 00</code></p>
+<p>客户端发送一个空的扩展，这个拓展是用于服务器发送自己签名证书的时间戳，或者根据发送了扩展的客户端更改行为。</p>
+<p>0x00 0x12：SCT 的标识符</p>
+<p>0x00 0x00：长度——接下来 SCT 的内容将占用 0 字节</p>
+</li>
+</ol>
+<h3 id="服务端回应（Server-Hello）"><a href="#服务端回应（Server-Hello）" class="headerlink" title="服务端回应（Server Hello）"></a>服务端回应（Server Hello）</h3><p>示例：<code>16 03 03 00 31 02 00 00 2d 03 03 70 71 72 73 74 75 76 77 78 79 7a 7b 7c 7d 7e 7f 80 81 82 83 84 85 86 87 88 89 8a 8b 8c 8d 8e 8f 00 c0 13 00 00 05 ff 01 00 01 00</code></p>
+<p>接下来是服务端的回应，想必也是跟客户端一一对应的，包括以下内容</p>
+<ul>
+<li>the selected protocol version（确定选择的协议版本）</li>
+<li>server random data (used later in the handshake)（服务端随机数）</li>
+<li>the session id（可选项，已建立的会话id）</li>
+<li>the selected cipher suite（使用的密码学组件）</li>
+<li>the selected compression method使用的数据压缩方式）</li>
+<li>a list of extensions（拓展项）</li>
+</ul>
+<p>报文结构：</p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>16 03 01 00 31</code></p>
+<p>0x16：握手记录的标识符</p>
+<p>0x03 0x01 ：协议是3.1版本， TLS 1.0；</p>
+<p>0x00 0x31：长度——接下来握手消息将占用49字节</p>
+<p><strong>握手标头 (Handshake Header)</strong>：``02 00 00 2d`</p>
+<p>0x02：服务端握手请求 Server Hello）</p>
+<p>0x00 0x00 0x2d：长度——接下来的请求消息将占用45字节</p>
+<p><strong>服务端所用协议版本 (Server Version)</strong>：<code>03 03</code></p>
+<p>0x03 0x03： TLS 1.2</p>
+<p><strong>服务端随机数 (Server Random)</strong> ：<code>70 71 72 73 74 75 76 77 78 79 7a 7b 7c 7d 7e 7f 80 81 82 83 84 85 86 87 88 89 8a 8b 8c 8d 8e 8f</code></p>
+<p>0x70 0x71 … 0x8f：32字节随机数</p>
+<p><strong>会话 ID (Session ID)</strong>：<code>00</code></p>
+<p>00：长度——接下来会话ID将占用 0 字节  （如果之前建立过连接，那么就会有一个会话ID，32字节）</p>
+<p><strong>选择的密码学组件 (Cipher Suite)</strong>：<code>c0 13</code></p>
+<p>0xc0 0x13：TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</p>
+<p><strong>压缩方式 (Compression Method)</strong>：<code>00</code></p>
+<p>0x00：从客户端提供的选项中，选择不压缩</p>
+<p><strong>拓展项 (Extensions)</strong>：<code>00 05 ff 01 00 01 00</code></p>
+<p>0x00 0x05：长度——接下来拓展项内容占用 5 字节</p>
+<p><strong>重新协商信息（Renegotiation Info）</strong>：``ff 01 00 01 00`</p>
+<p>0xff 0x01：Renegotiation Info 的标识符</p>
+<p>0x00 0x01：长度——Renegotiation Info 的内容将占用1字节</p>
+<p>0x00：长度——Renegotiation Info 具体内容的长度为 0（因为这是一次新的连接）</p>
+<h3 id="服务端证书（Server-Certificate）"><a href="#服务端证书（Server-Certificate）" class="headerlink" title="服务端证书（Server Certificate）"></a>服务端证书（Server Certificate）</h3><p>示例：<code>16 03 03 03 2f 0b 00 03 2b 00 03 28 00 03 25 30 82 03 21 30 82 02 09 a0 03 02 01 02 02 08 15 5a 92 ad c2 04 8f 90 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 22 31 0b 30 09 06 03 55 04 06 13 02 55 53 31 13 30 11 06 03 55 04 0a 13 0a 45 78 61 6d 70 6c 65 20 43 41 30 1e 17 0d 31 38 31 30 30 35 30 31 33 38 31 37 5a 17 0d 31 39 31 30 30 35 30 31 33 38 31 37 5a 30 2b 31 0b 30 09 06 03 55 04 06 13 02 55 53 31 1c 30 1a 06 03 55 04 03 13 13 65 78 61 6d 70 6c 65 2e 75 6c 66 68 65 69 6d 2e 6e 65 74 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 c4 80 36 06 ba e7 47 6b 08 94 04 ec a7 b6 91 04 3f f7 92 bc 19 ee fb 7d 74 d7 a8 0d 00 1e 7b 4b 3a 4a e6 0f e8 c0 71 fc 73 e7 02 4c 0d bc f4 bd d1 1d 39 6b ba 70 46 4a 13 e9 4a f8 3d f3 e1 09 59 54 7b c9 55 fb 41 2d a3 76 52 11 e1 f3 dc 77 6c aa 53 37 6e ca 3a ec be c3 aa b7 3b 31 d5 6c b6 52 9c 80 98 bc c9 e0 28 18 e2 0b f7 f8 a0 3a fd 17 04 50 9e ce 79 bd 9f 39 f1 ea 69 ec 47 97 2e 83 0f b5 ca 95 de 95 a1 e6 04 22 d5 ee be 52 79 54 a1 e7 bf 8a 86 f6 46 6d 0d 9f 16 95 1a 4c f7 a0 46 92 59 5c 13 52 f2 54 9e 5a fb 4e bf d7 7a 37 95 01 44 e4 c0 26 87 4c 65 3e 40 7d 7d 23 07 44 01 f4 84 ff d0 8f 7a 1f a0 52 10 d1 f4 f0 d5 ce 79 70 29 32 e2 ca be 70 1f df ad 6b 4b b7 11 01 f4 4b ad 66 6a 11 13 0f e2 ee 82 9e 4d 02 9d c9 1c dd 67 16 db b9 06 18 86 ed c1 ba 94 21 02 03 01 00 01 a3 52 30 50 30 0e 06 03 55 1d 0f 01 01 ff 04 04 03 02 05 a0 30 1d 06 03 55 1d 25 04 16 30 14 06 08 2b 06 01 05 05 07 03 02 06 08 2b 06 01 05 05 07 03 01 30 1f 06 03 55 1d 23 04 18 30 16 80 14 89 4f de 5b cc 69 e2 52 cf 3e a3 00 df b1 97 b8 1d e1 c1 46 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 59 16 45 a6 9a 2e 37 79 e4 f6 dd 27 1a ba 1c 0b fd 6c d7 55 99 b5 e7 c3 6e 53 3e ff 36 59 08 43 24 c9 e7 a5 04 07 9d 39 e0 d4 29 87 ff e3 eb dd 09 c1 cf 1d 91 44 55 87 0b 57 1d d1 9b df 1d 24 f8 bb 9a 11 fe 80 fd 59 2b a0 39 8c de 11 e2 65 1e 61 8c e5 98 fa 96 e5 37 2e ef 3d 24 8a fd e1 74 63 eb bf ab b8 e4 d1 ab 50 2a 54 ec 00 64 e9 2f 78 19 66 0d 3f 27 cf 20 9e 66 7f ce 5a e2 e4 ac 99 c7 c9 38 18 f8 b2 51 07 22 df ed 97 f3 2e 3e 93 49 d4 c6 6c 9e a6 39 6d 74 44 62 a0 6b 42 c6 d5 ba 68 8e ac 3a 01 7b dd fc 8e 2c fc ad 27 cb 69 d3 cc dc a2 80 41 44 65 d3 ae 34 8c e0 f3 4a b2 fb 9c 61 83 71 31 2b 19 10 41 64 1c 23 7f 11 a5 d6 5c 84 4f 04 04 84 99 38 71 2b 95 9e d6 85 bc 5c 5d d6 45 ed 19 90 94 73 40 29 26 dc b4 0e 34 69 a1 59 41 e8 e2 cc a8 4b b6 08 46 36 a0</code></p>
+<p>服务端发送给客户端的证书包括以下内容</p>
+<ul>
+<li>the hostname of the server（服务端的主机名）</li>
+<li>the public key used by this server（服务端的公钥）</li>
+<li>proof from a trusted third party that the owner of this hostname holds the private key for this public key（出据可信任第三方的证明，证明该服务掌握着该公钥对应的私钥）</li>
+</ul>
+<p><strong>记录标头 (Record Header)</strong> ：<code>16 03 03 03 2f</code></p>
+<p>0x16：握手记录的标识符</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x03 0x2f：长度——接下来握手消息将占用815字节</p>
+<p><strong>握手标头 (Handshake Header)</strong>：``0b 00 03 2b`</p>
+<p>0x0b：服务端证书标识符 (certificate）</p>
+<p>0x00 0x03 0x2b：长度——接下来的请求消息将占用811字节</p>
+<p><strong>证书 (Certificate)</strong>：<code>00 03 28 00 03 25</code></p>
+<p>0x00 0x03 0x28：长度——接下来证书的长度将占用808字节</p>
+<p>0x00 0x03 0x25：长度——接下来第一个（也是唯一一个）证书的长度将占用805字节</p>
+<p>0x30 0x82 0x03 … 0x0a：证书具体内容，格式可参考 <a href="https://tls12.xargs.org/certificate.html" target="_blank" rel="noopener">https://tls12.xargs.org/certificate.html</a></p>
+<h3 id="服务端交换密钥生成（Server-Key-Exchange-Generation）"><a href="#服务端交换密钥生成（Server-Key-Exchange-Generation）" class="headerlink" title="服务端交换密钥生成（Server Key Exchange Generation）"></a>服务端交换密钥生成（Server Key Exchange Generation）</h3><p>与同客户端交换密钥生成步骤相同</p>
+<p>服务器计算用于密钥交换的私有/公共密钥对。密钥交换是一种技术，在这种技术中，双方可以就同一个数字达成一致，而窃听者无法知道它是什么。</p>
+<p>密钥交换的计算原理（即椭圆曲线上的运算）可见 <a href="https://x25519.xargs.org/" target="_blank" rel="noopener">X25519</a> 。私钥一般是 $0$ 到 $2^{256}-1$ 之间的一个整数，服务器是通过生成32字节（256位）的随机数据来选择。这里我们所选私钥为：</p>
+<p><code>909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeaf</code></p>
+<p>我们可以利用 openssl 计算特定私钥的公钥，命令为：openssl pkey -noout -text &lt; server-ephemeral-private.key</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">### requires openssl <span class="number">1.1</span>.<span class="number">0</span> <span class="built_in">or</span> higher</span><br><span class="line">$ openssl pkey -noout -text &lt; server-ephemeral-private.key</span><br><span class="line"></span><br><span class="line">X25519 Private-Key:</span><br><span class="line">pri<span class="variable">v:</span></span><br><span class="line">    <span class="number">90</span>:<span class="number">91</span>:<span class="number">92</span>:<span class="number">93</span>:<span class="number">94</span>:<span class="number">95</span>:<span class="number">96</span>:<span class="number">97</span>:<span class="number">98</span>:<span class="number">99</span>:<span class="number">9</span><span class="variable">a:9b</span>:<span class="number">9</span><span class="keyword">c</span>:<span class="number">9</span>d:<span class="number">9</span><span class="keyword">e</span>:</span><br><span class="line">    <span class="number">9</span><span class="keyword">f</span>:a0:a1:a2:a3:a4:a5:a6:a7:a8:a9:<span class="keyword">a</span><span class="variable">a:ab</span>:ac:ad:</span><br><span class="line">    ae:af</span><br><span class="line"><span class="keyword">pu</span><span class="variable">b:</span></span><br><span class="line">    <span class="number">9</span><span class="keyword">f</span>:d7:ad:<span class="number">6</span>d:<span class="keyword">cf</span>:f4:<span class="number">29</span>:<span class="number">8</span>d:d3:f9:<span class="number">6</span>d:<span class="number">5</span><span class="variable">b:1b</span>:<span class="number">2</span><span class="variable">a:f9</span>:</span><br><span class="line">    <span class="number">10</span>:a0:<span class="number">53</span>:<span class="number">5</span><span class="variable">b:14</span>:<span class="number">88</span>:d7:f8:<span class="keyword">f</span><span class="variable">a:bb</span>:<span class="number">34</span>:<span class="number">9</span><span class="variable">a:98</span>:<span class="number">28</span>:<span class="number">80</span>:</span><br><span class="line">    b6:<span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+<p>得到与私钥相关的公钥是</p>
+<p><code>9fd7ad6dcff4298dd3f96d5b1b2af910a0535b1488d7f8fabb349a982880b615</code></p>
+<h3 id="服务端发送交换密钥（Server-Key-Exchange）"><a href="#服务端发送交换密钥（Server-Key-Exchange）" class="headerlink" title="服务端发送交换密钥（Server Key Exchange）"></a>服务端发送交换密钥（Server Key Exchange）</h3><p>服务器为密钥交换提供信息。作为密钥交换过程的一部分，服务器和客户端都将拥有公钥和私钥的密钥对，并将向另一方发送公钥。然后，将使用各方的私钥和另一方的公钥的组合来生成共享加密密钥。</p>
+<p>双方就使用ECDHE的密码组件达成一致，这意味着密钥将基于选定的椭圆曲线，然后使用Diffie-Hellman协商密钥，并且这个密钥是临时的（为每个连接生成），而不是使用证书中的公钥/私钥。</p>
+<p>示例：<code>16 03 03 01 2c 0c 00 01 28 03 00 1d 20 9f d7 ad 6d cf f4 29 8d d3 f9 6d 5b 1b 2a f9 10 a0 53 5b 14 88 d7 f8 fa bb 34 9a 98 28 80 b6 15 04 01 01 00 04 02 b6 61 f7 c1 91 ee 59 be 45 37 66 39 bd c3 d4 bb 81 e1 15 ca 73 c8 34 8b 52 5b 0d 23 38 aa 14 46 67 ed 94 31 02 14 12 cd 9b 84 4c ba 29 93 4a aa cc e8 73 41 4e c1 1c b0 2e 27 2d 0a d8 1f 76 7d 33 07 67 21 f1 3b f3 60 20 cf 0b 1f d0 ec b0 78 de 11 28 be ba 09 49 eb ec e1 a1 f9 6e 20 9d c3 6e 4f ff d3 6b 67 3a 7d dc 15 97 ad 44 08 e4 85 c4 ad b2 c8 73 84 12 49 37 25 23 80 9e 43 12 d0 c7 b3 52 2e f9 83 ca c1 e0 39 35 ff 13 a8 e9 6b a6 81 a6 2e 40 d3 e7 0a 7f f3 58 66 d3 d9 99 3f 9e 26 a6 34 c8 1b 4e 71 38 0f cd d6 f4 e8 35 f7 5a 64 09 c7 dc 2c 07 41 0e 6f 87 85 8c 7b 94 c0 1c 2e 32 f2 91 76 9e ac ca 71 64 3b 8b 98 a9 63 df 0a 32 9b ea 4e d6 39 7e 8c d0 1a 11 0a b3 61 ac 5b ad 1c cd 84 0a 6c 8a 6e aa 00 1a 9d 7d 87 dc 33 18 64 35 71 22 6c 4d d2 c2 ac 41 fb</code></p>
+<p>报文结构：</p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>16 03 03 01 2c</code></p>
+<p>0x16：握手记录的标识符</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x03 0x2f：长度——接下来握手消息将占用300字节</p>
+<p><strong>握手标头 (Handshake Header)</strong>：<code>0c 00 01 28</code></p>
+<p>0x0c：服务端密钥交换标识符 (Server Key Exchange）</p>
+<p>0x00 0x01 0x28：长度——接下来发送的消息将占用296字节</p>
+<p><strong>曲线信息 (Curve Info)</strong>: <code>03 00 1d</code></p>
+<p>0x03：曲线名称的标识符，接下来的字节将指定某一条特定曲线。</p>
+<p>0x00 0x1d：曲线 curve x25519</p>
+<p><strong>公钥（Public Key）</strong>:<code>20 9f d7 ad 6d cf f4 29 8d d3 f9 6d 5b 1b 2a f9 10 a0 53 5b 14 88 d7 f8 fa bb 34 9a 98 28 80 b6 15</code></p>
+<p>0x20：长度——接下来发送的公钥将占用32字节</p>
+<p>0x9f 0xd7….. 0x15：前面计算得到的公钥</p>
+<p><strong>签名 （Signature）</strong>:</p>
+<p><code>04 01 01 00 04 02 b6 61 f7 c1 91 ee 59 be 45 37 66 39 bd c3 d4 bb 81 e1 15 ca 73 c8 34 8b 52 5b 0d 23 38 aa 14 46 67 ed 94 31 02 14 12 cd 9b 84 4c ba 29 93 4a aa cc e8 73 41 4e c1 1c b0 2e 27 2d 0a d8 1f 76 7d 33 07 67 21 f1 3b f3 60 20 cf 0b 1f d0 ec b0 78 de 11 28 be ba 09 49 eb ec e1 a1 f9 6e 20 9d c3 6e 4f ff d3 6b 67 3a 7d dc 15 97 ad 44 08 e4 85 c4 ad b2 c8 73 84 12 49 37 25 23 80 9e 43 12 d0 c7 b3 52 2e f9 83 ca c1 e0 39 35 ff 13 a8 e9 6b a6 81 a6 2e 40 d3 e7 0a 7f f3 58 66 d3 d9 99 3f 9e 26 a6 34 c8 1b 4e 71 38 0f cd d6 f4 e8 35 f7 5a 64 09 c7 dc 2c 07 41 0e 6f 87 85 8c 7b 94 c0 1c 2e 32 f2 91 76 9e ac ca 71 64 3b 8b 98 a9 63 df 0a 32 9b ea 4e d6 39 7e 8c d0 1a 11 0a b3 61 ac 5b ad 1c cd 84 0a 6c 8a 6e aa 00 1a 9d 7d 87 dc 33 18 64 35 71 22 6c 4d d2 c2 ac 41 fb</code></p>
+<p>因为服务器正在生成临时密钥，所以它没有使用服务器证书中提供的公钥。为了证明服务器拥有服务器证书（在TLS会话中提供证书有效性），它使用证书的私钥签署临时密钥。可以使用证书的公钥验证此签名。</p>
+<p>0x04 0x01：作为 RSA with SHA256 hash 签名算法的保留字</p>
+<p>0x01 0x00：长度——接下来签名信息将占用 256 字节</p>
+<p>0x04 0x02 0xb6 … 0xfb：信息摘要 SHA256(client_hello_random + server_hello_random + curve_info + public_key) 的RSA签名（这里就使用了本次连接客户端和服务端的随机数，使得攻击者无法进行重放攻击。）</p>
+<p>签名的计算也可以用 openssl </p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">### client random from Client Hello</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>00<span class="symbol">\x</span>01<span class="symbol">\x</span>02<span class="symbol">\x</span>03<span class="symbol">\x</span>04<span class="symbol">\x</span>05<span class="symbol">\x</span>06<span class="symbol">\x</span>07'  &gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>08<span class="symbol">\x</span>09<span class="symbol">\x</span>0a<span class="symbol">\x</span>0b<span class="symbol">\x</span>0c<span class="symbol">\x</span>0d<span class="symbol">\x</span>0e<span class="symbol">\x</span>0f' &gt;&gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>10<span class="symbol">\x</span>11<span class="symbol">\x</span>12<span class="symbol">\x</span>13<span class="symbol">\x</span>14<span class="symbol">\x</span>15<span class="symbol">\x</span>16<span class="symbol">\x</span>17' &gt;&gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>18<span class="symbol">\x</span>19<span class="symbol">\x</span>1a<span class="symbol">\x</span>1b<span class="symbol">\x</span>1c<span class="symbol">\x</span>1d<span class="symbol">\x</span>1e<span class="symbol">\x</span>1f' &gt;&gt; /tmp/compute</span><br><span class="line">### server random from Server Hello</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>70<span class="symbol">\x</span>71<span class="symbol">\x</span>72<span class="symbol">\x</span>73<span class="symbol">\x</span>74<span class="symbol">\x</span>75<span class="symbol">\x</span>76<span class="symbol">\x</span>77' &gt;&gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>78<span class="symbol">\x</span>79<span class="symbol">\x</span>7a<span class="symbol">\x</span>7b<span class="symbol">\x</span>7c<span class="symbol">\x</span>7d<span class="symbol">\x</span>7e<span class="symbol">\x</span>7f' &gt;&gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>80<span class="symbol">\x</span>81<span class="symbol">\x</span>82<span class="symbol">\x</span>83<span class="symbol">\x</span>84<span class="symbol">\x</span>85<span class="symbol">\x</span>86<span class="symbol">\x</span>87' &gt;&gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>88<span class="symbol">\x</span>89<span class="symbol">\x</span>8a<span class="symbol">\x</span>8b<span class="symbol">\x</span>8c<span class="symbol">\x</span>8d<span class="symbol">\x</span>8e<span class="symbol">\x</span>8f' &gt;&gt; /tmp/compute</span><br><span class="line">### the curve info section from this message</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>03<span class="symbol">\x</span>00<span class="symbol">\x</span>1d' &gt;&gt; /tmp/compute</span><br><span class="line">### the public key sections from this msg</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>20<span class="symbol">\x</span>9f<span class="symbol">\x</span>d7<span class="symbol">\x</span>ad<span class="symbol">\x</span>6d<span class="symbol">\x</span>cf<span class="symbol">\x</span>f4<span class="symbol">\x</span>29' &gt;&gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>8d<span class="symbol">\x</span>d3<span class="symbol">\x</span>f9<span class="symbol">\x</span>6d<span class="symbol">\x</span>5b<span class="symbol">\x</span>1b<span class="symbol">\x</span>2a<span class="symbol">\x</span>f9' &gt;&gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>10<span class="symbol">\x</span>a0<span class="symbol">\x</span>53<span class="symbol">\x</span>5b<span class="symbol">\x</span>14<span class="symbol">\x</span>88<span class="symbol">\x</span>d7<span class="symbol">\x</span>f8' &gt;&gt; /tmp/compute</span><br><span class="line">$ echo -en '<span class="symbol">\x</span>fa<span class="symbol">\x</span>bb<span class="symbol">\x</span>34<span class="symbol">\x</span>9a<span class="symbol">\x</span>98<span class="symbol">\x</span>28<span class="symbol">\x</span>80<span class="symbol">\x</span>b6<span class="symbol">\x</span>15' &gt;&gt; /tmp/compute</span><br><span class="line">$ openssl dgst -sign server.key -sha256 /tmp/compute | hexdump</span><br><span class="line"></span><br><span class="line">0000000 04 02 b6 61 f7 c1 91 ee 59 be 45 37 66 39 bd c3</span><br><span class="line">... snip ...</span><br><span class="line">00000f0 7d 87 dc 33 18 64 35 71 22 6c 4d d2 c2 ac 41 fb</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端回复完毕（Server-Hello-Done）"><a href="#服务端回复完毕（Server-Hello-Done）" class="headerlink" title="服务端回复完毕（Server Hello Done）"></a>服务端回复完毕（Server Hello Done）</h3><p>服务器表示它完成了握手的一半。</p>
+<p>示例：<code>16 03 03 00 04 0e 00 00 00</code></p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>16 03 03 00 04</code></p>
+<p>0x16：握手记录的标识符</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x00 0x04：长度——接下来握手消息将占用4字节</p>
+<p><strong>握手标头 (Handshake Header)</strong>：<code>0e 00 00 00</code></p>
+<p>0x0e：服务端回复完毕的标识符 (server hello done）</p>
+<p>0x00 0x00 0x00：长度——接下来发送的消息将占用0字节</p>
+<h3 id="客户端交换密钥生成（Client-Key-Exchange-Generation）"><a href="#客户端交换密钥生成（Client-Key-Exchange-Generation）" class="headerlink" title="客户端交换密钥生成（Client Key Exchange Generation）"></a>客户端交换密钥生成（Client Key Exchange Generation）</h3><p>同服务端交换密钥生成</p>
+<p>这里我们设所选私钥为：<code>202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f</code></p>
+<p>那么对应公钥就是：<code>358072d6365880d1aeea329adf9121383851ed21a28e3b75e965d0d2cd166254</code></p>
+<h3 id="客户端发送交换密钥（Client-Key-Exchange）"><a href="#客户端发送交换密钥（Client-Key-Exchange）" class="headerlink" title="客户端发送交换密钥（Client Key Exchange）"></a>客户端发送交换密钥（Client Key Exchange）</h3><p>同服务端发送交换密钥，但是不会发送曲线信息，因为客户端会按照服务端确定的曲线进行计算；也不会发送签名，因为客户端并没有公私钥</p>
+<p>示例：<code>16 03 03 00 25 10 00 00 21 20 35 80 72 d6 36 58 80 d1 ae ea 32 9a df 91 21 38 38 51 ed 21 a2 8e 3b 75 e9 65 d0 d2 cd 16 62 54</code></p>
+<p>报文结构：</p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>16 03 03 00 25</code></p>
+<p>0x16：握手记录的标识符</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x00 0x25：长度——接下来握手消息将占用37字节</p>
+<p><strong>握手标头 (Handshake Header)</strong>：<code>10 00 00 21</code></p>
+<p>0x10：服务端密钥交换标识符 (certificate）</p>
+<p>0x00 0x00 0x21：长度——接下来发送的消息将占用33字节</p>
+<p><strong>公钥（Public Key）</strong>:<code>20 35 80 72 d6 36 58 80 d1 ae ea 32 9a df 91 21 38 38 51 ed 21 a2 8e 3b 75 e9 65 d0 d2 cd 16 62 54</code></p>
+<p>0x20：长度——接下来发送的公钥将占用32字节</p>
+<p>0x20 0x35….. 0x54：前面计算得到的公钥</p>
+<h3 id="客户端通讯密钥计算（Client-Encryption-Keys-Calculation）"><a href="#客户端通讯密钥计算（Client-Encryption-Keys-Calculation）" class="headerlink" title="客户端通讯密钥计算（Client Encryption Keys Calculation）"></a>客户端通讯密钥计算（Client Encryption Keys Calculation）</h3><p>同服务端通讯密钥计算</p>
+<p>客户端现在有了计算双方将使用的加密密钥的信息。它在计算中使用以下信息：</p>
+<p>服务端随机数（来自 Server Hello）</p>
+<p>客户端随机数（来自 Client Hello）</p>
+<p>服务器公钥（来自 Server Key Exchange）</p>
+<p>客户端私钥（来自 Client Key Generation）</p>
+<p>客户端使用 curve25519 算法将服务器的公钥乘以客户端的私钥，生成32字节的结果称为 PreMasterSecret，结果如下：</p>
+<p><code>df4a291baa1eb7cfa6934b29b474baad2697e29f1f920dcc77c8a0a088447624</code></p>
+<p>然后客户端根据 PreMasterSecret 计算48字节的 MasterSecret</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">seed = <span class="string">"master secret"</span> + client_random + server_random</span><br><span class="line">a0 = seed</span><br><span class="line">a1 = HMAC-SHA256(<span class="attribute">key</span>=PreMasterSecret, <span class="attribute">data</span>=a0)</span><br><span class="line">a2 = HMAC-SHA256(<span class="attribute">key</span>=PreMasterSecret, <span class="attribute">data</span>=a1)</span><br><span class="line">p1 = HMAC-SHA256(<span class="attribute">key</span>=PreMasterSecret, <span class="attribute">data</span>=a1 + seed)</span><br><span class="line">p2 = HMAC-SHA256(<span class="attribute">key</span>=PreMasterSecret, <span class="attribute">data</span>=a2 + seed)</span><br><span class="line">MasterSecret = p1[all 32 bytes] + p2[first 16 bytes]</span><br></pre></td></tr></table></figure>
+
+<p>利用 openssl生成 MasterSecret 的命令行示例：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">### set up our PreMasterSecret as a hex string</span><br><span class="line">$ pmshex=df<span class="number">4</span>a<span class="number">291</span>baa<span class="number">1</span>eb<span class="number">7</span>cfa<span class="number">6934</span>b<span class="number">29</span>b<span class="number">474</span>baad</span><br><span class="line">$ pmshex=$&#123;pmshex&#125;<span class="number">2697e29</span>f<span class="number">1</span>f<span class="number">920</span>dcc<span class="number">77</span><span class="keyword">c</span><span class="number">8</span>a<span class="number">0</span>a<span class="number">088447624</span></span><br><span class="line">### client random from Client Hello</span><br><span class="line">$ echo -en '\<span class="keyword">x</span><span class="number">00</span>\<span class="keyword">x</span><span class="number">01</span>\<span class="keyword">x</span><span class="number">02</span>\<span class="keyword">x</span><span class="number">03</span>\<span class="keyword">x</span><span class="number">04</span>\<span class="keyword">x</span><span class="number">05</span>\<span class="keyword">x</span><span class="number">06</span>\<span class="keyword">x</span><span class="number">07</span>' &gt;  /tmp/c_rand</span><br><span class="line">$ echo -en '\<span class="keyword">x</span><span class="number">08</span>\<span class="keyword">x</span><span class="number">09</span>\<span class="keyword">x</span><span class="number">0</span>a\<span class="keyword">x</span><span class="number">0</span>b\<span class="keyword">x</span><span class="number">0</span><span class="keyword">c</span>\<span class="keyword">x</span><span class="number">0</span>d\<span class="keyword">x</span><span class="number">0</span>e\<span class="keyword">x</span><span class="number">0</span>f' &gt;&gt; /tmp/c_rand</span><br><span class="line">$ echo -en '\<span class="keyword">x</span><span class="number">10</span>\<span class="keyword">x</span><span class="number">11</span>\<span class="keyword">x</span><span class="number">12</span>\<span class="keyword">x</span><span class="number">13</span>\<span class="keyword">x</span><span class="number">14</span>\<span class="keyword">x</span><span class="number">15</span>\<span class="keyword">x</span><span class="number">16</span>\<span class="keyword">x</span><span class="number">17</span>' &gt;&gt; /tmp/c_rand</span><br><span class="line">$ echo -en '\<span class="keyword">x</span><span class="number">18</span>\<span class="keyword">x</span><span class="number">19</span>\<span class="keyword">x</span><span class="number">1</span>a\<span class="keyword">x</span><span class="number">1</span>b\<span class="keyword">x</span><span class="number">1</span><span class="keyword">c</span>\<span class="keyword">x</span><span class="number">1</span>d\<span class="keyword">x</span><span class="number">1</span>e\<span class="keyword">x</span><span class="number">1</span>f' &gt;&gt; /tmp/c_rand</span><br><span class="line">### server random from Server Hello</span><br><span class="line">$ echo -en '\<span class="keyword">x</span><span class="number">70</span>\<span class="keyword">x</span><span class="number">71</span>\<span class="keyword">x</span><span class="number">72</span>\<span class="keyword">x</span><span class="number">73</span>\<span class="keyword">x</span><span class="number">74</span>\<span class="keyword">x</span><span class="number">75</span>\<span class="keyword">x</span><span class="number">76</span>\<span class="keyword">x</span><span class="number">77</span>' &gt;  /tmp/s_rand</span><br><span class="line">$ echo -en '\<span class="keyword">x</span><span class="number">78</span>\<span class="keyword">x</span><span class="number">79</span>\<span class="keyword">x</span><span class="number">7</span>a\<span class="keyword">x</span><span class="number">7</span>b\<span class="keyword">x</span><span class="number">7</span><span class="keyword">c</span>\<span class="keyword">x</span><span class="number">7</span>d\<span class="keyword">x</span><span class="number">7</span>e\<span class="keyword">x</span><span class="number">7</span>f' &gt;&gt; /tmp/s_rand</span><br><span class="line">$ echo -en '\<span class="keyword">x</span><span class="number">80</span>\<span class="keyword">x</span><span class="number">81</span>\<span class="keyword">x</span><span class="number">82</span>\<span class="keyword">x</span><span class="number">83</span>\<span class="keyword">x</span><span class="number">84</span>\<span class="keyword">x</span><span class="number">85</span>\<span class="keyword">x</span><span class="number">86</span>\<span class="keyword">x</span><span class="number">87</span>' &gt;&gt; /tmp/s_rand</span><br><span class="line">$ echo -en '\<span class="keyword">x</span><span class="number">88</span>\<span class="keyword">x</span><span class="number">89</span>\<span class="keyword">x</span><span class="number">8</span>a\<span class="keyword">x</span><span class="number">8</span>b\<span class="keyword">x</span><span class="number">8</span><span class="keyword">c</span>\<span class="keyword">x</span><span class="number">8</span>d\<span class="keyword">x</span><span class="number">8</span>e\<span class="keyword">x</span><span class="number">8</span>f' &gt;&gt; /tmp/s_rand</span><br><span class="line">### build the seed</span><br><span class="line">$ echo -en 'master secret' &gt; /tmp/seed</span><br><span class="line">$ cat /tmp/c_rand /tmp/s_rand &gt;&gt; /tmp/seed</span><br><span class="line">### a<span class="number">0</span> is the same as the seed</span><br><span class="line">$ cat /tmp/seed &gt; /tmp/a<span class="number">0</span></span><br><span class="line">### a(n) is hmac-sha<span class="number">256</span>(key=secret, data=a(n<span class="number">-1</span>))</span><br><span class="line">$ cat /tmp/a<span class="number">0</span> | openssl dgst -sha<span class="number">256</span> \</span><br><span class="line">   -mac HMAC -macopt hexkey:$pmshex -binary &gt; /tmp/a<span class="number">1</span></span><br><span class="line">$ cat /tmp/a<span class="number">1</span> | openssl dgst -sha<span class="number">256</span> \</span><br><span class="line">   -mac HMAC -macopt hexkey:$pmshex -binary &gt; /tmp/a<span class="number">2</span></span><br><span class="line">### p(n) is hmac-sha<span class="number">256</span>(key=secret, data=a(n)+seed)</span><br><span class="line">$ cat /tmp/a<span class="number">1</span> /tmp/seed | openssl dgst -sha<span class="number">256</span> \</span><br><span class="line">   -mac HMAC -macopt hexkey:$pmshex -binary &gt; /tmp/p<span class="number">1</span></span><br><span class="line">$ cat /tmp/a<span class="number">2</span> /tmp/seed | openssl dgst -sha<span class="number">256</span> \</span><br><span class="line">   -mac HMAC -macopt hexkey:$pmshex -binary &gt; /tmp/p<span class="number">2</span></span><br><span class="line">### first <span class="number">48</span> bytes is MasterSecret</span><br><span class="line">$ cat /tmp/p<span class="number">1</span> /tmp/p<span class="number">2</span> | head -<span class="keyword">c</span> <span class="number">48</span> &gt; /tmp/mastersecret</span><br><span class="line">$ hexdump /tmp/mastersecret</span><br><span class="line"></span><br><span class="line"><span class="number">0000000</span> <span class="number">91</span> <span class="number">6</span>a bf <span class="number">9</span>d a<span class="number">5</span> <span class="number">59</span> <span class="number">73</span> e<span class="number">1</span> <span class="number">36</span> <span class="number">14</span> ae <span class="number">0</span>a <span class="number">3</span>f <span class="number">5</span>d <span class="number">3</span>f <span class="number">37</span></span><br><span class="line"><span class="number">0000010</span> b<span class="number">0</span> <span class="number">23</span> ba <span class="number">12</span> <span class="number">9</span>a ee <span class="number">02</span> <span class="keyword">cc</span> <span class="number">91</span> <span class="number">34</span> <span class="number">33</span> <span class="number">81</span> <span class="number">27</span> cd <span class="number">70</span> <span class="number">49</span></span><br><span class="line"><span class="number">0000020</span> <span class="number">78</span> <span class="number">1</span><span class="keyword">c</span> <span class="number">8</span>e <span class="number">19</span> fc <span class="number">1</span>e b<span class="number">2</span> a<span class="number">7</span> <span class="number">38</span> <span class="number">7</span>a <span class="keyword">c</span><span class="number">0</span> <span class="number">6</span>a e<span class="number">2</span> <span class="number">37</span> <span class="number">34</span> <span class="number">4</span><span class="keyword">c</span></span><br></pre></td></tr></table></figure>
+
+<p>得到：<code>916abf9da55973e13614ae0a3f5d3f37b023ba129aee02cc9134338127cd7049781c8e19fc1eb2a7387ac06ae237344c</code></p>
+<p>最后，我们利用 MasterSecret 生成用于通讯加密的 encryption keys（包括密钥，IV向量，mac key）</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">seed = <span class="string">"key expansion"</span> + server_random + client_random</span><br><span class="line">a0 = seed</span><br><span class="line">a1 = HMAC-SHA256(<span class="attribute">key</span>=MasterSecret, <span class="attribute">data</span>=a0)</span><br><span class="line">a2 = HMAC-SHA256(<span class="attribute">key</span>=MasterSecret, <span class="attribute">data</span>=a1)</span><br><span class="line">a3 = HMAC-SHA256(<span class="attribute">key</span>=MasterSecret, <span class="attribute">data</span>=a2)</span><br><span class="line">a4 = <span class="built_in">..</span>.</span><br><span class="line">p1 = HMAC-SHA256(<span class="attribute">key</span>=MasterSecret, <span class="attribute">data</span>=a1 + seed)</span><br><span class="line">p2 = HMAC-SHA256(<span class="attribute">key</span>=MasterSecret, <span class="attribute">data</span>=a2 + seed)</span><br><span class="line">p3 = HMAC-SHA256(<span class="attribute">key</span>=MasterSecret, <span class="attribute">data</span>=a3 + seed)</span><br><span class="line">p4 = <span class="built_in">..</span>.</span><br><span class="line">p = p1 + p2 + p3 + p4 <span class="built_in">..</span>.</span><br><span class="line">client write mac key = [first 20 bytes of p]</span><br><span class="line">server write mac key = [next 20 bytes of p]</span><br><span class="line">client write key = [next 16 bytes of p]</span><br><span class="line">server write key = [next 16 bytes of p]</span><br><span class="line">client write IV = [next 16 bytes of p]</span><br><span class="line">server write IV = [next 16 bytes of p]</span><br></pre></td></tr></table></figure>
+
+<p>示例命令行</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">### continued from above command line example</span><br><span class="line">### <span class="keyword">set</span> up <span class="comment">our MasterSecret as a hex string</span></span><br><span class="line">$ mshex=$(hexdump <span class="comment">-ve</span> <span class="comment">'/1 "%02x"'</span> /tmp/<span class="comment">mastersecret)</span></span><br><span class="line">### build <span class="comment">the seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'key expansion'</span><span class="comment"> &gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">$ cat /tmp/<span class="comment">s_rand</span> /tmp/<span class="comment">c_rand &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">### a0 <span class="comment">is the same as the seed</span></span><br><span class="line">$ cat /tmp/<span class="comment">seed &gt;</span> /tmp/<span class="comment">a0</span></span><br><span class="line">### a(n) <span class="comment">is hmac-sha256(key=secret, data=a(n-1))</span></span><br><span class="line">$ cat /tmp/<span class="comment">a0</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">a1</span></span><br><span class="line">$ cat /tmp/<span class="comment">a1</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">a2</span></span><br><span class="line">$ cat /tmp/<span class="comment">a2</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">a3</span></span><br><span class="line">$ cat /tmp/<span class="comment">a3</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">a4</span></span><br><span class="line">### p(n) <span class="comment">is hmac-sha256(key=secret, data=a(n)+seed)</span></span><br><span class="line">$ cat /tmp/<span class="comment">a1</span> /tmp/<span class="comment">seed</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">p1</span></span><br><span class="line">$ cat /tmp/<span class="comment">a2</span> /tmp/<span class="comment">seed</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">p2</span></span><br><span class="line">$ cat /tmp/<span class="comment">a3</span> /tmp/<span class="comment">seed</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">p3</span></span><br><span class="line">$ cat /tmp/<span class="comment">a4</span> /tmp/<span class="comment">seed</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">p4</span></span><br><span class="line">### combine <span class="comment">them into a single stream</span></span><br><span class="line">$ cat /tmp/<span class="comment">p1</span> /tmp/<span class="comment">p2</span> /tmp/<span class="comment">p3</span> /tmp/<span class="comment">p4 &gt;</span> /tmp/<span class="comment">p</span></span><br><span class="line">$ dd <span class="comment">if=</span>/tmp/<span class="comment">p of=</span>/tmp/<span class="comment">client_mac_key bs=1 skip=0  count=20</span></span><br><span class="line">$ dd <span class="comment">if=</span>/tmp/<span class="comment">p of=</span>/tmp/<span class="comment">server_mac_key bs=1 skip=20 count=20</span></span><br><span class="line">$ dd <span class="comment">if=</span>/tmp/<span class="comment">p of=</span>/tmp/<span class="comment">client_key     bs=1 skip=40 count=16</span></span><br><span class="line">$ dd <span class="comment">if=</span>/tmp/<span class="comment">p of=</span>/tmp/<span class="comment">server_key     bs=1 skip=56 count=16</span></span><br><span class="line">$ dd <span class="comment">if=</span>/tmp/<span class="comment">p of=</span>/tmp/<span class="comment">client_iv      bs=1 skip=72 count=16</span></span><br><span class="line">$ dd <span class="comment">if=</span>/tmp/<span class="comment">p of=</span>/tmp/<span class="comment">server_iv      bs=1 skip=88 count=16</span></span><br><span class="line">$ hexdump /tmp/<span class="comment">client_mac_key</span></span><br><span class="line">0000000 1b <span class="comment">7d 11 7c 7d 5f 69 0b c2 63 ca e8 ef 60 af 0f</span></span><br><span class="line">0000010 18 78 ac <span class="comment">c2</span></span><br><span class="line"></span><br><span class="line">$ hexdump /tmp/<span class="comment">server_mac_key</span></span><br><span class="line">0000000 2a <span class="comment">d8 bd d8 c6 01 a6 17 12 6f 63 54 0e b2 09 06</span></span><br><span class="line">0000010 f7 <span class="comment">81 fa d2</span></span><br><span class="line"></span><br><span class="line">$ hexdump /tmp/<span class="comment">client_key</span></span><br><span class="line">0000000 f6 <span class="comment">56 d0 37 b1 73 ef 3e 11 16 9f 27 23 1a 84 b6</span></span><br><span class="line"></span><br><span class="line">$ hexdump /tmp/<span class="comment">server_key</span></span><br><span class="line">0000000 75 2a <span class="comment">18 e7 a9 fc b7 cb cd d8 f9 8d d8 f7 69 eb</span></span><br><span class="line"></span><br><span class="line">$ hexdump /tmp/<span class="comment">client_iv</span></span><br><span class="line">0000000 a0 <span class="comment">d2 55 0c 92 38 ee bf ef 5c 32 25 1a bb 67 d6</span></span><br><span class="line"></span><br><span class="line">$ hexdump /tmp/<span class="comment">server_iv</span></span><br><span class="line">0000000 43 45 28 db <span class="comment">49 37 d5 40 d3 93 13 5e 06 a1 1b b8</span></span><br></pre></td></tr></table></figure>
+
+<p>最终客户端得到 </p>
+<ul>
+<li>client MAC key: <code>1b7d117c7d5f690bc263cae8ef60af0f1878acc2</code></li>
+<li>server MAC key: <code>2ad8bdd8c601a617126f63540eb20906f781fad2</code></li>
+<li>client write key: <code>f656d037b173ef3e11169f27231a84b6</code></li>
+<li>server write key: <code>752a18e7a9fcb7cbcdd8f98dd8f769eb</code></li>
+<li>client write IV: <code>a0d2550c9238eebfef5c32251abb67d6</code></li>
+<li>server write IV: <code>434528db4937d540d393135e06a11bb8</code></li>
+</ul>
+<h3 id="客户端启用加密通讯（Client-Change-Cipher-Spec）"><a href="#客户端启用加密通讯（Client-Change-Cipher-Spec）" class="headerlink" title="客户端启用加密通讯（Client Change Cipher Spec）"></a>客户端启用加密通讯（Client Change Cipher Spec）</h3><p>同服务端启用通讯加密</p>
+<p>客户端表示它已经计算了共享加密密钥，并且来自客户端的所有后续消息将使用客户端写入的密钥进行加密。</p>
+<p>在TLS的下一版本中，此消息类型已被删除，因为显得有点多余。</p>
+<p>示例：<code>14 03 03 00 01 01</code></p>
+<p>报文结构：</p>
+<p><strong>记录 (Record)</strong> ：<code>14 03 03 00 01 01</code></p>
+<p>0x14：客户端启用加密通讯的标识符（ChangeCipherSpec record）</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x00 0x01：长度——接下来消息将占用1字节</p>
+<p>0x01：客户端启用加密通讯</p>
+<h3 id="客户端握手完毕（Client-Handshake-Finished）"><a href="#客户端握手完毕（Client-Handshake-Finished）" class="headerlink" title="客户端握手完毕（Client Handshake Finished）"></a>客户端握手完毕（Client Handshake Finished）</h3><p>为了验证握手是否成功且未被篡改，客户端计算验证数据并使用客户端通讯密钥对其进行加密。</p>
+<p>验证数据是根据所有握手消息的散列构建的，并验证握手过程的完整性。</p>
+<p>示例：<code>16 03 03 00 40 40 41 42 43 44 45 46 47 48 49 4a 4b 4c 4d 4e 4f 22 7b c9 ba 81 ef 30 f2 a8 a7 8f f1 df 50 84 4d 58 04 b7 ee b2 e2 14 c3 2b 68 92 ac a3 db 7b 78 07 7f dd 90 06 7c 51 6b ac b3 ba 90 de df 72 0f</code></p>
+<p>报文结构：</p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>16 03 03 00 40</code></p>
+<p>0x16：握手记录的标识符</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x00 0x40：长度——接下来握手消息将占用64字节</p>
+<p><strong>加密向量（Encryption IV）</strong>：<code>40 41 42 43 44 45 46 47 48 49 4a 4b 4c 4d 4e 4f</code></p>
+<p>客户端发送用于解密密钥的初始IV向量</p>
+<p>0x40 0x41 … 0x4f：IV向量</p>
+<p><strong>加密密文（Encrypted Data）</strong>：<code>22 7b c9 ba 81 ef 30 f2 a8 a7 8f f1 df 50 84 4d 58 04 b7 ee b2 e2 14 c3 2b 68 92 ac a3 db 7b 78 07 7f dd 90 06 7c 51 6b ac b3 ba 90 de df 72 0f</code></p>
+<p>此数据使用客户端通讯密钥加密。它包含消息认证码（MAC）和填充，所以密文比解密的数据大。</p>
+<p>可以用以下命令解密</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### client key</span></span><br><span class="line">$ hexkey=f656d037b173ef3e11169f27231a84b6</span><br><span class="line"><span class="comment">### IV for this record</span></span><br><span class="line">$ hexiv=<span class="number">404142434445464748494</span>a4b4c4d4e4f</span><br><span class="line"><span class="comment">### encrypted data</span></span><br><span class="line">$ echo <span class="string">'22 7b c9 ba 81 ef 30 f2 a8 a7 8f f1 df 50 84 4d'</span>  &gt; <span class="regexp">/tmp/msg</span>1</span><br><span class="line">$ echo <span class="string">'58 04 b7 ee b2 e2 14 c3 2b 68 92 ac a3 db 7b 78'</span> <span class="meta">&gt;&gt; </span>/tmp/msg1</span><br><span class="line">$ echo <span class="string">'07 7f dd 90 06 7c 51 6b ac b3 ba 90 de df 72 0f'</span> <span class="meta">&gt;&gt; </span>/tmp/msg1</span><br><span class="line">$ xxd -r -p /tmp/msg1 \</span><br><span class="line">  <span class="params">| openssl enc -d -nopad -aes-128-cbc -K $hexkey -iv $hexiv |</span> hexdump</span><br><span class="line"></span><br><span class="line"><span class="number">0000000</span> <span class="number">14</span> <span class="number">00</span> <span class="number">00</span> 0c cf <span class="number">91</span> <span class="number">96</span> <span class="number">26</span> f1 <span class="number">36</span> 0c <span class="number">53</span> <span class="number">6</span>a aa d7 <span class="number">3</span>a</span><br><span class="line"><span class="number">0000010</span> a5 a<span class="number">0</span> <span class="number">3</span>d <span class="number">23</span> <span class="number">30</span> <span class="number">56</span> e4 ac <span class="number">6</span>e ba <span class="number">7</span>f d9 e5 <span class="number">31</span> <span class="number">7</span>f ac</span><br><span class="line"><span class="number">0000020</span> <span class="number">2</span>d b5 b7 0e 0b 0b 0b 0b 0b 0b 0b 0b 0b 0b 0b 0b</span><br><span class="line"></span><br><span class="line">The last <span class="number">32</span> bytes contain a <span class="number">20</span>-byte MAC <span class="keyword">and</span> padding to bring the data to a</span><br><span class="line">multiple of <span class="number">16</span> bytes.  The <span class="number">20</span>-byte MAC can be reproduced as <span class="symbol">follows:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### from https://tools.ietf.org/html/rfc2246#section-6.2.3.1</span></span><br><span class="line">$ sequence=<span class="string">'0000000000000000'</span></span><br><span class="line">$ rechdr=<span class="string">'16 03 03'</span></span><br><span class="line">$ datalen=<span class="string">'00 10'</span></span><br><span class="line">$ data=<span class="string">'14 00 00 0c cf 91 96 26 f1 36 0c 53 6a aa d7 3a'</span></span><br><span class="line"><span class="comment">### from "Encryption Keys Calculation"</span></span><br><span class="line">$ mackey=<span class="number">1</span>b7d117c7d5f690bc263cae8ef60af0f1878acc2</span><br><span class="line">$ echo $sequence $rechdr $datalen $data <span class="params">| xxd -r -p \</span></span><br><span class="line"><span class="params">  |</span> openssl dgst -sha1 -mac HMAC -macopt <span class="symbol">hexkey:</span>$mackey</span><br><span class="line"></span><br><span class="line">a5a03d233056e4ac6eba7fd9e5317fac2db5b70e</span><br></pre></td></tr></table></figure>
+
+<p>将会得到明文：<code>14 00 00 0c cf 91 96 26 f1 36 0c 53 6a aa d7 3a</code></p>
+<p>明文的含义为：</p>
+<p><strong>握手标头 (Handshake Header)</strong>：<code>14 00 00 0c</code></p>
+<p>0x14：握手完成标识符 (finished）</p>
+<p>0x00 0x00 0x0c：长度——接下来发送的握手消息将占用12字节</p>
+<p><strong>验证消息（Verify Data）</strong>：<code>cf 91 96 26 f1 36 0c 53 6a aa d7 3a</code></p>
+<p>0xcf 0x91 … 0x3a：用于验证的消息</p>
+<p>验证消息是根据主密钥和在此之前的所有握手记录（类型为0x16）的有效载荷的散列构建的。</p>
+<p>在此之前的所有握手消息的 SHA256 为 061dda04b3c2217ff73bd79b9cf88a2bb6ec505404aac8722db03ef417b54cb4 。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">seed</span> = <span class="string">"client finished"</span> + SHA256(all handshake messages)</span><br><span class="line"><span class="attr">a0</span> = seed</span><br><span class="line"><span class="attr">a1</span> = HMAC-SHA256(key=MasterSecret, data=a0)</span><br><span class="line"><span class="attr">p1</span> = HMAC-SHA256(key=MasterSecret, data=a1 + seed)</span><br><span class="line"><span class="attr">verify_data</span> = p1[first <span class="number">12</span> bytes]</span><br></pre></td></tr></table></figure>
+
+<p>命令示例：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">### <span class="keyword">set</span> up <span class="comment">our MasterSecret as a hex string</span></span><br><span class="line">$ mshex=$(hexdump <span class="comment">-ve</span> <span class="comment">'/1 "%02x"'</span> /tmp/<span class="comment">mastersecret)</span></span><br><span class="line">### build <span class="comment">the seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'client finished'</span><span class="comment"> &gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">### add <span class="comment">SHA256(all_messages) to seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'\x06\x1d\xda\x04\xb3\xc2\x21\x7f'</span><span class="comment"> &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'\xf7\x3b\xd7\x9b\x9c\xf8\x8a\x2b'</span><span class="comment"> &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'\xb6\xec\x50\x54\x04\xaa\xc8\x72'</span><span class="comment"> &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'\x2d\xb0\x3e\xf4\x17\xb5\x4c\xb4'</span><span class="comment"> &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">### a0 <span class="comment">is the same as the seed</span></span><br><span class="line">$ cat /tmp/<span class="comment">seed &gt;</span> /tmp/<span class="comment">a0</span></span><br><span class="line">### a(n) <span class="comment">is hmac-sha256(key=secret, data=a(n-1))</span></span><br><span class="line">$ cat /tmp/<span class="comment">a0</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">a1</span></span><br><span class="line">### p(n) <span class="comment">is hmac-sha256(key=secret, data=a(n)+seed)</span></span><br><span class="line">$ cat /tmp/<span class="comment">a1</span> /tmp/<span class="comment">seed</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">p1</span></span><br><span class="line">$ head <span class="comment">-c 12</span> /tmp/<span class="comment">p1 &gt;</span> /tmp/<span class="comment">verify_data</span></span><br><span class="line">$ hexdump /tmp/<span class="comment">verify_data</span></span><br><span class="line"></span><br><span class="line">0000000 cf <span class="comment">91 96 26 f1 36 0c 53 6a aa d7 3a</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端通讯密钥计算（Server-Encryption-Keys-Calculation）"><a href="#服务端通讯密钥计算（Server-Encryption-Keys-Calculation）" class="headerlink" title="服务端通讯密钥计算（Server Encryption Keys Calculation）"></a>服务端通讯密钥计算（Server Encryption Keys Calculation）</h3><p>计算步骤和计算结果都与客户端通讯密钥计算相同</p>
+<h3 id="服务端启用加密通讯（Server-Change-Cipher-Spec）"><a href="#服务端启用加密通讯（Server-Change-Cipher-Spec）" class="headerlink" title="服务端启用加密通讯（Server Change Cipher Spec）"></a>服务端启用加密通讯（Server Change Cipher Spec）</h3><p>同客户端启用加密通讯</p>
+<p>示例：<code>14 03 03 00 01 01</code></p>
+<h3 id="服务端握手完毕（Client-Handshake-Finished）"><a href="#服务端握手完毕（Client-Handshake-Finished）" class="headerlink" title="服务端握手完毕（Client Handshake Finished）"></a>服务端握手完毕（Client Handshake Finished）</h3><p>同客户端握手完毕</p>
+<p>示例：<code>16 03 03 00 40 51 52 53 54 55 56 57 58 59 5a 5b 5c 5d 5e 5f 60 18 e0 75 31 7b 10 03 15 f6 08 1f cb f3 13 78 1a ac 73 ef e1 9f e2 5b a1 af 59 c2 0b e9 4f c0 1b da 2d 68 00 29 8b 73 a7 e8 49 d7 4b d4 94 cf 7d</code></p>
+<p>报文结构：</p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>16 03 03 00 40</code></p>
+<p>0x16：握手记录的标识符</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x00 0x40：长度——接下来握手消息将占用64字节</p>
+<p><strong>加密向量（Encryption IV）</strong>：<code>51 52 53 54 55 56 57 58 59 5a 5b 5c 5d 5e 5f 60</code></p>
+<p>客户端发送用于解密密钥的初始IV向量</p>
+<p>0x51 0x52 … 0x60：IV向量</p>
+<p><strong>加密密文（Encrypted Data）</strong>：<code>18 e0 75 31 7b 10 03 15 f6 08 1f cb f3 13 78 1a ac 73 ef e1 9f e2 5b a1 af 59 c2 0b e9 4f c0 1b da 2d 68 00 29 8b 73 a7 e8 49 d7 4b d4 94 cf 7d</code></p>
+<p>解密可得</p>
+<p><code>14 00 00 0c 84 4d 3c 10 74 6d d7 22 f9 2f 0c 7e</code></p>
+<p><strong>握手标头 (Handshake Header)</strong>：<code>14 00 00 0c</code></p>
+<p>0x14：握手完成标识符 (finished）</p>
+<p>0x00 0x00 0x0c：长度——接下来发送的握手消息将占用12字节</p>
+<p><strong>验证消息（Verify Data）</strong>：<code>84 4d 3c 10 74 6d d7 22 f9 2f 0c 7e</code></p>
+<p>0x84 0x4d … 0x7e：用于验证的消息</p>
+<p>在此之前的所有握手消息的 SHA256 为 b2017ba28d0e27f03ae327456b6ff00b4d5bbf0ef7cda83ce1029b521c3e7c35 。</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">### <span class="keyword">set</span> up <span class="comment">our MasterSecret as a hex string</span></span><br><span class="line">$ mshex=$(hexdump <span class="comment">-ve</span> <span class="comment">'/1 "%02x"'</span> /tmp/<span class="comment">mastersecret)</span></span><br><span class="line">### build <span class="comment">the seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'server finished'</span><span class="comment"> &gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">### add <span class="comment">SHA256(all_messages) to seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'\xb2\x01\x7b\xa2\x8d\x0e\x27\xf0'</span><span class="comment"> &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'\x3a\xe3\x27\x45\x6b\x6f\xf0\x0b'</span><span class="comment"> &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'\x4d\x5b\xbf\x0e\xf7\xcd\xa8\x3c'</span><span class="comment"> &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">$ echo <span class="comment">-en</span> <span class="comment">'\xe1\x02\x9b\x52\x1c\x3e\x7c\x35'</span><span class="comment"> &gt;&gt;</span> /tmp/<span class="comment">seed</span></span><br><span class="line">### a0 <span class="comment">is the same as the seed</span></span><br><span class="line">$ cat /tmp/<span class="comment">seed &gt;</span> /tmp/<span class="comment">a0</span></span><br><span class="line">### a(n) <span class="comment">is hmac-sha256(key=secret, data=a(n-1))</span></span><br><span class="line">$ cat /tmp/<span class="comment">a0</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">a1</span></span><br><span class="line">### p(n) <span class="comment">is hmac-sha256(key=secret, data=a(n)+seed)</span></span><br><span class="line">$ cat /tmp/<span class="comment">a1</span> /tmp/<span class="comment">seed</span> |<span class="comment"> openssl dgst -sha256 \</span></span><br><span class="line">   -mac <span class="comment">HMAC -macopt hexkey:$mshex -binary &gt;</span> /tmp/<span class="comment">p1</span></span><br><span class="line">$ head <span class="comment">-c 12</span> /tmp/<span class="comment">p1 &gt;</span> /tmp/<span class="comment">verify_data</span></span><br><span class="line">$ hexdump /tmp/<span class="comment">verify_data</span></span><br><span class="line"></span><br><span class="line">0000000 84 4d <span class="comment">3c 10 74 6d d7 22 f9 2f 0c 7e</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="双方正式进行加密通讯（Application-Data）"><a href="#双方正式进行加密通讯（Application-Data）" class="headerlink" title="双方正式进行加密通讯（Application Data）"></a>双方正式进行加密通讯（Application Data）</h3><p>示例， </p>
+<p>客户端发送信息：”ping”：<code>17 03 03 00 30 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 6c 42 1c 71 c4 2b 18 3b fa 06 19 5d 13 3d 0a 09 d0 0f c7 cb 4e 0f 5d 1c da 59 d1 47 ec 79 0c 99</code></p>
+<p>报文结构：</p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>17 03 03 00 30</code></p>
+<p>0x17：通讯标识符（Application Data）</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x00 0x30：长度——接下来握手消息将占用48字节</p>
+<p><strong>加密向量（Encryption IV）：</strong> <code>00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f</code></p>
+<p><strong>加密密文（Encrypted Data）：</strong><code>6c 42 1c 71 c4 2b 18 3b fa 06 19 5d 13 3d 0a 09 d0 0f c7 cb 4e 0f 5d 1c da 59 d1 47 ec 79 0c 99</code></p>
+<p>解密示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">### client key</span><br><span class="line">$ hexkey=f656d037b173ef3e11169f27231a84b6</span><br><span class="line">### IV for this record</span><br><span class="line">$ hexiv=000102030405060708090a0b0c0d0e0f</span><br><span class="line">### encrypted data</span><br><span class="line">$ echo &apos;6c 42 1c 71 c4 2b 18 3b fa 06 19 5d 13 3d 0a 09&apos;  &gt; /tmp/msg1</span><br><span class="line">$ echo &apos;d0 0f c7 cb 4e 0f 5d 1c da 59 d1 47 ec 79 0c 99&apos; &gt;&gt; /tmp/msg1</span><br><span class="line">$ xxd -r -p /tmp/msg1 \</span><br><span class="line">  | openssl enc -d -nopad -aes-128-cbc -K $hexkey -iv $hexiv | hexdump</span><br><span class="line"></span><br><span class="line">0000000 70 69 6e 67 60 10 12 49 f7 4a 03 77 c9 ca cf 63</span><br><span class="line">0000010 09 75 13 70 d8 0c fc aa 07 07 07 07 07 07 07 07</span><br><span class="line"></span><br><span class="line">The last 28 bytes contain a 20-byte MAC and padding to bring the data to a</span><br><span class="line">multiple of 16 bytes.  The 20-byte MAC can be reproduced as follows:</span><br><span class="line"></span><br><span class="line">### from https://tools.ietf.org/html/rfc2246#section-6.2.3.1</span><br><span class="line">$ sequence=&apos;0000000000000001&apos;</span><br><span class="line">$ rechdr=&apos;17 03 03&apos;</span><br><span class="line">$ datalen=&apos;00 04&apos;</span><br><span class="line">$ data=&apos;70 69 6e 67&apos;</span><br><span class="line">### from &quot;Encryption Keys Calculation&quot;</span><br><span class="line">$ mackey=1b7d117c7d5f690bc263cae8ef60af0f1878acc2</span><br><span class="line">$ echo $sequence $rechdr $datalen $data | xxd -r -p \</span><br><span class="line">  | openssl dgst -sha1 -mac HMAC -macopt hexkey:$mackey</span><br><span class="line"></span><br><span class="line">60101249f74a0377c9cacf6309751370d80cfcaa</span><br></pre></td></tr></table></figure>
+
+<p>解密得到：<code>70 69 6e 67 60 10 12 49 f7 4a 03 77 c9 ca cf 63 09 75 13 70 d8 0c fc aa 07 07 07 07 07 07 07 07</code></p>
+<p><code>70 69 6e 67</code>：消息 “ping”（Application Data）</p>
+<p><code>60 10 12 49 f7 4a 03 77 c9 ca cf 63 09 75 13 70 d8 0c fc aa</code>：MAC</p>
+<p><code>07 07 07 07 07 07 07 07</code> 填充（padding）</p>
+<p>服务端发送消息：”pong“：<code>17 03 03 00 30 61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70 97 83 48 8a f5 fa 20 bf 7a 2e f6 9d eb b5 34 db 9f b0 7a 8c 27 21 de e5 40 9f 77 af 0c 3d de 56</code></p>
+<p>报文结构：</p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>17 03 03 00 30</code></p>
+<p>0x17：通讯标识符（Application Data）</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x00 0x30：长度——接下来握手消息将占用48字节</p>
+<p><strong>加密向量（Encryption IV）：</strong> <code>61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70</code></p>
+<p><strong>加密密文（Encrypted Data）：</strong><code>97 83 48 8a f5 fa 20 bf 7a 2e f6 9d eb b5 34 db 9f b0 7a 8c 27 21 de e5 40 9f 77 af 0c 3d de 56</code></p>
+<p>解密示例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## server key</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexkey=752a18e7a9fcb7cbcdd8f98dd8f769eb</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## IV for this record</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexiv=6162636465666768696a6b6c6d6e6f70</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## encrypted data</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'97 83 48 8a f5 fa 20 bf 7a 2e f6 9d eb b5 34 db'</span>  &gt; /tmp/msg1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'9f b0 7a 8c 27 21 de e5 40 9f 77 af 0c 3d de 56'</span> &gt;&gt; /tmp/msg1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> xxd -r -p /tmp/msg1 \</span></span><br><span class="line">  | openssl enc -d -nopad -aes-128-cbc -K $hexkey -iv $hexiv | hexdump</span><br><span class="line"></span><br><span class="line">0000000 70 6f 6e 67 5a c7 99 dc cf dc 0f af 95 2b dc 91</span><br><span class="line">0000010 18 af 20 0e e3 1c 51 05 07 07 07 07 07 07 07 07</span><br><span class="line"></span><br><span class="line">The last 28 bytes contain a 20-byte MAC and padding to bring the data to a</span><br><span class="line">multiple of 16 bytes.  The 20-byte MAC can be reproduced as follows:</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## from https://tools.ietf.org/html/rfc2246#section-6.2.3.1</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sequence=<span class="string">'0000000000000001'</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rechdr=<span class="string">'17 03 03'</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> datalen=<span class="string">'00 04'</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> data=<span class="string">'70 6f 6e 67'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## from "Encryption Keys Calculation"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mackey=2ad8bdd8c601a617126f63540eb20906f781fad2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$sequence</span> <span class="variable">$rechdr</span> <span class="variable">$datalen</span> <span class="variable">$data</span> | xxd -r -p \</span></span><br><span class="line">  | openssl dgst -sha1 -mac HMAC -macopt hexkey:$mackey</span><br><span class="line"></span><br><span class="line">5ac799dccfdc0faf952bdc9118af200ee31c5105</span><br></pre></td></tr></table></figure>
+
+<p>解密可得：<code>70 6f 6e 67 5a c7 99 dc cf dc 0f af 95 2b dc 91 18 af 20 0e e3 1c 51 05 07 07 07 07 07 07 07 07</code></p>
+<p><code>70 6f 6e 67</code>：消息 “pong”（Application Data）</p>
+<p><code>5a c7 99 dc cf dc 0f af 95 2b dc 91 18 af 20 0e e3 1c 51 05</code>：MAC</p>
+<p><code>07 07 07 07 07 07 07 07</code> 填充（padding）</p>
+<h3 id="客服端关闭连接（Client-Close-Notify）"><a href="#客服端关闭连接（Client-Close-Notify）" class="headerlink" title="客服端关闭连接（Client Close Notify）"></a>客服端关闭连接（Client Close Notify）</h3><p>客户端将发出告警，表明它正在关闭连接。</p>
+<p>示例：<code>15 03 03 00 30 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f 0d 83 f9 79 04 75 0d d8 fd 8a a1 30 21 86 32 63 4f d0 65 e4 62 83 79 b8 8b bf 9e fd 12 87 a6 2d</code></p>
+<p>报文结构：</p>
+<p><strong>记录标头 (Record Header)</strong> ：<code>15 03 03 00 30</code></p>
+<p>0x15：告警记录标识符（alert record）</p>
+<p>0x03 0x03 ：协议是3.3版本， TLS 1.2；</p>
+<p>0x00 0x30：长度——接下来握手消息将占用48字节</p>
+<p><strong>加密向量（Encryption IV）：</strong> <code>10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f</code></p>
+<p><strong>加密密文（Encrypted Data）：</strong><code>0d 83 f9 79 04 75 0d d8 fd 8a a1 30 21 86 32 63 4f d0 65 e4 62 83 79 b8 8b bf 9e fd 12 87 a6 2d</code></p>
+<p>解密可得：<code>01 00 92 79 9c ba 81 9f 31 07 44 c5 59 62 2b e4 2b ce 3d 6a 41 fb 09 09 09 09 09 09 09 09 09 09</code></p>
+<p>其中：</p>
+<p>0x01：告警等级为 1，表示 Warning</p>
+<p>0x00：告警类型为 0，为关闭通知</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>TLS 1.2 协议（一）</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">10.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2022-12-08, 21:10:00</p>
+    <p><span class="copy-title">最后更新:</span>2023-01-31, 16:17:50</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2022/12/08/TLS1.2协议分析（一）/" title="TLS 1.2 协议（一）">http://jayxv.github.io/2022/12/08/TLS1.2协议分析（一）/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#TLS 1.2','#Crypto','#Paillier','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#paper','#small private exponent','#SQL','#python','#Knapsack','#Rsa','#continued_fraction','#RE','#DES','#差分密码分析','#操作模式','#number theory','#Abstract algebra','#ETH','#SPN','#线性密码分析','#Book','#Shadowsocks','#Nmap','#XSS','#Linux','#Coppersmith’s Method','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
