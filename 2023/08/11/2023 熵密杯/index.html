@@ -303,13 +303,13 @@
     
         
             
-            <li><div data-rel="论文小屋">论文小屋<small>(1)</small></div>
-                
-            </li>
-            
         
     
         
+            
+            <li><div data-rel="论文小屋">论文小屋<small>(1)</small></div>
+                
+            </li>
             
         
     
@@ -508,11 +508,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color3">RE</a>
+        <a class="color4">continued_fraction</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color4">continued_fraction</a>
+        <a class="color3">RE</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -560,11 +560,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color5">Nmap</a>
+        <a class="color4">XSS</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color4">XSS</a>
+        <a class="color5">Nmap</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -613,19 +613,19 @@
             <span class="post-date" title="2023-08-14 00:00:00">2023/08/14</span>
         </a>
         
-        <a  class="密码小屋 "
-           href="/2023/08/11/密码学基础之进制与编码/"
-           data-tag="Basic"
-           data-author="Van1sh" >
-            <span class="post-title" title="密码学基础之进制与编码">密码学基础之进制与编码</span>
-            <span class="post-date" title="2023-08-11 12:00:00">2023/08/11</span>
-        </a>
-        
         <a  class="比赛小屋 "
            href="/2023/08/11/2023 熵密杯/"
            data-tag="Write Up"
            data-author="Van1sh" >
             <span class="post-title" title="2023 熵密杯">2023 熵密杯</span>
+            <span class="post-date" title="2023-08-11 12:00:00">2023/08/11</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/08/11/密码学基础之进制与编码/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之进制与编码">密码学基础之进制与编码</span>
             <span class="post-date" title="2023-08-11 12:00:00">2023/08/11</span>
         </a>
         
@@ -1163,7 +1163,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2023-08-14 20:42:23'>2023-08-11 12:00</time>
+        创建时间:<time class="date" title='更新时间: 2023-09-10 22:39:16'>2023-08-11 12:00</time>
         
     </div>
     <div class="article-meta">
@@ -1203,7 +1203,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天和江苏金盾检测技术股份有限公司的小伙伴一起参加了在河南郑州举办的首届熵密杯线下赛，是之前没有接触过的闯关赛制，有点类似渗透，关卡之间环环相扣，也都和密码学应用紧密相关。不过很遗憾在之前的比赛中对国密的接触并不多，因此有很多知识盲区，导致此次比赛也未能解出全部赛题，所以玩的也不是很尽兴，希望下次还能再来！</p>
+        <p>今天和同事组队“金盾检测”一起参加了在河南郑州举办的首届熵密杯线下赛，是之前没有接触过的闯关赛制，有点类似渗透，关卡之间环环相扣，也都和密码学应用紧密相关。不过很遗憾在之前的比赛中对国密的接触并不多，因此有很多知识盲区，导致此次比赛也未能解出全部赛题，所以玩的也不是很尽兴，希望下次还能再来！</p>
 <h3 id="初始谜题"><a href="#初始谜题" class="headerlink" title="初始谜题"></a>初始谜题</h3><p>话不多说，我们先来看看赛题。首先是初始谜题，我们需要在靶场开启一个场景，会给到一个 ip 和 port；然后我们还可以下载到一个附件，里面包含一个客户端，我们在客户端里输入场景的 ip 和 port 就可以获得题目，题目使用 SM4  CBC-MAC 体制，计算了两个 32 字节消息的 MAC值，要求我们给出一个 64 字节的消息和对应的 MAC 值。具体内容如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">请输入谜题服务器IP地址(Please input Puzzle Server IP Address)</span><br><span class="line"><span class="number">172.10</span><span class="number">.42</span><span class="number">.212</span></span><br><span class="line">请输入谜题服务器端口号(Please input Puzzle Server Port Number)</span><br><span class="line"><span class="number">8070</span></span><br><span class="line">-----------------------------------------------------</span><br><span class="line">MSG1:</span><br><span class="line">e55e3e24a3ae7797808fdca05a16ac15eb5fa2e6185c23a814a35ba32b4637c2</span><br><span class="line">MAC1:</span><br><span class="line"><span class="number">0712</span>c867aa6ec7c1bb2b66312367b2c8</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">MSG2:</span><br><span class="line">d8d94f33797e1f41cab9217793b2d0f02b93d46c2ead104dce4bfec453767719</span><br><span class="line">MAC2:</span><br><span class="line"><span class="number">43669127</span>ae268092c056fd8d03b38b5b</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">请输入您的MSG3(<span class="number">64</span>字节，<span class="number">128</span>个Hex，不要添加空格！)(Please input your <span class="number">64</span>bytes MSG3(<span class="number">64</span> bytes,<span class="number">128</span> hexs,don<span class="string">'t using space)):</span></span><br></pre></td></tr></table></figure>
 
@@ -1352,7 +1352,7 @@
     <p><span class="copy-title">文章字数:</span><span class="post-count">5.8k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
     <p><span class="copy-title">发布时间:</span>2023-08-11, 12:00:00</p>
-    <p><span class="copy-title">最后更新:</span>2023-08-14, 20:42:23</p>
+    <p><span class="copy-title">最后更新:</span>2023-09-10, 22:39:16</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2023/08/11/2023 熵密杯/" title="2023 熵密杯">http://jayxv.github.io/2023/08/11/2023 熵密杯/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -1455,7 +1455,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#TLS 1.2','#Web','#Files','#Serialization','#Basic','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#DES','#差分密码分析','#Rsa','#RE','#continued_fraction','#paper','#small private exponent','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#ETH','#Shadowsocks','#Nmap','#XSS','#Coppersmith’s Method','#Linux','#book',],
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#ECC','#Paillier','#Crypto','#TLS 1.2','#Web','#Files','#Serialization','#Basic','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#DES','#差分密码分析','#Rsa','#continued_fraction','#RE','#paper','#small private exponent','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#ETH','#Shadowsocks','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
