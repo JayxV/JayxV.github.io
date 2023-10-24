@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>2023 祥云杯决赛 | Van1sh的小屋</title>
+  <meta name="keywords" content=" Write Up ">
+  <meta name="description" content="2023 祥云杯决赛 | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(83)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(35)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="合约小屋"><i class="fold iconfont icon-right"></i>合约小屋<small>(8)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="contract">contract<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="区块链靶场">区块链靶场<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(25)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="协议小屋">协议小屋<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="论文小屋">论文小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="漏洞小屋">漏洞小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="83">
+<input type="hidden" id="yelog_site_word_count" value="373.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Basic</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TLS 1.2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">RSA</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">continued_fraction</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">paper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">small private exponent</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ETH</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Shadowsocks</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class=""
+           href="/2023/08/14/微信公众号/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="关于微信公众号">关于微信公众号</span>
+            <span class="post-date" title="2023-08-14 00:00:00">2023/08/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/10/23/好题分享系列 - 2023 香山杯 - strange_hash/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="好题分享系列 - 2023 香山杯 - strange_hash">好题分享系列 - 2023 香山杯 - strange_hash</span>
+            <span class="post-date" title="2023-10-23 16:40:00">2023/10/23</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/10/17/密码学基础之格中难题与格基规约/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之格中难题与格基规约">密码学基础之格中难题与格基规约</span>
+            <span class="post-date" title="2023-10-17 09:02:00">2023/10/17</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/10/12/好题分享系列 - 2023 网信柏鹭杯 - fractRSA/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="好题分享系列 - 2023 网信柏鹭杯 - fractRSA">好题分享系列 - 2023 网信柏鹭杯 - fractRSA</span>
+            <span class="post-date" title="2023-10-12 12:02:00">2023/10/12</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/10/08/密码学基础之格理论基础/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之格理论基础">密码学基础之格理论基础</span>
+            <span class="post-date" title="2023-10-08 12:45:00">2023/10/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/26/2023 陇剑杯线下赛/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 陇剑杯线下赛">2023 陇剑杯线下赛</span>
+            <span class="post-date" title="2023-09-26 14:42:00">2023/09/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/21/2023 祥云杯决赛/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 祥云杯决赛">2023 祥云杯决赛</span>
+            <span class="post-date" title="2023-09-21 11:47:00">2023/09/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/17/2023 江苏省数据安全竞赛/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 江苏省数据安全竞赛">2023 江苏省数据安全竞赛</span>
+            <span class="post-date" title="2023-09-17 11:21:00">2023/09/17</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/09/13/密码学基础之线性代数Ⅱ/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之线性代数Ⅱ">密码学基础之线性代数Ⅱ</span>
+            <span class="post-date" title="2023-09-13 07:00:00">2023/09/13</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/09/06/密码学基础之线性代数Ⅰ/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之线性代数Ⅰ">密码学基础之线性代数Ⅰ</span>
+            <span class="post-date" title="2023-09-06 15:16:00">2023/09/06</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/04/2023 羊城杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 羊城杯">2023 羊城杯</span>
+            <span class="post-date" title="2023-09-04 10:15:00">2023/09/04</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/02/2023 熵密杯 revenge/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 熵密杯 revenge">2023 熵密杯 revenge</span>
+            <span class="post-date" title="2023-09-02 07:00:00">2023/09/02</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/01/2023 观安杯决赛/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 观安杯决赛">2023 观安杯决赛</span>
+            <span class="post-date" title="2023-09-01 11:59:00">2023/09/01</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/28/2023 陇剑杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 陇剑杯">2023 陇剑杯</span>
+            <span class="post-date" title="2023-08-28 14:40:00">2023/08/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/25/2023 观安杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 观安杯">2023 观安杯</span>
+            <span class="post-date" title="2023-08-25 15:54:00">2023/08/25</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/08/23/密码学攻击之RSA：初见/"
+           data-tag="RSA"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学攻击之RSA：初见">密码学攻击之RSA：初见</span>
+            <span class="post-date" title="2023-08-23 10:43:00">2023/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/08/18/密码学基础之数论四大定理/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之数论四大定理">密码学基础之数论四大定理</span>
+            <span class="post-date" title="2023-08-18 09:00:00">2023/08/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/14/2023 NepCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 NepCTF">2023 NepCTF</span>
+            <span class="post-date" title="2023-08-14 12:00:00">2023/08/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/14/2023 CCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 CryptoCTF">2023 CryptoCTF</span>
+            <span class="post-date" title="2023-08-14 00:00:00">2023/08/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/11/2023 熵密杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 熵密杯">2023 熵密杯</span>
+            <span class="post-date" title="2023-08-11 12:00:00">2023/08/11</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/08/04/密码学基础之抽象代数基础/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之抽象代数基础">密码学基础之抽象代数基础</span>
+            <span class="post-date" title="2023-08-04 12:00:00">2023/08/04</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/02/2023 ImaginaryCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 ImaginaryCTF">2023 ImaginaryCTF</span>
+            <span class="post-date" title="2023-08-02 00:00:00">2023/08/02</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/07/28/密码学基础之进制与编码/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之进制与编码">密码学基础之进制与编码</span>
+            <span class="post-date" title="2023-07-28 12:00:00">2023/07/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/07/24/2023 巅峰极客/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 巅峰极客-Rosita">2023 巅峰极客-Rosita</span>
+            <span class="post-date" title="2023-07-24 01:00:00">2023/07/24</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/07/23/2023 DASCTF-0x401/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 DASCTF-0x401">2023 DASCTF-0x401</span>
+            <span class="post-date" title="2023-07-23 00:00:00">2023/07/23</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/06/29/（我不懂）密码学系列之异或运算/"
+           data-tag="Lattice"
+           data-author="Van1sh" >
+            <span class="post-title" title="（我不懂）密码学系列之异或运算">（我不懂）密码学系列之异或运算</span>
+            <span class="post-date" title="2023-06-29 00:00:00">2023/06/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/06/15/2023 seectf/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 SEECTF">2023 SEECTF</span>
+            <span class="post-date" title="2023-06-15 10:55:00">2023/06/15</span>
+        </a>
+        
+        <a  class="漏洞小屋 "
+           href="/2023/01/30/Shadowsocks Redirect Attack/"
+           data-tag="Shadowsocks"
+           data-author="Van1sh" >
+            <span class="post-title" title="Shadowsocks Redirect Attack">Shadowsocks Redirect Attack</span>
+            <span class="post-date" title="2023-01-30 17:14:00">2023/01/30</span>
+        </a>
+        
+        <a  class="协议小屋 "
+           href="/2022/12/15/TLS1.2协议分析（二）/"
+           data-tag="TLS 1.2"
+           data-author="Van1sh" >
+            <span class="post-title" title="TLS 1.2 协议（二）">TLS 1.2 协议（二）</span>
+            <span class="post-date" title="2022-12-15 10:24:00">2022/12/15</span>
+        </a>
+        
+        <a  class="协议小屋 "
+           href="/2022/12/08/TLS1.2协议分析（一）/"
+           data-tag="TLS 1.2"
+           data-author="Van1sh" >
+            <span class="post-title" title="TLS 1.2 协议（一）">TLS 1.2 协议（一）</span>
+            <span class="post-date" title="2022-12-08 21:10:00">2022/12/08</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2022/11/15/密码学学习笔记之连分数/"
+           data-tag="continued_fraction"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记之连分数">密码学学习笔记之连分数</span>
+            <span class="post-date" title="2022-11-15 17:59:00">2022/11/15</span>
+        </a>
+        
+        <a  class="论文小屋 "
+           href="/2022/10/17/Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent/"
+           data-tag="paper,small private exponent"
+           data-author="Van1sh" >
+            <span class="post-title" title="Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent">Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent</span>
+            <span class="post-date" title="2022-10-17 15:31:00">2022/10/17</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/09/14/2022 cryptoctf/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 CryptoCTF">2022 CryptoCTF</span>
+            <span class="post-date" title="2022-09-14 17:16:00">2022/09/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/08/30/2021 cryptoctf/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 CryptoCTF">2021 CryptoCTF</span>
+            <span class="post-date" title="2022-08-30 13:30:00">2022/08/30</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/06/29/区块链学习笔记之2022ACTF-bet2loss/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022ACTF—bet2loss">区块链学习笔记之2022ACTF—bet2loss</span>
+            <span class="post-date" title="2022-06-29 15:23:00">2022/06/29</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/04/19/区块链学习笔记之2022starCTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022starCTF——TreasureHunter">区块链学习笔记之2022starCTF——TreasureHunter</span>
+            <span class="post-date" title="2022-04-19 15:23:00">2022/04/19</span>
+        </a>
+        
+        <a  class="合约小屋 区块链靶场 "
+           href="/2022/03/08/区块链靶场刷题之cpaturetheether/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="cpature the ether">cpature the ether</span>
+            <span class="post-date" title="2022-03-08 11:03:00">2022/03/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/28/2022 SUSCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 SUSCTF">2022 SUSCTF</span>
+            <span class="post-date" title="2022-02-28 11:18:35">2022/02/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/22/2021TQLCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 TQLCTF">2022 TQLCTF</span>
+            <span class="post-date" title="2022-02-22 22:22:22">2022/02/22</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/18/区块链学习笔记之BalsnCTF 2019 Bank/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之Balsn CTF 2019 - Bank">区块链学习笔记之Balsn CTF 2019 - Bank</span>
+            <span class="post-date" title="2022-02-18 14:45:00">2022/02/18</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/15/区块链学习笔记之BalsnCTF 2020 IdleGame/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之BalsnCTF 2020 IdleGame">区块链学习笔记之BalsnCTF 2020 IdleGame</span>
+            <span class="post-date" title="2022-02-15 15:39:00">2022/02/15</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/11/区块链学习笔记之paradigm-CTF babysandbox/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之paradigm-CTF babysandbox">区块链学习笔记之paradigm-CTF babysandbox</span>
+            <span class="post-date" title="2022-02-11 16:22:00">2022/02/11</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/01/23/区块链学习笔记之RealWorld体验赛/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之RealWorld体验赛——TransferFrom">区块链学习笔记之RealWorld体验赛——TransferFrom</span>
+            <span class="post-date" title="2022-01-23 00:11:00">2022/01/23</span>
+        </a>
+        
+        <a  class="合约小屋 "
+           href="/2021/12/22/区块链学习笔记之初探以太坊/"
+           data-tag="ETH"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之初探以太坊">区块链学习笔记之初探以太坊</span>
+            <span class="post-date" title="2021-12-22 10:16:00">2021/12/22</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/08/23/2021 祥云杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 祥云杯">2021 祥云杯</span>
+            <span class="post-date" title="2021-08-23 14:07:00">2021/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack/"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-2023 祥云杯决赛" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">2023 祥云杯决赛</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="比赛小屋">比赛小屋</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">Write Up</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2023-10-24 10:15:02'>2023-09-21 11:47</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#学生组"><span class="toc-text">学生组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#赛题一"><span class="toc-text">赛题一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#赛题二"><span class="toc-text">赛题二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#社会组"><span class="toc-text">社会组</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/XpBS9rnxDadA5aMvlzU27L3QhsBcx9cU6V6z1jvKHytDibiaD9glqreJVspBE9FwqXtic0PkeVB9qnLpsq8OgV43w/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<p>虽然本人没有参加第三届祥云杯决赛，但赛后还是摸到了赛题看。</p>
+<h2 id="学生组"><a href="#学生组" class="headerlink" title="学生组"></a>学生组</h2><p>有一个师傅在学生组，第一天学生组比完CTF后找到我说，在比赛的时候解题卡在了最后一步，让我瞅瞅，想知道怎么做。</p>
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/XpBS9rnxDadA5aMvlzU27L3QhsBcx9cUpLzLfzCPIsy5ZzgQaBeJC4vtzs78kuXuibHY1pld8rkEPhibXiaPvPX3g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<h3 id="赛题一"><a href="#赛题一" class="headerlink" title="赛题一"></a>赛题一</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">total_bit = <span class="number">512</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_para</span><span class="params">(bit_size)</span>:</span></span><br><span class="line">    P = getStrongPrime(bit_size)</span><br><span class="line">    Q = getStrongPrime(bit_size)</span><br><span class="line">    N = P * Q</span><br><span class="line">    magic = (N + <span class="number">1</span>) * (N + P + Q + <span class="number">1</span>) + (P - Q) ** <span class="number">2</span> + N</span><br><span class="line">    d = int(<span class="number">0.394</span> * bit_size)</span><br><span class="line">    e = inverse(d, magic)</span><br><span class="line">    k = d * e // magic</span><br><span class="line">    <span class="keyword">return</span> (N, e), (P, Q, k)</span><br><span class="line">pubkey, sec_key = make_para(<span class="number">2</span> * total_bit)</span><br><span class="line">flag = bytes_to_long(flag) * sec_key[<span class="number">2</span>]</span><br><span class="line">p = getStrongPrime(total_bit)</span><br><span class="line">q = getStrongPrime(total_bit)</span><br><span class="line">n = p * q</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">c = pow(flag, e, n)</span><br><span class="line">t = ((p - getRandomNBitInteger(<span class="number">16</span>)) * sec_key[<span class="number">0</span>] + q) % sec_key[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'output.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(str(pubkey) + <span class="string">'\n'</span>)</span><br><span class="line">    f.write(str((t, c)))</span><br></pre></td></tr></table></figure>
+
+<p>题目大致的瞅一眼，首先生成了一些参数 $N,e,(P,Q,k)$  其中 $N,e$ 已知。然后把 flag 乘了 k，接着又生成了一份 RSA 的公钥，并加密了 $k \cdot flag$ ，然后给出了关于 $p,q$ 的额外信息 $t = ((p-random) * P + q) % Q$</p>
+<p>那么问题很显然啊，需要先分解 $N$，把 $P,Q,k$ 整出来先。而关于 $P,Q$，在 make_para 函数中我们注意到关于 $e,d$ 的生成方式。乍一看，还以为生成了一个大小是 $N^{0.394}$ 的私钥，然后用来生成 $e$ 的模数是 magic，合并一下其实是 $(P^2+P+1)(Q^2+Q+1)$，还以为是论文题，要用一下连分数啥的。但是转念一想，不对啊，离线比赛出论文题，那不是缺了大德么。最后定睛一看，好家伙 <code>d = int(0.394 * bit_size)</code>，原来 $d$ 是一个已知整数。</p>
+<p>于是我们有 $e \cdot d = k (P^2+P+1)(Q^2+Q+1)+1$，展开一下 $e\cdot d-1 = k(N^2+PN+QN+P^2+Q^2+N+P+Q+1)$</p>
+<p>因此 $\lfloor \frac{e\cdot d-1}{N^2}\rfloor = k$，假设 $P&gt;Q$，那么 $Q^2 \lt N \lt P^2$，于是 $\lfloor \frac{e\cdot d-1}{kN}\rfloor \approx N +P+Q+2$，实际测出来是 $\lfloor \frac{e\cdot d-1}{kN}\rfloor = N +P+Q+3$</p>
+<p>然后解个方程我们就能获取 $P,Q,k$ 了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">N,e = (<span class="number">21136120517038375343657055317361461947217610380415290931285704769845405139443342030139838613845989765254932385503454684656325859309861269837188207923942223163348944160792729101485975484543693998035828762630825174735962679103457025646672449491007685400869138263581883506767852264244013623583813540066115060793144049256890248337903932112449333735324371400873419104520104079223733159263094092843185909770131443506433825708789563521497940390674504488024226655482568491358458107989880756229607524452273305978138461190013290440068226454238375505010225133919526068226837545142734502100757510899741312502285931571783851666429</span>, <span class="number">291542085122413541028076006933740091355832744332602513957292369860771664833892358795585946753279254101863581542678927529330607906769804928526978686071141386341893467977451552634615917127445748737712286687041822255325772392569586666055711202824870471562051621883329559663555059967665101455578668904247279540014709971958403913939101728330638301270881265277488332145439522278871554725936095617940701105161078332467466405454007283937177070102098256744642045839067405705972784471374421818844770106228499198315920181837950503279178647052157269318876892192700670366858062171759498850112906238502375693099462427930964555274451795362167393410749436026095037695100430810204847979914959732383773952788768239221142673268839750770222737928397507645337714199166919835667638401309062163501094032890215821366318775462220119081175885338966308921205861717088926659072208866126879068213582499260316364548817213314952246293713853884872460934174624844462586276340207505217646013915381902979372875919823493439285174120160656952728493383464761519634974414670811896809158801804891938928244053980210687334268664219571818927285279999791212932795196689285015367417706597781418431735001428656415752334850685705212368666855124013583549768407830008606258798409140</span>)</span><br><span class="line">d = int(<span class="number">0.394</span> * <span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">k = (e*d<span class="number">-1</span>)//N**<span class="number">2</span></span><br><span class="line">p_a_q = (e*d<span class="number">-1</span>)//(k*N) - N - <span class="number">3</span></span><br><span class="line">p_s_q = iroot(p_a_q**<span class="number">2</span><span class="number">-4</span>*N,<span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">p = (p_a_q+p_s_q)//<span class="number">2</span></span><br><span class="line">q = p_a_q - p</span><br><span class="line"><span class="keyword">assert</span> p*q == N</span><br><span class="line"></span><br><span class="line">print(p)</span><br><span class="line">print(q)</span><br><span class="line">print(k)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 143078039642881652792725771784213914569207427179221450527831176525315265565238257928580110111049486656241446498753952813958174255162082586211603455849496271101246800300949146175660103176787576526962695816071099455794179935847192303931252206979980383408582225496150194196048569906497422686531669037370362490591</span></span><br><span class="line"><span class="comment"># 147724420671358625656073728988251990709657136203479220456044242791542317692661747967991832853881462444146194371982730793349362452137634455888399765514368115413509137529033492152562833458082422584778299506218002962422410654802940055372919228164309566932084727942623228573408370823021433452034727423294317997219</span></span><br><span class="line"><span class="comment"># 263</span></span><br></pre></td></tr></table></figure>
+
+<p>显然我们是需要根据 $t = ((p-random) * P + q) % Q$ 解出 $p,q$ 来解密密文获得 flag</p>
+<p>这里由于 $P,Q$ 是 1024 比特的，$p,q$ 是 512 比特。考虑格基规约，类似 的 ，构造如下格</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">p = getPrime(<span class="number">510</span>)</span><br><span class="line">q = getPrime(<span class="number">510</span>)</span><br><span class="line">n = p * q</span><br><span class="line">t = ((p - getRandomNBitInteger(<span class="number">16</span>)) * P + q) % Q</span><br><span class="line">shift = <span class="number">2</span>^<span class="number">1024</span></span><br><span class="line">m = matrix(ZZ,[[shift*P,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">				[shift*<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">				[shift*Q,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">				[shift*t,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>^<span class="number">512</span>]])</span><br><span class="line">m = m.LLL()</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> abs(m[<span class="number">1</span>][<span class="number">2</span>])==q</span><br></pre></td></tr></table></figure>
+
+<p>本地测试发现当 $p,q$ 长度为 $510$ 的时候能跑出来，但是使用原来数据时，$p,q$ 多 2 个比特就怎么也出不来。</p>
+<p>于是想到爆破 $p,q$ 的高位，首先最高位肯定都是 1，对于第二个比特 ，猜一下，总共也就四种可能。（另外 $P,Q$ 也有可能会反，需要对调一下，总共就是 8 种可能）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">t,c = (<span class="number">18872151984199200051633005759140295224788252451326410141022483203855894790958837408470348915966212063467995292461061069273539234939320647533902914083943444743748789975745514239518406829738286900177972974033143896932863898553599888597165054837513698667686277110587659188172271629973371164557353473146831275972</span>, <span class="number">47672712219012743425382676880904671136942826695249149129159924785186563239747047304204962529935078111450524236186612259355850306867579998685662967391936502046679744616903469002187225791339629835786750259999982506494377133775859573660632942293353420327987860136624649402598383416748766985203781387716072244402</span>)</span><br><span class="line">k = <span class="number">263</span></span><br><span class="line">P = <span class="number">143078039642881652792725771784213914569207427179221450527831176525315265565238257928580110111049486656241446498753952813958174255162082586211603455849496271101246800300949146175660103176787576526962695816071099455794179935847192303931252206979980383408582225496150194196048569906497422686531669037370362490591</span></span><br><span class="line">Q = <span class="number">147724420671358625656073728988251990709657136203479220456044242791542317692661747967991832853881462444146194371982730793349362452137634455888399765514368115413509137529033492152562833458082422584778299506218002962422410654802940055372919228164309566932084727942623228573408370823021433452034727423294317997219</span></span><br><span class="line"><span class="comment"># 猜测 p,q 高位</span></span><br><span class="line">ph = <span class="number">0b11</span>&lt;&lt;<span class="number">510</span></span><br><span class="line">qh = <span class="number">0b11</span>&lt;&lt;<span class="number">510</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据 p,q 高位， t 做相应处理</span></span><br><span class="line">tbar = (t-qh-ph*P)%Q</span><br><span class="line"></span><br><span class="line">shift = <span class="number">2</span>^<span class="number">1024</span></span><br><span class="line">m = matrix(ZZ,[[shift*P,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">				[shift*<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">				[shift*Q,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">				[shift*tbar,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>^<span class="number">512</span>]])</span><br><span class="line">m = m.LLL()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> isPrime(int(abs(m[<span class="number">1</span>][<span class="number">2</span>])+qh)):</span><br><span class="line">	q = abs(m[<span class="number">1</span>][<span class="number">2</span>])+qh</span><br><span class="line">	e = <span class="number">65537</span></span><br><span class="line">	d = inverse(e,q<span class="number">-1</span>)</span><br><span class="line">	mm = pow(c,d,q)</span><br><span class="line">	print(long_to_bytes(int(mm//k)))</span><br><span class="line"></span><br><span class="line"><span class="string">b'flag&#123;6db64079-711c-4d80-86c6-baec1023d44d&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="赛题二"><a href="#赛题二" class="headerlink" title="赛题二"></a>赛题二</h3><p>然后我把第二题给问过来了，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">flag = <span class="string">b'xxx'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mypad</span><span class="params">(m)</span>:</span></span><br><span class="line">    l = len(m)</span><br><span class="line">    r = <span class="number">190</span> - l</span><br><span class="line">    padded_m = m + os.urandom(r)</span><br><span class="line">    <span class="keyword">return</span> padded_m</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myfunction</span><span class="params">(num)</span>:</span></span><br><span class="line">    output = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num):</span><br><span class="line">        output += (i+j)*<span class="number">6</span> + <span class="number">1</span></span><br><span class="line">        j += i</span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mix</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a | b , a * b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySeries</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num)</span>:</span></span><br><span class="line">        self.num = num</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Coe</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        c = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; n:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            c = (c * (<span class="number">1</span> / <span class="number">2</span> - i + <span class="number">1</span>)) / i</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Point</span><span class="params">(self, center)</span>:</span></span><br><span class="line">        sum = <span class="number">0</span></span><br><span class="line">        center -= <span class="number">1</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; self.num:</span><br><span class="line">            sum += (center ** (<span class="number">1</span> / <span class="number">2</span> - i) * self.Coe(i))</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> sum</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">All</span><span class="params">(bound)</span>:</span></span><br><span class="line">    num = randint(<span class="number">1111</span>, <span class="number">2222</span>)</span><br><span class="line">    T = MySeries(num)</span><br><span class="line">    output = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    i = <span class="number">3</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; bound:</span><br><span class="line">        b1 = T.Point(i)</span><br><span class="line">        b2 = T.Point(i + <span class="number">1</span>)</span><br><span class="line">        output += (b1 + b2) / <span class="number">2</span></span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    flag_len = len(flag)</span><br><span class="line">    p,q = getPrime(<span class="number">512</span>),getPrime(<span class="number">512</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        r = getPrime(<span class="number">512</span>)</span><br><span class="line">        R = bytes_to_long(str(r).encode())</span><br><span class="line">        <span class="keyword">if</span> isPrime(R):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">            </span><br><span class="line">    n = p * q * r </span><br><span class="line">    hint1 = R * r</span><br><span class="line">    mod = myfunction(n)</span><br><span class="line">    hint2 = pow(<span class="number">3</span>*n+<span class="number">1</span>,p % (<span class="number">2</span> ** <span class="number">400</span>),mod)</span><br><span class="line">    k = int(All(n))</span><br><span class="line">    xor_flag = strxor(long_to_bytes(k &gt;&gt; (k.bit_length() - <span class="number">8</span> * flag_len)),flag)</span><br><span class="line">    pad_flag = mypad(xor_flag)</span><br><span class="line">    m = bytes_to_long(pad_flag)</span><br><span class="line">    c = pow(m,<span class="number">65537</span>,n)</span><br><span class="line">    </span><br><span class="line">    print(<span class="string">'All data:'</span>)</span><br><span class="line">    print(<span class="string">f'flag_len = <span class="subst">&#123;flag_len&#125;</span>'</span>)</span><br><span class="line">    print(<span class="string">f'n = <span class="subst">&#123;n&#125;</span>'</span>)</span><br><span class="line">    print(<span class="string">f'c = <span class="subst">&#123;c&#125;</span>'</span>)</span><br><span class="line">    print(<span class="string">f'hint1 = <span class="subst">&#123;hint1&#125;</span>'</span>)</span><br><span class="line">    print(<span class="string">f'hint2 = <span class="subst">&#123;hint2&#125;</span>'</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">All data:</span></span><br><span class="line"><span class="string">flag_len = 42</span></span><br><span class="line"><span class="string">n = 1885106209951408608833065466098355578239648885277085979696889428331716535742564778501798478665957825315340421821880653818505857049636611632357321104069926874970489073929053910350131880591544986024406953378391135673202854750625745159391997973535848495128365477217006260495413869532372418221652962946340513593002422433536479789576519469228846773250447077165756739529520975715667675188738514871033908115371290569902086064227476952606366538782284487477820835988316471</span></span><br><span class="line"><span class="string">c = 696238728213276154324787695659767792043458798396732235983493075871691401810545168845655490352789752222363100922123671319198981013421632076090146254867823593523050502577701155837063376958530879006719716789887624440134559774538443909463537086796915613123528679984244371544503657821859556837415229166015914540860398289216765611441964228176020361651359395184571105468667815326494558761738459063914192172836518999575866452752941368767971539919141604299843463853501960</span></span><br><span class="line"><span class="string">hint1 = 47533994701669017942592643580845693193316601935087923279407365999451221242084261195588230994183718077379066856479267476895986608547324057765879168010176037349172136581929046771540241367625486215731295814611283581608613208990206581757576978017732022062210538697720930605552259306749633658032304554578427461842934055558865521604512892691323385156889995854702621568441768712619224249280792783364635307739215957762771386413831279443875185633720270001928747743847856394847878232194076679733830705297410959656270945532930199517880949</span></span><br><span class="line"><span class="string">hint2 = 1345739841248959791137389026125065605121513428784838684290299665636596562317989590469829195181078904857051392378877013458099983407103737518119999468489762053545474516182879516762580472262640794849609626308003164739287189671066241628052826558582865342176036139097546843281565147798609965645514151827840249686650855385385323417455247722134760335695053787221300451942370377598800841980049138341564555801417479362085565640973199260631136149016266661293883650801813550118778433333591258278147003619871962070136454674193198696690506092831171400435490432196636796719177624389194619648086397178720207413652618636521150924913978530986709499047969775311955879302418093270101476537853298615347062384026172441455857088955847766335746521291043747795520485020303040819568036819058385444936925860671650596681910380157657689041971132993731048618045570715513584627109356139903842365556697314631573799394266292587334468008221427502353566938518574247502783245674619641519095644135976062817840893465238031354234069073928763492529419021632732679912738674105898149050223970723297059883534089683179512881491210176114419520070007595698242827625902377045860953285447617249204919971737086366</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>赛题二就比较缝合怪了，魔改的应该是 <a href="https://jayxv.github.io/2022/09/14/2022%20cryptoctf/">2022 CCTF Infinity castle</a> </p>
+<p>第一步是用 $hint1$ 和 $n$ 做 <code>gcd</code> 求出 $r$，</p>
+<p>然后测试（或者推一下）可得 <code>myfuction</code> 其实就是一个计算三次方的函数，</p>
+<p>于是，根据二项式定理，我们可以利用 $hint2$ 求出 $p %400 = \frac{hint %400}{3n}$ ，</p>
+<p>有了 $p$ 的低 400 位，来一个 copper 就能分解 $n$ 了。</p>
+<p>最后为了解密 flag 还得求出 $k$，这个 <code>All</code> 函数其实就是一个泰勒展开在求 $\sqrt{n}$ 的积分，所以 $k = \frac{2}{3}n^\frac{3}{2}$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    n = <span class="number">1885106209951408608833065466098355578239648885277085979696889428331716535742564778501798478665957825315340421821880653818505857049636611632357321104069926874970489073929053910350131880591544986024406953378391135673202854750625745159391997973535848495128365477217006260495413869532372418221652962946340513593002422433536479789576519469228846773250447077165756739529520975715667675188738514871033908115371290569902086064227476952606366538782284487477820835988316471</span></span><br><span class="line"></span><br><span class="line">    r = <span class="number">13064264216014600984590013161094647588688097945008015283029781423081403612570218487688473281971441574006356719607329041516297420593832435695152551495621303</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># n = p * q * r </span></span><br><span class="line">    <span class="comment"># mod = myfunction(3)</span></span><br><span class="line">    <span class="comment"># print(mod==n**3)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># hint2 = pow(3*n+1,p % (2 ** 400),n**3)</span></span><br><span class="line">    <span class="comment"># hint2 = pow(3*n+1,400,n**3)</span></span><br><span class="line">    <span class="comment"># print((hint2%(n**2))//n)</span></span><br><span class="line">    <span class="comment"># pbar = (hint2%(n**2))//(3*n)</span></span><br><span class="line">    <span class="comment"># # pbar = 290093818088445232385211155295987419950746202522777816778903667287369882202987169000686051435796089920601608052312746065</span></span><br><span class="line">    <span class="comment"># R.&lt;x&gt; = Zmod(n)[]</span></span><br><span class="line">    <span class="comment"># f = (2^400) * x + pbar</span></span><br><span class="line">    <span class="comment"># x0 = f.monic().small_roots(X=2^112,beta=0.49)[0]</span></span><br><span class="line">    <span class="comment"># p = int(f(x0))</span></span><br><span class="line">    <span class="comment"># q = int(n)//p</span></span><br><span class="line">    <span class="comment"># p = 10835491201779459536146517032534966141751744767433086585469873899474443209697998673019277269625767885233333299822821960132722036029334072360300733477529681</span></span><br><span class="line">    <span class="comment"># q = 13316873218544878416280346742338579649540959399378233738197413050519025036683226049252858246940675299712559597339200613975360145818807371576573913305896497</span></span><br><span class="line">    <span class="comment"># phi = (p-1)*(q-1)*(r-1)</span></span><br><span class="line">    <span class="comment"># d = inverse(e,phi)</span></span><br><span class="line">    <span class="comment"># m = pow(c,d,p*q*r)</span></span><br><span class="line">    <span class="comment"># m = long_to_bytes(m)</span></span><br><span class="line">    <span class="comment"># </span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    k = <span class="number">2</span>*(n*iroot(n,<span class="number">2</span>)[<span class="number">0</span>])//<span class="number">3</span></span><br><span class="line">    xor_flag = strxor(long_to_bytes(k &gt;&gt; (k.bit_length() - <span class="number">8</span> * flag_len)),flag[:<span class="number">42</span>])</span><br><span class="line">    xor_flag</span><br><span class="line"></span><br><span class="line"><span class="string">b'flag&#123;84934a62-f932-968c-fa88-22f0284c0e8e&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="社会组"><a href="#社会组" class="headerlink" title="社会组"></a>社会组</h2><p>同事在社会组的 SU，赛后也把题目给我瞅了瞅，于是在去陇剑杯的飞机上看了一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag, genPrime, generate_g</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">sieve_base = <span class="comment"># from Crypto.Util.number import sieve_base</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rabinMillerTest</span><span class="params">(n, rounds)</span>:</span></span><br><span class="line">    tested = []</span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">3</span> <span class="keyword">or</span> (n &amp; <span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> n == <span class="number">2</span>, tested</span><br><span class="line">        <span class="comment"># n might be very large so it might be beneficial to precalculate n-1</span></span><br><span class="line">    n_1 = n - <span class="number">1</span></span><br><span class="line">    <span class="comment"># determine m and b so that 2**b * m = n - 1 and b maximal</span></span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    m = n_1</span><br><span class="line">    <span class="keyword">while</span> (m &amp; <span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">        b += <span class="number">1</span></span><br><span class="line">        m &gt;&gt;= <span class="number">1</span></span><br><span class="line">    <span class="comment">#a smaller number might be faster...</span></span><br><span class="line">    upper = <span class="number">2</span>**(max(n.bit_length() &gt;&gt; <span class="number">5</span>, <span class="number">10</span>))</span><br><span class="line">    <span class="comment"># we need to do at most n-2 rounds.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(min(rounds, n - <span class="number">2</span>)):</span><br><span class="line">        a = random.randint(<span class="number">2</span>, upper)</span><br><span class="line">        <span class="keyword">while</span> a <span class="keyword">in</span> tested:</span><br><span class="line">            a = random.randint(<span class="number">2</span>, upper)</span><br><span class="line">        tested.append(a)</span><br><span class="line">        <span class="comment"># do the rabin-miller test</span></span><br><span class="line">        z = pow(a, m, n)  <span class="comment"># (a**m) % n</span></span><br><span class="line">        <span class="keyword">if</span> z == <span class="number">1</span> <span class="keyword">or</span> z == n_1:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        composite = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> range(b):</span><br><span class="line">            z = (z * z) % n</span><br><span class="line">            <span class="keyword">if</span> z == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>, tested</span><br><span class="line">            <span class="keyword">elif</span> z == n_1:</span><br><span class="line">                composite = <span class="number">0</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> composite:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>, tested</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>, tested</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(N, false_positive_prob=<span class="number">1e-6</span>)</span>:</span></span><br><span class="line">    tested = []</span><br><span class="line">    <span class="keyword">if</span> N &lt; <span class="number">3</span> <span class="keyword">or</span> N &amp; <span class="number">1</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> N == <span class="number">2</span>, []</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> sieve_base:</span><br><span class="line">        <span class="keyword">if</span> N == p:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>, tested</span><br><span class="line">        <span class="keyword">if</span> N % p == <span class="number">0</span>:</span><br><span class="line">            tested.append(p)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>, tested</span><br><span class="line"></span><br><span class="line">    rounds = int(math.ceil(-math.log(false_positive_prob)/math.log(<span class="number">4</span>)))</span><br><span class="line">    <span class="keyword">return</span> rabinMillerTest(N, rounds)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Welcome to my secure key exchange system\n"</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    q = int(input(<span class="string">"q:"</span>))</span><br><span class="line">    <span class="keyword">if</span> q.bit_length() &lt; <span class="number">256</span>:</span><br><span class="line">        print(<span class="string">"oh! too small!!!"</span>)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    jud, tested = is_prime(q)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> jud:</span><br><span class="line">        print(<span class="string">f"Bad parameters! test set <span class="subst">&#123;tested&#125;</span> not pass."</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">x = int.from_bytes(os.urandom(q.bit_length() // <span class="number">8</span>), byteorder=<span class="string">'big'</span>)</span><br><span class="line">p = genPrime(q)</span><br><span class="line">g = generate_g(q, p)</span><br><span class="line">print(<span class="string">f"p: <span class="subst">&#123;p&#125;</span>"</span>)</span><br><span class="line">print(<span class="string">f"g: <span class="subst">&#123;g&#125;</span>"</span>)</span><br><span class="line">A = pow(g, x, p)</span><br><span class="line">print(<span class="string">f"Calculate the public key in this way: pow(g, secret, p)"</span>)</span><br><span class="line">print(<span class="string">f"eg. pow(g, x, p) = <span class="subst">&#123;A&#125;</span>"</span>)</span><br><span class="line">print(<span class="string">f"I can give you a hint:)"</span>)</span><br><span class="line">r = int(input(<span class="string">"r:"</span>))</span><br><span class="line"><span class="keyword">if</span> r &lt; x <span class="keyword">and</span> ((p - <span class="number">1</span>) % r == <span class="number">0</span>):</span><br><span class="line">    print(pow(g, x, r))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"don't need hint?"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    B = int(input(<span class="string">"give me your public key:"</span>))</span><br><span class="line">    <span class="keyword">if</span> <span class="number">1</span> &lt; B &lt; p:</span><br><span class="line">        shared = pow(B, x, p)</span><br><span class="line">        print(<span class="string">f"our shared key: <span class="subst">&#123;shared&#125;</span>"</span>)</span><br><span class="line">        x_ = int(input(<span class="string">"x?"</span>).strip())</span><br><span class="line">        <span class="keyword">if</span> x_ == x:</span><br><span class="line">            print(flag)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"sorry~"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>是一个需要交互的题，把函数 <code>genPrime, generate_g</code> 给偷摸隐藏了起来，估计是有点问题。看一下题目流程：</p>
+<ol>
+<li>用户端输入一个大于 256 比特的素数 $q$</li>
+<li>服务端随机生成一个秘密数 $x$，并根据用户的 $q$ 生成一个素数 $p$，在根据 $p,q$ 生成一个 $g$，并给出 $A \equiv g^x \pmod p$。（由于没有源码，这里合理猜测生成的 $p-1$ 具有因子 $q$，而 $g$ 是一个在模 $p$ 阶为 $q$ 的一个元素，这是 <u>Elgamal 参数生成</u>的标准）</li>
+<li>服务端允许用户输入一个 $r$，如果满足 $r \lt x,p-1 \equiv 0 \pmod r$，服务端就会输出 $g^x %r$</li>
+<li>之后服务端让用户输入一个 $B$，并给出 $B^x \pmod p$（就是一个 ECDH），然后让用户猜 $x$，猜对了就给 $flag$，一共一百次交互机会。</li>
+</ol>
+<p>乍一看给出了 <code>rabinMillerTest</code> 还以为让绕过素数检测，但根据后面的流程来看，估计预期应该是根据 hint 得到一些关于 $x$ 信息，再利用一百次交互，每次搞到一点额外的信息，最后恢复完整的 $x$ 叭。</p>
+<p>但是，注意到给 hint 的部分会给出 $g^x %r$，因此，只要 $r-1$ 是光滑的，就能解出 $x$ 了。而 $r$ 得是 $p-1$ 的一个因子，<u>如果我们对 <code>genPrime</code> 函数猜测的正确的话</u>，那就直接设 $r$ 为 $q$，而 $q-1$ 是一个光滑数就行了。至于和 $x$ 的大小关系，由于 $x$ 的生成和 $q$ 的比特有关 <code>x = int.from_bytes(os.urandom(q.bit_length() // 8), byteorder=&#39;big&#39;)</code> ，<u>注意这里 $x$ 并不是严格小于 $q$</u>，所以爆！为了消去“地板除”的影响，要找比特长度刚好是 8 的倍数的 $q$，然后多跑几次等 $x$ 比 $r$ 大，我们就可以直接解 $DLP$ 得到 $x %r$，然后根据大小关系，对结果加一个 $r$ 就是 $x$ 了。 </p>
+<p>生成 $p-1$ 光滑的素数 $p$ 的脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">genPrime</span><span class="params">(bit_len)</span>:</span></span><br><span class="line">	<span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">		x = <span class="number">2</span></span><br><span class="line">		<span class="keyword">while</span> x &lt; <span class="number">2</span>**bit_len:</span><br><span class="line">			x *= random.choice(sieve_base)</span><br><span class="line">		<span class="keyword">if</span> isPrime(x+<span class="number">1</span>) <span class="keyword">and</span> x.bit_length() % <span class="number">8</span> == <span class="number">0</span>:</span><br><span class="line">			<span class="keyword">return</span> x+<span class="number">1</span></span><br><span class="line">print(genPrime(<span class="number">256</span>))</span><br></pre></td></tr></table></figure>
+
+<p>（不过由于没有赛题源码，以上想法全是基于猜测正确的前提下）</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>2023 祥云杯决赛</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.5k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2023-09-21, 11:47:00</p>
+    <p><span class="copy-title">最后更新:</span>2023-10-24, 10:15:02</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2023/09/21/2023 祥云杯决赛/" title="2023 祥云杯决赛">http://jayxv.github.io/2023/09/21/2023 祥云杯决赛/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#Basic','#ECC','#Paillier','#Crypto','#TLS 1.2','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#DES','#差分密码分析','#RSA','#continued_fraction','#RE','#paper','#small private exponent','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#ETH','#Shadowsocks','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

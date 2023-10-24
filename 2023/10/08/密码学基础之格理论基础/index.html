@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>密码学基础之格理论基础 | Van1sh的小屋</title>
+  <meta name="keywords" content=" Basic ">
+  <meta name="description" content="密码学基础之格理论基础 | Van1sh的小屋">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Van1sh的小屋">
+<meta property="og:url" content="http://jayxv.github.io/about/index.html">
+<meta property="og:site_name" content="Van1sh的小屋">
+<meta property="og:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-30T11:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Van1sh的小屋">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp; Van1sh，也用ID：V、Vanish，主要是有的网站昵称至少两个字符，Vanish也容易被注册&amp;emsp;现就读于杭州电子科技大学。是一只究极大菜鸡加懒狗。自2019.2.14的2019Hctf-Game接触CTF，由于零基础，目前还菜的一批，可能还会继续菜下去。现在还只会做一点Crypto方向的题，其他什么Web，Pwn，Reverse, Misc….俺都不知道。">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/sublime.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Van1sh</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/JayxV" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:643713081@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=643713081&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(83)</small></div></li>
+    
+        
+            
+            <li><div data-rel="比赛小屋">比赛小屋<small>(35)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具小屋">工具小屋<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="合约小屋"><i class="fold iconfont icon-right"></i>合约小屋<small>(8)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="contract">contract<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="区块链靶场">区块链靶场<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="密码小屋"><i class="fold iconfont icon-right"></i>密码小屋<small>(25)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ECC">ECC<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Paillier">Paillier<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Lattice">Lattice<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Stream">Stream<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Knapsack">Knapsack<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Rsa">Rsa<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Block">Block<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Basic">Basic<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CTF">CTF<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="RSA">RSA<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="协议小屋">协议小屋<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Web小屋"><i class="fold iconfont icon-right"></i>Web小屋<small>(3)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Files related">Files related<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SQL">SQL<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="XSS">XSS<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="逆向小屋"><i class="fold iconfont icon-right"></i>逆向小屋<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="patch">patch<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="论文小屋">论文小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="漏洞小屋">漏洞小屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="小书屋">小书屋<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="83">
+<input type="hidden" id="yelog_site_word_count" value="373.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.fzwjscj.xyz/">fzwjscj</a></li>
+            
+            <li><a target="_blank" href="http://dldxz.cn/">DLDXZ</a></li>
+            
+            <li><a target="_blank" href="http://fanda.cloud/">fanda</a></li>
+            
+            <li><a target="_blank" href="http://passingfoam.com/">PassingFoam&#39;s blog</a></li>
+            
+            <li><a target="_blank" href="https://eqqie.cn/">赤道企鹅</a></li>
+            
+            <li><a target="_blank" href="http://blog.ragdoll.work/">咲夜南梦</a></li>
+            
+            <li><a target="_blank" href="https://www.zhaoj.in/">glzjin</a></li>
+            
+            <li><a target="_blank" href="https://coinc1dens.github.io/">Coinc1dens</a></li>
+            
+            <li><a target="_blank" href="http://blog.soreatu.com/">soreatu</a></li>
+            
+            <li><a target="_blank" href="http://www.ga1axy.top/">盖乐希</a></li>
+            
+            <li><a target="_blank" href="https://shawroot.cc/">Root.</a></li>
+            
+            <li><a target="_blank" href="https://l1near.top/">l1near</a></li>
+            
+            <li><a target="_blank" href="https://0xdktb.top/">0xDktb</a></li>
+            
+            <li><a target="_blank" href="https://www.wootec.top/">Reverier</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="以 in: 开头进行全文搜索" />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Write Up</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Sage</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CTF</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Basic</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Paillier</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Crypto</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TLS 1.2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Files</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Lattice</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Dsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">LCG</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rc4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SM4</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Knapsack</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Rsa</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DES</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">差分密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">RSA</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">continued_fraction</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RE</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">paper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">small private exponent</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">操作模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">number theory</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Abstract algebra</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">线性密码分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ETH</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Shadowsocks</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">XSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Nmap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Coppersmith’s Method</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">book</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class=""
+           href="/2023/08/14/微信公众号/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="关于微信公众号">关于微信公众号</span>
+            <span class="post-date" title="2023-08-14 00:00:00">2023/08/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/10/23/好题分享系列 - 2023 香山杯 - strange_hash/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="好题分享系列 - 2023 香山杯 - strange_hash">好题分享系列 - 2023 香山杯 - strange_hash</span>
+            <span class="post-date" title="2023-10-23 16:40:00">2023/10/23</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/10/17/密码学基础之格中难题与格基规约/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之格中难题与格基规约">密码学基础之格中难题与格基规约</span>
+            <span class="post-date" title="2023-10-17 09:02:00">2023/10/17</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/10/12/好题分享系列 - 2023 网信柏鹭杯 - fractRSA/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="好题分享系列 - 2023 网信柏鹭杯 - fractRSA">好题分享系列 - 2023 网信柏鹭杯 - fractRSA</span>
+            <span class="post-date" title="2023-10-12 12:02:00">2023/10/12</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/10/08/密码学基础之格理论基础/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之格理论基础">密码学基础之格理论基础</span>
+            <span class="post-date" title="2023-10-08 12:45:00">2023/10/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/26/2023 陇剑杯线下赛/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 陇剑杯线下赛">2023 陇剑杯线下赛</span>
+            <span class="post-date" title="2023-09-26 14:42:00">2023/09/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/21/2023 祥云杯决赛/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 祥云杯决赛">2023 祥云杯决赛</span>
+            <span class="post-date" title="2023-09-21 11:47:00">2023/09/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/17/2023 江苏省数据安全竞赛/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 江苏省数据安全竞赛">2023 江苏省数据安全竞赛</span>
+            <span class="post-date" title="2023-09-17 11:21:00">2023/09/17</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/09/13/密码学基础之线性代数Ⅱ/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之线性代数Ⅱ">密码学基础之线性代数Ⅱ</span>
+            <span class="post-date" title="2023-09-13 07:00:00">2023/09/13</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/09/06/密码学基础之线性代数Ⅰ/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之线性代数Ⅰ">密码学基础之线性代数Ⅰ</span>
+            <span class="post-date" title="2023-09-06 15:16:00">2023/09/06</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/04/2023 羊城杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 羊城杯">2023 羊城杯</span>
+            <span class="post-date" title="2023-09-04 10:15:00">2023/09/04</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/02/2023 熵密杯 revenge/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 熵密杯 revenge">2023 熵密杯 revenge</span>
+            <span class="post-date" title="2023-09-02 07:00:00">2023/09/02</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/09/01/2023 观安杯决赛/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 观安杯决赛">2023 观安杯决赛</span>
+            <span class="post-date" title="2023-09-01 11:59:00">2023/09/01</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/28/2023 陇剑杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 陇剑杯">2023 陇剑杯</span>
+            <span class="post-date" title="2023-08-28 14:40:00">2023/08/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/25/2023 观安杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 观安杯">2023 观安杯</span>
+            <span class="post-date" title="2023-08-25 15:54:00">2023/08/25</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/08/23/密码学攻击之RSA：初见/"
+           data-tag="RSA"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学攻击之RSA：初见">密码学攻击之RSA：初见</span>
+            <span class="post-date" title="2023-08-23 10:43:00">2023/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/08/18/密码学基础之数论四大定理/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之数论四大定理">密码学基础之数论四大定理</span>
+            <span class="post-date" title="2023-08-18 09:00:00">2023/08/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/14/2023 NepCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 NepCTF">2023 NepCTF</span>
+            <span class="post-date" title="2023-08-14 12:00:00">2023/08/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/14/2023 CCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 CryptoCTF">2023 CryptoCTF</span>
+            <span class="post-date" title="2023-08-14 00:00:00">2023/08/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/11/2023 熵密杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 熵密杯">2023 熵密杯</span>
+            <span class="post-date" title="2023-08-11 12:00:00">2023/08/11</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/08/04/密码学基础之抽象代数基础/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之抽象代数基础">密码学基础之抽象代数基础</span>
+            <span class="post-date" title="2023-08-04 12:00:00">2023/08/04</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/08/02/2023 ImaginaryCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 ImaginaryCTF">2023 ImaginaryCTF</span>
+            <span class="post-date" title="2023-08-02 00:00:00">2023/08/02</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/07/28/密码学基础之进制与编码/"
+           data-tag="Basic"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学基础之进制与编码">密码学基础之进制与编码</span>
+            <span class="post-date" title="2023-07-28 12:00:00">2023/07/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/07/24/2023 巅峰极客/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 巅峰极客-Rosita">2023 巅峰极客-Rosita</span>
+            <span class="post-date" title="2023-07-24 01:00:00">2023/07/24</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/07/23/2023 DASCTF-0x401/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 DASCTF-0x401">2023 DASCTF-0x401</span>
+            <span class="post-date" title="2023-07-23 00:00:00">2023/07/23</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2023/06/29/（我不懂）密码学系列之异或运算/"
+           data-tag="Lattice"
+           data-author="Van1sh" >
+            <span class="post-title" title="（我不懂）密码学系列之异或运算">（我不懂）密码学系列之异或运算</span>
+            <span class="post-date" title="2023-06-29 00:00:00">2023/06/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2023/06/15/2023 seectf/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2023 SEECTF">2023 SEECTF</span>
+            <span class="post-date" title="2023-06-15 10:55:00">2023/06/15</span>
+        </a>
+        
+        <a  class="漏洞小屋 "
+           href="/2023/01/30/Shadowsocks Redirect Attack/"
+           data-tag="Shadowsocks"
+           data-author="Van1sh" >
+            <span class="post-title" title="Shadowsocks Redirect Attack">Shadowsocks Redirect Attack</span>
+            <span class="post-date" title="2023-01-30 17:14:00">2023/01/30</span>
+        </a>
+        
+        <a  class="协议小屋 "
+           href="/2022/12/15/TLS1.2协议分析（二）/"
+           data-tag="TLS 1.2"
+           data-author="Van1sh" >
+            <span class="post-title" title="TLS 1.2 协议（二）">TLS 1.2 协议（二）</span>
+            <span class="post-date" title="2022-12-15 10:24:00">2022/12/15</span>
+        </a>
+        
+        <a  class="协议小屋 "
+           href="/2022/12/08/TLS1.2协议分析（一）/"
+           data-tag="TLS 1.2"
+           data-author="Van1sh" >
+            <span class="post-title" title="TLS 1.2 协议（一）">TLS 1.2 协议（一）</span>
+            <span class="post-date" title="2022-12-08 21:10:00">2022/12/08</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2022/11/15/密码学学习笔记之连分数/"
+           data-tag="continued_fraction"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记之连分数">密码学学习笔记之连分数</span>
+            <span class="post-date" title="2022-11-15 17:59:00">2022/11/15</span>
+        </a>
+        
+        <a  class="论文小屋 "
+           href="/2022/10/17/Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent/"
+           data-tag="paper,small private exponent"
+           data-author="Van1sh" >
+            <span class="post-title" title="Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent">Generalization of Some Attacks on RSA with Small Prime Combination and Small Private Exponent</span>
+            <span class="post-date" title="2022-10-17 15:31:00">2022/10/17</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/09/14/2022 cryptoctf/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 CryptoCTF">2022 CryptoCTF</span>
+            <span class="post-date" title="2022-09-14 17:16:00">2022/09/14</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/08/30/2021 cryptoctf/"
+           data-tag=""
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 CryptoCTF">2021 CryptoCTF</span>
+            <span class="post-date" title="2022-08-30 13:30:00">2022/08/30</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/06/29/区块链学习笔记之2022ACTF-bet2loss/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022ACTF—bet2loss">区块链学习笔记之2022ACTF—bet2loss</span>
+            <span class="post-date" title="2022-06-29 15:23:00">2022/06/29</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/04/19/区块链学习笔记之2022starCTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之2022starCTF——TreasureHunter">区块链学习笔记之2022starCTF——TreasureHunter</span>
+            <span class="post-date" title="2022-04-19 15:23:00">2022/04/19</span>
+        </a>
+        
+        <a  class="合约小屋 区块链靶场 "
+           href="/2022/03/08/区块链靶场刷题之cpaturetheether/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="cpature the ether">cpature the ether</span>
+            <span class="post-date" title="2022-03-08 11:03:00">2022/03/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/28/2022 SUSCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 SUSCTF">2022 SUSCTF</span>
+            <span class="post-date" title="2022-02-28 11:18:35">2022/02/28</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2022/02/22/2021TQLCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2022 TQLCTF">2022 TQLCTF</span>
+            <span class="post-date" title="2022-02-22 22:22:22">2022/02/22</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/18/区块链学习笔记之BalsnCTF 2019 Bank/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之Balsn CTF 2019 - Bank">区块链学习笔记之Balsn CTF 2019 - Bank</span>
+            <span class="post-date" title="2022-02-18 14:45:00">2022/02/18</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/15/区块链学习笔记之BalsnCTF 2020 IdleGame/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之BalsnCTF 2020 IdleGame">区块链学习笔记之BalsnCTF 2020 IdleGame</span>
+            <span class="post-date" title="2022-02-15 15:39:00">2022/02/15</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/02/11/区块链学习笔记之paradigm-CTF babysandbox/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之paradigm-CTF babysandbox">区块链学习笔记之paradigm-CTF babysandbox</span>
+            <span class="post-date" title="2022-02-11 16:22:00">2022/02/11</span>
+        </a>
+        
+        <a  class="合约小屋 contract "
+           href="/2022/01/23/区块链学习笔记之RealWorld体验赛/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之RealWorld体验赛——TransferFrom">区块链学习笔记之RealWorld体验赛——TransferFrom</span>
+            <span class="post-date" title="2022-01-23 00:11:00">2022/01/23</span>
+        </a>
+        
+        <a  class="合约小屋 "
+           href="/2021/12/22/区块链学习笔记之初探以太坊/"
+           data-tag="ETH"
+           data-author="Van1sh" >
+            <span class="post-title" title="区块链学习笔记之初探以太坊">区块链学习笔记之初探以太坊</span>
+            <span class="post-date" title="2021-12-22 10:16:00">2021/12/22</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/08/23/2021 祥云杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 祥云杯">2021 祥云杯</span>
+            <span class="post-date" title="2021-08-23 14:07:00">2021/08/23</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/08/06/密码学学习笔记之线性分析入门篇——EzSPN/"
+           data-tag="SPN,线性密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 线性分析入门篇——EzSPN">密码学学习笔记 之 线性分析入门篇——EzSPN</span>
+            <span class="post-date" title="2021-08-06 09:24:25">2021/08/06</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2021/07/16/密码学学习笔记之差分分析入门篇——四轮DES/"
+           data-tag="DES,差分密码分析"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 差分分析入门篇——四轮DES">密码学学习笔记 之 差分分析入门篇——四轮DES</span>
+            <span class="post-date" title="2021-07-16 09:24:25">2021/07/16</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2021/04/04/2021HFCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2021 HFCTF">2021 HFCTF</span>
+            <span class="post-date" title="2021-04-04 11:02:47">2021/04/04</span>
+        </a>
+        
+        <a  class="逆向小屋 patch "
+           href="/2021/03/27/逆向学习笔记之drinkSomeTea/"
+           data-tag="RE"
+           data-author="Van1sh" >
+            <span class="post-title" title="逆向学习笔记 之 drinkSomeTea">逆向学习笔记 之 drinkSomeTea</span>
+            <span class="post-date" title="2021-03-27 19:22:00">2021/03/27</span>
+        </a>
+        
+        <a  class="密码小屋 "
+           href="/2021/01/01/密码学学习笔记之密码学随笔/"
+           data-tag="Crypto"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 密码学随笔">密码学学习笔记 之 密码学随笔</span>
+            <span class="post-date" title="2021-01-01 00:00:00">2021/01/01</span>
+        </a>
+        
+        <a  class="密码小屋 RSA "
+           href="/2020/12/18/密码学学习笔记之RSA的一些套路/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RSA的一些套路">密码学学习笔记 之 RSA的一些套路</span>
+            <span class="post-date" title="2020-12-18 14:32:00">2020/12/18</span>
+        </a>
+        
+        <a  class="密码小屋 CTF "
+           href="/2020/12/18/密码学学习笔记之CTF/"
+           data-tag="CTF"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 CTF">密码学学习笔记 之 CTF</span>
+            <span class="post-date" title="2020-12-18 00:00:00">2020/12/18</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/12/10/2020RoarCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 RoarCTF">2020 RoarCTF</span>
+            <span class="post-date" title="2020-12-10 10:00:00">2020/12/10</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/11/04/2020ByteCTF&X-NUCA部分密码学题解/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 ByteCTF&amp;X-NUCA">2020 ByteCTF&amp;X-NUCA</span>
+            <span class="post-date" title="2020-11-04 10:00:00">2020/11/04</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2020/08/13/密码学学习笔记之coppersmith/"
+           data-tag="Coppersmith’s Method"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 Coppersmith’s Method">密码学学习笔记 之 Coppersmith’s Method</span>
+            <span class="post-date" title="2020-08-13 10:00:00">2020/08/13</span>
+        </a>
+        
+        <a  class="Web小屋 Files related "
+           href="/2020/08/09/Web学习笔记之文件与序列化/"
+           data-tag="Web,Files,Serialization"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 文件与序列化">Web学习笔记 之 文件与序列化</span>
+            <span class="post-date" title="2020-08-09 14:16:00">2020/08/09</span>
+        </a>
+        
+        <a  class="Web小屋 SQL "
+           href="/2020/08/07/Web学习笔记之SQL注入/"
+           data-tag="Web,SQL"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 SQL注入">Web学习笔记 之 SQL注入</span>
+            <span class="post-date" title="2020-08-07 13:18:00">2020/08/07</span>
+        </a>
+        
+        <a  class="Web小屋 XSS "
+           href="/2020/07/26/Web学习笔记之XSS/"
+           data-tag="Web,XSS"
+           data-author="Van1sh" >
+            <span class="post-title" title="Web学习笔记 之 XSS">Web学习笔记 之 XSS</span>
+            <span class="post-date" title="2020-07-26 10:44:00">2020/07/26</span>
+        </a>
+        
+        <a  class="密码小屋 Knapsack "
+           href="/2020/06/08/密码学学习笔记之knapsack/"
+           data-tag="Knapsack"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 knapsack">密码学学习笔记 之 knapsack</span>
+            <span class="post-date" title="2020-06-08 10:30:43">2020/06/08</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/26/2020BJD3rd/"
+           data-tag="Write Up"
+           data-author="Van1sh &amp; FzWjScJ" >
+            <span class="post-title" title="2020 BJD3rd">2020 BJD3rd</span>
+            <span class="post-date" title="2020-05-26 16:00:47">2020/05/26</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/24/2020GKCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 GKCTF">2020 GKCTF</span>
+            <span class="post-date" title="2020-05-24 17:05:00">2020/05/24</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2020/05/20/sage常用命令/"
+           data-tag="Sage"
+           data-author="Van1sh" >
+            <span class="post-title" title="sage常用命令">sage常用命令</span>
+            <span class="post-date" title="2020-05-20 11:22:00">2020/05/20</span>
+        </a>
+        
+        <a  class="密码小屋 Paillier "
+           href="/2020/05/14/密码学学习笔记之paillier cryptosystem/"
+           data-tag="Paillier"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 paillier cryptosystem">密码学学习笔记 之 paillier cryptosystem</span>
+            <span class="post-date" title="2020-05-14 11:00:19">2020/05/14</span>
+        </a>
+        
+        <a  class="密码小屋 Lattice "
+           href="/2020/05/12/密码学学习笔记之HNP/"
+           data-tag="Lattice,Dsa,LCG"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 HNP">密码学学习笔记 之 HNP</span>
+            <span class="post-date" title="2020-05-12 10:00:57">2020/05/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/10/2020网鼎杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 网鼎杯">2020 网鼎杯</span>
+            <span class="post-date" title="2020-05-10 21:15:00">2020/05/10</span>
+        </a>
+        
+        <a  class="密码小屋 ECC "
+           href="/2020/05/07/密码学学习笔记之NCCIP/"
+           data-tag="ECC"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 NCCIP">密码学学习笔记 之 NCCIP</span>
+            <span class="post-date" title="2020-05-07 10:30:43">2020/05/07</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/05/05/2020De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 De1CTF">2020 De1CTF</span>
+            <span class="post-date" title="2020-05-05 15:57:00">2020/05/05</span>
+        </a>
+        
+        <a  class="密码小屋 Block "
+           href="/2020/03/03/密码学学习笔记之分组密码操作模式/"
+           data-tag="操作模式"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 分组密码操作模式">密码学学习笔记 之 分组密码操作模式</span>
+            <span class="post-date" title="2020-03-03 15:15:00">2020/03/03</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2020/02/18/2020hgame_week1/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2020 hgame week1">2020 hgame week1</span>
+            <span class="post-date" title="2020-02-18 16:22:35">2020/02/18</span>
+        </a>
+        
+        <a  class="密码小屋 Stream "
+           href="/2020/01/30/密码学学习笔记之RC4与SM4/"
+           data-tag="Rc4,SM4"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 RC4与SM4">密码学学习笔记 之 RC4与SM4</span>
+            <span class="post-date" title="2020-01-30 00:05:00">2020/01/30</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/12/04/密码学学习笔记之浅析On r-th Root Extraction Algorithm in Fq/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq">密码学学习笔记 之 浅析On r-th Root Extraction Algorithm in Fq</span>
+            <span class="post-date" title="2019-12-04 14:30:46">2019/12/04</span>
+        </a>
+        
+        <a  class="密码小屋 Basic "
+           href="/2019/12/03/密码学学习笔记之数论四大定理及应用/"
+           data-tag="number theory,Abstract algebra"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 数论四大定理及应用">密码学学习笔记 之 数论四大定理及应用</span>
+            <span class="post-date" title="2019-12-03 15:30:25">2019/12/03</span>
+        </a>
+        
+        <a  class="密码小屋 Rsa "
+           href="/2019/11/11/密码学学习笔记之浅析Pollard's rho algorithm及其应用/"
+           data-tag="Rsa"
+           data-author="Van1sh" >
+            <span class="post-title" title="密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用">密码学学习笔记 之 浅析Pollard&#39;s rho algorithm及其应用</span>
+            <span class="post-date" title="2019-11-11 15:32:00">2019/11/11</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/11/08/2019UNCTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 UNCTF">2019 UNCTF</span>
+            <span class="post-date" title="2019-11-08 11:30:30">2019/11/08</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/11/01/docker和docker-compose的安装/"
+           data-tag="docker"
+           data-author="Van1sh" >
+            <span class="post-title" title="安装Docker 和 Docker-Compose以及docker images的制作及上传">安装Docker 和 Docker-Compose以及docker images的制作及上传</span>
+            <span class="post-date" title="2019-11-01 21:00:00">2019/11/01</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/09/12/Linux 基础/"
+           data-tag="Linux"
+           data-author="Vanish" >
+            <span class="post-title" title="Linux 基础">Linux 基础</span>
+            <span class="post-date" title="2019-09-12 00:17:00">2019/09/12</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/29/2019第五空间/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 第五空间">2019 第五空间</span>
+            <span class="post-date" title="2019-08-29 12:18:35">2019/08/29</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/27/2019OGeek/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 OGeek">2019 OGeek</span>
+            <span class="post-date" title="2019-08-27 11:02:35">2019/08/27</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/08/03/2019De1CTF/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 De1CTF">2019 De1CTF</span>
+            <span class="post-date" title="2019-08-03 22:14:55">2019/08/03</span>
+        </a>
+        
+        <a  class="小书屋 "
+           href="/2019/08/02/三体/"
+           data-tag="book"
+           data-author="Van1sh" >
+            <span class="post-title" title="三体">三体</span>
+            <span class="post-date" title="2019-08-02 12:56:00">2019/08/02</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/22/nmap/"
+           data-tag="Nmap"
+           data-author="Van1sh" >
+            <span class="post-title" title="初遇Nmap">初遇Nmap</span>
+            <span class="post-date" title="2019-07-22 16:07:55">2019/07/22</span>
+        </a>
+        
+        <a  class="工具小屋 "
+           href="/2019/07/21/python 正则/"
+           data-tag="python"
+           data-author="Van1sh" >
+            <span class="post-title" title="python 之 正则">python 之 正则</span>
+            <span class="post-date" title="2019-07-21 22:30:35">2019/07/21</span>
+        </a>
+        
+        <a  class="比赛小屋 "
+           href="/2019/07/15/2019赛博杯/"
+           data-tag="Write Up"
+           data-author="Van1sh" >
+            <span class="post-title" title="2019 赛博杯">2019 赛博杯</span>
+            <span class="post-date" title="2019-07-15 16:22:35">2019/07/15</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-密码学基础之格理论基础" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">密码学基础之格理论基础</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>Van1sh</a></span>
+        
+        
+        <span class="book">
+            
+                <a  data-rel="密码小屋">密码小屋</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color1">Basic</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2023-10-24 10:48:02'>2023-10-08 12:45</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.8k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇文章中的大部分基础知识都是摘自 《An  Introduction to  Mathematical  Cryptography》中的第七章：Lattices and Cryptography。对其中的内容进行了一些删减和整合，旨在向初学者介绍一些基础的格理论知识。不过仍需要读者掌握一定的线性代数基础知识。</p>
+<p>首先是<strong>格</strong> （Lattice）的定义：我们设有 $n$ 个 $m$ 维的相互<u>线性独立</u>的向量 $v_1,\dots,v_n \in \mathbb{R}^m$，那么由 $v_1,\dots,v_n$ 生成的格 $L$ 就是这些向量的所有<strong>系数为整数</strong>的线性组合。<br>$$<br>L = {a_1v_1+a_2v_2+\cdots+a_nv_n:a_1,a_2\dots,a_n \in \mathbb{Z} }<br>$$<br>对应的，这样一组向量则称为格 $L$ 的<strong>基</strong> (basis)。</p>
+<p>所以格和向量空间是很像的，不过由于“系数为整数”的要求，使得相对于<u>连续</u>的向量空间，格是由一系列<u>离散的格点</u>组成的。形如下图，格中的格点应该是无限多的，并且任一维度中，相邻格点之间的距离是固定不变的。（下面我们会再具体做说明）</p>
+<p><img src="https://s2.loli.net/2023/10/24/x4lYUE1Xct98DyV.png" alt="image-20231007161749091"></p>
+<p>我们再用一个”生动形象“的🌰来说明：</p>
+<p>首先我们定义一个坐标系的原点作为参照。</p>
+<p><img src="https://s2.loli.net/2023/10/24/lF4I9tnWHicNPuK.png" alt="image-20231007162345131"></p>
+<p>于是我们就可以定义一个<u>一维向量</u>（如果将点与点之间加上箭头的话大家可能会熟悉些）</p>
+<p><img src="https://s2.loli.net/2023/10/24/F3WVetgp5GHbD84.png" alt="image-20231007162817689"></p>
+<p>然后这个一维向量通过一系列“系数为整数”的线性组合（$v,-v,2v,-2v,3v\cdots $），那么它就可以生成一个一维的格</p>
+<p><img src="https://s2.loli.net/2023/10/24/NdDh52KWHtAGea8.png" alt="image-20231007163047556"></p>
+<p>如果此时我们引入一个在这个维度之外的向量</p>
+<p><img src="https://s2.loli.net/2023/10/24/QSU9i83PJFapMNB.png" alt="image-20231007163403790"></p>
+<p>那么同样的，取原来维度中的任一向量和这个向量作为基进行各种线性组合（$v+w,v-w,v+2w,v-2w \cdots$），于是就可以生成一个二维的格</p>
+<p><img src="https://s2.loli.net/2023/10/24/yxzpBI4NuZc3YAW.png" alt="image-20231007163534071"></p>
+<p>同理，我们还可以生成三维的格，</p>
+<p><img src="https://s2.loli.net/2023/10/24/2pXlrFxhkQ3JzTa.png" alt="image-20231007163659248"></p>
+<p>四维的、五维的等等也都可以（不过显然这不再是我们能够用图像表示出来的了）</p>
+<p>相信到这里大家对格应该有一个大致的认识了（很简单的嘛），那么我们继续后面的话题。对于一个格 $L$ 来说，他的<u>基并不是唯一</u>的，任何能够生成格 $L$ 的向量集合 $v$ 都可以称为 $L$ 的<u>格基</u>。显然 $L$ 的<u>任意格基中所包含的向量数量是相等</u>的，而格 $L$ 的维度也正是由格基中向量的数量所决定。那么格基之间是否可以相互转换呢？</p>
+<p>我们设 $L$ 的两组格基 ${v_1,\cdots,v_n },{w_1,\cdots,w_n}$。那么由于它们都是 $L$ 的格基，因此其中的每一个向量也都在格上， 即 $v_1,\cdots,v_n ,w_1,\cdots,w_n \in L$，那么显然对于任意的 $w_i,i\in[1,n]$，其都可以由格基 ${v_1,\cdots,v_n }$ 表示，于是有</p>
+<p><img src="https://s2.loli.net/2023/10/24/aYjpVNUXAeInFHO.png" alt="image-20231007173659962"></p>
+<p>并且由于格的性质，所有的系数 $a_{ij}$ 都是整数。我们将这些系数提取出来，就可以得到一个系数矩阵</p>
+<p><img src="https://s2.loli.net/2023/10/24/VF7duUWECZg931x.png" alt="image-20231007173848912"></p>
+<p>那么式子就可以记为 $w = A \times v$，如果我们想用 $w$ 表示 $v$，那么就是 $v = A^{-1} w$。</p>
+<p>注意到由于 $1 = det(I)=det(AA^{-1})=det(A)det(A^{-1})$，而 $A$ 中所有元素均为整数，因此有 $det(A) = \pm 1$。根据线性代数中的知识我们有 $A^{-1}=\frac{A^<em>}{det(A)}$，而伴随矩阵 $A^</em>$ 的计算过程中又不涉及任何的除法，于是 $A^*$ 中的元素都是整数，因而 $A^{-1}$ 中的元素也均为整数。 </p>
+<p>因此我们得到一个结论，<u>$L$ 的任意两个格基都可以通过一个行列式为 $\pm1$ 的整数矩阵进行相互转换。</u></p>
+<p>第二颗🌰，我们考虑一个三维的格 $L$，其一组格基为 $v_1=(2,1,3),v_2=(1,2,0),v_3=(2,-3,5)$，我们将其写为矩阵的形式</p>
+<p><img src="https://s2.loli.net/2023/10/24/ptkR2hPoTN8yUFY.png" alt="image-20231007175438936"></p>
+<p>然后我们构造三个也在 $L$ 中的向量：$w_1=v_1+v_3,w_2=v_1-v_2+2v_3,w_3=v_1+2v_2$，我们将这些系数取出来，构成系数矩阵 $U$:</p>
+<p><img src="https://s2.loli.net/2023/10/24/oa7zTUhHV6pwBst.png" alt="image-20231007175655611"></p>
+<p>于是由向量 $w_1,w_2,w_3$ 构成的矩阵 $B$ 为：</p>
+<p><img src="https://s2.loli.net/2023/10/24/PuRFXpOMygW6N93.png" alt="image-20231007175746407"></p>
+<p>由于矩阵 $U$ 的行列式为 $-1$，因此向量 $w_1,w_2,w_3$ 也是 $L$ 的一组格基，而 $U$ 的逆矩阵为</p>
+<p><img src="https://s2.loli.net/2023/10/24/SR2mFsIjl6PMbtU.png" alt="image-20231007175850303"></p>
+<p>矩阵 $U^{-1}$ 则揭露了如何用 $w$ 表示 $v$：$v_1=4w_1-2w_2-w_3,v_2=-2w_1+w_2+w_3,v_3=-3w_1+2w_2+w3$</p>
+<p>了解了上述内容后，我们可以还从另外一个角度定义格：设 $m$ 维的实数空间 $\mathbb{R}^m$ 中的一个子集 $L$，其在加法运算下满足封闭性，于是我们可以称之为 <u>可加子群</u>，如果对于 $L$ 中的任意向量 $v$，存在一个常数 $\epsilon \gt 0$，满足<br>$$<br>L \cap{w \in \mathbb{R}^m:||v-w||\lt \epsilon }={v}<br>$$<br>则称 $L$ 为 <u>可加离散子群</u>。更形象点说，（以 3 维为例）对于 $L$ 中的任一元素 $v$，在其周围半径为 $\epsilon$ 的空间内都没有其他元素。</p>
+<p><strong>定理：当且仅当 $\mathbb{R}^m$ 下的一个子集 $L$ 是可加离散子群，我们称 $L$ 为格。</strong></p>
+<p>对于那部分没有格点的空间，我们称之为格 $L$ 的基本域（fundamental domain），记为</p>
+<p>$$<br>\mathcal{F}(v_1,\dots,v_n)={ t_1v_1+t_2v_2 + \cdots + t_nv_n : 0 \le t_i \lt 1}<br>$$<br>下图展示了一个二维格的基本域</p>
+<p> <img src="https://s2.loli.net/2023/10/24/EuwSrVbkvC32xdq.png" alt="image-20231008102023178"></p>
+<p>有了基本域的概念，结合 $L$ 中的格点，我们就可以表示实数空间 $\mathbb{R}^n$ 中的任意向量 $w \in \mathbb{R}^n$ 了，记为<br>$$<br>w = t+v ,(t\in \mathcal{F}, v\in L)<br>$$<br><img src="https://s2.loli.net/2023/10/24/FQgE2DayZUIzBfe.png" alt="image-20231008102546059"></p>
+<p>另外，根据图片，结合前面我们对线性代数的学习，我们可以很自然的想到，对于 $n$ 维的格 $L$，设 $\mathcal{F}$ 为 $L$ 的基本域。那么 $\mathcal{F}$ 的<strong>度量</strong>（volume）就是 $L$ 的<strong>行列式</strong> (determinant）记为 $det(L)$。</p>
+<p>如果我们把格基的各个向量视为 $\mathcal{F}$ 的各个边，那么在各个向量长度不变的情况下，当且仅当各个向量相互正交时，$\mathcal{F}$ 取得最大值。于是我们引出 <strong>Hadamard’s 不等式</strong>：<br>$$<br>det(L) = Vol(\mathcal{F})\le ||v_1||||v_2||\cdots||v_n||<br>$$<br>当各个向量越趋于正交，不等式则越趋于相等。</p>
+<p>如果对于 $L$ 的某一格基 $(v_1,\dots,v_n)$，我们记其对应的基本域为 $\mathcal{F} = \mathcal{F}(v_1,\dots,v_n)$，再设 $v_i=(r_{i1},r_{i2)},\dots,r_{in})$，记</p>
+<p><img src="https://s2.loli.net/2023/10/24/QfvsEJLqKc75mZW.png" alt="image-20231008104323009"></p>
+<p>于是我们有<br>$$<br>Vol(\mathcal{F}(v_1\dots,v_n))=|det(F(v_1,\dots,v_n))|<br>$$<br>而我们在前文提到，$L$ 的不同格基可以通过一个行列式为 $\pm1$ 的整数矩阵进行相互转换，即 $F(v_1,\dots,v_n)=AF(w_1,\dots,w_n),det(A)=\pm1$。于是我们不难得出， <strong>$L$ 的任意基本域的度量都相等</strong>。形象点来说，就是<u>所有格点周围的空间大小都是相同</u>的。</p>
+<p>那么对于格基础理论的介绍就到此为止了，对于感兴趣还想要继续深入了解的读者可以自行查阅相关数学书籍。下一篇文章将介绍一些格中经典的数学问题，以及对应的密码学场景。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可联系QQ 643713081，也可以邮件至 643713081@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>密码学基础之格理论基础</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Van1sh">Van1sh</a></p>
+    <p><span class="copy-title">发布时间:</span>2023-10-08, 12:45:00</p>
+    <p><span class="copy-title">最后更新:</span>2023-10-24, 10:48:02</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2023/10/08/密码学基础之格理论基础/" title="密码学基础之格理论基础">http://jayxv.github.io/2023/10/08/密码学基础之格理论基础/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2020 Van1sh</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@Van1sh','@FzWjScJ','#Write Up','#docker','#Sage','#CTF','#Basic','#ECC','#Paillier','#Crypto','#TLS 1.2','#Web','#Files','#Serialization','#Lattice','#Dsa','#LCG','#Rc4','#SM4','#Knapsack','#Rsa','#DES','#差分密码分析','#RSA','#continued_fraction','#RE','#paper','#small private exponent','#SQL','#python','#操作模式','#number theory','#Abstract algebra','#SPN','#线性密码分析','#ETH','#Shadowsocks','#XSS','#Nmap','#Coppersmith’s Method','#Linux','#book',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
